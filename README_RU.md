@@ -10,7 +10,8 @@ A-01 — открытая история развития долгосрочно
   <img src="media/founder-alexander-ponomarev.webp" alt="Портрет Александра Пономарева, основателя A-01" width="220">
 </p>
 
-**Сайт проекта:** https://vibeshorts.ru/evasphere/
+**Сайт проекта:** https://vibeshorts.ru/evasphere/  
+**Рабочее пространство Сферы Евы:** https://evasphere.usite.pro/
 
 **Языки:** [English](README.md) · [Русский](README_RU.md)
 
@@ -76,6 +77,7 @@ A-01 развивается как концепция и проект цифро
 
 ## Сайт и обновления
 
-Сайт проекта: https://vibeshorts.ru/evasphere/
+Сайт проекта: https://vibeshorts.ru/evasphere/  
+Рабочее пространство Сферы Евы: https://evasphere.usite.pro/
 
 Репозиторий — публичная история разработки. Статус проекта может меняться; перед использованием технических сведений проверяйте датированные заметки к версиям.
