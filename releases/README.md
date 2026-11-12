@@ -16,3 +16,10 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Open v2.0.3 preview](v2.0.3/eva-sphere-a01-v203-desktop-chat-preview.html)
 - [Release notes](v2.0.3/RELEASE-NOTES.md)
 - Status: preview; browser and device testing pending.
+
+
+## v2.0.4 — First-visit welcome and orientation
+
+- [Open v2.0.4 preview](v2.0.4/eva-sphere-a01-v204-welcome-preview.html)
+- [Release notes](v2.0.4/RELEASE-NOTES.md)
+- Status: preview; browser and first-visit flow testing pending.
