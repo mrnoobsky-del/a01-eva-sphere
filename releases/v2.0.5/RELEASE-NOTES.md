@@ -47,3 +47,12 @@ Static source checks passed: welcome markup is inside .workspace-main; final wel
 - On mobile walkthrough mode, retain a compact sector/status header, hide nonessential hints/tools and secondary dock actions, and center the exit control at the bottom. Keep the joystick and camera hint in separate lower side zones with safe-area spacing.
 - Keep HUD overlays pointer-transparent except for actual controls; desktop keyboard/mouse and desktop directional controls remain available.
 - Validate in browser emulation and on real phones before production, including small screens, safe-area insets, two-finger input, and opening/closing walk mode.
+
+
+## Mobile overflow and walkable dólka identity cards
+- Added inward-facing facade identity plaques for each of the 60 dólka modules. Plaques show the module number, level and human-readable name; they are visible only in walkthrough mode and only on the currently visible floor.
+- Tapping a dólka while walking now opens an in-scene information card instead of immediately moving the character. The card shows its name, description, level and explicit concept/not-built status.
+- Added an explicit route action to approach the selected module; route and elevator logic remain in the existing navigation system. Closing the card does not move the character.
+- Improved mobile side-sheet, search-dialog and walk-lift sizing with dynamic viewport units, safe-area insets, internal scrolling and overscroll containment. Long labels and metadata can wrap instead of being cut off.
+- The mobile info card is kept in the upper-left of the 3D scene so it avoids the lower movement/exit controls; the right camera-look area stays available.
+- Static source checks passed. Real-device visual checks remain required for 320px-wide phones, short landscape screens, two-finger input while labels are visible, and long object descriptions.
