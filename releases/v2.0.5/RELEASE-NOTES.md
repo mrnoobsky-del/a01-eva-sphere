@@ -13,3 +13,13 @@ Date: 2026-11-12
 
 ## Validation
 Static source checks passed: welcome markup is inside .workspace-main; final welcome layout is contained, not viewport-fixed; open/close toggles welcome-mode; responsive cards and compact-nav rules are present. Browser visual and interaction testing remains required. Not deployed to production.
+
+
+## Mobile header and Eva chat refinement
+- Keep search, Eva, language, and theme actions in one compact horizontal row on phones; use icon-first controls and preserve accessible labels.
+- Prevent the mobile header from wrapping into a vertical stack, including narrow 320–380px screens.
+- On phones, opening Eva does not automatically focus the textarea or summon the keyboard.
+- The mobile composer uses a 16px input font to avoid iOS focus zoom, a compact send button, and no desktop Enter hint.
+- Enter inserts a newline on mobile; the explicit send button submits. Desktop retains Enter-to-send and Shift+Enter newline.
+- Use VisualViewport resize/scroll measurements to resize the chat panel when the on-screen keyboard appears, keeping the conversation scroll area and composer visible.
+- Browser testing on physical iOS/Android devices remains required.
