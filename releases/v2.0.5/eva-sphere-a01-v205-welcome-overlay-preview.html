@@ -1985,13 +1985,14 @@ function pick(event){const rect=renderer.domElement.getBoundingClientRect();poin
 let walkLookLast=null;
 let walkTouchPointerId=null,walkLookPointerId=null;
 let walkTouchMove={x:0,y:0};
-let walkMoveBlend=0;
 let suppressWalkTapUntil=0;
+const walkTouchGestures=new Map();
 const walkJoystick=document.getElementById('walkJoystick');
 const walkJoystickThumb=document.getElementById('walkJoystickThumb');
 const walkJoystickRadius=42;
 function resetWalkJoystick(){
- walkTouchPointerId=null;walkTouchMove.x=0;walkTouchMove.y=0;walkMoveBlend=0;
+ walkTouchPointerId=null;walkTouchMove.x=0;walkTouchMove.y=0;
+ walkMoveBlendX=0;walkMoveBlendY=0;
  if(walkJoystick){walkJoystick.classList.remove('active');walkJoystick.style.left='';walkJoystick.style.top='';}
  if(walkJoystickThumb)walkJoystickThumb.style.transform='translate(0px,0px)';
 }
@@ -1999,62 +2000,82 @@ function updateWalkJoystick(event){
  if(walkTouchPointerId!==event.pointerId||!walkJoystick)return;
  const dx=event.clientX-walkJoystick._originX,dy=event.clientY-walkJoystick._originY;
  const length=Math.hypot(dx,dy),scale=length>walkJoystickRadius?walkJoystickRadius/length:1;
- const x=dx*scale,y=dy*scale;
- walkTouchMove.x=x/walkJoystickRadius;walkTouchMove.y=y/walkJoystickRadius;
+ const x=dx*scale,y=dy*scale;walkTouchMove.x=x/walkJoystickRadius;walkTouchMove.y=y/walkJoystickRadius;
  if(walkJoystickThumb)walkJoystickThumb.style.transform=`translate(${x}px,${y}px)`;
 }
 renderer.domElement.addEventListener('pointermove',event=>{
  if(walkMode&&event.pointerType==='touch'){
-  if(event.pointerId===walkTouchPointerId){event.preventDefault();updateWalkJoystick(event);return;}
-  if(event.pointerId===walkLookPointerId&&walkLookLast){
-   event.preventDefault();
-   walkLookOffset-=(event.clientX-walkLookLast.x)*.006;
-   walkPitch=Math.max(.04,Math.min(.58,walkPitch+(event.clientY-walkLookLast.y)*.0035));
-   walkLookLast={x:event.clientX,y:event.clientY};
+  const gesture=walkTouchGestures.get(event.pointerId);if(!gesture)return;
+  const dx=event.clientX-gesture.startX,dy=event.clientY-gesture.startY;
+  if(!gesture.moved&&Math.hypot(dx,dy)>9){
+   gesture.moved=true;gesture.lastX=event.clientX;gesture.lastY=event.clientY;
+   if(gesture.role==='move'&&walkJoystick){
+    walkPath=[];walkPathIndex=0;
+    const stageRect=stage.getBoundingClientRect(),margin=70;
+    const x=Math.max(margin,Math.min(stageRect.width-margin,gesture.startX-stageRect.left));
+    const y=Math.max(margin,Math.min(stageRect.height-margin,gesture.startY-stageRect.top));
+    walkJoystick._originX=gesture.startX;walkJoystick._originY=gesture.startY;
+    walkJoystick.style.left=x+'px';walkJoystick.style.top=y+'px';walkJoystick.classList.add('active');
+   }
+  }
+  if(gesture.role==='move'&&gesture.moved){event.preventDefault();updateWalkJoystick(event);}
+  if(gesture.role==='look'&&gesture.moved){
+   event.preventDefault();walkYaw-=(event.clientX-gesture.lastX)*.006;
+   walkPitch=Math.max(.04,Math.min(.58,walkPitch+(event.clientY-gesture.lastY)*.0035));
+   gesture.lastX=event.clientX;gesture.lastY=event.clientY;
   }
   return;
  }
- if(pointerStart&&Math.hypot(event.clientX-pointerStart.x,event.clientY-pointerStart.y)>7)didDrag=true;if(walkMode){if(pointerStart&&didDrag){if(walkLookLast){walkLookOffset-= (event.clientX-walkLookLast.x)*.006;walkPitch=Math.max(.04,Math.min(.58,walkPitch+(event.clientY-walkLookLast.y)*.0035));}walkLookLast={x:event.clientX,y:event.clientY};}return;}if(event.pointerType==='touch')return;const id=pick(event);hoveredId=id;highlight();if(id){const o=allFeatures.find(x=>x.id===id);tooltip.textContent=o.name;const r=stage.getBoundingClientRect();tooltip.style.left=`${Math.min(event.clientX-r.left+12,r.width-190)}px`;tooltip.style.top=`${Math.max(62,event.clientY-r.top-28)}px`;tooltip.style.display='block';renderer.domElement.style.cursor='pointer';}else{tooltip.style.display='none';renderer.domElement.style.cursor='grab';}});
+ if(pointerStart&&Math.hypot(event.clientX-pointerStart.x,event.clientY-pointerStart.y)>7)didDrag=true;
+ if(walkMode){
+  if(pointerStart&&didDrag&&walkLookLast){walkYaw-=(event.clientX-walkLookLast.x)*.006;walkPitch=Math.max(.04,Math.min(.58,walkPitch+(event.clientY-walkLookLast.y)*.0035));}
+  walkLookLast={x:event.clientX,y:event.clientY};return;
+ }
+ if(event.pointerType==='touch')return;
+ const id=pick(event);hoveredId=id;highlight();
+ if(id){const o=allFeatures.find(x=>x.id===id);tooltip.textContent=o.name;const r=stage.getBoundingClientRect();tooltip.style.left=`${Math.min(event.clientX-r.left+12,r.width-190)}px`;tooltip.style.top=`${Math.max(62,event.clientY-r.top-28)}px`;tooltip.style.display='block';renderer.domElement.style.cursor='pointer';}
+ else{tooltip.style.display='none';renderer.domElement.style.cursor='grab';}
+});
 renderer.domElement.addEventListener('pointerleave',()=>{hoveredId=null;tooltip.style.display='none';highlight();});
-renderer.domElement.addEventListener('click',event=>{if(walkMode&&performance.now()<suppressWalkTapUntil){didDrag=false;pointerStart=null;walkLookLast=null;return;}if(didDrag){didDrag=false;pointerStart=null;walkLookLast=null;return;}if(walkMode){handleWalkClick(event);return;}const id=pick(event);if(id)selectItem(id);});
+renderer.domElement.addEventListener('click',event=>{
+ if(walkMode&&performance.now()<suppressWalkTapUntil){didDrag=false;pointerStart=null;walkLookLast=null;return;}
+ if(didDrag){didDrag=false;pointerStart=null;walkLookLast=null;return;}
+ if(walkMode){handleWalkClick(event);return;}
+ const id=pick(event);if(id)selectItem(id);
+});
 renderer.domElement.addEventListener('pointerdown',event=>{
  if(walkMode&&event.pointerType==='touch'){
-  suppressWalkTapUntil=performance.now()+550;
   const rect=renderer.domElement.getBoundingClientRect();
-  const safeTop=rect.top+Math.min(88,rect.height*.18);
-  const safeBottom=rect.bottom-Math.min(78,rect.height*.16);
+  const safeTop=rect.top+Math.min(70,rect.height*.13),safeBottom=rect.bottom-Math.min(62,rect.height*.12);
   if(event.clientY<safeTop||event.clientY>safeBottom)return;
   event.preventDefault();event.stopPropagation();
-  if(event.clientX<rect.left+rect.width*.46&&walkTouchPointerId===null){
-   walkTouchPointerId=event.pointerId;
-   const stageRect=stage.getBoundingClientRect();
-   const margin=70;
-   const x=Math.max(margin,Math.min(stageRect.width-margin,event.clientX-stageRect.left));
-   const y=Math.max(margin,Math.min(stageRect.height-margin,event.clientY-stageRect.top));
-   walkJoystick._originX=event.clientX;walkJoystick._originY=event.clientY;
-   walkJoystick.style.left=x+'px';walkJoystick.style.top=y+'px';walkJoystick.classList.add('active');
-   walkTouchMove.x=0;walkTouchMove.y=0;
-   try{renderer.domElement.setPointerCapture(event.pointerId)}catch(_){}
-  }else if(walkLookPointerId===null){
-   walkLookPointerId=event.pointerId;walkLookLast={x:event.clientX,y:event.clientY};
-   try{renderer.domElement.setPointerCapture(event.pointerId)}catch(_){}
-  }
+  const role=event.clientX<rect.left+rect.width*.47?'move':'look';
+  if(role==='move'&&walkTouchPointerId!==null)return;
+  if(role==='look'&&walkLookPointerId!==null)return;
+  walkTouchGestures.set(event.pointerId,{role,startX:event.clientX,startY:event.clientY,lastX:event.clientX,lastY:event.clientY,moved:false});
+  if(role==='move'){walkTouchPointerId=event.pointerId;walkTouchMove.x=0;walkTouchMove.y=0;}
+  else{walkLookPointerId=event.pointerId;walkLookLast={x:event.clientX,y:event.clientY};}
+  try{renderer.domElement.setPointerCapture(event.pointerId)}catch(_){}
   return;
  }
  pointerStart={x:event.clientX,y:event.clientY};walkLookLast={x:event.clientX,y:event.clientY};didDrag=false;renderer.domElement.style.cursor='grabbing';
 });
-function releaseWalkTouch(event){
- if(event.pointerId===walkTouchPointerId)resetWalkJoystick();
- if(event.pointerId===walkLookPointerId){walkLookPointerId=null;walkLookLast=null;}
+function finishWalkTouch(event,cancelled=false){
+ const gesture=walkTouchGestures.get(event.pointerId);
+ if(!gesture)return;
+ walkTouchGestures.delete(event.pointerId);
+ if(!gesture.moved&&!cancelled)handleWalkClick(event);
+ suppressWalkTapUntil=performance.now()+450;
+ if(gesture.role==='move')resetWalkJoystick();
+ if(gesture.role==='look'){walkLookPointerId=null;walkLookLast=null;}
 }
 renderer.domElement.addEventListener('pointerup',event=>{
- releaseWalkTouch(event);
+ if(walkMode&&event.pointerType==='touch'){finishWalkTouch(event,false);return;}
  renderer.domElement.style.cursor=walkMode?'crosshair':'grab';
- setTimeout(()=>{if(event.pointerType!=='touch'){pointerStart=null;walkLookLast=null;didDrag=false;}},0);
+ setTimeout(()=>{pointerStart=null;walkLookLast=null;didDrag=false;},0);
 });
-renderer.domElement.addEventListener('pointercancel',releaseWalkTouch);
-window.addEventListener('blur',()=>{resetWalkJoystick();walkLookPointerId=null;walkLookLast=null;});
-
+renderer.domElement.addEventListener('pointercancel',event=>finishWalkTouch(event,true));
+window.addEventListener('blur',()=>{resetWalkJoystick();walkLookPointerId=null;walkLookLast=null;walkTouchGestures.clear();});
 function resize(){const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false);}
 const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(stage);resize();
 renderLevelButtons();renderStreetButtons();updatePanel();updateLevelOverview(focusedLevel);highlight();updateClimateUI();
@@ -2091,7 +2112,64 @@ window.evaSearchIndex.push(...[{"kind":"registry","registryId":"A01-SYS-CLIMATE"
 window.dispatchEvent(new Event('eva-search-index-ready'));let savedTheme='light';try{savedTheme=window.EVA_A01_RESOLVE_THEME?.()||localStorage.getItem('evaSphereTheme')||'light';}catch{}setUiTheme(savedTheme);applyLightMode();syncWalkUI();window.EVA_A01_REFRESH_PREFS_UI?.();
 $('loading').classList.add('hidden');
 const clock=new THREE.Clock();
-function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05);const t=clock.elapsedTime;world.rotation.y=walkMode?0:Math.sin(t*.055)*.012;explodeProgress+=(explodeTarget-explodeProgress)*.075;for(const [n,g] of floorGroups){g.position.y=originalFloorY.get(n)+(n-2.5)*1.08*explodeProgress;}for(const [n,g] of routeLevelGroups){g.position.y=(n-2.5)*1.08*explodeProgress;}for(const [n,g] of streetLevelGroups){g.position.y=(n-2.5)*1.08*explodeProgress;}if(transitRunning){for(const cabin of liftCabins){cabin.group.position.y=.65+((Math.sin(t*.72+cabin.phase)+1)/2)*6.3;}for(const marker of routeMarkers){const a=t*.34+marker.offset+marker.level*.62;const r=4.55;marker.mesh.position.set(Math.cos(a)*r,levelY[marker.level]+.19,Math.sin(a)*r);}}else{for(let i=0;i<liftCabins.length;i++)liftCabins[i].group.position.y=1.15+i*1.85;}if(walkMode){const levelDelta=walkLevelTarget-walkLevelY;if(Math.abs(levelDelta)>.015){walkLevelY+=levelDelta*Math.min(1,dt*1.7);walkTransferActive=true;}else{walkLevelY=walkLevelTarget;if(walkTransferActive){walkTransferActive=false;showWalkToast(`Ты на уровне 0${walkPlayerLevel}.`);}}if(!walkTransferActive&&walkKeys.left)walkLookOffset+=1.85*dt;if(!walkTransferActive&&walkKeys.right)walkLookOffset-=1.85*dt;if(!walkTransferActive&&Math.abs(walkTouchMove.x)>.035)walkLookOffset-=walkTouchMove.x*1.85*dt;let moving=false;const speed=.72;const targetForward=(walkKeys.forward?1:0)-(walkKeys.back?1:0)-walkTouchMove.y;walkMoveBlend+=(targetForward-walkMoveBlend)*Math.min(1,dt*10);const forward=walkMoveBlend;if(!walkTransferActive&&walkGoalAngle!==null){const delta=wrapAngle(walkGoalAngle-walkTheta);const step=speed*dt/walkRadius;if(Math.abs(delta)<=step){walkTheta=walkGoalAngle;walkGoalAngle=null;walkLookOffset=Math.PI/2;moving=false;const target=allFeatures.find(x=>x.id===walkGoalId);if(target)showWalkToast(`Ты у входа: ${target.name}. Внутренний интерьер — следующий этап.`);walkGoalId=null;}else{walkTheta=wrapAngle(walkTheta+Math.sign(delta)*step);moving=true;walkLookOffset=0;}}else if(!walkTransferActive){if(Math.abs(forward)>.025){const tangent=Math.cos(walkLookOffset);walkTheta=wrapAngle(walkTheta+forward*tangent*speed*dt/walkRadius);moving=Math.abs(tangent)>.08&&Math.abs(forward)>.07;}}const px=Math.cos(walkTheta)*walkRadius,pz=Math.sin(walkTheta)*walkRadius;const gy=walkLevelY+.105;avatarGroup.position.set(px,gy, pz);const faceYaw=Math.PI-walkTheta+walkLookOffset;avatarGroup.rotation.y=faceYaw;walkStepPhase+=moving?dt*9:dt*2.1;const swing=moving?Math.sin(walkStepPhase)*.38:Math.sin(walkStepPhase)*.025;avatarLeftLeg.rotation.x=swing;avatarRightLeg.rotation.x=-swing;avatarLeftArm.rotation.x=-swing*.72;avatarRightArm.rotation.x=swing*.72;avatarTorso.position.y=.63+(moving?Math.abs(Math.sin(walkStepPhase*2))*.018:0);const yaw=faceYaw;const desiredCamera=new THREE.Vector3(px+Math.sin(yaw)*walkCameraDistance,gy+.56+walkPitch*.40,pz+Math.cos(yaw)*walkCameraDistance);camera.position.lerp(desiredCamera,1-Math.exp(-dt*12));const forwardVec=new THREE.Vector3(-Math.sin(yaw),0,-Math.cos(yaw));const lookTarget=new THREE.Vector3(px,gy+.27,pz).add(forwardVec.multiplyScalar(.18));camera.lookAt(lookTarget);}else{controls.enabled=true;controls.update();}if(starRevealStarted){const starProgress=Math.min(1,(performance.now()-starRevealStarted)/4400);starMaterial.opacity=.72*Math.sin(Math.PI*starProgress);if(starProgress>=1){starfield.visible=false;starMaterial.opacity=0;starRevealStarted=0;}}renderer.render(scene,camera);}
+function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05);const t=clock.elapsedTime;world.rotation.y=walkMode?0:Math.sin(t*.055)*.012;explodeProgress+=(explodeTarget-explodeProgress)*.075;for(const [n,g] of floorGroups){g.position.y=originalFloorY.get(n)+(n-2.5)*1.08*explodeProgress;}for(const [n,g] of routeLevelGroups){g.position.y=(n-2.5)*1.08*explodeProgress;}for(const [n,g] of streetLevelGroups){g.position.y=(n-2.5)*1.08*explodeProgress;}if(transitRunning){for(const cabin of liftCabins){cabin.group.position.y=.65+((Math.sin(t*.72+cabin.phase)+1)/2)*6.3;}for(const marker of routeMarkers){const a=t*.34+marker.offset+marker.level*.62;const r=4.55;marker.mesh.position.set(Math.cos(a)*r,levelY[marker.level]+.19,Math.sin(a)*r);}}else{for(let i=0;i<liftCabins.length;i++)liftCabins[i].group.position.y=1.15+i*1.85;}if(walkMode){
+ const levelDelta=walkLevelTarget-walkLevelY;
+ if(Math.abs(levelDelta)>.015){walkLevelY+=levelDelta*Math.min(1,dt*1.7);walkTransferActive=true;}
+ else{
+  walkLevelY=walkLevelTarget;
+  if(walkTransferActive){
+   walkTransferActive=false;walkLiftAnimating=false;transitRunning=false;
+   if(walkLiftTargetLevel!==null){
+    walkPlayerLevel=walkLiftTargetLevel;focusedLevel=walkPlayerLevel;walkLiftTargetLevel=null;
+    for(const [n,g] of floorGroups)g.visible=n===focusedLevel;
+    for(const [n,g] of routeLevelGroups)g.visible=n===focusedLevel;
+    for(const [n,g] of streetLevelGroups)g.visible=n===focusedLevel;
+    renderLevelButtons();syncSimulationUI();showWalkToast('Ты на уровне 0'+walkPlayerLevel+'.');
+    if(walkPendingTarget){const next=walkPendingTarget;walkPendingTarget=null;setWalkDestination(next.x,next.z,next.id||null);}
+   }
+  }
+ }
+ if(!walkTransferActive){
+  if(walkKeys.left)walkYaw+=1.85*dt;
+  if(walkKeys.right)walkYaw-=1.85*dt;
+  const targetX=walkTouchPointerId!==null?walkTouchMove.x:0;
+  const targetY=(walkKeys.forward?1:0)-(walkKeys.back?1:0)-(walkTouchPointerId!==null?walkTouchMove.y:0);
+  walkMoveBlendX+=(targetX-walkMoveBlendX)*Math.min(1,dt*10);
+  walkMoveBlendY+=(targetY-walkMoveBlendY)*Math.min(1,dt*10);
+  let moving=false;
+  if(walkPathIndex<walkPath.length){
+   const point=walkPath[walkPathIndex],dx=point.x-walkX,dz=point.z-walkZ,dist=Math.hypot(dx,dz);
+   if(dist<.10)walkPathIndex++;
+   else{const step=Math.min(dist,1.12*dt);walkX+=dx/dist*step;walkZ+=dz/dist*step;walkYaw=Math.atan2(-dx,-dz);moving=true;}
+   if(walkPathIndex>=walkPath.length){
+    walkPath=[];walkPathIndex=0;const doneId=walkGoalId;walkGoalId=null;
+    if(walkPendingLiftLevel!==null){const nextLevel=walkPendingLiftLevel;beginWalkLift(nextLevel);}
+    else if(doneId&&doneId!=='lift')showWalkToast('Ты подошёл к выбранному объекту.');
+   }
+  }else{
+   const forward=walkMoveBlendY,strafe=walkMoveBlendX;
+   if(Math.abs(forward)>.025||Math.abs(strafe)>.025){
+    const fx=-Math.sin(walkYaw),fz=-Math.cos(walkYaw),rx=Math.cos(walkYaw),rz=-Math.sin(walkYaw);
+    const dx=(fx*forward+rx*strafe)*1.18*dt,dz=(fz*forward+rz*strafe)*1.18*dt;
+    const nx=walkX+dx,nz=walkZ+dz;
+    if(isWalkable(nx,nz,walkPlayerLevel)){walkX=nx;walkZ=nz;moving=true;}
+    else if(isWalkable(nx,walkZ,walkPlayerLevel)){walkX=nx;moving=true;}
+    else if(isWalkable(walkX,nz,walkPlayerLevel)){walkZ=nz;moving=true;}
+   }
+  }
+  $('walkLiftCall')?.classList.toggle('visible',Math.hypot(walkX,walkZ)<=2.12);
+  walkStepPhase+=moving?dt*9:dt*2.1;
+  const swing=moving?Math.sin(walkStepPhase)*.38:Math.sin(walkStepPhase)*.025;
+  avatarGroup.position.set(walkX,walkLevelY+.105,walkZ);avatarGroup.rotation.y=walkYaw;
+  avatarLeftLeg.rotation.x=swing;avatarRightLeg.rotation.x=-swing;avatarLeftArm.rotation.x=-swing*.72;avatarRightArm.rotation.x=swing*.72;
+  avatarTorso.position.y=.63+(moving?Math.abs(Math.sin(walkStepPhase*2))*.018:0);
+  const gy=walkLevelY+.105;
+  const desiredCamera=new THREE.Vector3(walkX+Math.sin(walkYaw)*walkCameraDistance,gy+.56+walkPitch*.40,walkZ+Math.cos(walkYaw)*walkCameraDistance);
+  camera.position.lerp(desiredCamera,1-Math.exp(-dt*12));
+  const forwardVec=new THREE.Vector3(-Math.sin(walkYaw),0,-Math.cos(walkYaw));
+  const lookTarget=new THREE.Vector3(walkX,gy+.27,walkZ).add(forwardVec.multiplyScalar(.18));camera.lookAt(lookTarget);
+ }
+}else{controls.enabled=true;controls.update();}if(starRevealStarted){const starProgress=Math.min(1,(performance.now()-starRevealStarted)/4400);starMaterial.opacity=.72*Math.sin(Math.PI*starProgress);if(starProgress>=1){starfield.visible=false;starMaterial.opacity=0;starRevealStarted=0;}}renderer.render(scene,camera);}
 animate();
 window.addEventListener('beforeunload',()=>{resizeObserver.disconnect();controls.dispose();renderer.dispose();});
 } catch(error) {
