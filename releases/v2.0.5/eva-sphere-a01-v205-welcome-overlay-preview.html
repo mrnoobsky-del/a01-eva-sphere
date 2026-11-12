@@ -797,6 +797,69 @@ html[data-theme="dark"] .level-overview li{color:#e8eeee}
 }
 @media(prefers-reduced-motion:reduce){.walk-joystick-thumb{transition:none!important}}
 </style>
+<style id="a01-v207-mobile-overflow-and-dolek-identity">
+/* Mobile surfaces: keep the full content reachable inside every sheet. */
+@media(max-width:780px){
+ #contextDrawer.side{
+  top:auto!important;left:0!important;right:0!important;bottom:0!important;
+  width:100%!important;height:min(88dvh,820px)!important;
+  max-height:calc(100dvh - env(safe-area-inset-top) - 8px)!important;
+  min-height:0!important;overflow-x:hidden!important;overflow-y:auto!important;
+  overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch;
+  padding-bottom:max(14px,env(safe-area-inset-bottom))!important;
+ }
+ #contextDrawer .drawer-head{position:sticky!important;top:0!important;flex:0 0 auto!important;z-index:16!important}
+ #contextDrawer .card{min-width:0!important;max-width:100%!important;overflow:visible!important;overflow-wrap:anywhere}
+ #contextDrawer .card p,#contextDrawer .card b,#contextDrawer .card span{overflow-wrap:anywhere}
+ #contextDrawer .meta,#contextDrawer .meta>div{min-width:0}
+ #contextDrawer .meta b{overflow-wrap:anywhere;word-break:break-word}
+ #contextDrawer .appearance-actions{display:flex;flex-wrap:wrap;gap:7px}
+ #contextDrawer .appearance-actions .btn{flex:1 1 105px;min-width:0;white-space:normal}
+ .search-overlay{align-items:flex-start!important;padding:max(10px,env(safe-area-inset-top)) 10px max(12px,env(safe-area-inset-bottom))!important;overflow-y:auto!important;overscroll-behavior:contain}
+ .search-dialog{width:100%!important;max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 22px)!important;min-height:0!important}
+ .search-results{min-height:0!important;flex:1 1 auto!important;overflow-y:auto!important;overscroll-behavior:contain}
+ .walk-lift-panel{top:calc(52px + env(safe-area-inset-top))!important;left:10px!important;right:10px!important;transform:none!important;width:auto!important;max-width:none!important;max-height:calc(100dvh - 68px - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;overflow-y:auto!important;overscroll-behavior:contain}
+ .walk-lift-levels span{white-space:normal!important;text-align:center;line-height:1.2}
+ .walk-object-card{position:absolute;z-index:15;top:58px;left:10px;width:min(340px,calc(100% - 20px));max-height:calc(100dvh - 86px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;display:none;padding:12px;border:1px solid rgba(185,215,228,.24);border-radius:16px;background:rgba(7,14,20,.92);color:#f4f7f8;box-shadow:0 16px 48px rgba(0,0,0,.36);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);pointer-events:auto}
+ .walk-object-card.open{display:block}
+ .walk-object-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:7px;color:#a9d9ed;font-size:9px;font-weight:750;letter-spacing:.11em}
+ .walk-object-card-head button{width:30px;height:30px;flex:0 0 30px;border:1px solid #ffffff30;border-radius:50%;background:#ffffff12;color:#fff;font-size:19px}
+ .walk-object-card>strong{display:block;font-size:15px;line-height:1.3;overflow-wrap:anywhere}
+ .walk-object-card>p{margin:7px 0;color:#d2dce1;font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+ .walk-object-card-meta{color:#9daeb7;font-size:9px;line-height:1.4}
+ .walk-object-card-actions{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
+ .walk-object-card-actions button{min-height:36px;padding:8px 11px;border:1px solid #ffffff2e;border-radius:11px;background:#ffffff0e;color:#f5f8fa;font-size:10px;font-weight:650}
+ .walk-object-card-actions #walkObjectGo{background:#edf5f7;color:#11191d;border-color:#edf5f7;flex:1 1 150px}
+ .walk-object-card-actions #walkObjectDismiss{flex:0 1 auto}
+ .commons-shell{max-height:100dvh}
+}
+@media(max-width:390px){
+ #contextDrawer .drawer-head strong{font-size:14px}
+ #contextDrawer .card{padding:11px!important}
+ #contextDrawer .meta{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .walk-object-card{left:8px;width:calc(100% - 16px);top:54px;padding:10px}
+ .walk-object-card>strong{font-size:14px}
+ .walk-object-card>p{font-size:10px}
+ .walk-object-card-actions button{font-size:9px}
+}
+@media(max-height:650px) and (max-width:780px){
+ #contextDrawer.side{height:calc(100dvh - env(safe-area-inset-top) - 4px)!important;max-height:calc(100dvh - env(safe-area-inset-top) - 4px)!important}
+ .walk-object-card{max-height:calc(100dvh - 68px - env(safe-area-inset-top))}
+ .walk-lift-panel{max-height:calc(100dvh - 60px - env(safe-area-inset-top))}
+}
+@media(min-width:781px){
+ .walk-object-card{position:absolute;z-index:15;top:70px;right:16px;width:min(360px,34%);max-height:calc(100% - 150px);overflow-y:auto;display:none;padding:14px;border:1px solid var(--line);border-radius:17px;background:rgba(8,16,22,.92);color:#f4f7f8;box-shadow:0 18px 55px rgba(0,0,0,.35);backdrop-filter:blur(18px);pointer-events:auto}
+ .walk-object-card.open{display:block}
+ .walk-object-card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;color:#a9d9ed;font-size:10px;font-weight:750;letter-spacing:.11em}
+ .walk-object-card-head button{width:30px;height:30px;border:1px solid #ffffff30;border-radius:50%;background:#ffffff12;color:#fff;font-size:19px}
+ .walk-object-card>strong{display:block;font-size:16px;line-height:1.3}
+ .walk-object-card>p{margin:8px 0;color:#d2dce1;font-size:12px;line-height:1.55}
+ .walk-object-card-meta{color:#9daeb7;font-size:10px}
+ .walk-object-card-actions{display:flex;gap:8px;margin-top:12px}
+ .walk-object-card-actions button{padding:9px 12px;border:1px solid #ffffff2e;border-radius:11px;background:#ffffff0e;color:#f5f8fa;font-size:11px}
+ .walk-object-card-actions #walkObjectGo{background:#edf5f7;color:#11191d;border-color:#edf5f7}
+}
+</style>
 </head>
 <body data-theme="light">
 <div class="app nav-expanded" id="appShell">
@@ -890,6 +953,7 @@ html[data-theme="dark"] .level-overview li{color:#e8eeee}
   <button class="btn dock-secondary" id="dockLevelsBtn" type="button" title="Открыть уровни"><span aria-hidden="true">▤</span><span>Уровни</span></button>
  </div>
  <button class="btn tools-toggle" id="toolsToggle" type="button" aria-expanded="false">Инструменты вида <span aria-hidden="true">⌄</span></button><div class="tools" id="stageTools"><button class="btn" id="shellBtn" type="button" aria-pressed="true">Оболочка: вкл.</button><button class="btn" id="climateToggle" type="button" aria-pressed="false">Климат: показать</button><button class="btn" id="energyToggle" aria-pressed="false">Энергия: показать</button><button class="btn" id="routesBtn" type="button" aria-pressed="false">Маршруты</button><button class="btn" id="streetsBtn" type="button" aria-pressed="false">Внутренние улицы</button><button class="btn" id="transitBtn" type="button" aria-pressed="false">Движение</button><button class="btn" id="lightBtn" type="button" aria-pressed="false">Свет: день</button><button class="btn" id="explodeBtn" type="button" aria-pressed="false">Разобрать уровни</button><button class="btn" id="spinBtn" type="button" aria-pressed="false">Автовращение</button><button class="btn" id="resetBtn" type="button">Сбросить вид</button></div></div><div class="walk-controls hidden" id="walkControls" aria-label="Управление прогулкой"><div class="walk-control-cluster walk-move-cluster"><span class="walk-control-label">ДВИЖЕНИЕ</span><div class="walk-move-pad"><button type="button" data-walk="forward" aria-label="Идти вперёд">↑</button><button type="button" data-walk="back" aria-label="Идти назад">↓</button></div></div><div class="walk-control-cluster walk-look-cluster"><span class="walk-control-label">ПОВОРОТ КАМЕРЫ</span><div class="walk-look-pad"><button type="button" data-walk="left" aria-label="Повернуть камеру влево">←</button><button type="button" data-walk="right" aria-label="Повернуть камеру вправо">→</button></div></div><div class="walk-joystick" id="walkJoystick" aria-hidden="true"><div class="walk-joystick-base"><div class="walk-joystick-ring"></div><div class="walk-joystick-thumb" id="walkJoystickThumb"></div></div></div><button class="walk-lift-call" id="walkLiftCall" type="button">Лифт · уровни</button><div class="walk-lift-panel" id="walkLiftPanel" aria-hidden="true"><div class="walk-lift-head"><strong>ЛИФТ A-01</strong><button id="walkLiftClose" type="button" aria-label="Закрыть выбор уровня">×</button></div><div class="walk-lift-levels"><button type="button" data-walk-level="0"><b>00</b><span>Забота</span></button><button type="button" data-walk-level="1"><b>01</b><span>Атриум</span></button><button type="button" data-walk-level="2"><b>02</b><span>Сервисы</span></button><button type="button" data-walk-level="3"><b>03</b><span>Жильё</span></button><button type="button" data-walk-level="4"><b>04</b><span>Управление</span></button></div><small>Выбери уровень для перехода по центральному лифтовому ядру</small></div><div class="walk-mobile-hint">Левый палец · движение <span>Правый · обзор</span><span>Касание · выбрать объект</span></div><div class="walk-help">Управление: джойстик · осмотр: перетаскивание · объект: короткое касание</div></div>
+<div class="walk-object-card" id="walkObjectCard" aria-hidden="true" aria-live="polite"><div class="walk-object-card-head"><span id="walkObjectBadge">ДОЛЬКА · A-01</span><button type="button" id="walkObjectClose" aria-label="Закрыть описание объекта">×</button></div><strong id="walkObjectTitle">Название пространства</strong><p id="walkObjectDescription">Описание выбранного пространства.</p><div class="walk-object-card-meta" id="walkObjectMeta">Уровень · концепт</div><div class="walk-object-card-actions"><button type="button" id="walkObjectGo">Пройти к дольке</button><button type="button" id="walkObjectDismiss">Закрыть</button></div></div>
 </section></div>
 <aside class="side" id="contextDrawer" aria-label="Контекстная панель" aria-hidden="true"><div class="drawer-head"><div><div class="eyebrow">КОНТЕКСТНАЯ ПАНЕЛЬ · A-01</div><strong id="drawerTitle">Обзор комплекса</strong></div><button class="drawer-close" id="closeDrawer" type="button" aria-label="Закрыть панель"><span aria-hidden="true">×</span></button></div>
 
@@ -1156,6 +1220,7 @@ const world = new THREE.Group();scene.add(world);
 const floorGroups = new Map();
 const itemGroups = new Map();
 const itemMeshes = [];
+const dolekLabels = new Map();
 const levelY = {0:.65,1:2.0,2:3.65,3:5.3,4:6.95};
 const ATRIUM_RADIUS = 3.72;
 const OUTER_RADIUS = 7.85;
@@ -1487,6 +1552,49 @@ function curvedFootprint(inner,outer,halfAngle,depth){
  const geometry=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelSegments:2,steps:1,bevelSize:.035,bevelThickness:.025,curveSegments:16});
  geometry.rotateX(-Math.PI/2);return geometry;
 }
+function createDolekIdentityLabel(item){
+ const canvas=document.createElement('canvas');
+ canvas.width=640;canvas.height=96;
+ const ctx=canvas.getContext('2d');
+ if(!ctx)return null;
+ const accent=['#9ce6c6','#8fd9ff','#9ce6c6','#c9baff','#f0d69d'][item.level]||'#b9dce9';
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ ctx.beginPath();
+ ctx.roundRect(7,7,626,82,17);
+ ctx.fillStyle='rgba(7,15,21,.90)';
+ ctx.fill();
+ ctx.lineWidth=3;
+ ctx.strokeStyle=accent;
+ ctx.globalAlpha=.92;
+ ctx.stroke();
+ ctx.globalAlpha=1;
+ ctx.textAlign='center';
+ ctx.textBaseline='middle';
+ ctx.fillStyle=accent;
+ ctx.font='700 17px Inter,system-ui,sans-serif';
+ ctx.fillText('ДОЛЬКА '+String(item.slotNo).padStart(2,'0')+'  ·  УРОВЕНЬ 0'+item.level,320,29);
+ let fontSize=30;
+ ctx.font='650 '+fontSize+'px Inter,system-ui,sans-serif';
+ while(ctx.measureText(item.name).width>570&&fontSize>18){
+  fontSize-=1;
+  ctx.font='650 '+fontSize+'px Inter,system-ui,sans-serif';
+ }
+ ctx.fillStyle='#f5f8fa';
+ ctx.fillText(item.name,320,65);
+ const texture=new THREE.CanvasTexture(canvas);
+ texture.colorSpace=THREE.SRGBColorSpace;
+ texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+ const material=new THREE.MeshBasicMaterial({map:texture,transparent:true,depthWrite:false,side:THREE.DoubleSide,toneMapped:false});
+ const plaque=new THREE.Mesh(new THREE.PlaneGeometry(1.60,.24),material);
+ plaque.position.set(item.innerRadius-.025,.69,0);
+ plaque.rotation.y=-Math.PI/2;
+ plaque.userData.itemId=item.id;
+ plaque.userData.dolekIdentityLabel=true;
+ plaque.renderOrder=5;
+ plaque.visible=false;
+ return plaque;
+}
+
 function makeBuilding(item,parent){
  const g=new THREE.Group();
  if(item.kind==='atrium'){
@@ -1532,6 +1640,7 @@ function makeBuilding(item,parent){
   // Each dоlek gets an inward-facing doorway toward the central promenade.
   const door=addMesh(g,new THREE.BoxGeometry(.40,.49,.055),materials.dark,[inner+.035,.36,0],[0,Math.PI/2,0]);door.userData.itemId=item.id;
   const doorGlass=addMesh(g,new THREE.BoxGeometry(.25,.34,.065),materials.glass,[inner+.045,.39,0],[0,Math.PI/2,0]);doorGlass.userData.itemId=item.id;
+  const identityLabel=createDolekIdentityLabel(item);if(identityLabel){g.add(identityLabel);dolekLabels.set(item.id,identityLabel);}
   // Minimal rooftop identity marker; green modules receive small trees.
   if(['garden','terrace'].includes(item.kind)){
    for(let i=-1;i<=1;i++){
@@ -1914,6 +2023,22 @@ function updateLevelOverview(level){
 function escapeLevelText(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
 
 function updatePanel(){const o=allFeatures.find(x=>x.id===selectedId)||items[0];$('objectName').textContent=o.name;$('objectDesc').textContent=o.desc;$('objectTag').textContent=o.isDolek?`ДОЛЬКА ${String(o.slotNo).padStart(2,'0')} · КОНЦЕПТ`:`КОНЦЕПТ · ${o.type.toUpperCase()}`;$('objectCode').textContent=o.id;$('objectLevel').textContent=labelByLevel[o.level];const links=o.links?o.links.map(id=>items.find(x=>x.id===id)?.name||streetFeatures.find(x=>x.id===id)?.name).filter(Boolean):streetFeatures.filter(s=>s.links.includes(o.id)).map(s=>s.name);$('objectConnections').textContent=links.length?links.join(' · '):'Связи уточняются';const market=o.isDolek&&o.tenureOptions?.length>0;$('objectMarket').textContent=market?(o.tenureOptions.includes('purchase')?'Приобретение или аренда':'Аренда'):(o.isDolek?'Общая зона / инфраструктура':'Не коммерческий объект');$('objectOffer').textContent=o.isDolek?(market?'Не выставлено · цена и площадь не определены':'Общее пространство · не лот'):'Концепт · не выставлено';$('marketNote').textContent=market?'Это планируемый формат будущего размещения. Карточка не является офертой, бронью или правом собственности; предложение появится только после создания и юридического оформления реального помещения.':'Демонстрационная архитектурная зона. Для общего пространства не предполагается индивидуальная продажа или аренда.';const wb=$('walkToBtn');wb.style.display=o.isDolek?'inline-flex':'none';wb.disabled=!o.isDolek;wb.textContent=walkMode?'Подойти к входу':'Прогулка к дольке';const cb=$('viewCommonsBtn');cb.style.display=o.level===0?'inline-flex':'none';}
+function closeWalkObjectCard(){
+ const card=$('walkObjectCard');
+ card?.classList.remove('open');
+ card?.setAttribute('aria-hidden','true');
+}
+function showWalkObjectCard(item){
+ if(!item)return;
+ const card=$('walkObjectCard');
+ if(!card)return;
+ $('walkObjectBadge').textContent='ДОЛЬКА '+String(item.slotNo).padStart(2,'0')+' · A-01';
+ $('walkObjectTitle').textContent=item.name;
+ $('walkObjectDescription').textContent=item.desc;
+ $('walkObjectMeta').textContent=labelByLevel[item.level]+' · Концепция · Не построено';
+ card.classList.add('open');
+ card.setAttribute('aria-hidden','false');
+}
 function highlight(){for(const [id,g] of itemGroups){g.traverse(o=>{if(o.isMesh&&o.material&&o.material.emissive){const active=id===selectedId||id===hoveredId;o.material.emissive.set(active?0x397c9f:0x000000);o.material.emissiveIntensity=active?.48:0;}})}}
 function renderLevelButtons(){const holder=$('levels');holder.innerHTML=Object.entries(levelInfo).reverse().map(([n,v])=>`<button class="level-btn ${focusedLevel===+n?'active':''}" data-level="${n}" type="button"><span><span class="level-num">0${n}</span><span class="level-name">${v.short}</span></span><small>${items.filter(x=>x.level===+n&&x.isDolek).length} долек</small></button>`).join('');holder.querySelectorAll('[data-level]').forEach(b=>b.addEventListener('click',()=>focusLevel(+b.dataset.level)));}
 function focusLevel(level){if(walkMode&&level!==null&&level!==undefined&&walkPlayerLevel!==level){requestWalkLift(level);return;}focusedLevel=level;for(const [n,g] of floorGroups){g.visible=focusedLevel===null||n===focusedLevel;}for(const [n,g] of routeLevelGroups){g.visible=focusedLevel===null||n===focusedLevel;}for(const [n,g] of streetLevelGroups){g.visible=focusedLevel===null||n===focusedLevel;}renderLevelButtons();updateLevelOverview(focusedLevel);syncSimulationUI();if(focusedLevel!==null){const first=items.find(x=>x.level===level);if(first)selectItem(first.id);}else{selectItem(selectedId);}}
@@ -1951,16 +2076,20 @@ function findWalkPath(sx,sz,tx,tz,level){
 }
 function nearestLiftLanding(){const a=Math.round(Math.atan2(walkZ,walkX)/(Math.PI/2))*(Math.PI/2);return {x:Math.cos(a)*1.72,z:Math.sin(a)*1.72};}
 function setWalkDestination(x,z,id=null){const destination=nearestWalkablePoint(x,z,walkPlayerLevel);if(!destination){showWalkToast('Маршрут пока недоступен в этой зоне.');return false;}const path=findWalkPath(walkX,walkZ,destination.x,destination.z,walkPlayerLevel);if(!path.length){showWalkToast('Не удалось построить маршрут по доступным проходам.');return false;}walkPath=path;walkPathIndex=0;walkGoalId=id||null;showWalkToast(id?('Маршрут к объекту: '+((allFeatures.find(x=>x.id===id)||{}).name||'выбранная зона')):'Маршрут построен');return true;}
-function openWalkLift(){const panel=$('walkLiftPanel');if(!panel)return;panel.classList.add('open');panel.setAttribute('aria-hidden','false');$('walkLiftCall')?.classList.add('visible');}
+function openWalkLift(){closeWalkObjectCard();const panel=$('walkLiftPanel');if(!panel)return;panel.classList.add('open');panel.setAttribute('aria-hidden','false');$('walkLiftCall')?.classList.add('visible');}
 function closeWalkLift(){const panel=$('walkLiftPanel');panel?.classList.remove('open');panel?.setAttribute('aria-hidden','true');}
 function beginWalkLift(level){if(!Number.isInteger(level)||level<0||level>4)return;closeWalkLift();if(level===walkPlayerLevel){showWalkToast('Ты уже на этом уровне.');return;}walkLiftTargetLevel=level;walkPendingLiftLevel=null;walkTransferActive=true;walkLiftAnimating=true;walkLevelTarget=levelY[level];transitRunning=true;walkPath=[];walkPathIndex=0;walkMoveBlendX=0;walkMoveBlendY=0;showWalkToast('Лифт A-01 · переход на уровень 0'+level);}
 function requestWalkLift(level,target=null){if(!Number.isInteger(level)||level<0||level>4)return;if(target)walkPendingTarget=target;if(Math.hypot(walkX,walkZ)<=2.08){beginWalkLift(level);return;}walkPendingLiftLevel=level;const landing=nearestLiftLanding();if(!setWalkDestination(landing.x,landing.z,'lift')){walkPendingLiftLevel=null;return;}showWalkToast('Подойди к центральному лифту — переход начнётся автоматически.');}
 function walkFeatureDestination(feature){if(!feature)return;let target;if(feature.isDolek){const a=feature.angle;target={x:4.58*Math.cos(a),z:4.58*Math.sin(a)};}else if(feature.path==='arc')target={x:feature.radius*Math.cos(feature.angle),z:feature.radius*Math.sin(feature.angle)};else if(feature.path==='plaza'){const a=feature.angle||0;target={x:3.35*Math.cos(a),z:3.35*Math.sin(a)};}else if(feature.path==='radial')target={x:5.35*Math.cos(feature.angle),z:5.35*Math.sin(feature.angle)};else target=nearestLiftLanding();if(feature.level!==walkPlayerLevel)requestWalkLift(feature.level,{x:target.x,z:target.z,level:feature.level,id:feature.id});else if(feature.kind==='atrium'){const landing=nearestLiftLanding();setWalkDestination(landing.x,landing.z,'elevator');}else setWalkDestination(target.x,target.z,feature.id);}
-function syncWalkUI(){const btn=$('walkBtn');btn.querySelector('.action-label').textContent=walkMode?'Выйти':'Войти внутрь';btn.querySelector('.action-icon').textContent=walkMode?'↙':'↗';btn.setAttribute('aria-pressed',String(walkMode));$('walkControls').classList.toggle('hidden',!walkMode);stage.classList.toggle('walking',walkMode);$('stageHint').textContent=walkMode?'Джойстик — движение · правая часть экрана — обзор · короткое касание — выбрать объект.':'Навигация слева · Сфера в центре · подробности справа.';$('viewMode').textContent=walkMode?'ПРОГУЛКА · УРОВЕНЬ 0'+walkPlayerLevel:(focusedLevel!==null?'УРОВЕНЬ 0'+focusedLevel+' · '+lightModes[lightMode].name:'ОБЩИЙ ОБЗОР · '+lightModes[lightMode].name);$('walkToBtn').textContent=walkMode?'Подойти к входу':'Прогулка к дольке';}
+function syncWalkUI(){const btn=$('walkBtn');btn.querySelector('.action-label').textContent=walkMode?'Выйти':'Войти внутрь';btn.querySelector('.action-icon').textContent=walkMode?'↙':'↗';btn.setAttribute('aria-pressed',String(walkMode));$('walkControls').classList.toggle('hidden',!walkMode);stage.classList.toggle('walking',walkMode);for(const label of dolekLabels.values())label.visible=walkMode;if(!walkMode)closeWalkObjectCard();$('stageHint').textContent=walkMode?'Джойстик — движение · правая часть экрана — обзор · короткое касание — выбрать объект.':'Навигация слева · Сфера в центре · подробности справа.';$('viewMode').textContent=walkMode?'ПРОГУЛКА · УРОВЕНЬ 0'+walkPlayerLevel:(focusedLevel!==null?'УРОВЕНЬ 0'+focusedLevel+' · '+lightModes[lightMode].name:'ОБЩИЙ ОБЗОР · '+lightModes[lightMode].name);$('walkToBtn').textContent=walkMode?'Подойти к входу':'Прогулка к дольке';}
 function setWalkMode(enabled,targetId=null){if(enabled===walkMode)return;walkMode=enabled;if(walkMode){const selected=allFeatures.find(x=>x.id===selectedId);walkPlayerLevel=selected?.level??1;focusedLevel=walkPlayerLevel;for(const [n,g] of floorGroups)g.visible=n===focusedLevel;for(const [n,g] of routeLevelGroups)g.visible=n===focusedLevel;for(const [n,g] of streetLevelGroups)g.visible=n===focusedLevel;renderLevelButtons();controls.autoRotate=false;controls.enabled=false;$('spinBtn').classList.remove('active');$('spinBtn').setAttribute('aria-pressed','false');setExplode(false);walkPath=[];walkPathIndex=0;walkGoalId=null;walkPitch=.20;avatarGroup.visible=true;camera.fov=62;camera.updateProjectionMatrix();walkX=4.42;walkZ=0;walkYaw=Math.PI;walkMoveBlendX=0;walkMoveBlendY=0;walkLevelY=levelY[walkPlayerLevel];walkLevelTarget=walkLevelY;walkTransferActive=false;walkLiftAnimating=false;walkPendingLiftLevel=null;walkPendingTarget=null;syncWalkUI();syncSimulationUI();showWalkToast('Ты внутри Сферы. Касайся объектов для выбора и маршрута.');if(targetId){const target=allFeatures.find(x=>x.id===targetId);if(target)walkFeatureDestination(target);}}else{resetWalkJoystick();walkMoveBlendX=0;walkMoveBlendY=0;walkLookPointerId=null;walkLookLast=null;walkPath=[];walkPathIndex=0;walkGoalId=null;walkTransferActive=false;walkLiftAnimating=false;walkPendingLiftLevel=null;walkPendingTarget=null;transitRunning=false;closeWalkLift();Object.keys(walkKeys).forEach(k=>walkKeys[k]=false);avatarGroup.visible=false;controls.enabled=true;camera.fov=43;camera.updateProjectionMatrix();focusedLevel=null;for(const [n,g] of floorGroups)g.visible=true;for(const [n,g] of routeLevelGroups)g.visible=true;for(const [n,g] of streetLevelGroups)g.visible=true;renderLevelButtons();camera.position.set(22.5,17.5,27.8);controls.target.set(0,5.05,0);controls.update();syncWalkUI();syncSimulationUI();}updatePanel();}
 function walkToSelected(){const o=allFeatures.find(x=>x.id===selectedId);if(!o||!o.isDolek)return;if(!walkMode)setWalkMode(true,o.id);else walkFeatureDestination(o);}
 function pickWalkFloor(event){const rect=renderer.domElement.getBoundingClientRect();pointer.x=((event.clientX-rect.left)/rect.width)*2-1;pointer.y=-((event.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects([...floorGroups.values()],true);for(const hit of hits){if(hit.object.userData.walkFloor&&hit.object.userData.walkLevel===walkPlayerLevel){const p={x:hit.point.x,z:hit.point.z};if(isWalkable(p.x,p.z,walkPlayerLevel))return p;}}const worldHits=raycaster.intersectObjects(world.children,true);for(const hit of worldHits){if(hit.object.userData.walkBridge&&hit.object.userData.walkLevel===walkPlayerLevel){const p={x:hit.point.x,z:hit.point.z};if(isWalkable(p.x,p.z,walkPlayerLevel))return p;}}return null;}
-function handleWalkClick(event){const id=pick(event);if(id){const feature=allFeatures.find(x=>x.id===id);if(!feature)return;selectItem(id);walkFeatureDestination(feature);return;}const rect=renderer.domElement.getBoundingClientRect();pointer.x=((event.clientX-rect.left)/rect.width)*2-1;pointer.y=-((event.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(world.children,true);const elevatorHit=hits.find(hit=>hit.object===core||hit.object.userData.walkAction==='elevator');if(elevatorHit){if(Math.hypot(walkX,walkZ)>2.08){const p=nearestLiftLanding();setWalkDestination(p.x,p.z,'lift');showWalkToast('Подойди к центральному лифту.');}else openWalkLift();return;}const gardenHits=raycaster.intersectObjects([gardenGroup],true);if(gardenHits.length){const hit=gardenHits[0];if(walkPlayerLevel===0){setWalkDestination(hit.point.x,hit.point.z,'garden');showWalkToast('Зимний сад · маршрут построен.');}else{requestWalkLift(0,{x:hit.point.x,z:hit.point.z,level:0,id:'garden'});showWalkToast('Зимний сад находится на уровне 00.');}return;}const surface=pickWalkFloor(event);if(surface){setWalkDestination(surface.x,surface.z);return;}showWalkToast('Коснись объекта, дорожки или центрального лифта.');}
+function handleWalkClick(event){const id=pick(event);if(id){const feature=allFeatures.find(x=>x.id===id);if(!feature)return;selectItem(id);if(feature.isDolek){walkPath=[];walkPathIndex=0;walkMoveBlendX=0;walkMoveBlendY=0;showWalkObjectCard(feature);return;}closeWalkObjectCard();walkFeatureDestination(feature);return;}const rect=renderer.domElement.getBoundingClientRect();pointer.x=((event.clientX-rect.left)/rect.width)*2-1;pointer.y=-((event.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(world.children,true);const elevatorHit=hits.find(hit=>hit.object===core||hit.object.userData.walkAction==='elevator');if(elevatorHit){if(Math.hypot(walkX,walkZ)>2.08){const p=nearestLiftLanding();setWalkDestination(p.x,p.z,'lift');showWalkToast('Подойди к центральному лифту.');}else openWalkLift();return;}const gardenHits=raycaster.intersectObjects([gardenGroup],true);if(gardenHits.length){const hit=gardenHits[0];if(walkPlayerLevel===0){setWalkDestination(hit.point.x,hit.point.z,'garden');showWalkToast('Зимний сад · маршрут построен.');}else{requestWalkLift(0,{x:hit.point.x,z:hit.point.z,level:0,id:'garden'});showWalkToast('Зимний сад находится на уровне 00.');}return;}const surface=pickWalkFloor(event);if(surface){setWalkDestination(surface.x,surface.z);return;}showWalkToast('Коснись объекта, дорожки или центрального лифта.');}
+
+$('walkObjectClose')?.addEventListener('click',closeWalkObjectCard);
+$('walkObjectDismiss')?.addEventListener('click',closeWalkObjectCard);
+$('walkObjectGo')?.addEventListener('click',()=>{const feature=allFeatures.find(x=>x.id===selectedId);if(feature){closeWalkObjectCard();walkFeatureDestination(feature);}});
 $('walkBtn').addEventListener('click',()=>setWalkMode(!walkMode));$('walkToBtn').addEventListener('click',walkToSelected);$('walkLiftCall')?.addEventListener('click',openWalkLift);$('walkLiftClose')?.addEventListener('click',closeWalkLift);document.querySelectorAll('[data-walk-level]').forEach(button=>button.addEventListener('click',()=>requestWalkLift(Number(button.dataset.walkLevel))));$('viewCommonsBtn').addEventListener('click',()=>window.evaA01ShowIntegrated?.('commons'));document.getElementById('objectRegistryBtn')?.addEventListener('click',()=>window.open('./eva-sphere-registry-v19.html#'+encodeURIComponent(selectedId),'_blank','noopener'));$('closeCommons').addEventListener('click',()=>{$('commonsOverlay').classList.remove('open');$('commonsOverlay').setAttribute('aria-hidden','true');});$('commonsOverlay').addEventListener('click',e=>{if(e.target===$('commonsOverlay'))$('closeCommons').click();});window.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('commonsOverlay').classList.contains('open'))$('closeCommons').click();});
 for(const button of document.querySelectorAll('[data-walk]')){const key=button.dataset.walk;const down=e=>{e.preventDefault();e.stopPropagation();walkKeys[key]=true;walkPath=[];walkPathIndex=0;};const up=e=>{e.preventDefault();e.stopPropagation();walkKeys[key]=false;};button.addEventListener('pointerdown',down);button.addEventListener('pointerup',up);button.addEventListener('pointercancel',up);button.addEventListener('lostpointercapture',up);button.addEventListener('contextmenu',e=>e.preventDefault());}
 window.addEventListener('pointerup',()=>{Object.keys(walkKeys).forEach(k=>walkKeys[k]=false);});
