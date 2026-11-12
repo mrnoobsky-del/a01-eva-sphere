@@ -37,3 +37,13 @@ Static source checks passed: welcome markup is inside .workspace-main; final wel
 - Desktop keyboard/mouse and existing on-screen direction controls remain available outside the mobile breakpoint.
 - Added pointer capture, pointer-cancel and window-blur cleanup to avoid stuck movement; mobile touch-action is disabled only while in walk mode.
 - This is an initial implementation pass; verify on real Android/iOS hardware for thumb reach, touch concurrency, camera feel, and safe-area behavior before production.
+
+
+## Walkthrough UX and HUD conflict prevention
+- Restrict touch-control start zones to the central/lower viewport so touches near the top status area and bottom controls do not initiate movement or camera look.
+- Clamp the floating joystick origin within the stage bounds so its visual base does not spill outside the 3D viewport.
+- Suppress synthetic tap/click actions after touch gestures, preventing accidental target selection when a player releases a movement or camera touch.
+- Ease character movement in and out instead of starting/stopping at full speed; camera follow smoothing is frame-rate independent.
+- On mobile walkthrough mode, retain a compact sector/status header, hide nonessential hints/tools and secondary dock actions, and center the exit control at the bottom. Keep the joystick and camera hint in separate lower side zones with safe-area spacing.
+- Keep HUD overlays pointer-transparent except for actual controls; desktop keyboard/mouse and desktop directional controls remain available.
+- Validate in browser emulation and on real phones before production, including small screens, safe-area insets, two-finger input, and opening/closing walk mode.
