@@ -82,3 +82,10 @@ Project website: https://vibeshorts.ru/evasphere/
 Eva Sphere workspace: https://evasphere.usite.pro/
 
 The repository is a public development record. Project status may change; check the dated release notes before relying on any implementation detail.
+
+## Latest digital twin build
+
+- **A-01 v2.1.0 — Human Navigation & Safety Architecture:** [Open HTML prototype](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html)
+- [Russian documentation](digital-twin/README_RU_v210.md) · [Changelog](digital-twin/CHANGELOG_v210.md)
+
+This build adds vertical first-person look control, adjustable field of view, a conceptual main entrance/exit, and two conceptual protected stair cores. These are design-study elements, not a certified life-safety or construction design. Full stair traversal and professional code validation remain future work.
