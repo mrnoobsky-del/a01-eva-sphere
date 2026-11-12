@@ -2445,7 +2445,7 @@ function setExteriorMode(enabled){
  controls.enabled=true;
  syncWalkUI();syncSimulationUI();
 }
-function setWalkDestination(angle,id=null){walkGoalAngle=wrapAngle(angle);walkGoalId=id||null;activeWalkTargetId=id||null;walkLastDestination='';walkLookOffset=0;updateWalkRouteVisual();const target=items.find(x=>x.id===id);showWalkToast(id?`Маршрут к пространству: ${target?.name||'выбранный объект'}.`:'Маршрут по внутренней галерее построен.');}
+function setWalkDestination(angle,id=null){walkGoalAngle=wrapAngle(angle);walkGoalId=id||null;activeWalkTargetId=id||null;walkLastDestination='';walkLookOffset=0;updateWalkRouteVisual();const target=items.find(x=>x.id===id);const label=id==='evac-north'?'северной эвакуационной лестнице':id==='evac-south'?'южной эвакуационной лестнице':id==='main-entrance'?'главному входу':id==='main-exit'?'главному выходу':target?.name;if(label)showWalkToast(`Маршрут построен: ${label}.`);else showWalkToast('Маршрут по внутренней галерее построен.');}
 function applyWalkFov(){
  const value=walkFirstPerson?walkFov:62;
  if(walkMode){camera.fov=value;camera.updateProjectionMatrix();}
