@@ -23,3 +23,9 @@ Static source checks passed: welcome markup is inside .workspace-main; final wel
 - Enter inserts a newline on mobile; the explicit send button submits. Desktop retains Enter-to-send and Shift+Enter newline.
 - Use VisualViewport resize/scroll measurements to resize the chat panel when the on-screen keyboard appears, keeping the conversation scroll area and composer visible.
 - Browser testing on physical iOS/Android devices remains required.
+
+
+## Mobile follow-up from device preview
+- Explicitly force the top action cluster to flex-direction: row on narrow phone widths, overriding the legacy column rule at max-width 520px. Keep all four controls aligned horizontally without wrapping.
+- Enter submits the Eva message on both desktop and mobile; Shift+Enter inserts a newline.
+- Hide the keyboard shortcut hint beneath the composer on mobile. Keep the explicit send button available.
