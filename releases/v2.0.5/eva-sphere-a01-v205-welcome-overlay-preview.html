@@ -739,6 +739,64 @@ html[data-theme="dark"] .level-overview li{color:#e8eeee}
  .stage.walking .walk-joystick,.stage.walking .walk-mobile-hint{display:none!important}
 }
 </style>
+<style id="a01-v206-walk-navigation">
+.stage.walking .walk-controls{z-index:5;pointer-events:none}
+.stage.walking .walk-control-cluster,.stage.walking .walk-lift-call,.stage.walking .walk-lift-panel{pointer-events:auto}
+.stage.walking .walk-help{pointer-events:none}
+.walk-lift-call{display:none;position:absolute;top:58px;right:12px;z-index:12;padding:8px 12px;border:1px solid rgba(185,222,237,.4);border-radius:999px;background:rgba(8,18,25,.88);color:#eef8fb;font-size:10px;font-weight:700;box-shadow:0 6px 22px rgba(0,0,0,.2);backdrop-filter:blur(12px)}
+.walk-lift-call.visible{display:inline-flex}
+.walk-lift-panel{display:none;position:absolute;z-index:14;top:104px;left:50%;transform:translateX(-50%);width:min(410px,calc(100% - 28px));padding:12px;border:1px solid rgba(180,213,226,.28);border-radius:18px;background:rgba(8,16,22,.94);color:#f3f7f9;box-shadow:0 18px 55px rgba(0,0,0,.38);backdrop-filter:blur(18px);pointer-events:auto}
+.walk-lift-panel.open{display:block}
+.walk-lift-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font-size:10px;letter-spacing:.13em}
+.walk-lift-head button{width:30px;height:30px;border:1px solid #ffffff2a;border-radius:50%;background:#ffffff10;color:#fff;font-size:19px}
+.walk-lift-levels{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.walk-lift-levels button{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;padding:10px 4px;border:1px solid #ffffff24;border-radius:12px;background:#ffffff0d;color:#fff}
+.walk-lift-levels button:active{background:#eaf5f8;color:#10191e}
+.walk-lift-levels b{font-size:16px}
+.walk-lift-levels span{font-size:8px;color:inherit;white-space:nowrap}
+.walk-lift-panel small{display:block;margin-top:10px;color:#aebbc2;font-size:9px;line-height:1.45}
+@media(max-width:780px){
+ .stage.walking{isolation:isolate}
+ .stage.walking canvas{touch-action:none}
+ .stage.walking .stage-top{z-index:7;left:10px;right:10px;top:10px;align-items:center;gap:6px}
+ .stage.walking .stage-title b{font-size:9px;letter-spacing:.08em}
+ .stage.walking .stage-title span,.stage.walking .sim-note{display:none!important}
+ .stage.walking .view-pill{padding:6px 8px;font-size:8px;white-space:nowrap}
+ .stage.walking .stage-bottom{z-index:9;left:10px;right:10px;bottom:max(9px,env(safe-area-inset-bottom));display:flex;justify-content:center;align-items:center;pointer-events:none}
+ .stage.walking .stage-bottom .hint,.stage.walking #dockFocusBtn,.stage.walking #dockLevelsBtn,.stage.walking #toolsToggle{display:none!important}
+ .stage.walking .stage-actions{display:flex!important;justify-content:center;align-items:center;gap:0;padding:4px;border-radius:999px;pointer-events:auto}
+ .stage.walking #walkBtn{min-height:36px;padding:8px 15px!important;border-radius:999px;font-size:11px!important}
+ .stage.walking .walk-controls{position:absolute;inset:0;display:block!important;overflow:hidden;pointer-events:none}
+ .stage.walking .walk-control-cluster,.stage.walking .walk-help{display:none!important}
+ .stage.walking .walk-joystick{position:absolute;display:none;width:126px;height:126px;transform:translate(-50%,-50%);pointer-events:none}
+ .stage.walking .walk-joystick.active{display:block}
+ .stage.walking .walk-joystick-base{position:absolute;inset:0;border:1px solid rgba(205,226,237,.34);border-radius:50%;background:radial-gradient(circle,rgba(183,211,226,.13),rgba(12,22,29,.22));box-shadow:0 10px 35px rgba(0,0,0,.22),inset 0 0 24px rgba(255,255,255,.07);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+ .stage.walking .walk-joystick-ring{position:absolute;inset:17px;border:1px dashed rgba(205,226,237,.22);border-radius:50%}
+ .stage.walking .walk-joystick-thumb{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px;border:1px solid rgba(226,242,250,.75);border-radius:50%;background:linear-gradient(145deg,rgba(235,246,252,.92),rgba(112,151,174,.76));box-shadow:0 5px 18px rgba(0,0,0,.3),0 0 18px rgba(132,194,224,.22);will-change:transform}
+ .stage.walking .walk-mobile-hint{position:absolute;right:10px;bottom:max(68px,calc(env(safe-area-inset-bottom) + 62px));display:flex;flex-direction:column;align-items:flex-end;gap:3px;max-width:116px;padding:7px 9px;border:1px solid rgba(215,232,242,.2);border-radius:11px;background:rgba(5,10,14,.48);color:rgba(239,247,251,.82);font-size:8px;line-height:1.35;letter-spacing:.01em;backdrop-filter:blur(9px);pointer-events:none}
+ .stage.walking .walk-mobile-hint span{color:rgba(190,219,234,.72)}
+ .stage.walking .walk-lift-call{top:54px;right:10px;font-size:9px;padding:8px 10px}
+ .stage.walking .walk-lift-panel{top:92px;width:calc(100% - 24px);padding:10px}
+ .stage.walking .walk-lift-levels{gap:4px}
+ .stage.walking .walk-lift-levels button{padding:9px 2px;border-radius:10px}
+ .stage.walking .walk-lift-levels b{font-size:15px}
+ .stage.walking .walk-lift-levels span{font-size:7px}
+}
+@media(max-width:380px){
+ .stage.walking .stage-title b{font-size:8px}
+ .stage.walking .walk-mobile-hint{max-width:100px;font-size:7px;right:8px}
+ .stage.walking .walk-joystick{width:116px;height:116px}
+ .stage.walking .walk-joystick-thumb{width:44px;height:44px;margin:-22px}
+ .stage.walking .walk-lift-panel{top:88px}
+ .stage.walking .walk-lift-levels span{font-size:6.5px}
+}
+@media(min-width:781px){
+ .stage.walking .walk-controls{pointer-events:none}
+ .stage.walking .walk-control-cluster,.stage.walking .walk-lift-call,.stage.walking .walk-lift-panel{pointer-events:auto}
+ .stage.walking .walk-joystick,.stage.walking .walk-mobile-hint{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){.walk-joystick-thumb{transition:none!important}}
+</style>
 </head>
 <body data-theme="light">
 <div class="app nav-expanded" id="appShell">
@@ -831,7 +889,7 @@ html[data-theme="dark"] .level-overview li{color:#e8eeee}
   <button class="btn dock-secondary" id="dockFocusBtn" type="button" title="Перейти к выбранному объекту"><span aria-hidden="true">◎</span><span>К объекту</span></button>
   <button class="btn dock-secondary" id="dockLevelsBtn" type="button" title="Открыть уровни"><span aria-hidden="true">▤</span><span>Уровни</span></button>
  </div>
- <button class="btn tools-toggle" id="toolsToggle" type="button" aria-expanded="false">Инструменты вида <span aria-hidden="true">⌄</span></button><div class="tools" id="stageTools"><button class="btn" id="shellBtn" type="button" aria-pressed="true">Оболочка: вкл.</button><button class="btn" id="climateToggle" type="button" aria-pressed="false">Климат: показать</button><button class="btn" id="energyToggle" aria-pressed="false">Энергия: показать</button><button class="btn" id="routesBtn" type="button" aria-pressed="false">Маршруты</button><button class="btn" id="streetsBtn" type="button" aria-pressed="false">Внутренние улицы</button><button class="btn" id="transitBtn" type="button" aria-pressed="false">Движение</button><button class="btn" id="lightBtn" type="button" aria-pressed="false">Свет: день</button><button class="btn" id="explodeBtn" type="button" aria-pressed="false">Разобрать уровни</button><button class="btn" id="spinBtn" type="button" aria-pressed="false">Автовращение</button><button class="btn" id="resetBtn" type="button">Сбросить вид</button></div></div><div class="walk-controls hidden" id="walkControls" aria-label="Управление прогулкой"><div class="walk-control-cluster walk-move-cluster"><span class="walk-control-label">ДВИЖЕНИЕ</span><div class="walk-move-pad"><button type="button" data-walk="forward" aria-label="Идти вперёд">↑</button><button type="button" data-walk="back" aria-label="Идти назад">↓</button></div></div><div class="walk-control-cluster walk-look-cluster"><span class="walk-control-label">ПОВОРОТ КАМЕРЫ</span><div class="walk-look-pad"><button type="button" data-walk="left" aria-label="Повернуть камеру влево">←</button><button type="button" data-walk="right" aria-label="Повернуть камеру вправо">→</button></div></div><div class="walk-joystick" id="walkJoystick" aria-hidden="true"><div class="walk-joystick-base"><div class="walk-joystick-ring"></div><div class="walk-joystick-thumb" id="walkJoystickThumb"></div></div></div><div class="walk-mobile-hint">Слева · движение <span>Справа · обзор</span></div><div class="walk-help">Удерживай кнопки · Проводи пальцем по сцене, чтобы осмотреться</div></div>
+ <button class="btn tools-toggle" id="toolsToggle" type="button" aria-expanded="false">Инструменты вида <span aria-hidden="true">⌄</span></button><div class="tools" id="stageTools"><button class="btn" id="shellBtn" type="button" aria-pressed="true">Оболочка: вкл.</button><button class="btn" id="climateToggle" type="button" aria-pressed="false">Климат: показать</button><button class="btn" id="energyToggle" aria-pressed="false">Энергия: показать</button><button class="btn" id="routesBtn" type="button" aria-pressed="false">Маршруты</button><button class="btn" id="streetsBtn" type="button" aria-pressed="false">Внутренние улицы</button><button class="btn" id="transitBtn" type="button" aria-pressed="false">Движение</button><button class="btn" id="lightBtn" type="button" aria-pressed="false">Свет: день</button><button class="btn" id="explodeBtn" type="button" aria-pressed="false">Разобрать уровни</button><button class="btn" id="spinBtn" type="button" aria-pressed="false">Автовращение</button><button class="btn" id="resetBtn" type="button">Сбросить вид</button></div></div><div class="walk-controls hidden" id="walkControls" aria-label="Управление прогулкой"><div class="walk-control-cluster walk-move-cluster"><span class="walk-control-label">ДВИЖЕНИЕ</span><div class="walk-move-pad"><button type="button" data-walk="forward" aria-label="Идти вперёд">↑</button><button type="button" data-walk="back" aria-label="Идти назад">↓</button></div></div><div class="walk-control-cluster walk-look-cluster"><span class="walk-control-label">ПОВОРОТ КАМЕРЫ</span><div class="walk-look-pad"><button type="button" data-walk="left" aria-label="Повернуть камеру влево">←</button><button type="button" data-walk="right" aria-label="Повернуть камеру вправо">→</button></div></div><div class="walk-joystick" id="walkJoystick" aria-hidden="true"><div class="walk-joystick-base"><div class="walk-joystick-ring"></div><div class="walk-joystick-thumb" id="walkJoystickThumb"></div></div></div><button class="walk-lift-call" id="walkLiftCall" type="button">Лифт · уровни</button><div class="walk-lift-panel" id="walkLiftPanel" aria-hidden="true"><div class="walk-lift-head"><strong>ЛИФТ A-01</strong><button id="walkLiftClose" type="button" aria-label="Закрыть выбор уровня">×</button></div><div class="walk-lift-levels"><button type="button" data-walk-level="0"><b>00</b><span>Забота</span></button><button type="button" data-walk-level="1"><b>01</b><span>Атриум</span></button><button type="button" data-walk-level="2"><b>02</b><span>Сервисы</span></button><button type="button" data-walk-level="3"><b>03</b><span>Жильё</span></button><button type="button" data-walk-level="4"><b>04</b><span>Управление</span></button></div><small>Выбери уровень для перехода по центральному лифтовому ядру</small></div><div class="walk-mobile-hint">Левый палец · движение <span>Правый · обзор</span><span>Касание · выбрать объект</span></div><div class="walk-help">Управление: джойстик · осмотр: перетаскивание · объект: короткое касание</div></div>
 </section></div>
 <aside class="side" id="contextDrawer" aria-label="Контекстная панель" aria-hidden="true"><div class="drawer-head"><div><div class="eyebrow">КОНТЕКСТНАЯ ПАНЕЛЬ · A-01</div><strong id="drawerTitle">Обзор комплекса</strong></div><button class="drawer-close" id="closeDrawer" type="button" aria-label="Закрыть панель"><span aria-hidden="true">×</span></button></div>
 
@@ -1397,6 +1455,7 @@ for(let level=0;level<=4;level++){
 
 // Central atrium void, glass lift core and four illuminated sky bridges.
 const core=addMesh(world,new THREE.CylinderGeometry(1.28,1.45,7.55,56,1,true),themeBind(new THREE.MeshPhysicalMaterial({color:0x8ddfff,transparent:true,opacity:.23,roughness:.16,metalness:.25,side:THREE.DoubleSide}),'#dce8e5',0xffffff,.31,.23),[0,4.05,0]);
+core.userData.walkAction='elevator';
 addMesh(world,new THREE.CylinderGeometry(.18,.24,7.65,24),themeBind(mat(0x9ec7d9,.28,.68),'#151d20',0x9ec7d9),[0,4.05,0]);
 for(let level=0;level<=4;level++){
  const y=levelY[level]+.12;
@@ -1405,6 +1464,7 @@ for(let level=0;level<=4;level++){
  for(let a=0;a<4;a++){
   const angle=a*Math.PI/2;
   const link=addMesh(world,new THREE.BoxGeometry(ATRIUM_RADIUS-1.62,.075,.46),themeBind(mat(0x9bc6df,.34,.5),'#d0d8d5',0xffffff),[Math.cos(angle)*((ATRIUM_RADIUS+1.62)/2),y,Math.sin(angle)*((ATRIUM_RADIUS+1.62)/2)],[0,-angle,0]);
+  link.userData.walkBridge=true;link.userData.walkLevel=level;
  }
 }
 // Inner tower crown.
@@ -1748,7 +1808,7 @@ const avatarRightLeg=new THREE.Group();avatarRightLeg.position.set(.075,.39,0);a
 addMesh(avatarRightLeg,new THREE.CapsuleGeometry(.06,.22,3,7),avatarSuit,[0,-.14,0]);
 const avatarBadge=addMesh(avatarGroup,new THREE.TorusGeometry(.22,.012,6,28),materials.glow,[0,.025,0],[Math.PI/2,0,0]);
 
-let walkMode=false;let walkPlayerLevel=1;let walkLevelY=levelY[1];let walkLevelTarget=levelY[1];let walkTransferActive=false;let walkTheta=0;const walkRadius=4.42;let walkGoalAngle=null;let walkGoalId=null;let walkLookOffset=0;let walkPitch=.20;let walkCameraDistance=1.22;let walkStepPhase=0;let walkToastTimer=null;const walkKeys={forward:false,back:false,left:false,right:false};
+let walkMode=false;let walkPlayerLevel=1;let walkLevelY=levelY[1];let walkLevelTarget=levelY[1];let walkTransferActive=false;let walkX=4.42,walkZ=0,walkYaw=Math.PI;let walkPath=[],walkPathIndex=0,walkGoalId=null;let walkPitch=.20;let walkCameraDistance=1.22;let walkStepPhase=0;let walkToastTimer=null;let walkMoveBlendX=0,walkMoveBlendY=0;let walkLiftTargetLevel=null,walkPendingLiftLevel=null,walkPendingTarget=null;let walkLiftAnimating=false;const walkKeys={forward:false,back:false,left:false,right:false};
 let selectedId='A01-L01-01';let focusedLevel=null;let exploded=false;let shellVisible=true;let hoveredId=null;let explodeProgress=0;let explodeTarget=0;
 let routesVisible=false,streetsVisible=false,transitRunning=false,lightMode=0;
 let uiTheme='light';
@@ -1941,7 +2001,7 @@ $('clearFocusBtn').addEventListener('click',()=>{if(walkMode){showWalkToast('Ч�
 
 const raycaster=new THREE.Raycaster();const pointer=new THREE.Vector2();const tooltip=$('tooltip');let pointerStart=null;let didDrag=false;
 function findItemId(object){let current=object;while(current){if(current.userData&&current.userData.itemId)return current.userData.itemId;current=current.parent;}return null;}
-function pick(event){const rect=renderer.domElement.getBoundingClientRect();pointer.x=((event.clientX-rect.left)/rect.width)*2-1;pointer.y=-((event.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(world.children,true);for(const hit of hits){const id=findItemId(hit.object);if(!id)continue;const feature=allFeatures.find(x=>x.id===id);if(!feature)continue;if(focusedLevel&&feature.level!==focusedLevel)continue;if(streetFeatureGroups.has(id)&&!streetsVisible)continue;return id;}return null;}
+function pick(event){const rect=renderer.domElement.getBoundingClientRect();pointer.x=((event.clientX-rect.left)/rect.width)*2-1;pointer.y=-((event.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(world.children,true);for(const hit of hits){const id=findItemId(hit.object);if(!id)continue;const feature=allFeatures.find(x=>x.id===id);if(!feature)continue;if(focusedLevel!==null&&feature.level!==focusedLevel&&!walkMode)continue;if(streetFeatureGroups.has(id)&&!streetsVisible)continue;return id;}return null;}
 let walkLookLast=null;
 let walkTouchPointerId=null,walkLookPointerId=null;
 let walkTouchMove={x:0,y:0};
