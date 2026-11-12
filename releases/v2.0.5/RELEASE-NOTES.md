@@ -29,3 +29,11 @@ Static source checks passed: welcome markup is inside .workspace-main; final wel
 - Explicitly force the top action cluster to flex-direction: row on narrow phone widths, overriding the legacy column rule at max-width 520px. Keep all four controls aligned horizontally without wrapping.
 - Enter submits the Eva message on both desktop and mobile; Shift+Enter inserts a newline.
 - Hide the keyboard shortcut hint beneath the composer on mobile. Keep the explicit send button available.
+
+
+## Third-person mobile walkthrough controls
+- Added a floating virtual joystick for mobile movement: it appears at the initial touch point on the left half of the 3D viewport, controls forward/backward movement and left/right facing, and returns to center when released.
+- Right-side touch drag controls camera yaw and pitch independently, allowing simultaneous two-thumb movement and looking.
+- Desktop keyboard/mouse and existing on-screen direction controls remain available outside the mobile breakpoint.
+- Added pointer capture, pointer-cancel and window-blur cleanup to avoid stuck movement; mobile touch-action is disabled only while in walk mode.
+- This is an initial implementation pass; verify on real Android/iOS hardware for thumb reach, touch concurrency, camera feel, and safe-area behavior before production.
