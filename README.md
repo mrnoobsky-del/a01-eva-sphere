@@ -10,7 +10,8 @@ A-01 is an open project record for a long-term vision: a resilient, human-centre
   <img src="media/founder-alexander-ponomarev.webp" alt="Portrait of Alexander Ponomarev, founder of A-01" width="220">
 </p>
 
-**Project website:** https://vibeshorts.ru/evasphere/
+**Project website:** https://vibeshorts.ru/evasphere/  
+**Eva Sphere workspace:** https://evasphere.usite.pro/
 
 **Languages:** [English](README.md) · [Русский](README_RU.md)
 
@@ -76,6 +77,7 @@ No open-source license is granted in this initial publication. Unless a separate
 
 ## Contact and updates
 
-Project website: https://vibeshorts.ru/evasphere/
+Project website: https://vibeshorts.ru/evasphere/  
+Eva Sphere workspace: https://evasphere.usite.pro/
 
 The repository is a public development record. Project status may change; check the dated release notes before relying on any implementation detail.
