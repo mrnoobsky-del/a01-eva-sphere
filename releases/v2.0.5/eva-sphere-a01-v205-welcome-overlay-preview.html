@@ -611,7 +611,41 @@ html[data-theme="dark"] .level-overview li{color:#e8eeee}
 .nav-rail.collapsed .nav-item{justify-content:center!important;gap:0!important;white-space:nowrap!important;overflow:hidden!important}
 .nav-rail.collapsed .nav-mark{min-height:0!important}
 @media(max-width:780px){.a01-welcome{padding:10px!important}.a01-welcome-dialog{max-height:calc(100svh - 20px)!important}}
-</style></head>
+</style><style id="a01-v205-welcome-layout">
+.workspace-main{position:relative}
+.a01-welcome{position:absolute!important;inset:0!important;z-index:8!important;display:none!important;align-items:stretch!important;justify-content:stretch!important;width:100%!important;height:100%!important;min-height:0!important;padding:0!important;overflow:hidden!important;background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;isolation:auto!important}
+.a01-welcome.open{display:flex!important}
+.a01-welcome-backdrop{display:none!important}
+.a01-welcome-dialog{position:relative!important;display:flex!important;flex-direction:column!important;justify-content:center!important;gap:0!important;width:100%!important;height:100%!important;max-height:none!important;max-width:none!important;overflow:auto!important;margin:0!important;padding:clamp(24px,4vw,58px)!important;border:1px solid var(--line)!important;border-radius:25px!important;background:radial-gradient(ellipse at 80% 12%,color-mix(in srgb,var(--accent) 9%,transparent),transparent 42%),var(--panel)!important;color:var(--text)!important;box-shadow:0 20px 65px rgba(0,0,0,.12)!important}
+.a01-welcome-top{display:flex;align-items:center;gap:11px;color:var(--muted);font-size:11px;font-weight:750;letter-spacing:.14em}
+.a01-welcome-mark{width:36px;height:36px;border-radius:12px}
+.a01-welcome-close{width:38px;height:38px;display:grid;place-items:center;margin-left:auto;border:1px solid var(--line);border-radius:50%;background:var(--panel2);color:var(--text);font-size:22px}
+.a01-welcome-eyebrow{margin-top:clamp(18px,3vh,34px);color:var(--accent);font-size:10px;font-weight:750;letter-spacing:.15em}
+.a01-welcome-dialog h1{margin:13px 0;font-size:clamp(34px,4.2vw,54px);line-height:1.04;letter-spacing:-.055em;font-weight:720}
+.a01-welcome-lead{max-width:680px;margin:0;color:var(--muted);font-size:clamp(13px,1.2vw,16px);line-height:1.7}
+.a01-welcome-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:clamp(22px,4vh,38px)}
+.a01-welcome-choice{display:grid;grid-template-columns:42px minmax(0,1fr) 18px;align-items:center;gap:11px;min-width:0;min-height:88px;padding:15px 14px;border:1px solid var(--line);border-radius:17px;background:var(--panel2);color:var(--text);text-align:left;cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease;box-shadow:none}
+.a01-welcome-choice:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 55%,var(--line));background:color-mix(in srgb,var(--accent) 6%,var(--panel2))}
+.a01-welcome-choice.primary{border-color:color-mix(in srgb,var(--accent) 48%,var(--line));background:color-mix(in srgb,var(--accent) 9%,var(--panel2))}
+.a01-choice-icon{width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line);border-radius:13px;color:var(--accent);font-size:20px}
+.a01-welcome-choice strong,.a01-welcome-choice small{display:block;min-width:0}
+.a01-welcome-choice strong{font-size:13px;line-height:1.35;font-weight:700}
+.a01-welcome-choice small{margin-top:5px;color:var(--muted);font-size:11px;line-height:1.45}
+.a01-welcome-choice>b{justify-self:end;color:var(--muted);font-size:18px;font-weight:400}
+.a01-welcome-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:22px;color:var(--muted);font-size:11px;line-height:1.5}
+#a01WelcomeLater{padding:9px 14px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--text);font:inherit;cursor:pointer;white-space:nowrap}
+#a01WelcomeLater:hover{background:var(--panel2)}
+.a01-welcome-disclaimer{margin-top:12px;color:var(--muted);font-size:10px;line-height:1.5;opacity:.85}
+.app.welcome-mode .stage{visibility:hidden;pointer-events:none}
+.nav-rail.collapsed .nav-section-label{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+.nav-rail.collapsed .nav-text{display:none!important;visibility:hidden!important}
+.nav-rail.collapsed .nav-item{justify-content:center!important;gap:0!important;white-space:nowrap!important;overflow:hidden!important}
+.nav-rail.collapsed .nav-mark{min-height:0!important}
+@media(max-width:900px){.a01-welcome-dialog{padding:25px!important}.a01-welcome-choices{gap:8px}.a01-welcome-choice{grid-template-columns:34px minmax(0,1fr) 14px;gap:8px;padding:11px;min-height:82px}.a01-choice-icon{width:34px;height:34px}.a01-welcome-choice strong{font-size:12px}.a01-welcome-choice small{font-size:10px}}
+@media(max-width:620px){.a01-welcome{position:relative!important;inset:auto!important;height:auto!important;min-height:calc(100svh - 110px)!important;margin-bottom:12px}.a01-welcome-dialog{min-height:inherit!important;padding:24px 18px!important;border-radius:20px!important}.a01-welcome-dialog h1{font-size:clamp(31px,9vw,42px)}.a01-welcome-choices{grid-template-columns:1fr;gap:9px;margin-top:22px}.a01-welcome-choice{grid-template-columns:40px minmax(0,1fr) 18px;min-height:68px;padding:10px 12px}.a01-choice-icon{width:38px;height:38px}.a01-welcome-choice strong{font-size:13px}.a01-welcome-choice small{font-size:11px}.a01-welcome-bottom{align-items:flex-start;flex-direction:column;margin-top:16px}.a01-welcome-disclaimer{margin-top:9px}.app.welcome-mode .stage{display:none}}
+@media(max-height:650px) and (min-width:621px){.a01-welcome-dialog{padding:18px 28px!important}.a01-welcome-eyebrow{margin-top:12px}.a01-welcome-dialog h1{font-size:34px}.a01-welcome-choices{margin-top:16px}.a01-welcome-choice{min-height:70px}.a01-welcome-bottom{margin-top:12px}}
+</style>
+</head>
 <body data-theme="light">
 <div class="app nav-expanded" id="appShell">
 
@@ -676,6 +710,23 @@ html[data-theme="dark"] .level-overview li{color:#e8eeee}
 <div id="integratedWorkspace" class="integrated-workspace" hidden><iframe id="integratedFrame" title="Рабочая область Сферы Евы A-01"></iframe></div>
 <main class="workspace">
 <div class="workspace-main">
+<div class="a01-welcome" id="a01Welcome" aria-hidden="true">
+ <div class="a01-welcome-backdrop"></div>
+ <section class="a01-welcome-dialog" role="region" aria-labelledby="a01WelcomeTitle" aria-describedby="a01WelcomeDescription">
+  <div class="a01-welcome-top"><span class="a01-welcome-mark">✧</span><span>A-01 · DIGITAL TWIN</span><button type="button" class="a01-welcome-close" id="a01WelcomeClose" aria-label="Закрыть знакомство">×</button></div>
+  <div class="a01-welcome-eyebrow">СФЕРА ЕВЫ · ЭНЕРГИЯ · ИНТЕЛЛЕКТ · ЖИЗНЬ</div>
+  <h1 id="a01WelcomeTitle">Добро пожаловать<br>в Сферу Евы</h1>
+  <p id="a01WelcomeDescription" class="a01-welcome-lead">Это открытый проект будущей инфраструктуры, где технологии, пространство и забота о людях соединяются в единую систему. Начни с того, что тебе интересно.</p>
+  <div class="a01-welcome-choices">
+   <button type="button" class="a01-welcome-choice primary" data-welcome-nav="overview"><span class="a01-choice-icon">◉</span><span><strong>Посмотреть Сферу</strong><small>3D-модель, уровни и пространства</small></span><b>→</b></button>
+   <button type="button" class="a01-welcome-choice" data-welcome-nav="eva"><span class="a01-choice-icon">✧</span><span><strong>Поговорить с Евой</strong><small>Отдельный чат с ИИ-помощником проекта</small></span><b>→</b></button>
+   <button type="button" class="a01-welcome-choice" data-welcome-nav="docs"><span class="a01-choice-icon">▤</span><span><strong>Изучить проект</strong><small>Документация, принципы и устройство A-01</small></span><b>→</b></button>
+  </div>
+  <div class="a01-welcome-bottom"><span>Можно вернуться к разделам через меню слева.</span><button type="button" id="a01WelcomeLater">Перейти позже</button></div>
+  <div class="a01-welcome-disclaimer">A-01 — проект в разработке. Концептуальные модели и планы не означают, что объекты уже построены.</div>
+ </section>
+</div>
+
 <section class="stage" id="stage" aria-label="Интерактивная 3D-модель купола Сферы Евы">
 <div class="loading" id="loading">Подготавливаем объёмную модель…</div><div class="toast" id="toast"></div><div class="tooltip" id="tooltip"></div>
 <div class="stage-top"><div class="stage-title"><b>СЕКТОР A-01 / ВНУТРЕННЯЯ СТРУКТУРА</b><span>Стеклянный свод · зимний сад · пять уровней · климат и энергетика по запросу</span></div><div class="stage-top-right"><div class="view-pill" id="viewMode">ОБЩИЙ ОБЗОР · ДЕНЬ</div></div></div>
@@ -750,22 +801,6 @@ html[data-theme="dark"] .level-overview li{color:#e8eeee}
 </aside>
 </main>
 
-<div class="a01-welcome" id="a01Welcome" aria-hidden="true">
- <div class="a01-welcome-backdrop"></div>
- <section class="a01-welcome-dialog" role="dialog" aria-modal="true" aria-labelledby="a01WelcomeTitle" aria-describedby="a01WelcomeDescription">
-  <div class="a01-welcome-top"><span class="a01-welcome-mark">✧</span><span>A-01 · DIGITAL TWIN</span><button type="button" class="a01-welcome-close" id="a01WelcomeClose" aria-label="Закрыть знакомство">×</button></div>
-  <div class="a01-welcome-eyebrow">СФЕРА ЕВЫ · ЭНЕРГИЯ · ИНТЕЛЛЕКТ · ЖИЗНЬ</div>
-  <h1 id="a01WelcomeTitle">Добро пожаловать<br>в Сферу Евы</h1>
-  <p id="a01WelcomeDescription" class="a01-welcome-lead">Это открытый проект будущей инфраструктуры, где технологии, пространство и забота о людях соединяются в единую систему. Начни с того, что тебе интересно.</p>
-  <div class="a01-welcome-choices">
-   <button type="button" class="a01-welcome-choice primary" data-welcome-nav="overview"><span class="a01-choice-icon">◉</span><span><strong>Посмотреть Сферу</strong><small>3D-модель, уровни и пространства</small></span><b>→</b></button>
-   <button type="button" class="a01-welcome-choice" data-welcome-nav="eva"><span class="a01-choice-icon">✧</span><span><strong>Поговорить с Евой</strong><small>Отдельный чат с ИИ-помощником проекта</small></span><b>→</b></button>
-   <button type="button" class="a01-welcome-choice" data-welcome-nav="docs"><span class="a01-choice-icon">▤</span><span><strong>Изучить проект</strong><small>Документация, принципы и устройство A-01</small></span><b>→</b></button>
-  </div>
-  <div class="a01-welcome-bottom"><span>Можно вернуться к разделам через меню слева.</span><button type="button" id="a01WelcomeLater">Перейти позже</button></div>
-  <div class="a01-welcome-disclaimer">A-01 — проект в разработке. Концептуальные модели и планы не означают, что объекты уже построены.</div>
- </section>
-</div>
 <div class="search-overlay" id="searchOverlay" aria-hidden="true"><div class="search-scrim" data-search-close></div><section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="searchDialogTitle"><div class="search-dialog-top"><div><div class="eyebrow">НАВИГАЦИЯ ПО ПРОЕКТУ</div><strong id="searchDialogTitle">Найти в Сфере Евы</strong></div><button class="drawer-close" id="closeSearch" type="button" aria-label="Закрыть поиск">×</button></div><label class="search-input-wrap"><span aria-hidden="true">⌕</span><input id="globalSearchInput" type="search" autocomplete="off" placeholder="Уровень, помещение, система, документ…"><kbd>ESC</kbd></label><div class="search-results-meta" id="searchResultsMeta">Начни вводить запрос или выбери популярный раздел</div><div class="search-results" id="searchResults" role="listbox" aria-label="Результаты поиска"><button class="search-suggestion" type="button" data-search-preset="L00">Уровень 00 · Пространство заботы <span>Бесплатные общественные сервисы</span></button><button class="search-suggestion" type="button" data-search-preset="климат">Климат и качество воздуха <span>Фильтрация · сценарии · зоны</span></button><button class="search-suggestion" type="button" data-search-preset="энергия">Энергетический центр <span>Тепло · накопители · резерв</span></button></div><div class="search-footer"><span>↑ ↓ перемещение</span><span>↵ открыть</span><span>Ctrl K повторно открыть</span></div></section></div>
 <div id="commonsOverlay" class="commons-overlay" aria-hidden="true">
  <div class="commons-shell">
@@ -2261,15 +2296,17 @@ const frame=document.getElementById('integratedFrame');
  const welcome=document.getElementById('a01Welcome');
  if(!welcome)return;
  const key='a01-welcome-seen-v205';
+ const shell=document.getElementById('appShell');
  const close=()=>{
   welcome.classList.remove('open');
+  shell?.classList.remove('welcome-mode');
   welcome.setAttribute('aria-hidden','true');
   try{localStorage.setItem(key,'1')}catch(e){}
  };
  const open=()=>{
   welcome.classList.add('open');
+  shell?.classList.add('welcome-mode');
   welcome.setAttribute('aria-hidden','false');
-  document.getElementById('a01WelcomeClose')?.focus({preventScroll:true});
  };
  document.getElementById('a01WelcomeClose')?.addEventListener('click',close);
  document.getElementById('a01WelcomeLater')?.addEventListener('click',close);
