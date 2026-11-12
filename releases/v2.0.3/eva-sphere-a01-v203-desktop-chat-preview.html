@@ -802,7 +802,7 @@ html[data-theme="dark"] .level-overview li{color:#e8eeee}
   const key=button.dataset.nav;
   document.querySelectorAll('[data-nav]').forEach(el=>el.classList.toggle('active',el===button));
   closeNav();
-  if(key==='eva'){closePanel();window.evaA01ShowIntegrated?.(null);openEvaChat(true);return;}
+  if(key==='eva'){closePanel();window.evaA01CloseIntegrated?.();window.evaA01OpenChat?.(true);return;}
   if(key==='commons'||key==='docs'||key==='registry'||key==='engineering'||key==='book'){
    closePanel();
    window.evaA01ShowIntegrated?.(key);
@@ -1927,6 +1927,7 @@ window.addEventListener('beforeunload',()=>{resizeObserver.disconnect();controls
  let chatBusy=false;
  function addEvaMessage(text,kind){const el=document.createElement('div');el.className='eva-chat-message '+kind;el.textContent=text;chatMessages.appendChild(el);chatMessages.scrollTop=chatMessages.scrollHeight;return el;}
  function openEvaChat(fullPage=false){appShell.classList.toggle('eva-page-mode',fullPage);chatPanel?.classList.add('open');chatPanel?.setAttribute('aria-hidden','false');chatScrim?.classList.toggle('open',!fullPage);chatScrim?.setAttribute('aria-hidden',String(fullPage));if(fullPage){document.querySelectorAll('[data-nav]').forEach(el=>el.classList.toggle('active',el.dataset.nav==='eva'));}setTimeout(()=>chatInput?.focus(),80);}
+ window.evaA01OpenChat=openEvaChat;
  function closeEvaChat(){appShell.classList.remove('eva-page-mode');chatPanel?.classList.remove('open');chatPanel?.setAttribute('aria-hidden','true');chatScrim?.classList.remove('open');chatScrim?.setAttribute('aria-hidden','true');document.querySelectorAll('[data-nav]').forEach(el=>el.classList.toggle('active',el.dataset.nav==='overview'));}
  document.getElementById('evaOpenBtn')?.addEventListener('click',openEvaChat);
  document.getElementById('evaChatClose')?.addEventListener('click',closeEvaChat);
