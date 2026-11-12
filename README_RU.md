@@ -11,7 +11,8 @@ A-01 — открытая история развития долгосрочно
 </p>
 
 **Сайт проекта:** https://vibeshorts.ru/evasphere/  
-**Рабочее пространство Сферы Евы:** https://evasphere.usite.pro/
+**Рабочее пространство Сферы Евы:** https://evasphere.usite.pro/  
+**Поддержать проект:** [Добровольная поддержка](https://yoomoney.ru/checkout/payments/v2/contract?orderId=3283a952-000f-5001-a000-1bf0a570ecc8)
 
 **Языки:** [English](README.md) · [Русский](README_RU.md)
 
