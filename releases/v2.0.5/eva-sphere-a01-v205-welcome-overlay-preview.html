@@ -652,7 +652,7 @@ html[data-theme="dark"] .level-overview li{color:#e8eeee}
  #appShell .top .page-context{flex:1 1 auto!important;width:auto!important;min-width:0!important;overflow:hidden}
  #appShell .top .page-context span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
  #appShell .top .page-context strong{white-space:nowrap}
- #appShell .top .top-actions{display:flex!important;flex:0 0 auto!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:4px!important;min-width:0}
+ #appShell .top .top-actions{display:flex!important;flex:0 0 auto!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:4px!important;min-width:0}
  #appShell .top-actions>*{flex:0 0 auto!important;min-width:32px!important;height:34px!important;padding:0 7px!important;border-radius:11px!important;white-space:nowrap!important}
  #appShell .top-actions .global-search-btn{width:34px!important;height:34px!important;padding:0!important;font-size:20px!important}
  #appShell .top-actions .eva-toggle{width:36px!important;padding:0!important;justify-content:center!important;gap:0!important}
@@ -669,7 +669,7 @@ html[data-theme="dark"] .level-overview li{color:#e8eeee}
  .eva-chat-compose{position:relative!important;flex:0 0 auto!important;padding:9px 10px max(10px,env(safe-area-inset-bottom))!important;background:var(--surface)!important}
  .eva-chat-compose textarea{min-height:42px!important;max-height:120px!important;resize:none!important;font-size:16px!important;line-height:1.4!important;padding:10px 12px!important}
  .eva-chat-compose-foot{margin-top:6px!important;justify-content:flex-end!important}
- .eva-chat-compose-foot span{display:none!important}
+ .eva-chat-compose-foot span,.eva-chat-compose-foot #evaChatHint{display:none!important}
  .eva-chat-send{width:40px!important;height:38px!important;border-radius:13px!important}
  .eva-chat-panel.open{transform:translateX(0)!important}
 }
@@ -2071,7 +2071,7 @@ window.addEventListener('beforeunload',()=>{resizeObserver.disconnect();controls
   finally{typing.remove();chatBusy=false;chatSend.disabled=false;chatMessages.scrollTop=chatMessages.scrollHeight;if(chatPanel?.classList.contains('open')&&!window.matchMedia('(max-width:780px)').matches)chatInput?.focus();}
  }
  chatForm?.addEventListener('submit',e=>{e.preventDefault();const message=chatInput.value;if(!message.trim()||chatBusy)return;chatInput.value='';sendEvaMessage(message);});
- chatInput?.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!window.matchMedia('(max-width:780px)').matches){e.preventDefault();chatForm.requestSubmit();}});
+ chatInput?.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();chatForm.requestSubmit();}});
 
 
  const evaMobileQuery=window.matchMedia('(max-width:780px)');
