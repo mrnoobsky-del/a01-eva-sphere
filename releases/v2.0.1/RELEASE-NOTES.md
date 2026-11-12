@@ -14,3 +14,9 @@ Unified the project book presentation with the main A-01 workspace visual langua
 ## Important limitations
 
 This is a development snapshot, not a production-certified release. The physical Sphere and its infrastructure remain concepts. Engineering content is preliminary and requires qualified review before implementation.
+
+## Documentation update — 2026-11-12
+
+- Added the founder portrait as an optimized WebP image in `media/`.
+- Updated the English and Russian repository landing pages and the Project Book founder section.
+- The portrait was supplied by the founder and is included in this public repository at his explicit request. No separate reuse license is granted.

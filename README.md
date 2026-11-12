@@ -6,6 +6,10 @@ A-01 is an open project record for a long-term vision: a resilient, human-centre
 
 > A-01 is not a claim that the Sphere already exists. It is an open record of the work, research and design exploration toward something we hope to bring into reality.
 
+<p align="center">
+  <img src="media/founder-alexander-ponomarev.webp" alt="Portrait of Alexander Ponomarev, founder of A-01" width="220">
+</p>
+
 **Project website:** https://vibeshorts.ru/evasphere/
 
 **Languages:** [English](README.md) · [Русский](README_RU.md)
