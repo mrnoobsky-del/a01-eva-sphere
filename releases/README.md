@@ -29,3 +29,9 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Open v2.0.10 HTML snapshot](v2.0.10/eva-sphere-a01-v2010-light-default.html)
 - [Release notes](v2.0.10/RELEASE-NOTES.md)
 - Status: archived snapshot; JavaScript syntax check passed; browser/WebGL verification and production deployment not performed. The later v2.1.0 digital-twin snapshot remains the repository's newer baseline.
+
+## v3.2.6 — Runtime audit and startup guards (experimental)
+
+- [Open v3.2.6 HTML prototype](v3.2.6/eva-sphere-a01-v3.2.6-runtime-audit.html)
+- [Release notes](v3.2.6/RELEASE-NOTES.md)
+- Status: archived experimental branch based on the v3.x interiors study; JavaScript syntax and static HTML checks passed. Live browser/WebGL verification and production deployment have not been performed. This does not replace or supersede the v2.1.0 main digital-twin baseline.
