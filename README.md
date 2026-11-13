@@ -50,9 +50,9 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 
 ## Current digital workspace
 
-The latest prepared interface snapshot in this repository is **A-01 v2.0.1**. It includes a unified visual treatment for the project book and the main workspace. It has been structurally prepared, but it has **not** been confirmed in a live browser, tested against the production Worker, or deployed to the public website.
+The repository tracks two separately versioned snapshots: **A-01 v2.1.0** is the main digital-twin baseline in `digital-twin/`; **A-01 v2.0.13** is an archived snapshot of the integrated `/evasphere/` site workspace in `releases/v2.0.13/`. These version labels belong to different snapshot tracks. The v2.0.13 archive does not supersede the v2.1.0 baseline.
 
-See `releases/` and the release notes for scope and limitations.
+The v2.0.13 archive passed static HTML and JavaScript checks, but live browser/WebGL verification, production Worker verification and deployment to the public website have not been confirmed. See the release notes for scope and limitations.
 
 ## Founder
 

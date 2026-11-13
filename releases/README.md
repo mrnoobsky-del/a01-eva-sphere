@@ -30,6 +30,12 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Release notes](v2.0.10/RELEASE-NOTES.md)
 - Status: archived snapshot; JavaScript syntax check passed; browser/WebGL verification and production deployment not performed. The later v2.1.0 digital-twin snapshot remains the repository's newer baseline.
 
+## v2.0.13 — Integrated site workspace snapshot
+
+- [Open v2.0.13 HTML snapshot](v2.0.13/eva-sphere-a01-v2.0.13.html)
+- [Release notes](v2.0.13/RELEASE-NOTES.md)
+- Status: archived snapshot of the integrated `/evasphere/` workspace; four executable JavaScript blocks passed static syntax checks and no duplicate HTML IDs were found. Browser/WebGL verification and production deployment were not performed. This is a separate snapshot track and does not supersede the v2.1.0 main digital-twin baseline.
+
 ## v3.2.6 — Runtime audit and startup guards (experimental)
 
 - [Open v3.2.6 HTML prototype](v3.2.6/eva-sphere-a01-v3.2.6-runtime-audit.html)
