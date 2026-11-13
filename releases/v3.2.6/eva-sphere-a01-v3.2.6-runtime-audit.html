@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="eva-ucoz-user-id" content="$USER_ID$"><meta name="eva-ucoz-username" content="$USERNAME$">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Сфера Евы A-01 · v3.2.6 — аудит и защита запуска</title>
+<meta name="description" content="Сфера Евы A-01 — прототип v3.2.6: верхняя корона, лифты, лестничные пролёты, мосты галерей и аудит связности маршрутов. Проект в разработке.">
+<link rel="canonical" href="https://vibeshorts.ru/evasphere/">
+<meta property="og:type" content="website"><meta property="og:url" content="https://vibeshorts.ru/evasphere/"><meta property="og:title" content="Сфера Евы A-01 — энергия, интеллект, жизнь">
+<style>
+:root{color-scheme:light;--bg:#edf1ef;--panel:rgba(250,252,251,.9);--line:rgba(35,55,62,.16);--text:#172329;--muted:#64747a;--ice:#d9edf2}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:radial-gradient(ellipse at 50% -10%,#ffffff 0,transparent 58%),var(--bg);color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden}
+#stage{position:fixed;inset:0}
+#stage canvas{display:block;width:100%;height:100%;touch-action:none;outline:none}
+.head{position:fixed;left:max(16px,env(safe-area-inset-left));top:max(14px,env(safe-area-inset-top));z-index:2;pointer-events:none}
+.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.head h1{margin:4px 0 2px;font-size:clamp(18px,2.6vw,28px);letter-spacing:-.03em;line-height:1.1}
+.head p{margin:0;color:var(--muted);font-size:12px;max-width:420px}
+#info{position:fixed;right:max(16px,env(safe-area-inset-right));top:max(14px,env(safe-area-inset-top));z-index:2;padding:9px 13px;border:1px solid var(--line);border-radius:14px;background:var(--panel);backdrop-filter:blur(10px);font-size:11px;letter-spacing:.06em;max-width:min(380px,60vw)}
+#info b{display:block;font-size:12px;letter-spacing:.04em;margin-bottom:2px}
+#info span{color:var(--muted)}
+#auditPanel{position:fixed;left:max(16px,env(safe-area-inset-left));bottom:max(82px,calc(env(safe-area-inset-bottom) + 76px));z-index:3;width:min(380px,calc(100vw - 32px));max-height:min(48vh,430px);overflow:auto;padding:14px;border:1px solid var(--line);border-radius:16px;background:rgba(250,252,251,.96);backdrop-filter:blur(14px);box-shadow:0 12px 36px rgba(20,40,48,.12);font-size:11px}
+#auditPanel[hidden]{display:none}
+.audit-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px;font-size:12px;font-weight:750}
+.audit-state{font-size:9px;letter-spacing:.12em;color:#52796d}
+.audit-row{display:grid;grid-template-columns:12px 1fr;gap:8px;padding:7px 0;border-top:1px solid var(--line)}
+.audit-dot{width:7px;height:7px;border-radius:50%;margin-top:4px;background:#4f9878}
+.audit-dot.warn{background:#b88a3d}
+.audit-dot.fail{background:#c45a5a}
+.audit-detail{display:block;color:var(--muted);margin-top:2px}
+.metric{margin-top:7px;padding-top:7px;border-top:1px solid var(--line);font-size:11px;color:var(--text);line-height:1.5}.status{margin-top:6px;font-size:9px;letter-spacing:.12em;color:#52796d;font-weight:700}
+.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));z-index:2;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;padding:8px;border:1px solid var(--line);border-radius:18px;background:var(--panel);backdrop-filter:blur(10px);max-width:calc(100vw - 20px)}
+.bar button{font:inherit;font-size:12px;color:var(--text);background:rgba(255,255,255,.56);border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-height:36px;cursor:pointer}
+.bar button:hover{background:rgba(189,234,255,.1)}
+.bar button[aria-pressed="true"]{background:#d9edf2;color:#17313b;border-color:#b7d5dc}
+.bar i{width:1px;background:var(--line);margin:2px 2px;flex:0 0 1px}
+.bar button{white-space:nowrap;flex:0 0 auto}
+@media(max-width:640px){
+#auditPanel{left:10px;right:10px;bottom:calc(max(76px,env(safe-area-inset-bottom) + 68px));width:auto;max-height:34vh}
+.head p{display:none}
+#info{left:max(16px,env(safe-area-inset-left));right:max(16px,env(safe-area-inset-right));top:calc(max(14px,env(safe-area-inset-top)) + 54px);max-width:none}
+.bar{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;left:10px;right:10px;transform:none;max-width:none;scrollbar-width:none}
+.bar::-webkit-scrollbar{display:none}
+}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/"}}</script>
+</head>
+<body>
+<div id="stage"></div>
+<div class="head"><div class="eyebrow">A-01 · цифровой двойник</div><h1>Сфера Евы</h1><p>Концепция, не построенный объект. Лифты, лестницы и галереи показаны как схема вертикальной логистики.</p></div>
+<div id="info"><b id="info-title">ОБЩИЙ ОБЗОР</b><span id="info-subtitle">5 уровней · 54 зоны · 2 лифта · лестница</span><div class="metric" id="metric">Расчёты: подготовка модели…</div><div class="status" id="info-status">КОНЦЕПТ · НЕ ПОСТРОЕННЫЙ ОБЪЕКТ</div></div>
+<div class="bar" id="bar">
+<button data-level="all" aria-pressed="true">Все</button>
+<button data-level="0">00 Забота</button><button data-level="1">01 Атриум</button><button data-level="2">02 Сервисы</button><button data-level="3">03 Жильё</button><button data-level="4">04 Управление</button>
+<i></i>
+<button id="btnExplode" aria-pressed="false">Разнос</button><button id="btnDome" aria-pressed="true">Купол</button><button id="btnSpin" aria-pressed="false">Вращение</button><button id="btnCirculation" aria-pressed="true">Транспорт</button><button id="btnAudit" aria-pressed="false">Проверка</button>
+</div>
+<aside id="auditPanel" hidden aria-live="polite"></aside>
+<script type="module">
+const $=id=>document.getElementById(id);
+function showSceneError(title,error){
+ const message=String(error&&error.message||error||'Неизвестная ошибка');
+ const titleEl=$('info-title'),subtitleEl=$('info-subtitle'),metricEl=$('metric'),statusEl=$('info-status');
+ if(titleEl)titleEl.textContent=title;
+ if(subtitleEl)subtitleEl.textContent='Сцена остановлена. Проверьте подключение библиотек и доступность WebGL.';
+ if(metricEl)metricEl.textContent=`Причина: ${message}`;
+ if(statusEl)statusEl.textContent='ОШИБКА ИНИЦИАЛИЗАЦИИ · ДАННЫЕ МОДЕЛИ СОХРАНЕНЫ';
+ console.error('Eva Sphere:',title,error);
+}
+try{
+ const requiredIds=['stage','info-title','info-subtitle','metric','info-status','bar','auditPanel','btnExplode','btnDome','btnSpin','btnCirculation','btnAudit'];
+ const missingIds=requiredIds.filter(id=>!$(id));
+ if(missingIds.length)throw new Error(`Не найдены элементы интерфейса: ${missingIds.map(id=>'#'+id).join(', ')}`);
+ if(document.querySelectorAll('#bar [data-level]').length!==6)throw new Error('Не найдены все шесть кнопок выбора уровня');
+ const THREE=await import('three');
+ const {OrbitControls}=await import('three/addons/controls/OrbitControls.js');
+const TAU=Math.PI*2;
+const CONFIG={
+ domeRadius:9.2,domeHeight:11,domeProfilePower:2.5,upperCrownTargetDepth:1.5,atriumRadius:3.72,outerRadius:7.85,walkRadius:4.42,walkHalfWidth:.5,metersPerUnit:null,
+ slabThickness:.19,sectors:12,sectorGap:.035,columnCount:16,clearance:.3,topLevelSpan:1.65,
+ levels:[
+  {id:0,y:.65,name:'Пространство заботы и восстановления',short:'Забота',tone:0x9ce6c6},
+  {id:1,y:2.0,name:'Атриум и общественные пространства',short:'Атриум',tone:0x8fd9ff},
+  {id:2,y:3.65,name:'Галерея сервисов и торговли',short:'Сервисы',tone:0x9ce6c6},
+  {id:3,y:5.3,name:'Жилой уровень и зелёная терраса',short:'Жильё',tone:0xc9baff},
+  {id:4,y:6.95,name:'Верхняя корона · управление и исследования',short:'Корона',tone:0xf0d69d,sectors:6}
+ ]
+};
+const C=CONFIG,levels=C.levels;
+const domeRadiusAtY=y=>{const q=Math.max(0,Math.min(1,y/C.domeHeight));return C.domeRadius*Math.pow(Math.max(0,1-Math.pow(q,C.domeProfilePower)),1/C.domeProfilePower);};
+const sectorsForLevel=i=>levels[i].sectors||C.sectors;
+const originalEllipseCrownDepth=()=>{const y=levels[4].y+volH(4),r=C.domeRadius*Math.sqrt(Math.max(0,1-(y/C.domeHeight)**2)),ro=Math.min(C.outerRadius,r-.4);return (ro-.12)-(C.walkRadius+C.walkHalfWidth+.02);};
+const nextY=i=>i<levels.length-1?levels[i+1].y:levels[i].y+C.topLevelSpan;
+const volH=i=>nextY(i)-levels[i].y-C.slabThickness-C.clearance;
+const outerAt=i=>Math.min(C.outerRadius,domeRadiusAtY(levels[i].y+volH(i))-.4);
+const arc=(r,a0,a1,n)=>{const p=[];for(let i=0;i<=n;i++){const a=a0+(a1-a0)*i/n;p.push(new THREE.Vector2(r*Math.cos(a),-r*Math.sin(a)));}return p;};
+const extrude=(shape,depth)=>{const g=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:false,curveSegments:8});g.rotateX(-Math.PI/2);return g;};
+const sectorGeo=(a0,a1,r0,r1,h)=>{const n=Math.max(2,Math.ceil((a1-a0)/.05));return extrude(new THREE.Shape([...arc(r1,a0,a1,n),...arc(r0,a1,a0,n)]),h);};
+const slabGeo=(r0,r1,t)=>{const s=new THREE.Shape(arc(r1,0,TAU,128).slice(0,-1));s.holes.push(new THREE.Path(arc(r0,TAU,0,128).slice(0,-1)));const g=extrude(s,t);g.translate(0,-t,0);return g;};
+let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+
+const stage=$('stage');
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(42,1,.1,300);camera.position.set(24,17,28);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,window.innerWidth<700?1.2:1.55));
+renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.15;
+stage.appendChild(renderer.domElement);
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.target.set(0,4.5,0);controls.enableDamping=true;controls.dampingFactor=.07;controls.minDistance=8;controls.maxDistance=70;controls.maxPolarAngle=Math.PI*.49;controls.autoRotateSpeed=.6;
+
+scene.add(new THREE.HemisphereLight(0xdff3ff,0x22313c,1.7));
+const sun=new THREE.DirectionalLight(0xffffff,2.2);sun.position.set(10,18,9);scene.add(sun);
+const glow=new THREE.PointLight(0x9fe0ff,38,16,2);glow.position.set(0,3.2,0);scene.add(glow);
+
+const slabMat=new THREE.MeshStandardMaterial({color:0xe8eeed,roughness:.5,metalness:.08});
+const edgeMat=new THREE.LineBasicMaterial({color:0xdff3ff,transparent:true,opacity:.5});
+const glassMat=new THREE.MeshPhysicalMaterial({color:0xcfefff,transparent:true,opacity:.16,roughness:.05,side:THREE.DoubleSide,depthWrite:false});
+const metalMat=new THREE.MeshStandardMaterial({color:0x8da1ad,roughness:.35,metalness:.7});
+
+const G=(k,...a)=>{const id=k+a.join('_');if(!gc.has(id))gc.set(id,new THREE[k](...a));return gc.get(id);};
+const gc=new Map(),T=new Map();
+const std=(c,r=.6,m=.1)=>new THREE.MeshStandardMaterial({color:c,roughness:r,metalness:m});
+const tm=c=>{if(!T.has(c))T.set(c,std(c,.45,.2));return T.get(c);};
+const M={wood:std(0xb59a7a),soft:std(0x78a2b4),dark:std(0x33424c,.5,.4),white:std(0xeff3f2),leaf:std(0x4f8f66,.9,0),glass:new THREE.MeshPhysicalMaterial({color:0xcfefff,transparent:true,opacity:.35,roughness:.05}),glow:new THREE.MeshBasicMaterial({color:0x9fe8ff})};
+const PROGRAM=[
+ [['Питьевая вода','care'],['Санитарные комнаты','care'],['Душевые','care'],['Зона отдыха','lounge'],['Тихая комната','lounge'],['Поддержка и навигация','control'],['Прачечная','workshop'],['Камеры хранения','market'],['Зарядка устройств','charge'],['Медпункт','care'],['Детская комната','lounge'],['Вход и выход','lounge']],
+ [['Зимний сад','garden'],['Площадь','lounge'],['Гостиная А','lounge'],['Гостиная Б','lounge'],['Кафе','market'],['Библиотека','lounge'],['Сцена и экран','control'],['Сад-террариум','garden'],['Оранжерея','garden'],['Информация','control'],['Коворкинг','workshop'],['Игровая','lounge']],
+ [['Торговая галерея','market'],['Продукты','market'],['Питание','market'],['Мастерские','workshop'],['Ремонт и прокат','workshop'],['Печать и 3D','workshop'],['Склад','market'],['Инженерный узел','lab'],['Прачечная и швейная','workshop'],['Аптека','care'],['Зарядная станция EV','charge'],['Доставка и роботы','charge']],
+ [['Апартаменты 1','rooms'],['Апартаменты 2','rooms'],['Апартаменты 3','rooms'],['Апартаменты 4','rooms'],['Апартаменты 5','rooms'],['Апартаменты 6','rooms'],['Гостевые комнаты','rooms'],['Гостевые комнаты','rooms'],['Общая гостиная','lounge'],['Зелёная терраса','garden'],['Зелёная терраса','garden'],['Прачечная','workshop']],
+ [['Центр Евы','control'],['Диспетчерская и энергосистема','control'],['Лаборатория исследований','lab'],['Мастерская прототипов','workshop'],['Архив знаний','archive'],['Обсерватория','observatory']]
+];
+const KIND_INFO={garden:'Зелёная зона: растения, дорожки, места отдыха.',lounge:'Мягкие группы мебели для отдыха и общения.',market:'Стойки и прилавки сервисов и питания.',workshop:'Рабочие столы, шкафы и инструмент.',rooms:'Жилые ячейки с перегородками.',care:'Кабины и точки обслуживания: вода, гигиена, помощь.',control:'Пульты, консоли и рабочие места управления.',lab:'Лабораторные столы и исследовательское оборудование.',charge:'Зарядные посты и места для электромобилей и роботов.',archive:'Систематизированное хранилище документов, данных и моделей.',observatory:'Панорамная зона наблюдения и визуального контроля.'};
+const sectorMeshes=[];
+const OBJECT_REGISTRY=[];
+const calcSectorArea=(r0,r1,a0,a1)=>Math.max(0,.5*(r1*r1-r0*r0)*(a1-a0));
+const calculateLevel=(i)=>{
+ const L=levels[i],sectors=sectorsForLevel(i),step=TAU/sectors,ro=outerAt(i),r0=C.walkRadius+C.walkHalfWidth+.02,r1=ro-.12;
+ const sectorAngle=Math.max(0,step-2*C.sectorGap);
+ const moduleArea=calcSectorArea(r0,r1,0,sectorAngle);
+ const modulesArea=moduleArea*sectors;
+ const grossRingArea=Math.PI*(ro*ro-C.atriumRadius*C.atriumRadius);
+ const walkArea=Math.PI*((C.walkRadius+C.walkHalfWidth)**2-(C.walkRadius-C.walkHalfWidth)**2);
+ const next=nextY(i),height=volH(i),residualArea=grossRingArea-modulesArea-walkArea;
+ const columnHeight=next-L.y-C.slabThickness,columnDomeMargin=domeRadiusAtY(L.y+columnHeight)-(ro-.18);
+ return {level:i,sectors,outerRadius:ro,moduleInnerRadius:r0,moduleOuterRadius:r1,moduleDepth:r1-r0,sectorAngle,moduleArea,modulesArea,grossRingArea,walkArea,residualArea,height,verticalClearance:next-C.slabThickness-(L.y+height),domeRadiusAtTop:domeRadiusAtY(L.y+height),columnHeight,columnDomeMargin};
+};
+const areaScale=()=>Number.isFinite(C.metersPerUnit)&&C.metersPerUnit>0?C.metersPerUnit*C.metersPerUnit:1;
+const areaUnit=()=>areaScale()===1&&C.metersPerUnit===null?'ед.²':'м²';
+const fmtNumber=n=>n.toLocaleString('ru-RU',{maximumFractionDigits:2});
+const fmtArea=n=>`${fmtNumber(n*areaScale())} ${areaUnit()}`;
+function geometryAudit(){
+ const checks=[];
+ const add=(name,ok,detail,type='check')=>checks.push({name,ok,detail,type});
+ const programOK=PROGRAM.length===levels.length&&PROGRAM.every((row,i)=>row.length===sectorsForLevel(i));
+ add('Сетка помещений',programOK,`${PROGRAM.length} уровней · ${PROGRAM.reduce((a,r)=>a+r.length,0)} функциональных зон`);
+ const ids=new Set(OBJECT_REGISTRY.map(x=>x.id));
+ const expectedObjects=PROGRAM.reduce((sum,row)=>sum+row.length,0);
+ const registryOK=OBJECT_REGISTRY.length===expectedObjects&&ids.size===OBJECT_REGISTRY.length;
+ add('Реестр помещений',registryOK,`${OBJECT_REGISTRY.length} записей · идентификаторы ${ids.size===OBJECT_REGISTRY.length?'уникальны':'содержат дубли'}`);
+ const rows=levels.map((_,i)=>calculateLevel(i));
+ const profileSamples=Array.from({length:17},(_,i)=>domeRadiusAtY(C.domeHeight*i/16));
+ const profileOK=profileSamples.every((r,i)=>i===0||r<=profileSamples[i-1]+1e-9)&&Math.abs(profileSamples[0]-C.domeRadius)<1e-8&&profileSamples[16]===0;
+ add('Профиль купола',profileOK,`Суперэллипсоид · показатель ${fmtNumber(C.domeProfilePower)} · основание ${fmtNumber(C.domeRadius)} ед. · высота ${fmtNumber(C.domeHeight)} ед.`);
+ const radialOK=rows.every(q=>q.moduleDepth>0&&q.moduleArea>0&&q.sectorAngle>0);
+ add('Радиальная геометрия',radialOK,`Глубина модулей: ${fmtNumber(Math.min(...rows.map(q=>q.moduleDepth)))}–${fmtNumber(Math.max(...rows.map(q=>q.moduleDepth)))} ед.`);
+ const crownOK=rows[4].sectors===6&&rows[4].moduleDepth>=C.upperCrownTargetDepth;
+ add('Полезная глубина L04',crownOK,`${rows[4].sectors} крупных зон · ${fmtNumber(rows[4].moduleDepth)} ед. при целевом значении ≥ ${fmtNumber(C.upperCrownTargetDepth)} ед.`);
+ const areaOK=rows.every(q=>q.residualArea>=-1e-7&&q.grossRingArea>0&&q.walkArea>0);
+ add('Баланс площадей',areaOK,'Сумма секторов и прогулочного кольца не превышает площадь кольцевого контура');
+ const verticalOK=rows.every(q=>q.height>0&&Math.abs(q.verticalClearance-C.clearance)<1e-7&&q.columnHeight>0);
+ add('Вертикальные зазоры',verticalOK,`Между объёмом помещений и следующей плитой: ${fmtNumber(C.clearance)} ед.`);
+ const domeOK=rows.every(q=>q.domeRadiusAtTop-q.outerRadius>=.399&&q.columnDomeMargin>0);
+ add('Контур купола',domeOK,`Проверены помещения и колонны; минимальный запас колонн: ${fmtNumber(Math.min(...rows.map(q=>q.columnDomeMargin)))} ед.`);
+ const scaleOK=Number.isFinite(C.metersPerUnit)&&C.metersPerUnit>0;
+ add('Привязка масштаба',scaleOK,scaleOK?`1 единица = ${fmtNumber(C.metersPerUnit)} м`:'Не задана: площади показаны в условных единицах²','warning');
+ return {checks,rows,ok:checks.filter(x=>x.type==='check'&&!x.ok).length===0,warnings:checks.filter(x=>x.type==='warning'&&!x.ok).length};
+}
+function routeAudit(){
+ const graph=new Map();
+ const addNode=id=>{if(!graph.has(id))graph.set(id,new Set());};
+ const connect=(a,b)=>{addNode(a);addNode(b);graph.get(a).add(b);graph.get(b).add(a);};
+ const hub=i=>`HUB-L${String(i).padStart(2,'0')}`;
+ levels.forEach((L,i)=>{
+  const ring=`RING-L${String(i).padStart(2,'0')}`;connect(hub(i),ring);
+  OBJECT_REGISTRY.filter(room=>room.level===i).forEach(room=>connect(ring,room.id));
+ });
+ stairConnections.forEach(stair=>connect(hub(stair.from),hub(stair.to)));
+ [...new Set(liftStops.map(stop=>stop.lift))].forEach(liftId=>{
+  const stops=liftStops.filter(stop=>stop.lift===liftId).map(stop=>stop.level).sort((a,b)=>a-b);
+  for(let i=0;i<stops.length-1;i++)connect(hub(stops[i]),hub(stops[i+1]));
+ });
+ const entryRoom=OBJECT_REGISTRY.find(room=>room.level===0&&room.sector===12);
+ if(entryRoom)connect('EXTERNAL-ENTRY',entryRoom.id);
+ const queue=['EXTERNAL-ENTRY'],visited=new Set(queue);
+ while(queue.length){const current=queue.shift();for(const next of graph.get(current)||[]){if(!visited.has(next)){visited.add(next);queue.push(next);}}}
+ const reachableRooms=OBJECT_REGISTRY.filter(room=>visited.has(room.id)).length;
+ const expectedStairs=levels.length-1,expectedBridges=levels.length,expectedPortals=OBJECT_REGISTRY.length;
+ const expectedPortalKeys=new Set(OBJECT_REGISTRY.map(room=>`${room.level}:${room.sector}`));
+ const actualPortalKeys=roomPortals.map(portal=>`${portal.userData.level}:${portal.userData.sector}`);
+ const portalKeys=new Set(actualPortalKeys);
+ const portalsMatch=actualPortalKeys.length===expectedPortals&&portalKeys.size===expectedPortalKeys.size&&[...expectedPortalKeys].every(key=>portalKeys.has(key));
+ const liftIds=new Set(liftCars.map(car=>car.id));
+ const checks=[
+  {name:'Лифтовые шахты, кабины и двери',ok:liftCars.length===2&&liftIds.size===2&&liftStops.length===2*levels.length&&landingDoors.length===2*levels.length,detail:`${liftCars.length} кабины · ${liftStops.length}/${2*levels.length} остановок · ${landingDoors.length}/${2*levels.length} дверей`},
+  {name:'Межэтажная лестница',ok:stairConnections.length===expectedStairs&&stairConnections.every(stair=>stair.midLanding&&stair.risers>=8&&stair.to===stair.from+1),detail:`${stairConnections.length}/${expectedStairs} соединений · двухмаршевая схема с промежуточными площадками`},
+  {name:'Мосты к галереям',ok:galleryBridges.length===expectedBridges&&galleryBridges.every(item=>item.mesh&&item.mesh.geometry),detail:`${galleryBridges.length}/${expectedBridges} уровней · геометрия мостов создана`},
+  {name:'Порталы помещений',ok:portalsMatch,detail:`${roomPortals.length}/${expectedPortals} порталов · ${portalKeys.size} уникальных привязок к зонам`},
+  {name:'Входная галерея',ok:externalPortals.length===2&&typeof entryWalk!=='undefined'&&!!entryWalk.geometry,detail:`${externalPortals.length}/2 внешних порталов · ${typeof entryWalk!=='undefined'?'входной проход создан':'входной проход отсутствует'}`},
+  {name:'Сквозная связность маршрутов',ok:reachableRooms===OBJECT_REGISTRY.length&&graph.has(hub(0))&&graph.has(hub(levels.length-1)),detail:`От входа достижимы ${reachableRooms}/${OBJECT_REGISTRY.length} помещений по графу созданных лифтов, лестниц и галерей`},
+  {name:'Высотный масштаб',ok:false,type:'warning',detail:`Межэтажный шаг ${fmtNumber(Math.min(...levels.slice(0,-1).map((L,i)=>levels[i+1].y-L.y)))}–${fmtNumber(Math.max(...levels.slice(0,-1).map((L,i)=>levels[i+1].y-L.y)))} ед.; реальная высота в метрах не задана`},
+  {name:'Внешний подход и эвакуация',ok:false,type:'warning',detail:'Внешняя отметка, пандус к L00, второй выход и эвакуационные маршруты пока не рассчитаны'}
+ ];
+ return {checks,reachableRooms,totalRooms:OBJECT_REGISTRY.length};
+}
+
+function renderAudit(){
+ const panel=$('auditPanel'),report=geometryAudit(),routes=routeAudit();
+ if(!panel)return report;
+ const routeFailures=routes.checks.filter(item=>item.type!=='warning'&&!item.ok).length;
+ const state=report.ok&&routeFailures===0?'ГЕОМЕТРИЯ И СВЯЗНОСТЬ ПРОВЕРЕНЫ':'ЕСТЬ НЕПРОЙДЕННЫЕ ПРОВЕРКИ';
+ const rows=report.checks.map(c=>`<div class-row><span class="audit-dot ${c.ok?'':c.type==='warning'?'warn':'fail'}"></span><div><strong>${c.name}</strong><span class="audit-detail">${c.detail}</span></div></div>`).join('');
+ const levelsReport=report.rows.map((q,i)=>`<div class="audit-row"><span class="audit-dot"></span><div><strong>L${String(i).padStart(2,'0')} · ${levels[i].short}</strong><span class="audit-detail">${q.sectors} зон · глубина ${fmtNumber(q.moduleDepth)} ед. · зона ${fmtArea(q.moduleArea)}</span></div></div>`).join('');
+ const routeRows=routes.checks.map(c=>`<div class="audit-row"><span class="audit-dot ${c.ok?'':c.type==='warning'?'warn':'fail'}"></span><div><strong>${c.name}</strong><span class="audit-detail">${c.detail}</span></div></div>`).join('');
+ panel.innerHTML=`<div class="audit-head"><span>АУДИТ A-01</span><span class="audit-state">${state}</span></div>${rows}<div class="audit-head" style="margin-top:10px">ГЕОМЕТРИЯ ПО УРОВНЯМ</div>${levelsReport}<div class="audit-head" style="margin-top:10px">ВЕРТИКАЛЬНАЯ ЛОГИСТИКА</div>${routeRows}<span class="audit-detail">Маршрутная связность проверяет топологию модели, но не заменяет проверку ширины проходов, эвакуации, габаритов лифта, уклонов и строительных норм. Реальный масштаб пока не откалиброван.</span>`;
+ return report;
+}
+
+function interior(g,kind,a0,a1,r0,r1,h,tone){
+ const put=(geo,mat,u,v,y,rot=0)=>{const r=r0+(r1-r0)*v,a=a0+(a1-a0)*u,m=new THREE.Mesh(geo,mat);m.position.set(Math.cos(a)*r,y,Math.sin(a)*r);m.rotation.y=-a+rot;g.add(m);return m;};
+ const bx=(x,y,z)=>G('BoxGeometry',x,y,z),cy=(r,hh,n=16)=>G('CylinderGeometry',r,r,hh,n),T0=tm(tone);
+ if(kind==='lounge'){for(const v of[.3,.72])for(const u of[.28,.72]){put(bx(.6,.28,1),M.soft,u,v,.14);put(bx(.12,.5,1),M.soft,u,v+(v<.5?-.1:.1),.3);}put(cy(.3,.18),M.wood,.5,.5,.09);}
+ else if(kind==='garden'){for(let n=0;n<8;n++){const s=.5+rnd()*.7;put(G('ConeGeometry',.26,s*1.6,7),M.leaf,.1+rnd()*.8,.1+rnd()*.8,s*.8);}}
+ else if(kind==='market'){for(const v of[.3,.7])for(const u of[.25,.75]){put(bx(.5,.5,1),M.wood,u,v,.25);put(bx(.7,.04,1.15),T0,u,v,1);}}
+ else if(kind==='workshop'){for(const v of[.3,.6])put(bx(.5,.45,1.5),M.wood,.5,v,.22);put(bx(.3,.9,2.4),M.dark,.5,.93,.45);}
+ else if(kind==='rooms'){for(const u of[.33,.66])put(bx(2.4,h*.8,.04),M.white,u,.5,h*.4);for(const u of[.17,.5,.83])put(bx(.8,.3,.5),M.soft,u,.78,.15);}
+ else if(kind==='care'){for(const u of[.2,.4,.6,.8]){put(bx(.5,.9,.5),M.glass,u,.55,.45);put(bx(.52,.04,.52),M.glow,u,.55,.92);}}
+ else if(kind==='control'){for(let n=0;n<5;n++){const u=.2+n*.15;put(bx(.3,.5,.55),M.dark,u,.72,.25);put(bx(.3,.02,.5),M.glow,u,.72,.51);}put(cy(.4,.35,24),M.dark,.5,.4,.17);put(cy(.3,.02,24),M.glow,.5,.4,.36);}
+ else if(kind==='lab'){for(const v of[.3,.6])put(bx(.45,.5,1.2),M.white,.5,v,.25);for(const u of[.15,.38,.62,.85]){put(bx(.3,1,.35),M.dark,u,.92,.5);put(bx(.02,.8,.04),M.glow,u,.84,.5);}}
+ else if(kind==='charge'){for(const u of[.2,.4,.6,.8]){put(bx(.14,1,.14),M.white,u,.9,.5);put(bx(.16,.08,.16),M.glow,u,.9,1);put(bx(1.2,.01,.5),M.dark,u,.5,.01);}}
+ else if(kind==='archive'){for(const v of[.22,.5,.78]){put(bx(1.25,1.45,.26),M.wood,.5,v,.74);for(const u of[.25,.5,.75])put(bx(.22,.12,.025),M.glow,u,v,.55);}}
+ else if(kind==='observatory'){for(const u of[.22,.5,.78]){put(bx(.82,.18,.9),M.soft,u,.55,.09);put(cy(.11,.72,16),M.dark,u,.86,.42);put(cy(.19,.045,20),M.glow,u,.86,.81);}put(cy(.42,.12,32),M.wood,.5,.5,.07);}
+}
+const levelGroups=[];
+const roomPortals=[];
+const externalPortals=[];
+const galleryBridges=[];
+const stairConnections=[];
+const liftStops=[];
+const liftCars=[];
+const landingDoors=[];
+const hubRadius=2.65;
+const bridgeWidth=1.5;
+const bridgeLength=2.45;
+const stairMaterial=std(0xdce6e7,.62,.12);
+const stairEdgeMaterial=std(0x829ba4,.38,.65);
+const portalGlassMaterial=new THREE.MeshPhysicalMaterial({color:0x8cc9d8,transparent:true,opacity:.2,roughness:.12,metalness:.12,side:THREE.DoubleSide});
+const portalFrameMaterial=std(0x718a94,.38,.55);
+const hubFloorMaterial=std(0xf4f7f6,.48,.08);
+function addRoomPortal(group,level,sector,a0,a1,r,y,height,isExternal=false){
+ const a=(a0+a1)/2,doorW=Math.min(.92,2*r*Math.sin((a1-a0)/2)*.48),doorH=Math.min(1.06,Math.max(.72,height*.88));
+ const portal=new THREE.Group();
+ portal.position.set(Math.cos(a)*(r+.025),0,Math.sin(a)*(r+.025));
+ portal.rotation.y=Math.PI/2-a;
+ const sideGeo=new THREE.BoxGeometry(.075,doorH,.11);
+ for(const x of[-doorW/2,doorW/2]){const side=new THREE.Mesh(sideGeo,portalFrameMaterial);side.position.set(x,doorH/2,0);portal.add(side);}
+ const lintel=new THREE.Mesh(new THREE.BoxGeometry(doorW+.08,.075,.12),portalFrameMaterial);lintel.position.y=doorH;portal.add(lintel);
+ const threshold=new THREE.Mesh(new THREE.BoxGeometry(doorW+.08,.045,.18),portalFrameMaterial);threshold.position.set(0,.02,0);portal.add(threshold);
+ const panel=new THREE.Mesh(new THREE.BoxGeometry(Math.max(.3,doorW-.14),doorH-.12,.025),portalGlassMaterial);panel.position.set(0,doorH/2,.025);portal.add(panel);
+ portal.userData={level,sector,kind:isExternal?'entry-portal':'room-portal'};group.add(portal);(isExternal?externalPortals:roomPortals).push(portal);
+}
+levels.forEach((L,i)=>{
+ const g=new THREE.Group();g.position.y=L.y;g.userData={baseY:L.y,level:i};scene.add(g);levelGroups.push(g);
+ const ro=outerAt(i),h=volH(i),sectors=sectorsForLevel(i),step=TAU/sectors;
+ g.add(new THREE.Mesh(slabGeo(C.atriumRadius,ro,C.slabThickness),slabMat));
+ const hubDeck=new THREE.Mesh(new THREE.CylinderGeometry(hubRadius,hubRadius,.16,72),hubFloorMaterial);hubDeck.position.y=-.08;g.add(hubDeck);
+ const bridge=new THREE.Mesh(new THREE.BoxGeometry(bridgeWidth,.16,bridgeLength),hubFloorMaterial);bridge.position.set(0,-.08,3.47);g.add(bridge);galleryBridges.push({level:i,mesh:bridge});
+ for(let k=0;k<sectors;k++){
+  const a0=k*step+C.sectorGap,a1=(k+1)*step-C.sectorGap,r0=C.walkRadius+C.walkHalfWidth+.02,r1=ro-.12;
+  const [roomName,roomKind]=PROGRAM[i][k];
+  const roomRecord={id:`A01-L${String(i).padStart(2,'0')}-S${String(k+1).padStart(2,'0')}`,level:i,sector:k+1,name:roomName,kind:roomKind,status:'concept',area:calcSectorArea(r0,r1,a0,a1),areaType:'geometric-estimate'};
+  OBJECT_REGISTRY.push(roomRecord);
+  const geo=sectorGeo(a0,a1,r0,r1,h);
+  const sm=new THREE.MeshStandardMaterial({color:L.tone,transparent:true,opacity:.2,roughness:.35,metalness:.05,depthWrite:false,emissive:L.tone,emissiveIntensity:0});
+  const m=new THREE.Mesh(geo,sm);m.userData={level:i,sector:k};g.add(m);sectorMeshes.push(m);
+  interior(g,PROGRAM[i][k][1],a0,a1,r0,r1,h,L.tone);
+  addRoomPortal(g,i,k+1,a0,a1,r0,L.y,h);
+  if(i===0&&k===11){addRoomPortal(g,i,k+1,a0,a1,r1,L.y,h,true);}
+  g.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo,25),edgeMat));
+ }
+ const ring=new THREE.Mesh(new THREE.RingGeometry(C.walkRadius-C.walkHalfWidth,C.walkRadius+C.walkHalfWidth,128),new THREE.MeshBasicMaterial({color:L.tone,transparent:true,opacity:.3,side:THREE.DoubleSide,depthWrite:false}));
+ ring.rotation.x=-Math.PI/2;ring.position.y=.012;g.add(ring);
+ const rail=new THREE.Mesh(new THREE.CylinderGeometry(C.atriumRadius,C.atriumRadius,.9,96,1,true),glassMat);rail.position.y=.45;g.add(rail);
+ const colH=nextY(i)-L.y-C.slabThickness,colGeo=new THREE.CylinderGeometry(.045,.045,colH,10);
+ for(let k=0;k<C.columnCount;k++){const a=k/C.columnCount*TAU,c=new THREE.Mesh(colGeo,metalMat);c.position.set(Math.cos(a)*(ro-.18),colH/2,Math.sin(a)*(ro-.18));g.add(c);}
+});
+
+const entryLevel=levels[0],entryStep=TAU/C.sectors,entryA0=11*entryStep+C.sectorGap,entryA1=12*entryStep-C.sectorGap,entryAngle=(entryA0+entryA1)/2;
+const entryRoomOuter=outerAt(0)-.12,entryShellRadius=domeRadiusAtY(entryLevel.y+.65)-.34,entryWalkLength=Math.max(.4,entryShellRadius-entryRoomOuter-.12);
+const entryWalk=new THREE.Mesh(new THREE.BoxGeometry(1.35,.12,entryWalkLength),hubFloorMaterial);entryWalk.position.set(Math.cos(entryAngle)*(entryRoomOuter+entryShellRadius)/2,-.06,Math.sin(entryAngle)*(entryRoomOuter+entryShellRadius)/2);entryWalk.rotation.y=Math.PI/2-entryAngle;levelGroups[0].add(entryWalk);
+addRoomPortal(levelGroups[0],0,12,entryA0,entryA1,entryShellRadius,entryLevel.y,1.3,true);
+
+const topY=nextY(levels.length-1);
+const verticalCirculation=new THREE.Group();scene.add(verticalCirculation);
+function cylinderBetween(a,b,radius,material){
+ const direction=new THREE.Vector3().subVectors(b,a),length=direction.length();
+ const mesh=new THREE.Mesh(new THREE.CylinderGeometry(radius,radius,length,8),material);
+ mesh.position.copy(a).add(b).multiplyScalar(.5);mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),direction.normalize());verticalCirculation.add(mesh);return mesh;
+}
+function buildStairConnection(index){
+ const y0=levels[index].y,y1=levels[index+1].y,rise=y1-y0,run=2.4,flightWidth=.72,z1=-.95,z2=-.05;
+ let risers=Math.max(8,Math.ceil(rise/.17));if(risers%2)risers++;
+ const half=risers/2,riseStep=rise/risers,tread1=run/half,tread2=run/half;
+ for(let j=0;j<half;j++){
+  const top=y0+(j+1)*riseStep,x=-run/2+(j+.5)*tread1;
+  const tread=new THREE.Mesh(new THREE.BoxGeometry(tread1*.96,.09,flightWidth),stairMaterial);tread.position.set(x,top-.045,z1);verticalCirculation.add(tread);
+ }
+ const midY=y0+rise/2;
+ const landing=new THREE.Mesh(new THREE.BoxGeometry(.92,.12,1.72),stairMaterial);landing.position.set(run/2,midY-.06,(z1+z2)/2);verticalCirculation.add(landing);
+ for(let j=0;j<half;j++){
+  const top=midY+(j+1)*riseStep,x=run/2-(j+.5)*tread2;
+  const tread=new THREE.Mesh(new THREE.BoxGeometry(tread2*.96,.09,flightWidth),stairMaterial);tread.position.set(x,top-.045,z2);verticalCirculation.add(tread);
+ }
+ const railHeight=.79;
+ for(const z of[z1-flightWidth/2,z1+flightWidth/2])cylinderBetween(new THREE.Vector3(-run/2,y0+railHeight,z),new THREE.Vector3(run/2,midY+railHeight,z),.025,stairEdgeMaterial);
+ for(const z of[z2-flightWidth/2,z2+flightWidth/2])cylinderBetween(new THREE.Vector3(run/2,midY+railHeight,z),new THREE.Vector3(-run/2,y1+railHeight,z),.025,stairEdgeMaterial);
+ stairConnections.push({from:index,to:index+1,risers,midLanding:true});
+}
+for(let i=0;i<levels.length-1;i++)buildStairConnection(i);
+
+const shaftGlass=new THREE.MeshPhysicalMaterial({color:0xb9dce5,transparent:true,opacity:.13,roughness:.08,metalness:.08,side:THREE.DoubleSide,depthWrite:false});
+const shaftWidth=.78,shaftDepth=.84,shaftZ=.95,shaftHeight=topY+.12;
+const liftSpecs=[{id:'passenger',x:-.56,label:'Пассажирский лифт'},{id:'service',x:.56,label:'Сервисный лифт'}];
+for(const spec of liftSpecs){
+ const {x}=spec;
+ const sideL=new THREE.Mesh(new THREE.BoxGeometry(.035,shaftHeight,shaftDepth),shaftGlass);sideL.position.set(x-shaftWidth/2,shaftHeight/2,shaftZ);verticalCirculation.add(sideL);
+ const sideR=new THREE.Mesh(new THREE.BoxGeometry(.035,shaftHeight,shaftDepth),shaftGlass);sideR.position.set(x+shaftWidth/2,shaftHeight/2,shaftZ);verticalCirculation.add(sideR);
+ const back=new THREE.Mesh(new THREE.BoxGeometry(shaftWidth,shaftHeight,.035),shaftGlass);back.position.set(x,shaftHeight/2,shaftZ-shaftDepth/2);verticalCirculation.add(back);
+ for(const sx of[-1,1])for(const sz of[-1,1]){const post=new THREE.Mesh(new THREE.BoxGeometry(.055,shaftHeight,.055),portalFrameMaterial);post.position.set(x+sx*(shaftWidth/2-.015),shaftHeight/2,shaftZ+sz*(shaftDepth/2-.015));verticalCirculation.add(post);}
+ const car=new THREE.Group();
+ const carFloor=new THREE.Mesh(new THREE.BoxGeometry(.67,.05,.72),stairEdgeMaterial);carFloor.position.set(0,-.025,0);car.add(carFloor);
+ const carBack=new THREE.Mesh(new THREE.BoxGeometry(.65,.88,.025),shaftGlass);carBack.position.set(0,.44,-.34);car.add(carBack);
+ for(const sx of[-1,1]){const wall=new THREE.Mesh(new THREE.BoxGeometry(.025,.88,.68),shaftGlass);wall.position.set(sx*.32,.44,0);car.add(wall);}
+ const roof=new THREE.Mesh(new THREE.BoxGeometry(.67,.035,.72),stairEdgeMaterial);roof.position.set(0,.88,0);car.add(roof);
+ car.position.set(x,levels[0].y,shaftZ);verticalCirculation.add(car);liftCars.push({id:spec.id,label:spec.label,group:car});
+ levels.forEach((L,i)=>{
+  const doorH=Math.min(.98,Math.max(.72,nextY(i)-L.y-.2)),doorZ=shaftZ+shaftDepth/2+.025;
+  const lintel=new THREE.Mesh(new THREE.BoxGeometry(shaftWidth,.045,.055),portalFrameMaterial);lintel.position.set(x,L.y+doorH,doorZ);verticalCirculation.add(lintel);
+  const left=new THREE.Mesh(new THREE.BoxGeometry(shaftWidth*.43,doorH-.04,.035),portalGlassMaterial);left.position.set(x-shaftWidth*.215,L.y+doorH/2,doorZ);verticalCirculation.add(left);
+  const right=new THREE.Mesh(new THREE.BoxGeometry(shaftWidth*.43,doorH-.04,.035),portalGlassMaterial);right.position.set(x+shaftWidth*.215,L.y+doorH/2,doorZ);verticalCirculation.add(right);
+  landingDoors.push({lift:spec.id,level:i,panels:[left,right],closed:[left.position.x,right.position.x],shift:shaftWidth*.24});
+  liftStops.push({lift:spec.id,level:i});
+ });
+}
+
+const garden=new THREE.Group();scene.add(garden);
+const bed=new THREE.Mesh(new THREE.CircleGeometry(C.atriumRadius-.05,64),new THREE.MeshStandardMaterial({color:0x4f8a63,roughness:.9}));bed.rotation.x=-Math.PI/2;bed.position.y=.08;garden.add(bed);
+for(let k=0;k<18;k++){
+ const a=rnd()*TAU,r=.9+rnd()*2.3,h=.9+rnd()*1.3,w=.3+rnd()*.25;
+ const t=new THREE.Mesh(new THREE.ConeGeometry(w,h,7),new THREE.MeshStandardMaterial({color:new THREE.Color().setHSL(.33+rnd()*.06,.45,.3+rnd()*.12),flatShading:true,roughness:.9}));
+ t.position.set(Math.cos(a)*r,.08+h/2,Math.sin(a)*r);garden.add(t);
+}
+const plinth=new THREE.Mesh(new THREE.CylinderGeometry(C.domeRadius+.5,C.domeRadius+.7,.5,128),new THREE.MeshStandardMaterial({color:0x26343e,roughness:.45,metalness:.5}));plinth.position.y=-.25;scene.add(plinth);
+const grid=new THREE.GridHelper(80,80,0x3a5566,0x2a3d4a);grid.position.y=-.52;grid.material.transparent=true;grid.material.opacity=.35;scene.add(grid);
+
+const dome=new THREE.Group();scene.add(dome);
+const domeProfile=[];for(let i=0;i<=96;i++){const y=C.domeHeight*i/96;domeProfile.push(new THREE.Vector2(domeRadiusAtY(y),y));}
+const shell=new THREE.Mesh(new THREE.LatheGeometry(domeProfile,128),glassMat);dome.add(shell);
+const ribMat=new THREE.LineBasicMaterial({color:0x9fc7d8,transparent:true,opacity:.5});
+for(let m=0;m<24;m++){const a=m/24*TAU,p=[];for(let k=0;k<=48;k++){const y=C.domeHeight*k/48,r=domeRadiusAtY(y);p.push(new THREE.Vector3(Math.cos(a)*r,y,Math.sin(a)*r));}dome.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(p),ribMat));}
+for(let k=1;k<=8;k++){const y=C.domeHeight*k/9,r=domeRadiusAtY(y),p=[];for(let n=0;n<=128;n++){const a=n/128*TAU;p.push(new THREE.Vector3(Math.cos(a)*r,y,Math.sin(a)*r));}dome.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(p),ribMat));}
+
+let focus=null,explode=0,explodeTarget=0;
+const EXPLODE_STEP=1.3;
+function levelCenterY(i){return levelGroups[i].position.y+volH(i)/2;}
+function focusLevel(i){
+ clearSel();focus=i;levelGroups.forEach((g,n)=>{g.visible=i===null||n===i;});
+ document.querySelectorAll('#bar [data-level]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.level===(i===null?'all':String(i)))));
+ $('info-title').textContent=i===null?'ОБЩИЙ ОБЗОР':`УРОВЕНЬ 0${i} · ${levels[i].short.toUpperCase()}`;
+ $('info-subtitle').textContent=i===null?'5 уровней · 54 зоны · 2 лифта · лестница':levels[i].name;
+ $('info-status').textContent='КОНЦЕПТ · НЕ ПОСТРОЕННЫЙ ОБЪЕКТ';
+ updateMetrics(i);
+}
+function setExplode(on){explodeTarget=on?1:0;$('btnExplode').setAttribute('aria-pressed',String(on));}
+document.querySelectorAll('#bar [data-level]').forEach(b=>b.addEventListener('click',()=>focusLevel(b.dataset.level==='all'?null:Number(b.dataset.level))));
+$('btnExplode').addEventListener('click',()=>setExplode(explodeTarget===0));
+let domeOn=true;
+$('btnDome').addEventListener('click',e=>{domeOn=!domeOn;e.currentTarget.setAttribute('aria-pressed',String(domeOn));});
+$('btnSpin').addEventListener('click',e=>{controls.autoRotate=!controls.autoRotate;e.currentTarget.setAttribute('aria-pressed',String(controls.autoRotate));});
+$('btnAudit').addEventListener('click',e=>{const panel=$('auditPanel'),open=panel.hidden;panel.hidden=!open;e.currentTarget.setAttribute('aria-pressed',String(open));});
+let circulationOn=true;$('btnCirculation').addEventListener('click',e=>{circulationOn=!circulationOn;e.currentTarget.setAttribute('aria-pressed',String(circulationOn));verticalCirculation.visible=circulationOn&&explode<.04;});
+
+const ray=new THREE.Raycaster(),ptr=new THREE.Vector2();let selMesh=null,down=null;
+function clearSel(){if(selMesh){selMesh.material.emissiveIntensity=0;selMesh.material.opacity=.2;selMesh=null;}}
+function setMetricLines(lines){
+ const el=$('metric');if(!el)return;
+ el.replaceChildren();
+ lines.forEach((line,index)=>{if(index)el.append(document.createElement('br'));el.append(document.createTextNode(String(line)));});
+}
+function updateMetrics(i=null){
+ if(i===null){
+  const all=levels.map((_,n)=>calculateLevel(n));
+  const modules=all.reduce((a,q)=>a+q.modulesArea,0),walk=all.reduce((a,q)=>a+q.walkArea,0);
+  setMetricLines([`5 уровней · ${OBJECT_REGISTRY.length} пространств`,`Секторы: ${fmtArea(modules)} · галереи: ${fmtArea(walk)}`,`Масштаб: ${C.metersPerUnit?'привязан':'не откалиброван'}`]);
+  return;
+ }
+ const q=calculateLevel(i),lines=[`L0${i}: ${fmtArea(q.modulesArea)} — геометрическая площадь зон`,`Галерея: ${fmtArea(q.walkArea)} · ${q.sectors} зон`,`Глубина зоны: ${fmtNumber(q.moduleDepth)} ед.`];
+ if(i===4){const base=originalEllipseCrownDepth();if(Number.isFinite(base)&&base>0)lines.push(`Верхняя корона: +${fmtNumber((q.moduleDepth/base-1)*100)}% глубины к исходному профилю`);}
+ setMetricLines(lines);
+}
+function selectSector(m){
+ clearSel();if(!m)return;selMesh=m;selMesh.material.emissiveIntensity=.55;selMesh.material.opacity=.38;
+ const {level,sector}=m.userData,room=OBJECT_REGISTRY.find(x=>x.level===level&&x.sector===sector+1);
+ $('info-title').textContent=`${room.id} · ${room.name.toUpperCase()}`;
+ $('info-subtitle').textContent=KIND_INFO[room.kind];
+ setMetricLines([`Площадь сектора: ${fmtArea(room.area)}`,`Тип: ${room.kind}`,'Путь: портал → галерея → центральный узел','Статус: концепция']);
+ $('info-status').textContent='ГЕОМЕТРИЧЕСКАЯ ОЦЕНКА · НЕ ОБМЕР';
+}
+renderer.domElement.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY};});
+renderer.domElement.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-down.x,e.clientY-down.y)>6){down=null;return;}down=null;const r=renderer.domElement.getBoundingClientRect();ptr.set(((e.clientX-r.left)/r.width)*2-1,-((e.clientY-r.top)/r.height)*2+1);ray.setFromCamera(ptr,camera);const hit=ray.intersectObjects(sectorMeshes.filter(m=>m.parent.visible),false)[0];if(hit)selectSector(hit.object);else focusLevel(focus);});
+focusLevel(null);
+renderAudit();
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;camera.aspect=w/h;camera.fov=w<h?Math.min(85,2*Math.atan(Math.tan(21*Math.PI/180)/(w/h))*180/Math.PI*.9):42;camera.updateProjectionMatrix();renderer.setSize(w,h,false);}
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(resize).observe(stage);else window.addEventListener('resize',resize,{passive:true});resize();
+
+let last=performance.now(),rafId=0,animationStopped=false;
+document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(rafId);}else if(!animationStopped){last=performance.now();rafId=requestAnimationFrame(animate);}});
+renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();animationStopped=true;cancelAnimationFrame(rafId);showSceneError('Потерян графический контекст WebGL',new Error('Браузер остановил 3D-контекст. Перезагрузите страницу или уменьшите нагрузку.'));});
+function animate(now){
+ if(document.hidden||animationStopped)return;
+ rafId=requestAnimationFrame(animate);
+ try{
+  const dt=Math.min((now-last)/1000,.05);last=now;
+  explode+=(explodeTarget-explode)*Math.min(1,dt*4);
+  dome.visible=domeOn&&explode<.04;
+  levelGroups.forEach((g,i)=>{g.position.y=g.userData.baseY+i*EXPLODE_STEP*explode;});
+  verticalCirculation.visible=circulationOn&&explode<.04;
+  const activeStop=focus===null?0:focus,targetLiftY=levels[activeStop].y;
+  liftCars.forEach(car=>{car.group.position.y+=(targetLiftY-car.group.position.y)*Math.min(1,dt*2.5);});
+  landingDoors.forEach(door=>{const car=liftCars.find(item=>item.id===door.lift),atStop=car&&Math.abs(car.group.position.y-levels[door.level].y)<.055,open=atStop&&door.level===activeStop,shift=open?door.shift:0;door.panels[0].position.x=door.closed[0]-shift;door.panels[1].position.x=door.closed[1]+shift;});
+  const ty=focus===null?4.5+2*EXPLODE_STEP*explode:levelCenterY(focus);
+  controls.target.y+=(ty-controls.target.y)*Math.min(1,dt*3);
+  controls.update();renderer.render(scene,camera);
+ }catch(error){animationStopped=true;cancelAnimationFrame(rafId);showSceneError('Ошибка во время 3D-рендеринга',error);}
+}
+rafId=requestAnimationFrame(animate);
+window.EVA_SPHERE={sectorMeshes,selectSector,PROGRAM,THREE,CONFIG,scene,camera,controls,levelGroups,focusLevel,setExplode,outerAt,volH,domeRadiusAtY,sectorsForLevel,originalEllipseCrownDepth,OBJECT_REGISTRY,calculateLevel,calcSectorArea,geometryAudit,routeAudit,renderAudit,roomPortals,externalPortals,galleryBridges,stairConnections,liftStops,liftCars,verticalCirculation};
+}catch(err){
+ showSceneError('Не удалось запустить 3D',err);
+}
+</script>
+</body>
+</html>
