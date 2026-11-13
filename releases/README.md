@@ -23,3 +23,9 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Open v2.0.4 preview](v2.0.4/eva-sphere-a01-v204-welcome-preview.html)
 - [Release notes](v2.0.4/RELEASE-NOTES.md)
 - Status: preview; browser and first-visit flow testing pending.
+
+## v2.0.10 — Light Default archive
+
+- [Open v2.0.10 HTML snapshot](v2.0.10/eva-sphere-a01-v2010-light-default.html)
+- [Release notes](v2.0.10/RELEASE-NOTES.md)
+- Status: archived snapshot; JavaScript syntax check passed; browser/WebGL verification and production deployment not performed. The later v2.1.0 digital-twin snapshot remains the repository's newer baseline.
