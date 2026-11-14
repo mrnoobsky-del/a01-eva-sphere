@@ -41,3 +41,7 @@
 - Strengthened the demonstration with a longer travel path, larger retaining tray and a six-stage ochre service-status indicator.
 - Updated the motion to preserve the module's original local position when returning.
 - The strengthened motion still requires a fresh live browser interaction test; it is an illustrative digital sequence, not a validated mechanism.
+
+### Browser follow-up after the motion update
+- Confirmed on the published build that Smart Sky opens the individual LED cassette passport and that the front-service action starts the first visible status stage (power and signal isolation).
+- The browser session reached its time budget before the full 7.6-second cycle could be observed to completion. Return, relatching and idle restoration remain unverified in live browser testing.
