@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.1.0",
+  "id": "a01-living-world",
+  "name": "A-01 Living World",
+  "purpose": "Optional companion layer for the A-01 digital twin",
+  "integration": {
+    "api": "window.EVA_SPHERE",
+    "events": [
+      "eva-a01:scene-ready",
+      "a01-living-world:ready",
+      "a01-living-world:companion-action"
+    ],
+    "sceneLayer": "THREE.Scene root",
+    "level": 1,
+    "floorY": 2.04,
+    "movementBounds": {
+      "shape": "circle",
+      "center": {
+        "x": 0,
+        "z": 0
+      },
+      "radius": 2.65
+    },
+    "noCameraControl": true,
+    "noPlayerControlOverride": true
+  },
+  "companions": [
+    {
+      "id": "mushkins",
+      "name": "Мушкинссс",
+      "role": "Любопытный спутник",
+      "visual": "procedural-fly",
+      "modelUrl": null,
+      "spawn": {
+        "x": -0.72,
+        "y": 2.04,
+        "z": 2.25
+      }
+    },
+    {
+      "id": "eva",
+      "name": "Ева",
+      "role": "Световой аватар-помощник",
+      "visual": "procedural-light-orb-placeholder",
+      "modelUrl": null,
+      "spawn": {
+        "x": 0.72,
+        "y": 2.04,
+        "z": 2.25
+      }
+    }
+  ],
+  "capabilities": {
+    "proceduralVisuals": true,
+    "ambientMovement": true,
+    "localEmotes": true,
+    "aiProvider": false,
+    "voiceInput": false,
+    "voiceOutput": false,
+    "persistentConversationMemory": false,
+    "microphoneAccess": false
+  }
+}
