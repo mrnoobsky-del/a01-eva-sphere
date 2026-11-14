@@ -1412,6 +1412,17 @@ html[data-theme="dark"] #stage #sphereIntroOverlay .sphere-intro-mood-line{color
 .sky-screen-service-btn:active{transform:scale(.985)}
 @media(prefers-reduced-motion:reduce){.sky-screen-service-btn{transition:none}}
 </style>
+<style id="a01-v312-led-service-status">
+.sky-service-status{position:absolute;top:66px;left:50%;transform:translateX(-50%);z-index:6;width:min(360px,calc(100% - 28px));padding:10px 13px;border:1px solid rgba(211,154,69,.6);border-radius:13px;background:rgba(13,22,29,.92);box-shadow:0 12px 36px rgba(0,0,0,.24);backdrop-filter:blur(16px);color:#fff1d9;pointer-events:none}
+.sky-service-status[hidden]{display:none}
+.sky-service-status strong{display:block;font:750 10px/1.35 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.sky-service-status span{display:block;margin-top:3px;font:500 11px/1.35 system-ui,sans-serif;color:rgba(255,245,226,.78)}
+.sky-service-status i{display:block;height:3px;margin-top:9px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.13)}
+.sky-service-status i b{display:block;width:var(--service-progress,0%);height:100%;border-radius:inherit;background:linear-gradient(90deg,#b8792e,#e4b25f);transition:width .18s linear}
+.sky-service-status.is-done{border-color:rgba(105,190,150,.7)}
+@media(max-width:560px){.sky-service-status{top:58px;padding:8px 10px}.sky-service-status strong{font-size:9px}.sky-service-status span{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.sky-service-status i b{transition:none}}
+</style>
 </head>
 <body data-theme="light">
 <div class="app nav-expanded" id="appShell">
@@ -1480,7 +1491,7 @@ html[data-theme="dark"] #stage #sphereIntroOverlay .sphere-intro-mood-line{color
 <section class="stage" id="stage" aria-label="Интерактивная 3D-модель купола Сферы Евы">
 
 <div class="ambient-environment-veil" id="ambientEnvironmentVeil" aria-hidden="true"></div>
-<div class="loading" id="loading">Подготавливаем объёмную модель…</div><div class="toast" id="toast"></div>
+<div class="loading" id="loading">Подготавливаем объёмную модель…</div><div class="toast" id="toast"></div><div class="sky-service-status" id="skyServiceStatus" role="status" aria-live="polite" hidden><strong id="skyServiceStatusTitle">LED CASSETTE SERVICE</strong><span id="skyServiceStatusLabel"></span><i><b id="skyServiceStatusFill"></b></i></div>
 <div class="object-hover-card" id="objectHoverCard" hidden aria-live="polite">
  <div class="object-hover-kicker" id="objectHoverType">ОБЪЕКТ · A-01</div>
  <strong id="objectHoverName">Объект</strong>
@@ -3939,6 +3950,16 @@ $('loading').classList.add('hidden');
 const clock=new THREE.Clock();
 let shellServiceDemo=null;
 let skyPanelServiceDemo=null;
+let skyServiceStatusTimer=null;
+function updateSkyServiceStatus(title,label,progress,done=false){
+ const panel=$('skyServiceStatus');if(!panel)return;
+ panel.hidden=false;panel.classList.toggle('is-done',!!done);
+ const titleEl=$('skyServiceStatusTitle'),labelEl=$('skyServiceStatusLabel'),fill=$('skyServiceStatusFill');
+ if(titleEl)titleEl.textContent=title;if(labelEl)labelEl.textContent=label;
+ if(fill)fill.style.setProperty('--service-progress',`${Math.max(0,Math.min(1,progress))*100}%`);
+ if(skyServiceStatusTimer){clearTimeout(skyServiceStatusTimer);skyServiceStatusTimer=null;}
+ if(done)skyServiceStatusTimer=setTimeout(()=>{panel.hidden=true;panel.classList.remove('is-done');},2300);
+}
 let wasteLiftDemo=null;
 function disposeDemoRig(rig){
  if(!rig)return;
@@ -3992,7 +4013,7 @@ function makeSkyPanelServiceRig(feature,direction,offset){
   const to=from.clone().add(offset);
   const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints([from,from.clone().lerp(to,.34),to]),railMat);line.frustumCulled=false;rig.add(line);
  }
- const tray=new THREE.Mesh(new THREE.BoxGeometry(.86,.065,.58),new THREE.MeshStandardMaterial({color:0x263d43,roughness:.52,metalness:.4}));
+ const tray=new THREE.Mesh(new THREE.BoxGeometry(1.18,.085,.78),new THREE.MeshStandardMaterial({color:0x263d43,roughness:.52,metalness:.4}));
  tray.position.copy(start).add(offset);tray.name='Удерживаемый сервисный лоток LED-модуля';rig.add(tray);
  const latchMat=new THREE.MeshStandardMaterial({color:0xd39a45,emissive:0x70461a,emissiveIntensity:.24,roughness:.4});
  for(const side of [-1,1]){const latch=new THREE.Mesh(new THREE.SphereGeometry(.045,8,6),latchMat);latch.position.copy(start).add(tangent.clone().multiplyScalar(side*.38));rig.add(latch);}
@@ -4000,14 +4021,16 @@ function makeSkyPanelServiceRig(feature,direction,offset){
 }
 function startSkyPanelServiceCycle(id){
  const group=itemGroups.get(id),feature=allFeatures.find(x=>x.id===id);if(!group||!feature||feature.kind!=='sky-panel'||!group.userData.serviceModule||skyPanelServiceDemo)return;
+ if(exteriorMode)setExteriorMode(false);
  const module=group.userData.serviceModule,cavity=group.userData.serviceCavity;
  const phi=feature.phiStart+feature.phiLength/2,theta=(feature.thetaStart+feature.thetaEnd)/2;
  const direction=new THREE.Vector3(Math.cos(phi)*Math.sin(theta),-Math.cos(theta),-Math.sin(phi)*Math.sin(theta)).normalize();
  const tangent=new THREE.Vector3(Math.sin(phi),0,Math.cos(phi)).normalize();
- const offset=direction.clone().multiplyScalar(.42).add(new THREE.Vector3(0,-.34,0)).add(tangent.multiplyScalar(.14));
+ const offset=direction.clone().multiplyScalar(1.02).add(new THREE.Vector3(0,-.38,0)).add(tangent.multiplyScalar(.24));
  const rig=makeSkyPanelServiceRig(feature,direction,offset);projectionScreenGroup.add(rig);
- skyPanelServiceDemo={group,module,cavity,rig,start:performance.now(),offset,original:module.position.clone()};
+ skyPanelServiceDemo={group,module,cavity,rig,start:performance.now(),offset,original:module.position.clone(),phase:-1};
  $('objectPanelActions')?.querySelectorAll('button').forEach(b=>{b.disabled=true;});
+ updateSkyServiceStatus('01 · ПИТАНИЕ И СИГНАЛ','Кассета отключена от контента. Проверка сервисного состояния.',.06);
  requestSceneRender();
 }
 function startWasteLiftDemo(level){
@@ -4046,15 +4069,17 @@ function renderFrame(now){
   if(p>=1){shellServiceDemo.group.position.copy(shellServiceDemo.original);disposeDemoRig(shellServiceDemo.rig);shellServiceDemo=null;$('objectPanelActions')?.querySelectorAll('button').forEach(b=>{b.disabled=false;});}
  }
  if(skyPanelServiceDemo){
-  const p=Math.min(1,(now-skyPanelServiceDemo.start)/6200),ease=v=>v*v*(3-2*v);let travel=0;
-  if(p<.14)travel=0;
-  else if(p<.40)travel=ease((p-.14)/.26);
-  else if(p<.66)travel=1;
-  else if(p<.92)travel=1-ease((p-.66)/.26);
-  else travel=0;
-  skyPanelServiceDemo.module.position.copy(skyPanelServiceDemo.offset.clone().multiplyScalar(travel));
-  skyPanelServiceDemo.cavity.visible=p>.17&&p<.91;
-  if(p>=1){skyPanelServiceDemo.module.position.copy(skyPanelServiceDemo.original);skyPanelServiceDemo.cavity.visible=false;disposeDemoRig(skyPanelServiceDemo.rig);skyPanelServiceDemo=null;$('objectPanelActions')?.querySelectorAll('button').forEach(b=>{b.disabled=false;});}
+  const p=Math.min(1,(now-skyPanelServiceDemo.start)/7600),ease=v=>v*v*(3-2*v);let travel=0,phase=0,title='01 · ПИТАНИЕ И СИГНАЛ',label='Кассета отключена от контента. Проверка сервисного состояния.',progress=.08;
+  if(p<.13){phase=0;}
+  else if(p<.28){phase=1;title='02 · РАЗБЛОКИРОВКА';label='Контролируемое снятие механических фиксаторов.';progress=.2;}
+  else if(p<.48){phase=2;title='03 · ВЫДВИЖЕНИЕ';label='Модуль выходит внутрь по двум удерживаемым направляющим.';travel=ease((p-.28)/.20);progress=.2+.32*travel;}
+  else if(p<.69){phase=3;title='04 · СЕРВИСНОЕ ПОЛОЖЕНИЕ';label='Кассета лежит на удерживаемом лотке. Доступ к разъёмам открыт.';travel=1;progress=.72;}
+  else if(p<.92){phase=4;title='05 · ВОЗВРАТ';label='Модуль возвращается в посадочное место.';travel=1-ease((p-.69)/.23);progress=.72+.23*ease((p-.69)/.23);}
+  else{phase=5;title='06 · ФИКСАЦИЯ И ПРОВЕРКА';label='Посадка подтверждена. Питание и изображение готовы к восстановлению.';progress=.98;}
+  if(phase!==skyPanelServiceDemo.phase){skyPanelServiceDemo.phase=phase;updateSkyServiceStatus(title,label,progress);}
+  skyPanelServiceDemo.module.position.copy(skyPanelServiceDemo.original.clone().add(skyPanelServiceDemo.offset.clone().multiplyScalar(travel)));
+  skyPanelServiceDemo.cavity.visible=p>.28&&p<.93;
+  if(p>=1){skyPanelServiceDemo.module.position.copy(skyPanelServiceDemo.original);skyPanelServiceDemo.cavity.visible=false;disposeDemoRig(skyPanelServiceDemo.rig);skyPanelServiceDemo=null;$('objectPanelActions')?.querySelectorAll('button').forEach(b=>{b.disabled=false;});updateSkyServiceStatus('ГОТОВО · LED-КАССЕТА НА МЕСТЕ','Фиксаторы проверены. Сервисный цикл завершён.',1,true);}
  }
  if(wasteLiftDemo){
   const p=Math.min(1,(now-wasteLiftDemo.start)/5200),ease=v=>v*v*(3-2*v);let y;
