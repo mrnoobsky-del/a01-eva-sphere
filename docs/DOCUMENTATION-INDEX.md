@@ -4,6 +4,7 @@
 - [Status and evidence](STATUS-AND-EVIDENCE.md)
 - [Architecture notes](../architecture/README.md)
 - [Digital twin](../digital-twin/README.md)
+- [A-01 v3.0.0 — Parametric Modular Shell](../digital-twin/README_RU_v300.md)
 - [Release history](../releases/README.md)
 - [A-01 Sphere Standard v0.1](../standards/A01-SPHERE-STANDARD-v0.1.md)
 - [Sphere and component JSON Schemas](../schemas/)

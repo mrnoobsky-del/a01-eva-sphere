@@ -10,3 +10,7 @@ The files in this directory record proposed, reproducible geometry derived from 
 - [CSV cassette register](../templates/cassette-layout-register-v0.1.csv)
 
 The 12 sectors are parent zones. The 144 generated records are candidate replaceable modules, not an approved production schedule. The geometry does not establish physical dimensions, structural performance or construction readiness.
+
+- [Interactive v3.0.0 digital-twin visualization](../digital-twin/eva-sphere-a01-v300-parametric-shell-cassettes.html)
+
+The HTML prototype recreates the same parametric surface for selection and inspection; the JSON, CSV and SVG remain the separate geometry records.
