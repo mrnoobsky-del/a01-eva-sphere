@@ -6,7 +6,7 @@ A digital model or interface is not evidence that the corresponding physical sys
 
 ## Latest build
 
-- [A-01 v3.0.0 — Parametric Modular Shell](eva-sphere-a01-v300-parametric-shell-cassettes.html)
+- [A-01 v3.1.0 — Parametric Modular Shell](eva-sphere-a01-v300-parametric-shell-cassettes.html)
 - [Russian documentation](README_RU_v300.md) · [English documentation](README_v300.md) · [Changelog](CHANGELOG_v300.md)
 - [Stable v2.1.0 baseline](eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](README_RU_v210.md)
 

@@ -50,7 +50,7 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 
 ## Current digital workspace
 
-The repository preserves **A-01 v2.1.0** as the stable digital-twin baseline and adds **A-01 v3.0.0** as the newest experimental build with a selectable parametric exterior cassette grid. The separate **A-01 v2.0.13** archive in `releases/v2.0.13/` is an integrated `/evasphere/` site-workspace snapshot and belongs to a different version track.
+The repository preserves **A-01 v2.1.0** as the stable digital-twin baseline and adds **A-01 v3.1.0** as the newest experimental build with a selectable parametric exterior cassette grid. The separate **A-01 v2.0.13** archive in `releases/v2.0.13/` is an integrated `/evasphere/` site-workspace snapshot and belongs to a different version track.
 
 The v2.0.13 archive passed static HTML and JavaScript checks, but live browser/WebGL verification, production Worker verification and deployment to the public website have not been confirmed. See the release notes for scope and limitations.
 
@@ -85,8 +85,8 @@ The repository is a public development record. Project status may change; check 
 
 ## Latest digital twin build
 
-- **A-01 v3.0.0 — Parametric Modular Shell:** [Open HTML prototype](digital-twin/eva-sphere-a01-v300-parametric-shell-cassettes.html)
-- [Russian documentation](digital-twin/README_RU_v300.md) · [English documentation](digital-twin/README_v300.md) · [Changelog](digital-twin/CHANGELOG_v300.md)
+- **A-01 v3.0.0 — Parametric Modular Shell:** [Open HTML prototype](digital-twin/eva-sphere-a01-v310-modular-shell-waste-datacenter.html)
+- [Russian documentation](digital-twin/README_RU_v310.md) · [English documentation](digital-twin/README_v300.md) · [Changelog](digital-twin/CHANGELOG_v310.md)
 - **Stable v2.1.0 baseline:** [Open HTML prototype](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](digital-twin/README_RU_v210.md)
 
 The v3.0.0 experiment adds a selectable visualization of 144 proposed exterior cassette candidates. It preserves the v2.1.0 source as a separate baseline. The cassette geometry uses uncalibrated model units and is not a fabrication, structural or construction design. Browser/WebGL verification has not been completed.
