@@ -34,3 +34,10 @@
 ### Limitations
 - This is a digital concept and interaction prototype, not a built or construction-approved facility.
 - Dimensions, weights, rails, actuators, seals, loads, thermal and fire/water performance, electrical isolation and regulatory compliance require independent engineering design and verification.
+
+### Follow-up: LED cassette service discoverability and motion clarity
+- Added a direct Smart Sky panel entry to open an individual LED cassette passport.
+- Browser testing confirmed the passport and service action are reachable.
+- Strengthened the demonstration with a longer travel path, larger retaining tray and a six-stage ochre service-status indicator.
+- Updated the motion to preserve the module's original local position when returning.
+- The strengthened motion still requires a fresh live browser interaction test; it is an illustrative digital sequence, not a validated mechanism.
