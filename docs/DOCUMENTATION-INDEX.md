@@ -13,3 +13,7 @@
 - [Cassette interface register](../templates/cassette-interface-register.csv)
 
 The reference cassette remains a concept. Its construction details and verification criteria must be completed against a selected site, geometry, jurisdiction and engineering design basis.
+
+- [Parametric exterior cassette geometry v0.1](../architecture/A01-CAS-PANEL-GEOMETRY-v0.1.md)
+- [Cassette parameter model and generated geometry](../geometry/README.md)
+- [Cassette layout register](../templates/cassette-layout-register-v0.1.csv)

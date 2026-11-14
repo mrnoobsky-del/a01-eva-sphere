@@ -22,3 +22,12 @@ Visualizations must be captioned as concept imagery.
 - [Cassette interface register template](../templates/cassette-interface-register.csv)
 
 The cassette document is a proposed interface and verification brief. It does not define dimensions, material grades, fastener sizes, capacities or approved construction details.
+
+## Parametric cassette geometry
+
+- [A-01 cassette geometry methodology v0.1](A01-CAS-PANEL-GEOMETRY-v0.1.md)
+- [Parametric geometry package](../geometry/README.md)
+- [Generated cassette layout register](../templates/cassette-layout-register-v0.1.csv)
+- [Dependency-free layout generator](../tools/generate-cassette-layout.mjs)
+
+The proposed grid contains 12 parent sectors and 144 candidate cassette records. All dimensions remain in uncalibrated model units.

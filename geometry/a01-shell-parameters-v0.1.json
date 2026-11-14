@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "0.1.0",
+  "layoutId": "a01-shell-cassette-grid",
+  "status": "proposed-digital-geometry",
+  "units": "model-unit",
+  "scaleToMetres": null,
+  "sourceGeometry": {
+    "baseline": "digital-twin/eva-sphere-a01-v210-human-navigation-safety.html",
+    "baselineVersion": "v2.1.0",
+    "experimentalPanelReference": "releases/v2.0.27/eva-sphere-a01-v2.0.27-modular-shell-waste-datacenter.html",
+    "notes": [
+      "v2.1.0 confirms the shared dome radius and anisotropic scale but does not currently include the 12 cassette panel objects.",
+      "v2.0.27 contains the experimental 12-sector shell-panel geometry. This layout retains that parent-sector logic and subdivides each large petal into smaller candidate modules.",
+      "The old model offsets the cassette surface slightly outside the dome skin to avoid visual z-fighting. This is a rendering offset, not a physical cavity or clearance requirement."
+    ]
+  },
+  "ellipsoid": {
+    "baseRadius": 8.55,
+    "panelRadialFactor": 1.006,
+    "scaleXZ": 1.22,
+    "scaleY": 1.35,
+    "centerY": 0.58,
+    "thetaStartRad": 0.015,
+    "thetaEndPiFactor": 0.48,
+    "azimuthSectorCount": 12,
+    "columnsPerSector": 2,
+    "meridionalCourses": 6,
+    "boundarySamplesPerEdge": 9
+  },
+  "identification": {
+    "parentZonePattern": "A01-CAS-ZONE-P{sector}",
+    "panelAssetTagPattern": "A01-CAS-P{sector}-C{column}-B{band}",
+    "sectorNumbering": "1-based, clockwise when viewed from above; exact north/origin orientation remains TBD",
+    "columnNumbering": "1-based within parent sector; local azimuth origin remains TBD",
+    "bandNumbering": "1-based from crown toward lower rim"
+  },
+  "engineeringNotes": [
+    "All generated sizes and areas are in model units and model-unit squared; do not interpret them as metres or square metres.",
+    "Panel segmentation is a geometric proposal only. Fabrication width, mass, lifting, wind resistance, support spacing and serviceability are not verified.",
+    "The 12 parent sectors are addressing / maintenance zones. The 144 child panels are candidates for further rationalization, not an approved bill of materials.",
+    "No panel may be released from its support until an engineered service cradle and independent secondary retention are physically engaged."
+  ]
+}

@@ -109,3 +109,12 @@ We welcome evidence-backed ideas, technical reviews, test reports and independen
 - [Component, fastener and material registers](templates/)
 
 The standard is a project-specific information model, not a building code or construction approval. It references IFC, IDS and ISO information-management/product-data standards while keeping each Sphere site-specific.
+
+
+## Parametric exterior cassette geometry
+
+- [A-01 cassette geometry methodology v0.1](architecture/A01-CAS-PANEL-GEOMETRY-v0.1.md)
+- [Parametric geometry files and generated 144-panel layout](geometry/README.md)
+- [Cassette layout generator](tools/generate-cassette-layout.mjs)
+
+The layout is derived from the digital-twin dome parameters, uses uncalibrated model units and is not a fabrication or structural design.
