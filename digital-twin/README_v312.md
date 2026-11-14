@@ -73,3 +73,12 @@ The digital motion is a proposed sequence, not a validated actuator or rail desi
 - SQM curved LED: https://rentalhouse.sqm.eu/gb/indoor/1611-p206-moduled-inner-curved.html
 - Kalzip installation guidelines: https://img1.wsimg.com/blobby/go/9df8b50c-26bb-436e-9ea4-3db788efa8d0/downloads/FC%20Installation%20guidelines-2014.pdf?ver=1746654367885
 - NASA Architecture Volume 2, hatches and doorways: https://www.nasa.gov/reference/8-0-architecture-vol-2/
+
+## Addendum: LED service access and demo visibility
+
+- Added a direct “Паспорт и сервис LED-кассеты” entry in the Smart Sky panel, opening the first of the 144 cassettes.
+- Browser inspection confirmed the passport opens for `A01-SKY-CAS-P01-C01-B01`, describes front access and exposes a service-demo action.
+- The first browser test found the module movement too subtle to observe. The sequence has since been strengthened: longer travel, a more legible guide/tray assembly and an ochre status indicator with six stages — power/data isolation, unlocking, extension, service position, return, relatching and verification.
+- The demonstration lasts about 7.6 seconds. This is an illustrative motion sequence, not an actuator design.
+
+The interactive movement has not yet been re-tested after this final adjustment; it should not be treated as fully verified until a new browser run.
