@@ -50,7 +50,7 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 
 ## Current digital workspace
 
-The repository preserves **A-01 v2.1.0** as the stable digital-twin baseline. The integrated experimental line has advanced to **A-01 v3.1.1**, combining the 144-candidate modular shell, waste-service concepts, underground B1 data-centre concept and refined interaction controls. The separate **A-01 v2.0.13** archive in releases/v2.0.13/ is an integrated /evasphere/ site-workspace snapshot and belongs to a different version track.
+The repository preserves **A-01 v2.1.0** as the stable digital-twin baseline. The integrated experimental line has advanced to **A-01 v3.1.2**, combining the 144-candidate modular shell, waste-service concepts, underground B1 data-centre concept, serviceable interior LED sky and corrected first-arrival sequence. The separate **A-01 v2.0.13** archive in releases/v2.0.13/ is an integrated /evasphere/ site-workspace snapshot and belongs to a different version track.
 
 The v2.0.13 archive passed static HTML and JavaScript checks, but live browser/WebGL verification, production Worker verification and deployment to the public website have not been confirmed. See the release notes for scope and limitations.
 
@@ -85,12 +85,12 @@ The repository is a public development record. Project status may change; check 
 
 ## Latest digital twin build
 
-- **A-01 v3.1.1 — Ochre highlight, arrival sequence and compact flight HUD:** [Open HTML prototype](digital-twin/eva-sphere-a01-v311-ochre-hover-arrival-flight-hud.html)
-- [Russian documentation](digital-twin/README_RU_v311.md) · [English documentation](digital-twin/README_v311.md) · [Changelog](digital-twin/CHANGELOG_v311.md)
-- **Previous integrated v3.1.0:** [Open HTML prototype](digital-twin/eva-sphere-a01-v310-modular-shell-waste-datacenter.html) · [Russian documentation](digital-twin/README_RU_v310.md)
+- **A-01 v3.1.2 — Serviceable LED sky and intro sequencing:** [Open HTML prototype](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html)
+- [Russian documentation](digital-twin/README_RU_v312.md) · [English documentation](digital-twin/README_v312.md) · [Changelog](digital-twin/CHANGELOG_v312.md)
+- **Previous v3.1.1 build:** [Open HTML prototype](digital-twin/eva-sphere-a01-v311-ochre-hover-arrival-flight-hud.html) · [Documentation](digital-twin/README_v311.md)
 - **Stable v2.1.0 baseline:** [Open HTML prototype](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](digital-twin/README_RU_v210.md)
 
-The v3.1.1 release refines hover feedback, first-arrival presentation and the flight HUD while preserving the integrated v3.1.0 systems. The cassette geometry uses uncalibrated model units and is not a fabrication, structural or construction design.
+The v3.1.2 release improves first-entry sequencing, divides the interior LED sky into serviceable curved cassettes and documents a separate protected maintenance path for the exterior skin. The geometry uses uncalibrated model units and is not a fabrication, structural or construction design.
 
 ## Community development and additional Spheres
 
