@@ -6,9 +6,9 @@ A digital model or interface is not evidence that the corresponding physical sys
 
 ## Latest build
 
-- [A-01 v3.1.1 — Ochre highlight, arrival sequence and compact flight HUD](eva-sphere-a01-v311-ochre-hover-arrival-flight-hud.html)
-- [Russian documentation](README_RU_v311.md) · [English documentation](README_v311.md) · [Changelog](CHANGELOG_v311.md)
-- [Previous integrated v3.1.0 build](eva-sphere-a01-v310-modular-shell-waste-datacenter.html) · [Documentation](README_RU_v310.md)
+- [A-01 v3.1.2 — Serviceable LED sky and intro sequencing](eva-sphere-a01-v312-modular-shell-serviceable-led.html)
+- [Russian documentation](README_RU_v312.md) · [English documentation](README_v312.md) · [Changelog](CHANGELOG_v312.md)
+- [Previous v3.1.1 build](eva-sphere-a01-v311-ochre-hover-arrival-flight-hud.html) · [Documentation](README_v311.md)
 - [Stable v2.1.0 baseline](eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](README_RU_v210.md)
 
-The v3.1.1 build refines object highlighting, the first-arrival sequence and flight controls. It remains an experimental digital twin; its geometry is not a fabrication or construction design. A basic live browser check confirmed the published page, Three.js canvas and main panels load without obvious fatal errors; full interaction and physical mobile testing remain outstanding.
+The v3.1.2 build improves the first-arrival sequence, splits the interior LED sky into serviceable curved cassettes and documents a separate protected exterior shell maintenance path. It remains an experimental digital twin; its geometry is not a fabrication or construction design. Full live WebGL interaction and physical device testing have not been completed.
