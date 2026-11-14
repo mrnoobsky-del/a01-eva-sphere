@@ -1,0 +1,694 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrnoobsky-del/a01-eva-sphere/blob/main/schemas/sphere-manifest.schema.json",
+  "title": "A-01 Sphere Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "sphereId",
+    "name",
+    "status",
+    "project",
+    "site",
+    "geometry",
+    "architecture",
+    "systems",
+    "accessModel",
+    "governance",
+    "verification"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0"
+    },
+    "sphereId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 2
+    },
+    "tagline": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "proposal",
+        "concept",
+        "digital-twin",
+        "preliminary-design",
+        "detailed-design",
+        "permitting",
+        "construction",
+        "commissioning",
+        "operational",
+        "archived"
+      ]
+    },
+    "project": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "originator",
+        "contributors"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "originator": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "organization": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contributors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "role"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "role": {
+                "type": "string"
+              },
+              "profile": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "uri"
+              },
+              "contribution": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        },
+        "repository": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "license": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parentPlatform": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "site": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selectionStatus",
+        "jurisdiction"
+      ],
+      "properties": {
+        "selectionStatus": {
+          "enum": [
+            "not-selected",
+            "candidate",
+            "surveyed",
+            "selected"
+          ]
+        },
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "region": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "jurisdiction": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "coordinates": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "latitude",
+            "longitude"
+          ],
+          "properties": {
+            "latitude": {
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            },
+            "longitude": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            }
+          }
+        },
+        "climateReference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "geotechnicalReport": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        }
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "unitSystem",
+        "physicalStatus",
+        "dimensions",
+        "digitalTwin"
+      ],
+      "properties": {
+        "unitSystem": {
+          "const": "SI"
+        },
+        "coordinateReference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "physicalStatus": {
+          "enum": [
+            "not-defined",
+            "illustrative",
+            "scaled-concept",
+            "preliminary",
+            "calculated",
+            "surveyed",
+            "verified-as-built"
+          ]
+        },
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "outerDiameter_m",
+            "overallHeight_m",
+            "usableFloorArea_m2",
+            "physicalLevelCount",
+            "levelElevations_m"
+          ],
+          "properties": {
+            "outerDiameter_m": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "exclusiveMinimum": 0
+            },
+            "overallHeight_m": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "exclusiveMinimum": 0
+            },
+            "usableFloorArea_m2": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "exclusiveMinimum": 0
+            },
+            "physicalLevelCount": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "levelElevations_m": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "dimensionSource": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "uri"
+            }
+          }
+        },
+        "digitalTwin": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "modelStatus",
+            "modelUnits",
+            "modelPath"
+          ],
+          "properties": {
+            "modelStatus": {
+              "enum": [
+                "none",
+                "illustrative",
+                "scaled",
+                "preliminary",
+                "calibrated",
+                "as-built"
+              ]
+            },
+            "modelUnits": {
+              "enum": [
+                "unknown",
+                "model-unit",
+                "m",
+                "mm"
+              ]
+            },
+            "modelPath": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "modelRevision": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "architecture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primaryStructure",
+        "innerEnvelope",
+        "outerModules",
+        "interiorSky"
+      ],
+      "properties": {
+        "primaryStructure": {
+          "$ref": "#/$defs/architectureLayer"
+        },
+        "innerEnvelope": {
+          "$ref": "#/$defs/architectureLayer"
+        },
+        "outerModules": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "status",
+            "description",
+            "replaceability"
+          ],
+          "properties": {
+            "status": {
+              "$ref": "#/$defs/systemStatus"
+            },
+            "description": {
+              "type": "string"
+            },
+            "replaceability": {
+              "enum": [
+                "not-defined",
+                "conceptual",
+                "prototyped",
+                "tested",
+                "verified"
+              ]
+            },
+            "modelReference": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "interiorSky": {
+          "$ref": "#/$defs/architectureLayer"
+        }
+      }
+    },
+    "systems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "systemId",
+          "code",
+          "name",
+          "status",
+          "description"
+        ],
+        "properties": {
+          "systemId": {
+            "type": "string",
+            "pattern": "^[A-Z0-9-]{3,40}$"
+          },
+          "code": {
+            "enum": [
+              "SIT",
+              "STR",
+              "ENV",
+              "CAS",
+              "SKY",
+              "ARC",
+              "ENE",
+              "WAT",
+              "HVA",
+              "WST",
+              "ICT",
+              "FLS",
+              "MOB",
+              "OPS",
+              "GOV"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/$defs/systemStatus"
+          },
+          "description": {
+            "type": "string"
+          },
+          "componentRegister": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "owner": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          }
+        }
+      }
+    },
+    "accessModel": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "baselineServices",
+        "optionalConfigurations",
+        "incomeIndependence"
+      ],
+      "properties": {
+        "baselineServices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "optionalConfigurations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "incomeIndependence": {
+          "type": "boolean"
+        },
+        "participation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "governance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decisionAuthority",
+        "humanOversight",
+        "criticalSystemsPolicy"
+      ],
+      "properties": {
+        "decisionAuthority": {
+          "type": "string"
+        },
+        "humanOversight": {
+          "type": "boolean"
+        },
+        "criticalSystemsPolicy": {
+          "type": "string"
+        },
+        "dataClassification": {
+          "enum": [
+            "public",
+            "mixed",
+            "restricted"
+          ]
+        },
+        "contact": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "overallState",
+        "assumptions",
+        "openQuestions",
+        "riskRefs"
+      ],
+      "properties": {
+        "overallState": {
+          "enum": [
+            "concept-only",
+            "research",
+            "preliminary-engineering",
+            "independently-reviewed",
+            "tested",
+            "approved-for-specific-stage",
+            "as-built-verified"
+          ]
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "openQuestions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "riskRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "calculations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "approvals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "testReports": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "componentRegister": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "materialRegister": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "fastenerRegister": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "url",
+          "sourceType"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "sourceType": {
+            "enum": [
+              "standard",
+              "official-guidance",
+              "research",
+              "manufacturer",
+              "test-report",
+              "project-document",
+              "other"
+            ]
+          },
+          "edition": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "checkedOn": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "notes": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "version": {
+      "type": "string"
+    },
+    "lastUpdated": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    }
+  },
+  "$defs": {
+    "systemStatus": {
+      "enum": [
+        "not-started",
+        "concept",
+        "modelled",
+        "preliminary-engineering",
+        "reviewed",
+        "tested",
+        "approved-for-specific-stage",
+        "commissioned",
+        "operational",
+        "retired"
+      ]
+    },
+    "architectureLayer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "description"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/systemStatus"
+        },
+        "description": {
+          "type": "string"
+        },
+        "modelReference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -99,3 +99,13 @@ This build adds vertical first-person look control, adjustable field of view, a 
 - [Modular systems research brief](architecture/modular-systems-research-v0.1.md)
 
 We welcome evidence-backed ideas, technical reviews, test reports and independent Sphere proposals. A community Sphere is recorded as its own project; the current digital-twin viewer does not yet dynamically load community manifests. The registry and template are the first step toward a future multi-Sphere catalogue. See the contribution guide for the current process and licensing status.
+
+
+## A-01 Sphere Standard
+
+- [A-01 Sphere Standard v0.1](standards/A01-SPHERE-STANDARD-v0.1.md)
+- [Sphere manifest JSON Schema](schemas/sphere-manifest.schema.json)
+- [Component and asset JSON Schema](schemas/component-record.schema.json)
+- [Component, fastener and material registers](templates/)
+
+The standard is a project-specific information model, not a building code or construction approval. It references IFC, IDS and ISO information-management/product-data standards while keeping each Sphere site-specific.

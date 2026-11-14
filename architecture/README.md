@@ -9,3 +9,9 @@ Visualizations must be captioned as concept imagery.
 ## Modular systems research
 
 - [A-01 modular shell, waste logistics, digital sky and underground data-centre research v0.1](modular-systems-research-v0.1.md)
+
+
+## A-01 Sphere Standard
+
+- [A-01 Sphere Standard v0.1](../standards/A01-SPHERE-STANDARD-v0.1.md)
+- [Component, material and fastener register templates](../templates/)

@@ -1,0 +1,233 @@
+{
+  "schemaVersion": "0.1.0",
+  "sphereId": "a01-eva-sphere",
+  "name": "A-01 — Сфера Евы",
+  "tagline": "Энергия · Интеллект · Жизнь",
+  "status": "digital-twin",
+  "project": {
+    "description": "Долгосрочная человекоориентированная концепция модульной Сферы, сочетающей архитектуру, энергетику, ресурсные системы, цифровую инфраструктуру и ИИ-поддержку. Физический комплекс не представлен как построенный или действующий.",
+    "originator": "Alexander Ponomarev",
+    "organization": null,
+    "contributors": [],
+    "repository": "https://github.com/mrnoobsky-del/a01-eva-sphere",
+    "license": null,
+    "parentPlatform": "A-01 Sphere Standard"
+  },
+  "site": {
+    "selectionStatus": "not-selected",
+    "country": null,
+    "region": null,
+    "jurisdiction": null,
+    "coordinates": null,
+    "climateReference": null,
+    "geotechnicalReport": null
+  },
+  "geometry": {
+    "unitSystem": "SI",
+    "coordinateReference": null,
+    "physicalStatus": "illustrative",
+    "dimensions": {
+      "outerDiameter_m": null,
+      "overallHeight_m": null,
+      "usableFloorArea_m2": null,
+      "physicalLevelCount": null,
+      "levelElevations_m": [],
+      "dimensionSource": null
+    },
+    "digitalTwin": {
+      "modelStatus": "illustrative",
+      "modelUnits": "unknown",
+      "modelPath": "releases/v2.0.27/eva-sphere-a01-v2.0.27-modular-shell-waste-datacenter.html",
+      "modelRevision": "v2.0.27"
+    }
+  },
+  "architecture": {
+    "primaryStructure": {
+      "status": "concept",
+      "description": "Несущий каркас, кольца, рёбра, узлы и основания на концептуальной стадии; сечения, нагрузки и фундамент не рассчитаны.",
+      "modelReference": null
+    },
+    "innerEnvelope": {
+      "status": "concept",
+      "description": "Непрерывная внутренняя климатическая и защитная оболочка должна быть отделена от сменных наружных кассет; герметичность, огнестойкость и теплотехника не рассчитаны.",
+      "modelReference": null
+    },
+    "outerModules": {
+      "status": "modelled",
+      "description": "В цифровом двойнике показаны отдельные сменные внешние кассеты с демонстрацией сервисного цикла; реальная механика не испытана.",
+      "replaceability": "conceptual",
+      "modelReference": "releases/v2.0.27/eva-sphere-a01-v2.0.27-modular-shell-waste-datacenter.html"
+    },
+    "interiorSky": {
+      "status": "modelled",
+      "description": "Сектора внутреннего цифрового неба с отдельными идентификаторами и карточками; реальное оборудование, питание и охлаждение не выбраны.",
+      "modelReference": "releases/v2.0.27/eva-sphere-a01-v2.0.27-modular-shell-waste-datacenter.html"
+    }
+  },
+  "systems": [
+    {
+      "systemId": "A01-ENE",
+      "code": "ENE",
+      "name": "Энергетика и накопление",
+      "status": "concept",
+      "description": "Генерация, накопление, распределение, учёт и повторное использование тепла; топология и мощности не рассчитаны.",
+      "componentRegister": null,
+      "owner": null,
+      "evidenceRefs": []
+    },
+    {
+      "systemId": "A01-WAT",
+      "code": "WAT",
+      "name": "Вода и санитарные циклы",
+      "status": "concept",
+      "description": "Питьевая вода, санитария, серая вода и очистка; материальный и водный баланс не рассчитан.",
+      "componentRegister": null,
+      "owner": null,
+      "evidenceRefs": []
+    },
+    {
+      "systemId": "A01-HVA",
+      "code": "HVA",
+      "name": "Климат и вентиляция",
+      "status": "concept",
+      "description": "Отопление, вентиляция, охлаждение, влажность и качество воздуха; нагрузки и оборудование не определены.",
+      "componentRegister": null,
+      "owner": null,
+      "evidenceRefs": []
+    },
+    {
+      "systemId": "A01-WST",
+      "code": "WST",
+      "name": "Отходы и материальные циклы",
+      "status": "modelled",
+      "description": "Концептуальные сортировочные узлы на этажах, герметичные контейнеры, отдельный сервисный подъёмник и внешний док.",
+      "componentRegister": null,
+      "owner": null,
+      "evidenceRefs": [
+        "https://www.envacgroup.com/insights/step-by-step-guide-to-pneumatic-waste-collection-system/"
+      ]
+    },
+    {
+      "systemId": "A01-ICT",
+      "code": "ICT",
+      "name": "Вычислительная и сетевая инфраструктура",
+      "status": "concept",
+      "description": "Подземная зона вычислений, сети, хранения, питания и охлаждения; нагрузка, топология и защита площадки не рассчитаны.",
+      "componentRegister": null,
+      "owner": null,
+      "evidenceRefs": [
+        "https://www.ashrae.org/technical-resources/topics-and-initiatives/ai-data-center/integrated-design-principles"
+      ]
+    },
+    {
+      "systemId": "A01-CAS",
+      "code": "CAS",
+      "name": "Сменные кассеты оболочки",
+      "status": "modelled",
+      "description": "Наружные кассеты, направляющие, блокировки и страховка визуализированы; физические нагрузки и приводы не подтверждены.",
+      "componentRegister": null,
+      "owner": null,
+      "evidenceRefs": []
+    },
+    {
+      "systemId": "A01-SKY",
+      "code": "SKY",
+      "name": "Умное небо",
+      "status": "modelled",
+      "description": "Интерьерные медиа-сектора с индивидуальными идентификаторами для исследования и обслуживания.",
+      "componentRegister": null,
+      "owner": null,
+      "evidenceRefs": []
+    },
+    {
+      "systemId": "A01-FLS",
+      "code": "FLS",
+      "name": "Пожарная безопасность и эвакуация",
+      "status": "concept",
+      "description": "Требуется отдельное нормативное проектирование; маршруты цифровой модели не являются утверждённым планом эвакуации.",
+      "componentRegister": null,
+      "owner": null,
+      "evidenceRefs": []
+    }
+  ],
+  "accessModel": {
+    "baselineServices": [
+      "Безопасное базовое проживание",
+      "Питьевая вода и санитария",
+      "Питание и гигиена",
+      "Одежда и базовые предметы необходимости",
+      "Доступность и помощь в чрезвычайной ситуации"
+    ],
+    "optionalConfigurations": [
+      "Варианты отделки и цвета",
+      "Персонализация жилой дольки",
+      "Дополнительные функции и модули"
+    ],
+    "incomeIndependence": true,
+    "participation": "Добровольное участие жителей и партнёров; правила управления и распределения ресурсов требуют отдельной проработки."
+  },
+  "governance": {
+    "decisionAuthority": "Модель управления подлежит согласованию; критические решения требуют компетентной человеческой ответственности.",
+    "humanOversight": true,
+    "criticalSystemsPolicy": "ИИ может помогать анализу и оптимизации, но не должен иметь бесконтрольных полномочий на пожарную безопасность, эвакуацию, питание, лифты, доступ или финансы.",
+    "dataClassification": "mixed",
+    "contact": null
+  },
+  "verification": {
+    "overallState": "concept-only",
+    "assumptions": [
+      "Координаты и пропорции цифрового двойника иллюстративны, если отдельно не указаны измеренные физические размеры.",
+      "Участок и юрисдикция для первого физического пилота не выбраны."
+    ],
+    "openQuestions": [
+      "Определить климатический и строительный район первого пилота.",
+      "Согласовать вместимость, площади, размеры и число уровней физического комплекса.",
+      "Выполнить геотехнические, гидрологические, ветровые, снеговые, сейсмические и пожарные исследования.",
+      "Создать и испытать полноразмерную сменную кассету на наземном стенде.",
+      "Рассчитать водный, энергетический, тепловой и материальный балансы.",
+      "Уточнить, что означает RSI в исходном исследовательском запросе."
+    ],
+    "riskRefs": [
+      "R-STRUCTURE",
+      "R-FIRE-EGRESS",
+      "R-ENV-ENVELOPE",
+      "R-DATACENTER-FLOOD",
+      "R-DATACENTER-THERMAL",
+      "R-WASTE-LOGISTICS"
+    ],
+    "calculations": [],
+    "approvals": [],
+    "testReports": []
+  },
+  "componentRegister": null,
+  "materialRegister": null,
+  "fastenerRegister": null,
+  "sources": [
+    {
+      "title": "A-01 Sphere Standard v0.1",
+      "url": "https://github.com/mrnoobsky-del/a01-eva-sphere/blob/main/standards/A01-SPHERE-STANDARD-v0.1.md",
+      "sourceType": "project-document",
+      "edition": "0.1",
+      "checkedOn": "2026-11-14",
+      "notes": "Проектная модель данных для описания Сфер."
+    },
+    {
+      "title": "IFC 4.3.2.0 documentation",
+      "url": "https://ifc43-docs.standards.buildingsmart.org/",
+      "sourceType": "official-guidance",
+      "edition": "IFC 4.3.2.0",
+      "checkedOn": "2026-11-14",
+      "notes": "Документация buildingSMART."
+    },
+    {
+      "title": "ISO 23387:2025",
+      "url": "https://www.iso.org/standard/85391.html",
+      "sourceType": "standard",
+      "edition": "2025",
+      "checkedOn": "2026-11-14",
+      "notes": "Шаблоны данных объектов жизненного цикла активов."
+    }
+  ],
+  "version": "0.1.0",
+  "lastUpdated": "2026-11-14"
+}

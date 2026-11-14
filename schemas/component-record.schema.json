@@ -1,0 +1,614 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrnoobsky-del/a01-eva-sphere/blob/main/schemas/component-record.schema.json",
+  "title": "A-01 Component and Asset Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "componentId",
+    "assetTag",
+    "sphereId",
+    "systemCode",
+    "componentClass",
+    "name",
+    "lifecycleStatus",
+    "verificationState"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "0.1.0"
+    },
+    "componentId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "assetTag": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]{2,8}-[A-Z0-9]{2,8}-[A-Z0-9-]{1,32}$"
+    },
+    "sphereId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "parentComponentId": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "uuid"
+    },
+    "systemCode": {
+      "enum": [
+        "SIT",
+        "STR",
+        "ENV",
+        "CAS",
+        "SKY",
+        "ARC",
+        "ENE",
+        "WAT",
+        "HVA",
+        "WST",
+        "ICT",
+        "FLS",
+        "MOB",
+        "OPS",
+        "GOV"
+      ]
+    },
+    "componentClass": {
+      "enum": [
+        "site-element",
+        "structural-member",
+        "structural-node",
+        "envelope-assembly",
+        "cassette",
+        "panel",
+        "seal",
+        "fastener",
+        "equipment",
+        "sensor",
+        "cable",
+        "pipe",
+        "software-service",
+        "space",
+        "other"
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "function": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "levelId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "zoneId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gridReference": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "modelObjectId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "quantity": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "quantityUnit": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "lifecycleStatus": {
+      "enum": [
+        "proposed",
+        "designed",
+        "specified",
+        "procured",
+        "installed",
+        "commissioned",
+        "in-service",
+        "maintenance",
+        "replaced",
+        "removed",
+        "archived"
+      ]
+    },
+    "verificationState": {
+      "enum": [
+        "unknown",
+        "assumed",
+        "proposed",
+        "calculated",
+        "reviewed",
+        "tested",
+        "approved",
+        "as-built"
+      ]
+    },
+    "geometry": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "length_m": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "width_m": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "height_m": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "thickness_mm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "mass_kg": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "modelUnits": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "drawingRef": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "material": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "materialName",
+          "specificationStatus"
+        ],
+        "properties": {
+          "materialName": {
+            "type": "string"
+          },
+          "standard": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "grade": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "specificationStatus": {
+            "enum": [
+              "candidate",
+              "specified",
+              "verified",
+              "unknown"
+            ]
+          },
+          "manufacturer": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "productCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "supplier": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "batchOrLot": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "finish": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "colourSystem": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "colourCode": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "glossGU": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "coatingSystem": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "certificateRefs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "epdRef": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          }
+        }
+      }
+    },
+    "fastenerOrJoint": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "jointId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fastenerType": {
+          "enum": [
+            "bolt",
+            "screw",
+            "stud",
+            "nut",
+            "washer",
+            "anchor",
+            "rivet",
+            "other",
+            null
+          ]
+        },
+        "standard": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "standardEdition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "materialGrade": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "propertyClass": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "thread": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "diameter_mm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "pitch_mm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "length_mm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "quantityPerJoint": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "totalQuantity": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "coating": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "washerIsolation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "installationMethod": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "torque_Nm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "preload_kN": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "tighteningProcedureRef": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "designCalculationRef": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "manufacturerBatch": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "inspectionIntervalMonths": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "properties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "propertyId",
+          "valueStatus"
+        ],
+        "properties": {
+          "propertyId": {
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "number",
+              "integer",
+              "string",
+              "boolean",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "valueStatus": {
+            "enum": [
+              "unknown",
+              "assumed",
+              "proposed",
+              "calculated",
+              "reviewed",
+              "tested",
+              "approved",
+              "as-built"
+            ]
+          },
+          "sourceRef": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "method": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "manufacturerDocuments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "documentType",
+          "uri"
+        ],
+        "properties": {
+          "documentType": {
+            "enum": [
+              "datasheet",
+              "declaration",
+              "certificate",
+              "test-report",
+              "installation-manual",
+              "maintenance-manual",
+              "epd",
+              "other"
+            ]
+          },
+          "uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "revision": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          }
+        }
+      }
+    },
+    "maintenance": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "inspectionIntervalMonths": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "serviceLifeYears": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "sparePartId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "replacementMethod": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "responsibleRole": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "revision": {
+      "type": "string"
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

@@ -1,5 +1,13 @@
 {
   "schemaVersion": "0.1.0",
-  "description": "Registry of community-submitted Sphere projects. Intentionally empty until submissions are reviewed.",
-  "spheres": []
+  "description": "Registry of Sphere project manifests. Entries describe project records; they do not imply that a physical facility is built or approved.",
+  "spheres": [
+    {
+      "id": "a01-eva-sphere",
+      "kind": "reference-project",
+      "name": "A-01 — Сфера Евы",
+      "manifest": "a01/sphere.json",
+      "status": "digital-twin"
+    }
+  ]
 }
