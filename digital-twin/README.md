@@ -11,4 +11,4 @@ A digital model or interface is not evidence that the corresponding physical sys
 - [Previous integrated v3.1.0 build](eva-sphere-a01-v310-modular-shell-waste-datacenter.html) · [Documentation](README_RU_v310.md)
 - [Stable v2.1.0 baseline](eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](README_RU_v210.md)
 
-The v3.1.1 build refines object highlighting, the first-arrival sequence and flight controls. It remains an experimental digital twin; its geometry is not a fabrication or construction design. Full live WebGL verification has not been confirmed.
+The v3.1.1 build refines object highlighting, the first-arrival sequence and flight controls. It remains an experimental digital twin; its geometry is not a fabrication or construction design. A basic live browser check confirmed the published page, Three.js canvas and main panels load without obvious fatal errors; full interaction and physical mobile testing remain outstanding.
