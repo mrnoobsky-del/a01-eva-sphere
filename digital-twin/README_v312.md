@@ -81,4 +81,4 @@ The digital motion is a proposed sequence, not a validated actuator or rail desi
 - The first browser test found the module movement too subtle to observe. The sequence has since been strengthened: longer travel, a more legible guide/tray assembly and an ochre status indicator with six stages — power/data isolation, unlocking, extension, service position, return, relatching and verification.
 - The demonstration lasts about 7.6 seconds. This is an illustrative motion sequence, not an actuator design.
 
-The interactive movement has not yet been re-tested after this final adjustment; it should not be treated as fully verified until a new browser run.
+A repeat browser run confirmed the cassette passport opens and the first service-status stage appears after clicking the action. The full sequence through return and relatching was not observed to completion because the browser session reached its time budget; those later stages remain unverified.
