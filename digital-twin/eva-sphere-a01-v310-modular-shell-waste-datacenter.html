@@ -3817,7 +3817,7 @@ $('objectDetailClose').addEventListener('click',closeObjectDetails);$('objectDet
 function openEngineeringFeature(id,level){if(level!==undefined&&level!==null)focusLevel(level);const target=allFeatures.find(x=>x.id===id);if(!target)return;objectReadingId=null;selectItem(id);openObjectDetails(id);}
 $('openWasteSystem')?.addEventListener('click',()=>openEngineeringFeature('A01-WASTE-L00',0));
 $('openDataCenter')?.addEventListener('click',()=>openEngineeringFeature('A01-B1-DATA-01',0));
-$('openShellPanel')?.addEventListener('click',()=>{setExteriorMode(true);openEngineeringFeature('A01-SHELL-P01',null);});
+$('openShellPanel')?.addEventListener('click',()=>{setExteriorMode(true);openEngineeringFeature('A01-CAS-P01-C01-B01',null);});
 $('openSkyPanel')?.addEventListener('click',()=>{setExteriorMode(false);openEngineeringFeature('A01-SKY-P01',null);});
 objectHoverCard.addEventListener('pointerleave',event=>{if(walkMode)return;if(event.relatedTarget&&renderer.domElement.contains(event.relatedTarget))return;hideObjectHover(true);});
 objectHoverCard.addEventListener('pointerdown',event=>event.stopPropagation());

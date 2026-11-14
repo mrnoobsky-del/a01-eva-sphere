@@ -30,3 +30,6 @@
 - Materials, thickness, mass, fasteners, support spacing, structural loads, fire/water performance and service life remain undefined.
 - Crown closure and lower skirt require separate details.
 - No browser/WebGL session, cross-device performance run, physical test or engineering approval is claimed.
+
+### Follow-up validation fix
+- Updated the infrastructure shortcut to select the first new cassette ID (`A01-CAS-P01-C01-B01`) after replacing the legacy 12-panel IDs with the 144-panel address scheme.
