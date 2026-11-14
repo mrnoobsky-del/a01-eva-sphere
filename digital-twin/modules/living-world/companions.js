@@ -26,6 +26,7 @@
   function requestRender() {
     const api = state.api;
     if (typeof global.requestSceneRender === "function") global.requestSceneRender();
+    else if (api && api.controls && typeof api.controls.dispatchEvent === "function") api.controls.dispatchEvent({ type: "change" });
     else if (api && api.renderer && api.scene && api.camera) api.renderer.render(api.scene, api.camera);
   }
 
@@ -206,6 +207,7 @@
   function updateCompanion(companion, now, delta) {
     const c = companion.state;
     const group = companion.group;
+    if (state.paused) return;
     const elapsed = (now - companion.startedAt) / 1000;
     if (c.actionUntil && now >= c.actionUntil) { c.action = "idle"; c.actionUntil = 0; }
 
@@ -214,7 +216,7 @@
         const chosen = global.A01_LW_AI.chooseAmbientAction(c, now, Math.random());
         if (chosen === "wander") c.target = chooseTarget();
       }
-      if (c.action === "wander" || c.action === "idle" || c.action === "look" || c.action === "curious") {
+      if (c.action === "wander" || c.action === "idle" || c.action === "look" || c.action === "curious" || c.action === "return") {
         const dx = c.target.x - group.position.x;
         const dz = c.target.z - group.position.z;
         const distance = Math.hypot(dx, dz);
@@ -250,7 +252,7 @@
     const delta = state.lastFrame ? Math.min(0.08, (now - state.lastFrame) / 1000) : 0.04;
     state.lastFrame = now;
     state.companions.forEach(function (companion) { updateCompanion(companion, now, delta); });
-    if (now - state.lastRender >= FRAME_STEP) { state.lastRender = now; requestRender(); }
+    if (!state.paused && now - state.lastRender >= FRAME_STEP) { state.lastRender = now; requestRender(); }
   }
 
   function destroy() {
