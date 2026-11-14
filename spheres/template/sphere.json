@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "0.1.0",
+  "id": "example-sphere",
+  "name": "Название Сферы",
+  "tagline": "Энергия · Интеллект · Жизнь",
+  "status": "proposal",
+  "projectTrack": "community",
+  "ownershipAndGovernance": {
+    "teamName": null,
+    "contributors": [],
+    "governanceModel": "to-be-defined"
+  },
+  "location": {
+    "country": null,
+    "region": null,
+    "siteStatus": "not-selected",
+    "coordinates": null
+  },
+  "geometry": {
+    "form": "modular-dome",
+    "outerDiameter_m": null,
+    "overallHeight_m": null,
+    "usableFloorArea_m2": null,
+    "numberOfLevels": null,
+    "levelHeights_m": [],
+    "dimensionsStatus": "not-calculated"
+  },
+  "envelope": {
+    "primaryStructure": null,
+    "secondaryFrame": null,
+    "outerCassettes": [],
+    "innerWeatherAndThermalEnvelope": null,
+    "serviceCavity": null,
+    "materialsStatus": "concept"
+  },
+  "systems": {
+    "energy": [],
+    "water": [],
+    "wasteAndMaterialFlows": [],
+    "hvac": [],
+    "dataAndCompute": [],
+    "mobilityAndLogistics": [],
+    "fireAndLifeSafety": [],
+    "digitalTwin": []
+  },
+  "accessModel": {
+    "baselineLifeSupport": [],
+    "optionalComfortConfigurations": [],
+    "participationModel": "to-be-defined"
+  },
+  "verification": {
+    "status": "concept-only",
+    "siteStudies": [],
+    "calculations": [],
+    "independentReviews": [],
+    "permits": [],
+    "knownRisks": [],
+    "notVerified": []
+  },
+  "sources": [],
+  "version": "0.1.0",
+  "lastUpdated": null
+}

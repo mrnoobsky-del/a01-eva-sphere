@@ -89,3 +89,13 @@ The repository is a public development record. Project status may change; check 
 - [Russian documentation](digital-twin/README_RU_v210.md) · [Changelog](digital-twin/CHANGELOG_v210.md)
 
 This build adds vertical first-person look control, adjustable field of view, a conceptual main entrance/exit, and two conceptual protected stair cores. These are design-study elements, not a certified life-safety or construction design. Full stair traversal and professional code validation remain future work.
+
+
+## Community development and additional Spheres
+
+- [Contribution guide](CONTRIBUTING.md)
+- [Community Sphere registry and template](spheres/README.md)
+- [A-01 v2.0.27 modular-shell research snapshot](releases/v2.0.27/RELEASE-NOTES.md)
+- [Modular systems research brief](architecture/modular-systems-research-v0.1.md)
+
+We welcome evidence-backed ideas, technical reviews, test reports and independent Sphere proposals. A community Sphere is recorded as its own project; the current digital-twin viewer does not yet dynamically load community manifests. The registry and template are the first step toward a future multi-Sphere catalogue. See the contribution guide for the current process and licensing status.

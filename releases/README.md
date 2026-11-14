@@ -41,3 +41,11 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Open v3.2.6 HTML prototype](v3.2.6/eva-sphere-a01-v3.2.6-runtime-audit.html)
 - [Release notes](v3.2.6/RELEASE-NOTES.md)
 - Status: archived experimental branch based on the v3.x interiors study; JavaScript syntax and static HTML checks passed. Live browser/WebGL verification and production deployment have not been performed. This does not replace or supersede the v2.1.0 main digital-twin baseline.
+
+
+## v2.0.27 — Modular shell, waste logistics and underground data-centre concept
+
+- [Open v2.0.27 HTML snapshot](v2.0.27/eva-sphere-a01-v2.0.27-modular-shell-waste-datacenter.html)
+- [Release notes](v2.0.27/RELEASE-NOTES.md)
+- [Engineering research brief](../../architecture/modular-systems-research-v0.1.md)
+- Status: experimental design-study snapshot, separate from the main v2.1.0 baseline. Seven inline JavaScript blocks passed syntax checks; 234 HTML IDs were checked with no duplicates; embedded JSON is valid. Browser/WebGL and physical-engineering validation remain outstanding.
