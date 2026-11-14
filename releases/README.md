@@ -4,6 +4,12 @@ Versioned snapshots and their release notes are kept here.
 
 Each release must identify what changed, what was tested, what was not tested, known limitations and whether it has been deployed. A prepared archive is not automatically a verified or production release.
 
+## v3.1.3 — Deployable dolek and coordinated LED portal (experimental)
+
+- [Open v3.1.3 HTML prototype](v3.1.3/eva-sphere-a01-v313-deployable-dolek-led-portal.html)
+- [Release notes](v3.1.3/RELEASE-NOTES.md)
+- Status: experimental alternative movement study based on v3.1.2; seven executable inline JavaScript blocks passed static syntax checks and duplicate HTML IDs were not found. Full browser/WebGL and physical-engineering validation have not been performed. This does not replace the stationary-pod service concept in v3.1.2.
+
 ## v2.0.2 — Mobile UX preview
 
 - [Open mobile preview](v2.0.2/eva-sphere-a01-v202-mobile-preview.html)
