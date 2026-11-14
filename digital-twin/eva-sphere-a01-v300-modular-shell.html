@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101416">
+<title>Сфера Евы A-01 · v3.0</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101416;color:#f4f6f5;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+#app{width:100%;height:100%;position:relative}iframe{display:block;width:100%;height:100%;border:0;background:transparent}
+#loader{position:absolute;inset:0;display:grid;place-content:center;gap:12px;text-align:center;padding:28px;background:radial-gradient(ellipse at 50% 30%,#26363b,#101416 68%);z-index:5}
+#loader[hidden]{display:none}.mark{font-size:11px;letter-spacing:.22em;color:#a8c4ca}.headline{font-size:clamp(22px,4vw,34px);font-weight:600;letter-spacing:-.04em}.detail{font-size:13px;color:#a7b2b3;max-width:420px;line-height:1.6}.pulse{width:34px;height:2px;margin:8px auto;background:#a8c4ca;animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25;transform:scaleX(.45)}}
+</style>
+</head>
+<body>
+<div id="app">
+<iframe id="sphere" title="Интерактивный цифровой двойник Сферы Евы A-01 v3.0"></iframe>
+<div id="loader"><div class="mark">EVA SPHERE · A-01</div><div class="headline">Подготавливаем v3.0</div><div class="detail" id="status">Загружаем базовую модель, геометрию и слой наружных кассет…</div><div class="pulse"></div></div>
+</div>
+<script>
+(async()=>{
+ const status=document.getElementById('status'),loader=document.getElementById('loader'),frame=document.getElementById('sphere');
+ const replaceOnce=(source,find,replacement,label)=>{
+  const i=source.indexOf(find);
+  if(i<0)throw new Error('Не найден участок интеграции: '+label);
+  return source.slice(0,i)+replacement+source.slice(i+find.length);
+ };
+ try{
+  const baseUrl=new URL('./eva-sphere-a01-v210-human-navigation-safety.html',location.href);
+  const layoutUrl=new URL('../geometry/a01-cassette-layout-v0.1.json',location.href);
+  const patchUrl=new URL('./eva-sphere-a01-v300-cassette-layer.js',location.href);
+  const [baseResponse,layoutResponse,patchResponse]=await Promise.all([fetch(baseUrl),fetch(layoutUrl),fetch(patchUrl)]);
+  if(!baseResponse.ok||!layoutResponse.ok||!patchResponse.ok)throw new Error('Не удалось загрузить один из файлов v3.0.');
+  let source=await baseResponse.text();
+  const layout=await layoutResponse.json();
+  let patch=await patchResponse.text();
+  if(!Array.isArray(layout.panels)||layout.panels.length!==144)throw new Error('Ожидалась параметрическая сетка из 144 кассет.');
+  patch=patch.replace('/*__A01_CASSETTE_LAYOUT_DATA__*/','const cassetteLayoutData='+JSON.stringify(layout)+';');
+  source=replaceOnce(source,'<head>','<head><base href="'+new URL('./',location.href).href+'">','base URL');
+  source=replaceOnce(source,'</head>','<style id="eva-a01-v30-cassette">#cassetteToggle.active{border-color:rgba(122,184,199,.72);background:rgba(122,184,199,.15);color:var(--text)}</style></head>','styles');
+  source=replaceOnce(source,'<button class="btn" id="shellBtn" type="button" aria-pressed="true">Оболочка: вкл.</button>','<button class="btn active" id="shellBtn" type="button" aria-pressed="true">Оболочка: вкл.</button><button class="btn active" id="cassetteToggle" type="button" aria-pressed="true">Кассеты: вкл. · 144</button>','cassette toggle');
+  source=replaceOnce(source,'// Quiet landscape framing the building: low meadow, access loop, tree belts and distant Altai-like ridges.',patch+'\n// Quiet landscape framing the building: low meadow, access loop, tree belts and distant Altai-like ridges.','cassette geometry');
+  source=replaceOnce(source,"function updatePanel(){const o=allFeatures.find(x=>x.id===selectedId)||items[0];","function updatePanel(){if(selectedCassetteId){renderCassettePanel(selectedCassetteId);return;}const o=allFeatures.find(x=>x.id===selectedId)||items[0];",'passport panel');
+  source=replaceOnce(source,"function selectItem(id){const item=allFeatures.find(x=>x.id===id);if(!item)return;selectedId=id;","function selectItem(id){const item=allFeatures.find(x=>x.id===id);if(!item)return;selectedCassetteId=null;cassetteSelectionOutline.visible=false;selectedId=id;",'selection reset');
+  source=replaceOnce(source,"exteriorGroup.visible=enabled;\n shellGroup.visible=enabled?false:shellVisible;","exteriorGroup.visible=enabled;\n cassetteGroup.visible=enabled&&cassetteVisible;\n if(!enabled&&selectedCassetteId){selectedCassetteId=null;cassetteSelectionOutline.visible=false;updatePanel();}\n shellGroup.visible=enabled?false:shellVisible;",'exterior visibility');
+  source=replaceOnce(source,"$('exteriorBtn').addEventListener('click',()=>setExteriorMode(!exteriorMode));","$('exteriorBtn').addEventListener('click',()=>setExteriorMode(!exteriorMode));\n$('cassetteToggle').addEventListener('click',()=>{if(!exteriorMode){setExteriorMode(true);cassetteGroup.visible=true;return;}cassetteVisible=!cassetteVisible;cassetteGroup.visible=cassetteVisible;$('cassetteToggle').classList.toggle('active',cassetteVisible);$('cassetteToggle').setAttribute('aria-pressed',String(cassetteVisible));$('cassetteToggle').textContent=cassetteVisible?'Кассеты: вкл. · 144':'Кассеты: выкл.';if(!cassetteVisible){selectedCassetteId=null;cassetteSelectionOutline.visible=false;updatePanel();}});",'toggle action');
+  source=replaceOnce(source,"function findItemId(object){let current=object;while(current){if(current.userData&&current.userData.itemId)return current.userData.itemId;current=current.parent;}return null;}","function findItemId(object){let current=object;while(current){if(current.userData&&(current.userData.itemId||current.userData.cassetteId))return current.userData.itemId||current.userData.cassetteId;current=current.parent;}return null;}",'raycast id');
+  source=replaceOnce(source,"const hits=raycaster.intersectObjects(world.children,true);for(const hit of hits){const id=findItemId(hit.object);if(!id)continue;const feature=allFeatures.find(x=>x.id===id);if(!feature)continue;","const hits=raycaster.intersectObjects(exteriorMode?exteriorGroup.children:world.children,true);for(const hit of hits){const id=findItemId(hit.object);if(!id)continue;if(cassetteById.has(id))return id;const feature=allFeatures.find(x=>x.id===id);if(!feature)continue;",'raycast target');
+  source=replaceOnce(source,"if(id){const o=allFeatures.find(x=>x.id===id);tooltip.textContent=o.name;","if(id){const o=allFeatures.find(x=>x.id===id);const cassette=cassetteById.get(id);tooltip.textContent=cassette?('КАССЕТА · '+id):(o?.name||'Объект');",'tooltip');
+  source=replaceOnce(source,"const id=pick(event);if(id)selectItem(id);});","const id=pick(event);if(id){if(cassetteById.has(id))selectCassette(id);else selectItem(id);}});",'click select');
+  source=replaceOnce(source,"const renderer = new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});\nrenderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 1.65));","const isMobileRenderer=window.matchMedia('(max-width: 780px)').matches||window.matchMedia('(pointer: coarse)').matches;\nconst renderer = new THREE.WebGLRenderer({antialias:!isMobileRenderer,alpha:true,powerPreference:isMobileRenderer?'low-power':'high-performance'});\nrenderer.setPixelRatio(Math.min(window.devicePixelRatio||1,isMobileRenderer?1.35:1.8));",'adaptive renderer');
+  frame.addEventListener('load',()=>loader.hidden=true);
+  frame.srcdoc=source;
+  setTimeout(()=>{if(!loader.hidden)status.textContent='Модель загружается дольше обычного. Если экран не изменится, проверь доступность CDN и GitHub Pages.';},12000);
+ }catch(error){status.textContent='Ошибка запуска v3.0: '+error.message;status.style.color='#f0b9a7';}
+})();
+</script>
+</body>
+</html>
