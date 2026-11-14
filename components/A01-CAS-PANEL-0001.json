@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "0.1.0",
+  "componentId": "7f6c4a2e-9d1b-4a83-8c24-1e6f8c0b0001",
+  "assetTag": "A01-CAS-PANEL-0001",
+  "sphereId": "a01-eva-sphere",
+  "parentComponentId": null,
+  "systemCode": "CAS",
+  "componentClass": "cassette",
+  "name": "Наружная сменная кассета A-01 — базовый тип 0001",
+  "function": "Ненесущий наружный модуль/экран с отдельной механической фиксацией и независимой вторичной страховкой. Не заменяет основной несущий каркас или внутренний контур среды и безопасности.",
+  "location": {
+    "levelId": null,
+    "zoneId": null,
+    "gridReference": null,
+    "modelObjectId": null
+  },
+  "lifecycleStatus": "proposed",
+  "verificationState": "proposed",
+  "geometry": {
+    "length_m": null,
+    "width_m": null,
+    "height_m": null,
+    "thickness_mm": null,
+    "mass_kg": null,
+    "modelUnits": "unknown",
+    "drawingRef": null
+  },
+  "material": [],
+  "fastenerOrJoint": null,
+  "properties": [
+    {
+      "propertyId": "overall_width",
+      "value": null,
+      "unit": "m",
+      "valueStatus": "unknown",
+      "sourceRef": null,
+      "method": "Определить по утвержденной геометрии оболочки"
+    },
+    {
+      "propertyId": "overall_height",
+      "value": null,
+      "unit": "m",
+      "valueStatus": "unknown",
+      "sourceRef": null,
+      "method": "Определить по утвержденной геометрии оболочки"
+    },
+    {
+      "propertyId": "surface_area",
+      "value": null,
+      "unit": "m2",
+      "valueStatus": "unknown",
+      "sourceRef": null,
+      "method": "Рассчитать по модели реальной кассеты"
+    },
+    {
+      "propertyId": "total_mass",
+      "value": null,
+      "unit": "kg",
+      "valueStatus": "unknown",
+      "sourceRef": null,
+      "method": "Получить из ведомости выбранных материалов и оборудования"
+    },
+    {
+      "propertyId": "centre_of_gravity",
+      "value": null,
+      "unit": "local_xyz",
+      "valueStatus": "unknown",
+      "sourceRef": null,
+      "method": "Рассчитать/измерить для комплектной кассеты"
+    },
+    {
+      "propertyId": "design_wind_pressure",
+      "value": null,
+      "unit": "Pa",
+      "valueStatus": "unknown",
+      "sourceRef": null,
+      "method": "Рассчитать по площадке, геометрии и выбранной нормативной базе"
+    },
+    {
+      "propertyId": "design_wind_suction",
+      "value": null,
+      "unit": "Pa",
+      "valueStatus": "unknown",
+      "sourceRef": null,
+      "method": "Рассчитать отдельно для локальных зон и креплений"
+    },
+    {
+      "propertyId": "design_snow_ice_action",
+      "value": null,
+      "unit": "N",
+      "valueStatus": "unknown",
+      "sourceRef": null,
+      "method": "Определить по климату, геометрии и сценарию накопления/схода"
+    },
+    {
+      "propertyId": "design_temperature_range",
+      "value": null,
+      "unit": "degC",
+      "valueStatus": "unknown",
+      "sourceRef": null,
+      "method": "Определить по климатическим данным и свойствам материалов"
+    },
+    {
+      "propertyId": "design_service_life",
+      "value": null,
+      "unit": "year",
+      "valueStatus": "unknown",
+      "sourceRef": null,
+      "method": "Установить по проектному заданию и подтверждению выбранной системы"
+    }
+  ],
+  "manufacturerDocuments": [],
+  "maintenance": {
+    "inspectionIntervalMonths": null,
+    "serviceLifeYears": null,
+    "sparePartId": null,
+    "replacementMethod": "Концептуально: замена только после установки кассеты на механически удерживаемую сервисную опору, изоляции энергий и закрытия зоны работ. Детальный метод TBD.",
+    "responsibleRole": "Ответственный инженер фасадной/конструктивной системы и назначенный оператор обслуживания"
+  },
+  "revision": "0.1.0-concept",
+  "notes": "Паспорт фиксирует идентичность предложенного типа, а не готовое изделие. Все размеры, материалы, узлы, нагрузки и критерии испытаний остаются TBD. См. architecture/A01-CAS-PANEL-0001-reference-cassette-v0.1.md и templates/cassette-interface-register.csv."
+}

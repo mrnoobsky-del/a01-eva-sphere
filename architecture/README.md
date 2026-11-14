@@ -10,8 +10,15 @@ Visualizations must be captioned as concept imagery.
 
 - [A-01 modular shell, waste logistics, digital sky and underground data-centre research v0.1](modular-systems-research-v0.1.md)
 
-
 ## A-01 Sphere Standard
 
 - [A-01 Sphere Standard v0.1](../standards/A01-SPHERE-STANDARD-v0.1.md)
 - [Component, material and fastener register templates](../templates/)
+
+## Reference exterior cassette
+
+- [A01-CAS-PANEL-0001 — Reference Exterior Cassette v0.1](A01-CAS-PANEL-0001-reference-cassette-v0.1.md)
+- [Machine-readable cassette component record](../components/A01-CAS-PANEL-0001.json)
+- [Cassette interface register template](../templates/cassette-interface-register.csv)
+
+The cassette document is a proposed interface and verification brief. It does not define dimensions, material grades, fastener sizes, capacities or approved construction details.
