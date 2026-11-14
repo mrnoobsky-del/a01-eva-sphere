@@ -211,12 +211,14 @@
     const elapsed = (now - companion.startedAt) / 1000;
     if (c.actionUntil && now >= c.actionUntil) { c.action = "idle"; c.actionUntil = 0; }
 
-    if (!state.paused && state.ambient) {
-      if (now >= c.nextDecisionAt && c.action === "idle") {
+    if (!state.paused) {
+      if (!state.ambient && c.action === "wander") c.action = "idle";
+      if (state.ambient && now >= c.nextDecisionAt && c.action === "idle") {
         const chosen = global.A01_LW_AI.chooseAmbientAction(c, now, Math.random());
         if (chosen === "wander") c.target = chooseTarget();
       }
-      if (c.action === "wander" || c.action === "idle" || c.action === "look" || c.action === "curious" || c.action === "return") {
+      const mayMove = c.action === "return" || (state.ambient && (c.action === "wander" || c.action === "idle" || c.action === "look" || c.action === "curious"));
+      if (mayMove) {
         const dx = c.target.x - group.position.x;
         const dz = c.target.z - group.position.z;
         const distance = Math.hypot(dx, dz);
@@ -225,8 +227,9 @@
           group.position.x += dx / distance * travel;
           group.position.z += dz / distance * travel;
           group.rotation.y = Math.atan2(dx, dz);
-        } else if (c.action === "wander") {
+        } else if (c.action === "wander" || c.action === "return") {
           c.action = "idle";
+          c.actionUntil = 0;
           c.nextDecisionAt = now + 1800 + Math.random() * 2200;
         }
       }
