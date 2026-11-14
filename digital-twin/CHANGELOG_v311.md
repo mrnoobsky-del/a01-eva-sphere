@@ -26,7 +26,8 @@
 - All executable inline JavaScript blocks passed node --check.
 - JSON-LD parsed successfully.
 - Static checks confirmed expected highlight restoration, intro transition and HUD settings placement.
-- Full live WebGL/visual testing and physical mobile-device testing are not claimed.
+- A live browser check of the published CDN URL confirmed HTTP 200, scene/canvas rendering, main panels and no obvious fatal errors.
+- Full interaction testing, including the new hover and intro transitions, and physical mobile-device testing are not claimed.
 
 ### Limitations
 - This is a digital prototype, not a constructed or construction-approved facility.
