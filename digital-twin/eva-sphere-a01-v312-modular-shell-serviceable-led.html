@@ -3575,6 +3575,8 @@ function setExteriorMode(enabled){
  $('exteriorBtn').querySelector('.exterior-label').textContent=enabled?'Внутренний обзор':'Внешний облик';
  $('stageTitle').querySelector('b').textContent=enabled?'СЕКТОР A-01 / ВНЕШНЯЯ АРХИТЕКТУРА':'СЕКТОР A-01 / ВНУТРЕННЯЯ СТРУКТУРА';
  $('stageTitle').querySelector('span').textContent=enabled?'Архитектурная концепция · стекло, металл, ландшафт и дневной свет':'Панорамные экраны небосвода · зимний сад · пять уровней · климат и энергетика по запросу';
+ const sceneIsEnglish=(document.documentElement.lang||'ru').toLowerCase().startsWith('en');
+ stage.setAttribute('aria-label',sceneIsEnglish?(enabled?'Interactive 3D model of the A-01 exterior architecture':'Interactive 3D model of the A-01 interior structure'):(enabled?'Интерактивная 3D-модель внешней архитектуры Сферы Евы A-01':'Интерактивная 3D-модель внутренней структуры Сферы Евы A-01'));
  if(enabled){
   scene.background=exteriorSkyTexture;scene.environment=exteriorSkyTexture;renderer.shadowMap.enabled=true;renderer.shadowMap.needsUpdate=true;
   scene.fog=new THREE.Fog(0xc6dce4,62,165);
