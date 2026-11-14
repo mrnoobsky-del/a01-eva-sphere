@@ -20,7 +20,8 @@
 - All executable inline JavaScript blocks were extracted and checked with node --check.
 - JSON-LD parsed as valid JSON.
 - Static checks confirmed the highlight/material restoration, intro/return flow, and compact HUD structure.
-- Full visual WebGL validation and interactive testing in a real browser or on physical mobile devices have not been confirmed.
+- A browser check of the published URL confirmed HTTP 200, the Three.js canvas/stage, main panels and no obvious fatal errors.
+- Full testing of every interaction, the intro transition, object hover states and touch controls on physical devices has not been completed.
 
 ## Limitations
 
