@@ -1,10 +1,18 @@
 # Architecture
 
-This directory is reserved for architectural and engineering concept material.
+This directory contains architectural and engineering concept material.
 
 The physical A-01 complex is a concept, not a completed building. Site selection, geotechnical and climate studies, code compliance, structural engineering, fire safety, accessibility, energy modelling and independent review are required before any construction proposal can be treated as implementation-ready.
 
-Visualizations must be captioned as concept imagery.
+Visualizations must be captioned as concept imagery. Scene dimensions must not be treated as physical dimensions until a calibrated SI master geometry and a documented project datum are approved.
+
+## A-01 system architecture baseline
+
+- [A-01 system architecture baseline v0.1](A01-SYSTEM-ARCHITECTURE-BASELINE-RU-v0.1.md)
+- [Engineering reverse-engineering research v0.1](../docs/ENGINEERING-REVERSE-ENGINEERING-RU-v0.1.md)
+- [Movable module and airlock safety v0.1](A01-MOVABLE-MODULE-AIRLOCK-SAFETY-RU-v0.1.md)
+
+The baseline separates the primary structure, inner environmental/life-safety boundary, replaceable external modules, interior environment, building services, operations/digital twin and AI assistance. It is a concept-level architecture, not a construction design.
 
 ## Modular systems research
 

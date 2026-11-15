@@ -2,6 +2,9 @@
 
 - [Project charter](PROJECT-CHARTER.md)
 - [Status and evidence](STATUS-AND-EVIDENCE.md)
+- [A-01 engineering reverse-engineering research v0.1](ENGINEERING-REVERSE-ENGINEERING-RU-v0.1.md)
+- [A-01 system architecture baseline v0.1](../architecture/A01-SYSTEM-ARCHITECTURE-BASELINE-RU-v0.1.md)
+- [A-01 movable module and airlock safety v0.1](../architecture/A01-MOVABLE-MODULE-AIRLOCK-SAFETY-RU-v0.1.md)
 - [Architecture notes](../architecture/README.md)
 - [Digital twin](../digital-twin/README.md)
 - [A-01 v3.0.0 — Parametric Modular Shell](../digital-twin/README_RU_v300.md)
