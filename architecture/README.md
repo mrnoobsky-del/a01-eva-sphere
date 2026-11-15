@@ -11,6 +11,7 @@ Visualizations must be captioned as concept imagery. Scene dimensions must not b
 - [A-01 system architecture baseline v0.1](A01-SYSTEM-ARCHITECTURE-BASELINE-RU-v0.1.md)
 - [Engineering reverse-engineering research v0.1](../docs/ENGINEERING-REVERSE-ENGINEERING-RU-v0.1.md)
 - [Movable module and airlock safety v0.1](A01-MOVABLE-MODULE-AIRLOCK-SAFETY-RU-v0.1.md)
+- [Lift-up hatch and vertical pod transfer v0.1](A01-LIFT-UP-HATCH-VERTICAL-POD-TRANSFER-RU-v0.1.md)
 
 The baseline separates the primary structure, inner environmental/life-safety boundary, replaceable external modules, interior environment, building services, operations/digital twin and AI assistance. It is a concept-level architecture, not a construction design.
 
