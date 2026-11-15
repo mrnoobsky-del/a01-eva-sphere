@@ -42,6 +42,12 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Release notes](v2.0.13/RELEASE-NOTES.md)
 - Status: archived snapshot of the integrated `/evasphere/` workspace; four executable JavaScript blocks passed static syntax checks and no duplicate HTML IDs were found. Browser/WebGL verification and production deployment were not performed. This is a separate snapshot track and does not supersede the v2.1.0 main digital-twin baseline.
 
+## v3.3.0 — Serviceable shell, pressure and anti-icing (browser-tested concept)
+
+- [Open v3.3.0 HTML prototype](v3.3.0/eva-sphere-a01-v3.3.0-shell-pressure-antiicing.html)
+- [Release notes — English](v3.3.0/RELEASE-NOTES.md) · [Заметки к выпуску — русский](v3.3.0/RELEASE-NOTES_RU.md)
+- Status: standalone interactive engineering-concept module; Chromium checks passed at desktop, tablet and mobile viewport sizes. Manual and automated service cycles completed, pressure interlocks and fail-closed cases tested. No physical engineering validation or public uCoz deployment has been performed.
+
 ## v3.2.6 — Runtime audit and startup guards (experimental)
 
 - [Open v3.2.6 HTML prototype](v3.2.6/eva-sphere-a01-v3.2.6-runtime-audit.html)
