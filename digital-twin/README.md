@@ -18,3 +18,12 @@ v3.1.4 preserves the full v3.1.3 scene and adds optional local companions withou
 - **v2.0.13:** separate integrated /evasphere/ workspace archive.
 
 All geometry remains concept-level and uses uncalibrated model units. Full browser/WebGL, physical touch-device, uCoz and public-site checks must be reported separately. Physical construction requires qualified engineering, regulatory review and independent safety assessment.
+
+
+## Experimental branch v3.2.0
+
+- [Russian v3.2.0 documentation](README_RU_v320.md)
+- [HTML prototype](eva-sphere-a01-v320-lift-up-hatch-vertical-carriage.html)
+- [Changelog](CHANGELOG_v320.md)
+
+This is an experimental concept prototype. The hatch, carriage, anti-icing traces and pressure equalization are visual concepts only; no physical or safety verification is implied.
