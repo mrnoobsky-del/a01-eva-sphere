@@ -1,14 +1,20 @@
 # Digital Twin
 
-This directory documents the A-01 digital workspace and its evolving software prototypes.
+This directory contains the integrated A-01 digital workspace and its evolving software prototypes. A rendering is not evidence that a physical system has been built, commissioned or validated.
 
-A digital model or interface is not evidence that the corresponding physical systems have been built, commissioned or validated. Each release must state its version, scope, verification status and known limitations.
+## Current integrated candidate
 
-## Latest build
+- **A-01 v3.1.4:** [Open HTML prototype](eva-sphere-a01-v314-integrated-living-world-dolek.html)
+- [Russian docs](README_RU_v314.md) · [English docs](README_v314.md) · [Changelog](CHANGELOG_v314.md)
+- [Living World v0.1.1](modules/living-world/README_RU.md) · [Standalone preview](modules/living-world/preview.html) · [Manual test plan](modules/living-world/TEST-PLAN-RU.md)
 
-- [A-01 v3.1.2 — Serviceable LED sky and intro sequencing](eva-sphere-a01-v312-modular-shell-serviceable-led.html)
-- [Russian documentation](README_RU_v312.md) · [English documentation](README_v312.md) · [Changelog](CHANGELOG_v312.md)
-- [Previous v3.1.1 build](eva-sphere-a01-v311-ochre-hover-arrival-flight-hud.html) · [Documentation](README_v311.md)
-- [Stable v2.1.0 baseline](eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](README_RU_v210.md)
+v3.1.4 preserves the full v3.1.3 scene and adds optional local companions without replacing the camera, renderer, player controls, original Eva, service robot, shell or LED systems. The module can be removed through its public API. Pod deployment remains a conceptual animation.
 
-The v3.1.2 build improves the first-arrival sequence, splits the interior LED sky into serviceable curved cassettes and documents a separate protected exterior shell maintenance path. It remains an experimental digital twin; its geometry is not a fabrication or construction design. Full live WebGL interaction and physical device testing have not been completed.
+## Preserved version tracks
+
+- **v2.1.0:** [Stable navigation/safety baseline](eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](README_RU_v210.md)
+- **v3.1.3:** [Experimental pod and LED portal archive](../releases/v3.1.3/eva-sphere-a01-v313-deployable-dolek-led-portal.html)
+- **v3.2.6:** archived standalone geometry/runtime audit; it does not replace the complete integrated scene.
+- **v2.0.13:** separate integrated /evasphere/ workspace archive.
+
+All geometry remains concept-level and uses uncalibrated model units. Full browser/WebGL, physical touch-device, uCoz and public-site checks must be reported separately. Physical construction requires qualified engineering, regulatory review and independent safety assessment.
