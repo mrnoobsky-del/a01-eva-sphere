@@ -1099,6 +1099,12 @@ body.drawer-open .top,body.drawer-open .intro{max-width:1320px!important;margin-
 .object-panel-foot{margin-top:9px;font-size:9px;line-height:1.4;color:var(--muted);}
 #contextDrawer .object-detail-chips{display:flex;flex-wrap:wrap;gap:5px;}
 #contextDrawer .object-detail-chip{font-size:9px;padding:4px 7px;border-radius:999px;}
+#levelOverviewList{display:grid;gap:6px;margin:8px 0 0;padding:0;list-style:none;}
+#levelOverviewList li{margin:0;padding:0;list-style:none;}
+.level-object-link{display:flex;align-items:center;justify-content:space-between;gap:9px;width:100%;min-width:0;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--text);font:inherit;font-size:11px;line-height:1.35;text-align:left;cursor:pointer;transition:background .16s ease,border-color .16s ease;}
+.level-object-link span:first-child{min-width:0;}
+.level-object-link span:last-child{flex:0 0 auto;color:var(--muted);}
+.level-object-link:hover,.level-object-link:focus-visible{background:var(--panel2);border-color:var(--accent,#8daab5);outline:none;}
 .object-detail-overlay{display:none!important;}
 .object-hover-card{max-width:min(250px,calc(100% - 20px));padding:9px 11px;}
 .object-hover-card .object-study-btn{min-height:34px;padding:7px 9px;font-size:10px;}
@@ -3568,7 +3574,9 @@ function updateLevelOverview(level){
  const info=levelInfo[level],units=unitItems.filter(x=>x.level===level),other=coreItems.filter(x=>x.level===level),streets=streetFeatures.filter(x=>x.level===level);
  code.textContent=`УРОВЕНЬ ${String(level).padStart(2,'0')} · A-01`;code.dataset.level=String(level);count.textContent=`${units.length} модулей`;
  title.textContent=info.name;desc.textContent=info.description;
- list.innerHTML=[...other.map(x=>x.name),...units.map(x=>x.name)].map(name=>`<li>${escapeLevelText(name)}</li>`).join('');
+ const selectable=[...other,...units];
+ list.innerHTML=selectable.map(x=>`<li><button class="level-object-link" type="button" data-object-id="${escapeLevelText(x.id)}"><span>${escapeLevelText(x.name)}</span><span aria-hidden="true">↗</span></button></li>`).join('');
+ list.querySelectorAll('[data-object-id]').forEach(button=>button.addEventListener('click',()=>openObjectDetails(button.dataset.objectId)));
  spaces.textContent=streets.map(x=>x.name).join(' · ')||'Связи уточняются';link.textContent=`Описание уровня ${String(level).padStart(2,'0')} ↗`;
 }
 function escapeLevelText(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
