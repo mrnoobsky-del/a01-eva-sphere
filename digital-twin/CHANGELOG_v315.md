@@ -19,6 +19,8 @@
 - GitHub file creation completed on `feature/a01-v315-responsive-inspector-dolek`.
 - Source-level anchor checks passed for all intended replacements and the new CSS/3D objects.
 - Browser viewport verification is still pending.
+- Browser smoke test confirmed `Бутик 01` is selectable from the Level 01 list, opens its object passport, exposes the dolek-cycle button and advances the service status from phase 01 to phase 09.
+- Exact desktop grid geometry and mobile viewport behavior remain unverified; the browser run could not return pixel measurements or emulate 390×844.
 - No merge to `main`, no production deployment and no claim of engineering certification.
 
 ## Engineering boundary
