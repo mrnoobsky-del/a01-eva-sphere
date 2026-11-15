@@ -97,7 +97,7 @@ The v3.1.2 release improves first-entry sequencing, divides the interior LED sky
 - [Open v3.5.0 integrated digital twin](digital-twin/eva-sphere-a01-v350-acoustics-atrium.html)
 - [Russian v3.5.0 documentation](digital-twin/README_RU_v350.md) · [Changelog](digital-twin/CHANGELOG_v350.md) · [Release notes](releases/v3.5.0/RELEASE-NOTES.md)
 
-v3.5.0 extends the v3.4.0 integrated scene with 24 viewing bays across four atrium levels, visual sightline rays, 40 distributed speaker nodes and four main arrays, five logical sound zones and four sound-control modes. Geometry remains in uncalibrated scene units; the sound model does not perform physical room-acoustic simulation. Physical engineering and code checks have not been performed.
+v3.5.0 extends the v3.4.0 integrated scene with 24 viewing bays across L01–L04, two seating tiers, accessible viewing positions, visual sightline references, 40 distributed speaker nodes, four main arrays, eight acoustic islands, five logical sound zones and four sound modes. A responsive 2D fallback remains available when WebGL cannot be created. Scene units are not calibrated to metres; physical, acoustic and code checks remain outstanding.
 
 ## Integrated A-01 digital twin v3.4.0
 
