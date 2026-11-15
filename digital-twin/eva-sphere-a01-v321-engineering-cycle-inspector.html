@@ -4495,6 +4495,7 @@ window.EVA_SPHERE={
 window.dispatchEvent(new Event('eva-a01:scene-ready'));
 window.addEventListener('beforeunload',()=>{resizeObserver.disconnect();controls.dispose();renderer.dispose();});
 } catch(error) {
+ window.EVA_A01_INIT_DIAGNOSTIC={message:error?.message||String(error),stack:error?.stack||''};
  const loading=document.getElementById('loading');
  loading.classList.remove('hidden');
  loading.textContent='Не удалось загрузить 3D-движок. Проверь подключение к cdn.jsdelivr.net и обнови страницу.';
