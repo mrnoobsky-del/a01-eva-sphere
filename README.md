@@ -91,7 +91,7 @@ The repository is a public development record. Project status may change; check 
 - **Previous experimental v3.1.3:** [Open HTML archive](releases/v3.1.3/eva-sphere-a01-v313-deployable-dolek-led-portal.html)
 - **Stable v2.1.0 baseline:** [Open HTML prototype](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](digital-twin/README_RU_v210.md)
 
-The v3.1.2 release improves first-entry sequencing, divides the interior LED sky into serviceable curved cassettes and documents a separate protected maintenance path for the exterior skin. The geometry uses uncalibrated model units and is not a fabrication, structural or construction design.
+The v3.1.4 release candidate preserves the integrated scene and local companion layer. Full browser/WebGL, mobile-device and uCoz deployment verification remains outstanding; scene geometry and pod movement are conceptual, not construction documentation.
 
 ## Community development and additional Spheres
 
