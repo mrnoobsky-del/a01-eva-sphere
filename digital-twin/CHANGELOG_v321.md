@@ -25,3 +25,7 @@
 - 7 executable inline script blocks parsed without syntax errors.
 - Responsive CSS and 13 phase boundaries present in the generated file.
 - Browser interaction test pending.
+
+### Validation note
+
+Static syntax validation passed for all 7 executable inline script blocks. Both jsDelivr module URLs returned HTTP 200 in the test browser. That browser exposed neither WebGL 2 nor WebGL 1 (`getContext` returned null), so Three.js renderer creation and interactive 3D control verification were blocked by the environment. The error fallback now reports WebGL unavailability separately from module/CDN download failures.
