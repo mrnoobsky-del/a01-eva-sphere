@@ -50,7 +50,7 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 
 ## Current digital workspace
 
-The repository preserves **A-01 v2.1.0** as the stable digital-twin baseline. The integrated experimental line has advanced to **A-01 v3.1.2**, combining the 144-candidate modular shell, waste-service concepts, underground B1 data-centre concept, serviceable interior LED sky and corrected first-arrival sequence. The separate **A-01 v2.0.13** archive in releases/v2.0.13/ is an integrated /evasphere/ site-workspace snapshot and belongs to a different version track.
+The integrated release candidate is **A-01 v3.1.4**, based on the complete v3.1.3 scene with the optional local Living World v0.1.1 companion module. It preserves the five-level scene, navigation, Eva, service robot, modular shell, 144 serviceable LED cassettes, waste logistics and underground B1 data-centre concept. The deployable-pod sequence is a separate conceptual animation, not validated machinery.
 
 The v2.0.13 archive passed static HTML and JavaScript checks, but live browser/WebGL verification, production Worker verification and deployment to the public website have not been confirmed. See the release notes for scope and limitations.
 
@@ -85,12 +85,13 @@ The repository is a public development record. Project status may change; check 
 
 ## Latest digital twin build
 
-- **A-01 v3.1.2 — Serviceable LED sky and intro sequencing:** [Open HTML prototype](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html)
-- [Russian documentation](digital-twin/README_RU_v312.md) · [English documentation](digital-twin/README_v312.md) · [Changelog](digital-twin/CHANGELOG_v312.md)
-- **Previous v3.1.1 build:** [Open HTML prototype](digital-twin/eva-sphere-a01-v311-ochre-hover-arrival-flight-hud.html) · [Documentation](digital-twin/README_v311.md)
+- **A-01 v3.1.4 — Integrated Living World candidate:** [Open HTML prototype](digital-twin/eva-sphere-a01-v314-integrated-living-world-dolek.html)
+- [Russian documentation](digital-twin/README_RU_v314.md) · [English documentation](digital-twin/README_v314.md) · [Changelog](digital-twin/CHANGELOG_v314.md)
+- **Living World v0.1.1:** [Module docs](digital-twin/modules/living-world/README_RU.md) · [Preview](digital-twin/modules/living-world/preview.html) · [Test plan](digital-twin/modules/living-world/TEST-PLAN-RU.md)
+- **Previous experimental v3.1.3:** [Open HTML archive](releases/v3.1.3/eva-sphere-a01-v313-deployable-dolek-led-portal.html)
 - **Stable v2.1.0 baseline:** [Open HTML prototype](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](digital-twin/README_RU_v210.md)
 
-The v3.1.2 release improves first-entry sequencing, divides the interior LED sky into serviceable curved cassettes and documents a separate protected maintenance path for the exterior skin. The geometry uses uncalibrated model units and is not a fabrication, structural or construction design.
+The v3.1.4 release candidate preserves the integrated scene and local companion layer. Full browser/WebGL, mobile-device and uCoz deployment verification remains outstanding; scene geometry and pod movement are conceptual, not construction documentation.
 
 ## Community development and additional Spheres
 

@@ -4,6 +4,13 @@ Versioned snapshots and their release notes are kept here.
 
 Each release must identify what changed, what was tested, what was not tested, known limitations and whether it has been deployed. A prepared archive is not automatically a verified or production release.
 
+## v3.1.4 — Integrated Living World candidate
+
+- [Open integrated HTML build](../digital-twin/eva-sphere-a01-v314-integrated-living-world-dolek.html)
+- [Russian documentation](../digital-twin/README_RU_v314.md) · [English documentation](../digital-twin/README_v314.md) · [Changelog](../digital-twin/CHANGELOG_v314.md)
+- [Living World v0.1.1 module](../digital-twin/modules/living-world/README_RU.md) · [Manual test plan](../digital-twin/modules/living-world/TEST-PLAN-RU.md)
+- Status: release candidate. Static parsing passed for six inline classic scripts and three companion scripts; all 243 HTML IDs are unique and the manifest is valid JSON. Full browser/WebGL, physical mobile, uCoz and public deployment checks remain pending. Pod movement is conceptual.
+
 ## v3.1.3 — Deployable dolek and coordinated LED portal (experimental)
 
 - [Open v3.1.3 HTML prototype](v3.1.3/eva-sphere-a01-v313-deployable-dolek-led-portal.html)
