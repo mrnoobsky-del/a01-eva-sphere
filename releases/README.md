@@ -48,6 +48,12 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Release notes — English](v3.3.0/RELEASE-NOTES.md) · [Заметки к выпуску — русский](v3.3.0/RELEASE-NOTES_RU.md)
 - Status: standalone interactive engineering-concept module; Chromium checks passed at desktop, tablet and mobile viewport sizes. Manual and automated service cycles completed, pressure interlocks and fail-closed cases tested. No physical engineering validation or public uCoz deployment has been performed.
 
+## v3.4.0 — Integrated digital twin and shell engineering node
+
+- [Open integrated v3.4.0 digital twin](../digital-twin/eva-sphere-a01-v340-integrated-shell-engineering.html)
+- [Russian integration notes](../digital-twin/README_RU_v340.md) · [Change log](../digital-twin/CHANGELOG_v340.md)
+- Status: combines main v3.1.2 scene with v3.3.0 pressure / anti-icing workbench. Cassette selection is synchronized one-to-one with the main 144-cassette registry; the existing 3D shell-cassette animation is exposed for the selected item. Full end-to-end WebGL verification and physical engineering validation remain outstanding.
+
 ## v3.2.6 — Runtime audit and startup guards (experimental)
 
 - [Open v3.2.6 HTML prototype](v3.2.6/eva-sphere-a01-v3.2.6-runtime-audit.html)
