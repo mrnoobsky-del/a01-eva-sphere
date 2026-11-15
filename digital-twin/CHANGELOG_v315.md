@@ -3,6 +3,8 @@
 ## Added
 - Desktop inspector now occupies a real grid column next to the 3D stage.
 - Mobile inspector now behaves as a bottom sheet; the stage remains visible above it and reduces height while the sheet is open.
+- Level overview entries are selectable buttons that open the chosen module passport.
+- Direct 3D object selection opens the passport; a visible module-cycle shortcut is shown for selected deployable modules.
 - Added a two-leaf upward/outward opening concept to the deployable-module sequence.
 - Added a transparent service vestibule with separate inner and outer gate leaves.
 - Added a visual interlock sequence: the outer gate opens only while the inner boundary is shown as closed; the inner gate is released only after the outer boundary closes.
