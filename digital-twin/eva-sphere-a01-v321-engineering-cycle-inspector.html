@@ -4498,7 +4498,14 @@ window.addEventListener('beforeunload',()=>{resizeObserver.disconnect();controls
  window.EVA_A01_INIT_DIAGNOSTIC={message:error?.message||String(error),stack:error?.stack||''};
  const loading=document.getElementById('loading');
  loading.classList.remove('hidden');
- loading.textContent='Не удалось загрузить 3D-движок. Проверь подключение к cdn.jsdelivr.net и обнови страницу.';
+ const initMessage=String(error?.message||error);
+ if(/WebGL|creating WebGL context|context creation/i.test(initMessage)){
+  loading.textContent='Three.js загружен, но браузер не смог создать WebGL-контекст. Проверь поддержку WebGL и аппаратное ускорение браузера, затем обнови страницу.';
+ }else if(/Failed to fetch|Importing a module script failed|module specifier|ERR_NAME_NOT_RESOLVED|ERR_BLOCKED_BY_CLIENT/i.test(initMessage)){
+  loading.textContent='Не удалось загрузить модуль Three.js или его зависимости. Проверь доступ к CDN и сетевые ограничения браузера, затем обнови страницу.';
+ }else{
+  loading.textContent='Не удалось инициализировать 3D-сцену. Подробности записаны в диагностике браузера; попробуй обновить страницу.';
+ }
  loading.style.padding='24px';
  loading.style.textAlign='center';
  console.error('Eva Sphere 3D initialization failed:',error);
