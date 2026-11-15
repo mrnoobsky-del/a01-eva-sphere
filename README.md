@@ -92,6 +92,13 @@ The repository is a public development record. Project status may change; check 
 
 The v3.1.2 release improves first-entry sequencing, divides the interior LED sky into serviceable curved cassettes and documents a separate protected maintenance path for the exterior skin. The geometry uses uncalibrated model units and is not a fabrication, structural or construction design.
 
+## Serviceable shell engineering module — A-01 v3.3.0
+
+- [Open standalone HTML prototype](releases/v3.3.0/eva-sphere-a01-v3.3.0-shell-pressure-antiicing.html)
+- [English release notes](releases/v3.3.0/RELEASE-NOTES.md) · [Русские заметки](releases/v3.3.0/RELEASE-NOTES_RU.md)
+
+A separate, browser-tested concept module for the A01-L03-D01 shell-service node. It includes a 144-cassette selector, a nine-state service cycle, gradual service-chamber pressure balancing in both directions, interlocks for both pressure boundaries, fail-closed behaviour and an illustrative weather-driven anti-icing heuristic. It uses inline SVG/CSS/JavaScript and does not require WebGL. This is not a construction design or a real equipment controller. It does not supersede the main v2.1.0 baseline or the v3.1.2 integrated workspace line, and it has not been deployed to the public uCoz site.
+
 ## Community development and additional Spheres
 
 - [Contribution guide](CONTRIBUTING.md)
