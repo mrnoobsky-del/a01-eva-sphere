@@ -92,6 +92,14 @@ The repository is a public development record. Project status may change; check 
 
 The v3.1.2 release improves first-entry sequencing, divides the interior LED sky into serviceable curved cassettes and documents a separate protected maintenance path for the exterior skin. The geometry uses uncalibrated model units and is not a fabrication, structural or construction design.
 
+## Integrated A-01 digital twin v3.4.0
+
+- [Open v3.4.0 — main digital twin with integrated shell engineering node](digital-twin/eva-sphere-a01-v340-integrated-shell-engineering.html)
+- [Integration notes](digital-twin/README_RU_v340.md) · [Change log](digital-twin/CHANGELOG_v340.md)
+- [Release notes](releases/v3.4.0/RELEASE-NOTES.md)
+
+v3.4.0 combines the main v3.1.2 digital twin with the v3.3.0 shell engineering module. The service node opens from the selected outer-shell cassette's object card. Its selector synchronizes with the main model's 144 cassette records, and a separate action runs the existing 3D movement animation for that same cassette. The v3.1.2 and v3.3.0 sources remain preserved. This is an experimental integration line; publishing to GitHub does not automatically deploy to the uCoz website.
+
 ## Serviceable shell engineering module — A-01 v3.3.0
 
 - [Open standalone HTML prototype](releases/v3.3.0/eva-sphere-a01-v3.3.0-shell-pressure-antiicing.html)
