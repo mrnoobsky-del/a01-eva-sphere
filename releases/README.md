@@ -48,6 +48,12 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Release notes — English](v3.3.0/RELEASE-NOTES.md) · [Заметки к выпуску — русский](v3.3.0/RELEASE-NOTES_RU.md)
 - Status: standalone interactive engineering-concept module; Chromium checks passed at desktop, tablet and mobile viewport sizes. Manual and automated service cycles completed, pressure interlocks and fail-closed cases tested. No physical engineering validation or public uCoz deployment has been performed.
 
+## v3.5.0 — Atrium acoustics and viewing galleries
+
+- [Open integrated v3.5.0 digital twin](../digital-twin/eva-sphere-a01-v350-acoustics-atrium.html)
+- [Russian design documentation](../digital-twin/README_RU_v350.md) · [Changelog](../digital-twin/CHANGELOG_v350.md) · [Release notes](v3.5.0/RELEASE-NOTES.md)
+- Status: extends integrated v3.4.0 with four levels of viewing galleries, visual sightlines, distributed speaker concept, zone/mode controls. JavaScript syntax and static HTML-ID checks passed. Full WebGL/device and physical engineering checks remain separate; uCoz site deployment is not automatic.
+
 ## v3.4.0 — Integrated digital twin and shell engineering node
 
 - [Open integrated v3.4.0 digital twin](../digital-twin/eva-sphere-a01-v340-integrated-shell-engineering.html)
