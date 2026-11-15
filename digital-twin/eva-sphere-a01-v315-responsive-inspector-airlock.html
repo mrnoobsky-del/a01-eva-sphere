@@ -4303,7 +4303,7 @@ function renderFrame(now){
   demo.group.position.copy(demo.original).addScaledVector(radial,demo.stroke*moduleTravel);
   demo.group.position.y=demo.original.y+liftTravel;
   demo.rig.userData.liftCarriage.position.y=demo.rig.userData.liftStartY+liftTravel;
-  const wingOpen=shellOpen;
+  const wingOpen=shellOpen*(1-dolekSmooth01((p-.92)/.04));
   for(const door of demo.rig.userData.doorLeaves){door.hinge.rotation.z=door.side*.92*wingOpen;door.hinge.rotation.x=-door.side*.14*wingOpen;}
   const outerGateOpen=dolekSmooth01((p-.43)/.07)*(1-dolekSmooth01((p-.88)/.04));
   demo.rig.userData.outerGate.group.rotation.z=.92*outerGateOpen;
