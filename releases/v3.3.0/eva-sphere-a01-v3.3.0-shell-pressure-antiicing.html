@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Сфера Евы A-01 · v3.3.0 — оболочка, давление и антиобледенение</title>
+<meta name="description" content="A-01 v3.3.0: интерактивная концептуальная модель 144 кассет оболочки, сервисного шлюза, раздельных контуров давления и адаптивной антиобледенительной системы.">
+<meta name="a01-version" content="3.3.0">
+<style>
+:root{color-scheme:light;--bg:#edf1ef;--panel:rgba(250,252,251,.88);--line:rgba(35,55,62,.15);--ink:#172329;--muted:#687980;--teal:#5b9e9b;--mint:#bfe9d9;--ice:#d9edf2;--amber:#d49b4c;--red:#c55a5a;--shadow:0 18px 50px rgba(33,55,63,.10)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:radial-gradient(ellipse at 48% -12%,#fff 0,transparent 55%),var(--bg);color:var(--ink);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+body{padding:18px;overflow-x:hidden}
+button,input{font:inherit}
+button{cursor:pointer}
+.app{max-width:1480px;margin:0 auto;display:grid;gap:14px}
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:4px 2px}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.brand h1{font-size:clamp(22px,3vw,34px);letter-spacing:-.045em;line-height:1.06;margin:5px 0}
+.brand p{margin:0;color:var(--muted);max-width:680px}
+.topmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pill{border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:rgba(255,255,255,.55);font-size:11px;color:var(--muted);white-space:nowrap}
+.pill strong{color:var(--ink)}
+.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#5eaa89;margin-right:6px;vertical-align:1px}
+.main-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(320px,.85fr);gap:14px;align-items:start}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);backdrop-filter:blur(16px);min-width:0}
+.visual-card{padding:14px;display:flex;flex-direction:column;gap:10px;min-height:610px}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:2px 3px}
+.card-head h2{font-size:15px;margin:0;letter-spacing:-.02em}
+.card-head p{font-size:11px;color:var(--muted);margin:3px 0 0}
+.view-tag{font-size:10px;letter-spacing:.11em;color:#477b78;border:1px solid rgba(75,137,132,.25);background:rgba(191,233,217,.28);border-radius:999px;padding:6px 9px;white-space:nowrap}
+.diagram-wrap{position:relative;flex:0 0 auto;height:520px;min-height:460px;border-radius:16px;overflow:hidden;background:linear-gradient(160deg,rgba(232,243,242,.88),rgba(247,250,249,.75));border:1px solid rgba(49,83,90,.10)}
+.diagram-wrap svg{display:block;width:100%;height:100%;min-height:460px}
+.svg-label{font:11px Inter,system-ui,sans-serif;fill:#53676d}
+.svg-small{font:9px Inter,system-ui,sans-serif;fill:#708187;letter-spacing:.06em}
+.svg-title{font:700 11px Inter,system-ui,sans-serif;fill:#31454b;letter-spacing:.08em}
+.layer-label{font:10px Inter,system-ui,sans-serif;fill:#435a61}
+#cassetteLeaf,#ledPanel,#servicePod{transition:transform .8s cubic-bezier(.2,.8,.2,1)}
+#cassetteLeaf.extended{transform:translate(-58px,-11px)}
+#ledPanel.parked{transform:translate(28px,-3px)}
+#servicePod.deployed{transform:translate(-42px,0)}
+#domeShell{transition:opacity .35s ease}
+#domeShell.hidden{opacity:1}
+#selectedShellCell{transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+#selectedShellCell.service circle:first-of-type{stroke:#c47c2f;stroke-width:3;filter:drop-shadow(0 0 5px rgba(196,124,47,.65))}
+#heatGlow{transition:opacity .35s ease}
+#heatGlow.off{opacity:.08}
+#drainGlow{opacity:.08;transition:opacity .35s ease}
+#drainGlow.active{opacity:1;filter:drop-shadow(0 0 4px rgba(76,154,142,.45))}
+#drainGlow path{stroke-dasharray:5 5}
+#drainGlow.active path{animation:drainFlow 1.5s linear infinite}
+@keyframes drainFlow{to{stroke-dashoffset:-40}}
+#airflow{stroke-dasharray:7 8;opacity:.22}
+#airflow.active{opacity:1;animation:airflow 2.2s linear infinite}
+@keyframes airflow{to{stroke-dashoffset:-60}}
+.right-col{display:grid;grid-template-rows:auto auto auto;gap:14px;min-width:0;align-self:start}
+.control-card{padding:16px;display:flex;flex-direction:column;gap:12px}
+.section-kicker{font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.stage-title{font-size:20px;letter-spacing:-.035em;line-height:1.15;margin:0}
+.stage-copy{font-size:12px;color:var(--muted);margin:0;min-height:51px}
+.stage-track{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.stage-step{height:5px;border-radius:999px;background:#dce5e3;transition:background .25s}
+.stage-step.done{background:#8abeb1}
+.stage-step.current{background:#2f7775}
+.action-row{display:flex;flex-wrap:wrap;gap:7px}
+.btn{border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.68);color:var(--ink);padding:9px 12px;font-size:12px;min-height:38px;transition:transform .15s,background .15s,border-color .15s}
+.btn:hover{background:#fff;border-color:rgba(57,111,111,.35)}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:#193a40;color:#fff;border-color:#193a40}
+.btn.primary:hover{background:#28545b}
+.btn.active{background:#d9edf2;border-color:#a8cbd1;color:#17313b}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.interlock{border:1px solid rgba(77,137,131,.22);background:rgba(219,241,232,.42);border-radius:14px;padding:10px 11px;display:flex;gap:9px;align-items:flex-start}
+.interlock.warn{border-color:rgba(197,90,90,.24);background:rgba(250,229,226,.58)}
+.interlock b{display:block;font-size:11px}
+.interlock span{display:block;font-size:10px;color:var(--muted);margin-top:2px}
+.interlock-icon{width:23px;height:23px;border-radius:8px;background:#d2ebe0;color:#397862;display:grid;place-items:center;flex:0 0 auto;font-weight:800}
+.interlock.warn .interlock-icon{background:#f2d4d0;color:#a64747}
+.sensor-card{padding:15px;display:grid;gap:12px}
+.sensor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.module-picker{display:grid;grid-template-columns:1fr auto;gap:7px 10px;padding:11px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.48)}
+.module-picker label{display:block;font-size:9px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.module-picker strong{display:block;margin-top:3px;font-size:13px;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.module-picker small{display:block;color:var(--muted);font-size:9px;margin-top:2px}
+.module-picker output{align-self:center;font-size:11px;font-weight:750;color:#456a6b;font-variant-numeric:tabular-nums}
+.module-picker input{grid-column:1/-1;width:100%;accent-color:#468c89}
+.sensor .sensor-state{font-size:11px;letter-spacing:0;margin-top:5px;line-height:1.25}
+.risk-track{height:6px;border-radius:999px;background:#e3eae8;overflow:hidden}
+.risk-fill{height:100%;width:0;background:#5b9e9b;border-radius:inherit;transition:width .25s,background .25s}
+.pressure-state{font-size:10px;color:var(--muted);margin-top:-5px}
+.precip-row{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;padding:8px 0 0;border-top:1px solid rgba(35,55,62,.08)}
+.sensor{padding:10px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.48);min-width:0}
+.sensor label{display:block;font-size:9px;color:var(--muted);letter-spacing:.07em;text-transform:uppercase}
+.sensor strong{display:block;font-size:19px;letter-spacing:-.04em;margin-top:3px;font-variant-numeric:tabular-nums}
+.sensor small{display:block;font-size:9px;color:var(--muted);margin-top:1px}
+.range-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;font-size:11px}
+.range-row input{grid-column:1/-1;width:100%;accent-color:#468c89}
+.range-row output{font-variant-numeric:tabular-nums;color:#456a6b;font-weight:700}
+.switches{display:grid;gap:8px}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:11px;padding:8px 0;border-bottom:1px solid rgba(35,55,62,.08)}
+.switch:last-child{border:0;padding-bottom:0}
+.toggle{width:38px;height:22px;border-radius:999px;border:1px solid #b9c7c5;background:#e3e9e7;position:relative;flex:0 0 auto;padding:0}
+.toggle::after{content:"";position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.16);transition:transform .2s}
+.toggle[aria-pressed="true"]{background:#3b8580;border-color:#3b8580}
+.toggle[aria-pressed="true"]::after{transform:translateX(16px)}
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr 1.35fr;gap:14px}
+.notes-card{padding:16px;display:grid;gap:10px;align-content:start}
+.notes-card h3{margin:0;font-size:13px}
+.notes-card p{margin:0;color:var(--muted);font-size:11px}
+.flow-list{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.flow-item{background:rgba(255,255,255,.46);border:1px solid var(--line);border-radius:12px;padding:9px;min-width:0}
+.flow-item b{font-size:10px;display:block}
+.flow-item span{font-size:9px;color:var(--muted);display:block;margin-top:3px}
+.warning-note{font-size:10px;color:#796545;background:rgba(246,235,212,.56);border:1px solid rgba(212,155,76,.2);border-radius:12px;padding:10px 12px;line-height:1.45}
+@media(max-width:1050px){.main-grid{grid-template-columns:1fr}.right-col{grid-template-columns:1fr 1fr;grid-template-rows:auto auto}.control-card{grid-column:1/-1}.visual-card{min-height:560px}.bottom-grid{grid-template-columns:1fr}}
+@media(max-width:640px){body{padding:10px}.top{display:block}.topmeta{justify-content:flex-start;margin-top:10px}.main-grid{gap:10px}.visual-card{padding:9px;min-height:0}.diagram-wrap,.diagram-wrap svg{height:230px;min-height:230px}.right-col{grid-template-columns:1fr;gap:10px}.control-card{grid-column:auto}.stage-title{font-size:18px}.bottom-grid{gap:10px}.flow-list{grid-template-columns:repeat(2,1fr)}.sensor-grid{grid-template-columns:repeat(2,1fr)}.card{border-radius:17px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+  <div class="brand"><small>A-01 · инженерный цифровой двойник</small><h1>Сфера Евы</h1><p>Модуль оболочки, сервисная камера, внутренний LED-небосвод, управление давлением и защита от обледенения.</p></div>
+  <div class="topmeta"><span class="pill"><span class="status-dot"></span><strong>Локальная модель</strong> · без WebGL</span><span class="pill">Сервисный узел <strong>A01-L03-D01</strong></span><span class="pill">Кассеты оболочки <strong>144</strong></span></div>
+</header>
+<main class="main-grid">
+<section class="card visual-card">
+  <div class="card-head"><div><h2>Архитектура узла и оболочки</h2><p>Схема разреза · выделена одна обслуживаемая кассета из 144</p></div><span class="view-tag">КОНЦЕПТ · СЕЧЕНИЕ</span></div>
+  <div class="diagram-wrap">
+  <svg viewBox="0 0 1120 600" role="img" aria-label="Разрез Сферы Евы и детальная схема выдвижной сервисной кассеты" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9f7f5"/><stop offset="1" stop-color="#d9eaf0"/></linearGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c4e9ee" stop-opacity=".12"/><stop offset="1" stop-color="#74abb6" stop-opacity=".38"/></linearGradient>
+      <linearGradient id="heat" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f1b75d" stop-opacity=".1"/><stop offset=".5" stop-color="#ed9d48" stop-opacity=".9"/><stop offset="1" stop-color="#f1b75d" stop-opacity=".1"/></linearGradient>
+      <filter id="soft"><feGaussianBlur stdDeviation="5"/></filter>
+      <marker id="arrow" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="#4a8b88" stroke-width="1.1"/></marker>
+    </defs>
+    <rect x="0" y="0" width="1120" height="600" fill="url(#sky)" opacity=".42"/>
+    <path d="M18 478 C42 245 170 65 300 49 C430 65 558 245 582 478" fill="none" stroke="#769ba5" stroke-width="8" opacity=".16"/>
+    <path id="domeShell" d="M18 478 C42 245 170 65 300 49 C430 65 558 245 582 478" fill="none" stroke="#80b5c2" stroke-width="3"/>
+    <path d="M40 478 C63 263 180 93 300 79 C420 93 537 263 560 478" fill="none" stroke="#6f99a4" stroke-width="2" stroke-dasharray="5 7" opacity=".8"/>
+    <path d="M55 478 C76 280 190 121 300 108 C410 121 524 280 545 478" fill="none" stroke="#4f8e99" stroke-width="5" opacity=".23"/>
+    <path d="M77 478 C95 298 199 146 300 137 C401 146 505 298 523 478" fill="none" stroke="#6e9ea7" stroke-width="2" stroke-dasharray="3 5"/>
+    <g stroke="#9db8bd" stroke-width="1.4" opacity=".7">
+      <path d="M300 49V478M204 83L119 478M396 83L481 478M145 157L69 420M455 157L531 420"/>
+      <path d="M68 370Q300 300 532 370M48 430Q300 367 552 430" fill="none"/>
+    </g>
+    <g opacity=".9">
+      <path d="M55 352H545M48 395H552M40 438H560" stroke="#7a949b" stroke-width="7" stroke-linecap="round"/>
+      <path d="M62 346H538M55 389H545M47 432H553" stroke="#f8fbfa" stroke-width="2"/>
+      <path d="M280 168V456M320 168V456" stroke="#7e9aa1" stroke-width="7" opacity=".45"/>
+      <path d="M286 168V456M314 168V456" stroke="#f9fcfb" stroke-width="2"/>
+    </g>
+    <g>
+      <rect x="93" y="320" width="413" height="26" rx="8" fill="#d9eee8" opacity=".62"/><text x="104" y="337" class="svg-small">L04 · КОРОНА / УПРАВЛЕНИЕ</text>
+      <rect x="70" y="363" width="460" height="25" rx="8" fill="#d9edf2" opacity=".55"/><text x="82" y="380" class="svg-small">L03 · ЖИЛЬЁ И ТЕРРАСЫ</text>
+      <rect x="55" y="406" width="490" height="25" rx="8" fill="#e7e0f4" opacity=".42"/><text x="67" y="423" class="svg-small">L02 · СЕРВИСЫ</text>
+      <rect x="46" y="449" width="508" height="25" rx="8" fill="#e3eee9" opacity=".65"/><text x="58" y="466" class="svg-small">L00–L01 · ЗАБОТА / АТРИУМ</text>
+    </g>
+    <g id="selectedShellCell">
+      <path d="M437 190L525 153L572 165" fill="none" stroke="#b47d35" stroke-width="1.6" stroke-dasharray="4 3"/>
+      <circle cx="437" cy="190" r="17" fill="#e8bd74" fill-opacity=".23" stroke="#b47d35" stroke-width="1.5"/>
+      <circle cx="437" cy="190" r="4" fill="#b47d35"/>
+      <text id="selectedShellLabel" x="424" y="216" class="svg-small" fill="#8d642c">R03 / S01</text>
+    </g>
+    <g transform="translate(32 24)"><rect width="188" height="45" rx="11" fill="#ffffff" fill-opacity=".78" stroke="#d3e1df"/><text x="13" y="18" class="svg-title">ОБЩИЙ РАЗРЕЗ A-01</text><text x="13" y="33" class="svg-small">5 уровней · атриум · внешняя оболочка</text></g>
+    <g transform="translate(48 505)"><path d="M0 0H470" stroke="#bacac8"/><text x="0" y="20" class="svg-small">Схема не в масштабе · конструктивные размеры не заданы</text></g>
+
+    <g transform="translate(610 28)">
+      <rect x="0" y="0" width="485" height="540" rx="18" fill="#fbfdfc" fill-opacity=".84" stroke="#cbdcd9"/>
+      <text x="22" y="29" class="svg-title">СЕРВИСНЫЙ УЗЕЛ · A01-L03-D01</text>
+      <text x="22" y="46" class="svg-small">РАЗНЕСЁННОЕ СЕЧЕНИЕ СЛОЁВ · ВНЕШНЯЯ СТОРОНА СЛЕВА</text>
+      <rect x="22" y="68" width="441" height="405" rx="14" fill="#f4f8f7" stroke="#e1eae8"/>
+      <text x="36" y="91" class="svg-small">УЛИЦА / НАРУЖНАЯ СРЕДА</text>
+      <text x="360" y="91" class="svg-small">ИНТЕРЬЕР СФЕРЫ</text>
+      <path d="M42 112V430" stroke="#9bb0b2" stroke-dasharray="4 5"/>
+      <path d="M445 112V430" stroke="#9bb0b2" stroke-dasharray="4 5"/>
+      <g id="cassetteRail"><path d="M93 149H244M93 157H244" stroke="#667f87" stroke-width="3" stroke-linecap="round"/><circle cx="112" cy="153" r="5" fill="#879da2"/><circle cx="225" cy="153" r="5" fill="#879da2"/></g>
+      <g id="cassetteLeaf">
+        <rect x="115" y="119" width="102" height="65" rx="7" fill="#b7cbd0" stroke="#58737c" stroke-width="2"/>
+        <path d="M124 128H208M124 137H208M124 146H208M124 155H208M124 164H208" stroke="#eef6f4" stroke-width="2" opacity=".9"/>
+        <text x="166" y="177" text-anchor="middle" class="svg-small">КАССЕТА</text>
+      </g>
+      <g id="servicePod">
+        <rect x="68" y="201" width="126" height="75" rx="9" fill="#d6e8e5" stroke="#5f918b" stroke-width="1.7"/>
+        <rect x="81" y="215" width="100" height="47" rx="5" fill="#edf7f4" stroke="#a5c8c0"/>
+        <circle cx="91" cy="270" r="4" fill="#5b9e9b"/><circle cx="169" cy="270" r="4" fill="#5b9e9b"/>
+        <text x="131" y="235" text-anchor="middle" class="svg-title">СЕРВИСНЫЙ</text><text x="131" y="249" text-anchor="middle" class="svg-title">МОДУЛЬ</text>
+      </g>
+      <rect x="218" y="111" width="12" height="175" rx="5" fill="#82a7ad" opacity=".28" stroke="#62888f"/>
+      <text x="235" y="202" class="svg-small" transform="rotate(90 235 202)">ТЕПЛОВОЙ / ДРЕНАЖНЫЙ КОНТУР</text>
+      <rect x="250" y="112" width="78" height="174" rx="8" fill="#d6e9ed" fill-opacity=".48" stroke="#8caeb5" stroke-dasharray="4 4"/>
+      <text x="289" y="133" text-anchor="middle" class="svg-small">КАМЕРА</text><text x="289" y="145" text-anchor="middle" class="svg-small">БАЛАНСА</text>
+      <path id="airflow" d="M260 169C279 159 300 177 318 166M260 204C279 194 300 212 318 201M260 239C279 229 300 247 318 236" fill="none" stroke="#5b9e9b" stroke-width="2" marker-end="url(#arrow)"/>
+      <path d="M341 108V287" stroke="#3e7178" stroke-width="7" stroke-linecap="round"/>
+      <path d="M336 108V287" stroke="#c4e9e5" stroke-width="2"/>
+      <text x="350" y="165" class="svg-small" transform="rotate(90 350 165)">ВНУТРЕННЯЯ ГЕРМОГРАНИЦА</text>
+      <g id="ledPanel">
+        <rect x="370" y="118" width="61" height="17" rx="4" fill="#7c91ae" stroke="#536d89"/>
+        <path d="M376 126H425" stroke="#c8e3ff" stroke-width="2"/>
+        <text x="401" y="153" text-anchor="middle" class="svg-small">LED-ПАНЕЛЬ</text>
+      </g>
+      <rect x="358" y="185" width="88" height="101" rx="8" fill="#e9f2ee" stroke="#c5d9d0"/>
+      <text x="402" y="215" text-anchor="middle" class="svg-small">ВНУТРЕННЯЯ</text><text x="402" y="228" text-anchor="middle" class="svg-small">СРЕДА</text>
+      <path d="M361 259H443" stroke="#b5d0c4" stroke-width="4" stroke-linecap="round"/>
+      <g id="heatGlow" class="off" opacity="1">
+        <path d="M226 117V282M238 117V282" stroke="url(#heat)" stroke-width="7" filter="url(#soft)"/>
+        <path d="M227 115V284M239 115V284" stroke="#eaa04c" stroke-width="2" stroke-dasharray="4 5"/>
+      </g>
+      <g id="drainGlow"><path d="M226 286V302H242V311H254" fill="none" stroke="#55a99b" stroke-width="3" stroke-linecap="round"/><path d="M245 307L254 311L245 315" fill="none" stroke="#55a99b" stroke-width="2"/></g>
+      <g transform="translate(38 319)">
+        <rect width="408" height="70" rx="10" fill="#edf4f2" stroke="#d8e4e1"/>
+        <text x="13" y="19" class="svg-title">СЛОИ И ГРАНИЦЫ</text>
+        <g font-size="10" fill="#52676d">
+          <circle cx="17" cy="36" r="4" fill="#8baeb7"/><text x="28" y="39">Наружная кассета / погода</text>
+          <circle cx="17" cy="54" r="4" fill="#5b9e9b"/><text x="28" y="57">Изолируемая сервисная камера</text>
+          <circle cx="226" cy="36" r="4" fill="#3e7178"/><text x="237" y="39">Внутренняя гермограница</text>
+          <circle cx="226" cy="54" r="4" fill="#7c91ae"/><text x="237" y="57">Подвижная LED-панель</text>
+        </g>
+      </g>
+      <text id="svgStageLabel" x="22" y="505" class="svg-title">РЕЖИМ: ШТАТНАЯ ЭКСПЛУАТАЦИЯ</text>
+      <text id="svgStageHint" x="22" y="523" class="svg-small">Все механические створки закрыты, LED-панель активна.</text>
+    </g>
+  </svg>
+  </div>
+</section>
+<aside class="right-col">
+  <section class="card control-card">
+    <div class="section-kicker">Последовательность обслуживания · 9 стадий</div>
+    <h2 class="stage-title" id="stageTitle">Штатная эксплуатация</h2>
+    <p class="stage-copy" id="stageCopy">Внутренняя гермограница закрыта. Внешняя кассета зафиксирована. LED-панель работает, сервисная камера находится в дежурном режиме.</p>
+    <div class="stage-track" id="stageTrack" aria-label="Прогресс сервисного цикла"></div>
+    <div class="action-row">
+      <button class="btn" id="prevBtn" type="button">← Назад</button>
+      <button class="btn primary" id="nextBtn" type="button">Следующая стадия →</button>
+      <button class="btn" id="autoBtn" type="button">Автопрогон</button>
+      <button class="btn" id="resetBtn" type="button">Сброс</button>
+    </div>
+    <div class="interlock" id="interlockBox"><div class="interlock-icon" id="interlockIcon">✓</div><div><b id="interlockTitle">Блокировки в норме</b><span id="interlockText">Внутренняя и внешняя границы не открываются одновременно.</span></div></div>
+  </section>
+  <section class="card sensor-card">
+    <div><div class="section-kicker">Сценарные датчики</div><h2 style="font-size:14px;margin:3px 0 0">Давление и температура</h2></div>
+    <div class="module-picker">
+      <div><label for="cassetteIndex">Выбранная кассета оболочки</label><strong id="selectedModuleCode">A01-CAS-R03-S01</strong><small id="moduleDescription">Ряд 03 · сектор 01 · сервисный модуль A01-L03-D01</small></div>
+      <output id="cassetteIndexOut">25 / 144</output>
+      <input id="cassetteIndex" type="range" min="1" max="144" step="1" value="25" aria-label="Выбрать кассету оболочки от 1 до 144">
+    </div>
+    <div class="sensor-grid">
+      <div class="sensor"><label>Снаружи</label><strong id="outsideP">88.0 kPa</strong><small>сценарное давление</small></div>
+      <div class="sensor"><label>Внутри</label><strong id="insideP">101.3 kPa</strong><small>климатическая зона</small></div>
+      <div class="sensor"><label>Сервисная камера</label><strong id="chamberP">101.3 kPa</strong><small id="deltaP">Δ до цели 0.0 kPa</small></div>
+      <div class="sensor"><label>Наружная поверхность</label><strong id="surfaceT">−25 °C</strong><small id="iceRisk">Риск обледенения</small></div>
+      <div class="sensor"><label>Риск наледи</label><strong id="riskScore">—</strong><small id="dewPoint">Точка росы: —</small></div>
+      <div class="sensor"><label>Локальный нагрев</label><strong id="heatPower">—</strong><small id="heatStatus">Кромки · уплотнения · дренаж</small></div>
+    </div>
+    <div class="pressure-state" id="pressureState">Камера ожидает команду на выравнивание давления.</div>
+    <div class="range-row"><label for="outsidePressure">Сценарное внешнее давление</label><output id="outsidePressureOut">88.0 kPa</output><input id="outsidePressure" type="range" min="70" max="105" step="0.5" value="88"></div>
+    <div class="range-row"><label for="outsideTemp">Наружная температура</label><output id="outsideTempOut">−25 °C</output><input id="outsideTemp" type="range" min="-45" max="10" step="1" value="-25"></div>
+    <div class="range-row"><label for="humidity">Относительная влажность</label><output id="humidityOut">82 %</output><input id="humidity" type="range" min="20" max="100" step="1" value="82"></div>
+    <div class="range-row"><label for="wind">Скорость ветра</label><output id="windOut">8 м/с</output><input id="wind" type="range" min="0" max="35" step="1" value="8"></div>
+    <div class="precip-row"><span>Осадки / мокрый снег</span><button class="toggle" id="precipToggle" type="button" aria-pressed="true" aria-label="Включить или выключить сценарий осадков"></button></div>
+    <div class="risk-track" aria-label="Условный индекс риска обледенения"><div class="risk-fill" id="riskFill"></div></div>
+    <div class="switches">
+      <div class="switch"><span>Антиобледенение оболочки</span><button class="toggle" id="antiIceToggle" aria-pressed="true" aria-label="Включить или выключить антиобледенение"></button></div>
+      <div class="switch"><span>Автоматический баланс давления</span><button class="toggle" id="pressureToggle" aria-pressed="true" aria-label="Включить или выключить баланс давления"></button></div>
+    </div>
+  </section>
+</aside>
+</main>
+<div class="bottom-grid">
+  <section class="card notes-card">
+    <div class="section-kicker">Текущая архитектура концепта</div>
+    <h3>Что происходит внутри узла</h3>
+    <div class="flow-list">
+      <div class="flow-item"><b>01 · Изоляция</b><span>Гермограница закрывается до движения внешней створки.</span></div>
+      <div class="flow-item"><b>02 · Баланс</b><span>Камера выравнивает давление через отдельный регулируемый контур.</span></div>
+      <div class="flow-item"><b>03 · Доступ</b><span>LED-панель уходит в парковочную нишу, кассета выдвигается.</span></div>
+      <div class="flow-item"><b>04 · Возврат</b><span>Кассета запирается, камера проверяется и возвращается в режим интерьера.</span></div>
+    </div>
+    <div class="warning-note">Все значения и алгоритмы здесь — сценарная инженерная гипотеза для демонстрации логики. Не заданы проектные нагрузки, характеристики материалов и приводов. Модель не подтверждает прочность, герметичность, пожарную безопасность, энергоэффективность или пригодность конструкции к строительству.</div>
+  </section>
+  <section class="card notes-card"><div class="section-kicker">Антиобледенение · замкнутый тепловой контур</div><h3>Нагреваем только те зоны, где это действительно требуется</h3><p>Сценарный индекс риска учитывает температуру, относительную влажность, точку росы, осадки и ветер. При превышении порога локально включаются кромочные нагреватели, дорожки направляющих, уплотнения и водоотводы; импульсный тёплый воздух помогает просушивать сервисную полость. Нагрев всей оболочки не предполагается. Реальный алгоритм потребует климатических данных, теплотехнического расчёта и испытаний.</p></section>
+  <section class="card notes-card"><div class="section-kicker">Давление · раздельные контуры</div><h3>Жилой объём не используется как буфер</h3><p>Сервисная камера отделена двумя независимыми запираемыми границами. Давление меняется только в сервисном объёме через отдельные клапаны и буфер. В модели предусмотрены ограниченная скорость выравнивания, проверка перепада перед открытием и возврат кассеты в закрытое положение при отказе контура. Одновременное открытие внутренней и наружной створок запрещено.</p></section>
+</div>
+</div>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+const stages=[
+ {title:'Штатная эксплуатация',copy:'Внутренняя гермограница закрыта. Наружная кассета зафиксирована. LED-небосвод работает, сервисная камера находится в дежурном режиме.',label:'ШТАТНЫЙ РЕЖИМ',hint:'Обе границы закрыты. Сервисная камера находится в дежурном режиме.'},
+ {title:'Изоляция сервисной зоны',copy:'Внутренняя гермограница закрывается и подтверждает два независимых контура уплотнения. Наружный привод остаётся заблокирован.',label:'1 · ИЗОЛЯЦИЯ',hint:'Внутренняя гермограница закрыта и подтверждена датчиками.'},
+ {title:'Согласование давления с улицей',copy:'Камера медленно меняет давление через отдельный регулируемый контур. Переход дальше разрешён только после достижения допустимого перепада.',label:'2 · БАЛАНС С НАРУЖНЫМ КОНТУРОМ',hint:'Давление в камере изменяется постепенно. Внутренний контур остаётся изолированным.'},
+ {title:'Парковка LED-панели',copy:'Сегмент внутреннего LED-небосвода отходит по направляющей в защищённую парковочную нишу. Гермограница жилого пространства остаётся неподвижной.',label:'3 · LED В ПАРКОВОЧНОЙ НИШЕ',hint:'LED-сегмент отведён. Сервисный проём освобождён.'},
+ {title:'Выдвижение наружной кассеты',copy:'После проверки давления, внутренних замков и положения LED-панели внешняя кассета отходит по направляющим. Сервисная платформа занимает рабочее положение.',label:'4 · КАССЕТА ВЫДВИНУТА',hint:'Наружная створка открыта только в изолированную сервисную камеру.'},
+ {title:'Осмотр и обслуживание',copy:'Сервисный модуль проверяет уплотнения, направляющие, дренаж, нагревательные дорожки и сенсоры. Результаты фиксируются в паспорте выбранной кассеты.',label:'5 · ДИАГНОСТИКА',hint:'Проверяются уплотнения, дренаж, датчики и привод кассеты.'},
+ {title:'Возврат и герметизация',copy:'Кассета и сервисная платформа возвращаются в закрытое положение. Замки фиксируются. Перед переключением давления выполняется проверка закрытия.',label:'6 · ВОЗВРАТ КАССЕТЫ',hint:'Наружная граница закрыта и зафиксирована. Внутренняя граница остаётся закрытой.'},
+ {title:'Возврат давления к внутренней зоне',copy:'После подтверждения наружного закрытия камера постепенно выравнивает давление с внутренней климатической зоной. Внутренний шлюз пока остаётся заперт.',label:'7 · БАЛАНС С ВНУТРЕННИМ КОНТУРОМ',hint:'Давление камеры возвращается к внутреннему значению через отдельный контур.'},
+ {title:'Восстановление внутреннего режима',copy:'После достижения допустимого перепада и теста герметичности внутренний шлюз разблокируется. LED-панель возвращается, система выполняет итоговую самопроверку.',label:'8 · ШТАТНЫЙ РЕЖИМ ВОССТАНОВЛЕН',hint:'Обе границы закрыты; внутренний шлюз разблокируется только после подтверждения баланса.'}
+];
+const state={stage:0,autoTimer:null,pressureTimer:null,antiIce:true,pressure:true,precipitation:true,outsidePressure:88,insidePressure:101.3,outsideTemp:-25,humidity:82,wind:8,chamberPressure:101.3,selectedCassette:25,pressureRate:3.8,notice:''};
+const fmt=(n,d=1)=>Number(n).toFixed(d);
+function signed(n,d=1){return (n<0?'−':'')+Math.abs(n).toFixed(d);}
+function moduleCode(index){const ring=Math.floor((index-1)/12)+1,sector=(index-1)%12+1;return {ring,sector,code:`A01-CAS-R${String(ring).padStart(2,'0')}-S${String(sector).padStart(2,'0')}`};}
+function pressureTarget(){return state.stage>=2&&state.stage<=6?state.outsidePressure:state.insidePressure;}
+function pressureBalanced(target=pressureTarget()){return state.pressure&&Math.abs(state.chamberPressure-target)<=.35;}
+function setClass(id,cls,on){const el=$(id);if(el)el.classList.toggle(cls,!!on);}
+function dewPointC(temp,rh){const a=17.62,b=243.12,humidity=clamp(rh,1,100)/100,g=(a*temp)/(b+temp)+Math.log(humidity);return b*g/(a-g);}
+function iceModel(){
+ const dew=dewPointC(state.outsideTemp,state.humidity);
+ const cold=clamp((2-state.outsideTemp)/14,0,1);
+ const moisture=clamp((state.humidity-50)/50,0,1);
+ const condensation=clamp((2-dew)/18,0,1)*.10;
+ const wet=state.precipitation ? 0.30 : 0;
+ const wind=clamp(state.wind/30,0,1)*.10;
+ const risk=Math.round(clamp(cold*(.45+moisture*.25+condensation+wet+wind)*100,0,100));
+ const demand=risk>=32?Math.round(clamp((risk-24)*1.12+state.wind*.55+(state.precipitation?12:0),0,100)):0;
+ const active=state.antiIce&&risk>=32;
+ return {dew,risk,demand:active?demand:0,active};
+}
+function updateModule(){
+ const m=moduleCode(state.selectedCassette);
+ $('selectedModuleCode').textContent=m.code;
+ $('cassetteIndexOut').textContent=`${state.selectedCassette} / 144`;
+ $('moduleDescription').textContent=`Ряд ${String(m.ring).padStart(2,'0')} · сектор ${String(m.sector).padStart(2,'0')} · сервисный модуль A01-L03-D01`;
+ $('selectedShellLabel').textContent=`R${String(m.ring).padStart(2,'0')} / S${String(m.sector).padStart(2,'0')}`;
+ const x=300+(m.sector-6.5)*22,y=448-(m.ring-1)*27.2;
+ $('selectedShellCell').setAttribute('transform',`translate(${(x-437).toFixed(1)} ${(y-190).toFixed(1)})`);
+}
+function updatePressure(){
+ const target=pressureTarget(),delta=Math.abs(state.chamberPressure-target),balanced=pressureBalanced(target);
+ $('outsideP').textContent=fmt(state.outsidePressure)+' kPa';
+ $('insideP').textContent=fmt(state.insidePressure)+' kPa';
+ $('chamberP').textContent=fmt(state.chamberPressure)+' kPa';
+ $('deltaP').textContent='Δ до цели '+fmt(delta)+' kPa';
+ $('outsidePressureOut').textContent=fmt(state.outsidePressure)+' kPa';
+ $('pressureState').textContent=!state.pressure?'Автоматический баланс отключён · переход через шлюз заблокирован.':balanced?'Давление согласовано · допустимый перепад достигнут.':`Выравнивание: ${fmt(delta)} kPa до цели · скорость модели ${fmt(state.pressureRate)} kPa/с.`;
+ $('pressureState').style.color=!state.pressure?'#b14f4f':balanced?'#477e68':'#8a6b37';
+}
+function updateIce(){
+ const ice=iceModel();
+ $('surfaceT').textContent=signed(state.outsideTemp,0)+' °C';
+ $('outsideTempOut').textContent=signed(state.outsideTemp,0)+' °C';
+ $('iceRisk').textContent=ice.risk>=70?'Высокий риск':ice.risk>=35?'Умеренный риск':'Низкий риск';
+ $('iceRisk').style.color=ice.risk>=70?'#b14f4f':ice.risk>=35?'#98723a':'#477e68';
+ $('riskScore').textContent=ice.risk+' / 100';
+ $('riskScore').style.color=ice.risk>=70?'#b14f4f':ice.risk>=35?'#98723a':'#477e68';
+ $('dewPoint').textContent='Точка росы: '+signed(ice.dew,1)+' °C';
+ $('heatPower').textContent=ice.active?ice.demand+' %':'0 %';
+ $('heatStatus').textContent=ice.active?'Локальные зоны · нагрев включён':state.antiIce?'Ожидание риска':'Антиобледенение выключено';
+ $('heatPower').style.color=ice.active?'#477e68':'var(--ink)';
+ $('riskFill').style.width=ice.risk+'%';
+ $('riskFill').style.background=ice.risk>=70?'#c55a5a':ice.risk>=35?'#d49b4c':'#5b9e9b';
+ $('humidityOut').textContent=state.humidity+' %';
+ $('windOut').textContent=state.wind+' м/с';
+ setClass('heatGlow','off',!ice.active);
+ setClass('drainGlow','active',ice.active);
+}
+function updateInterlock(){
+ const s=state.stage,externalOpen=s===4||s===5,internalReleased=s===8;
+ const outsideOK=pressureBalanced(state.outsidePressure),insideOK=pressureBalanced(state.insidePressure);
+ let safe=true,title='Блокировки в норме',text='Обе гермограницы контролируются раздельно. Одновременное открытие исключено.';
+ if(externalOpen){safe=state.pressure&&outsideOK;if(!safe){title='Наружный доступ заблокирован';text='Кассета не должна оставаться открытой при несогласованном давлении. Контроллер возвращает её в закрытое положение.';}else{text='Внутренняя гермограница закрыта; сервисная камера согласована с наружным контуром.';}}
+ else if(s===2||s===3){safe=state.pressure&&outsideOK;if(!safe){title='Идёт балансировка';text='Выдвижение заблокировано до выравнивания давления с наружным контуром.';}else{title='Наружный контур согласован';text='Допустимый перепад достигнут. Можно продолжить сервисную последовательность.';}}
+ else if(s===7){safe=state.pressure&&insideOK;if(!safe){title='Восстановление давления';text='Внутренний шлюз остаётся заперт до достижения целевого давления.';}else{title='Баланс с интерьером достигнут';text='Проверка перепада пройдена. Следующая стадия восстановит внутренний режим.';}}
+ else if(internalReleased){safe=state.pressure&&insideOK;title=safe?'Штатный режим восстановлен':'Внутренний шлюз заблокирован';text=safe?'Давление согласовано, наружная кассета закрыта, сервисный цикл завершён.':'Недопустимый перепад: внутренний шлюз не должен разблокироваться.';}
+ $('interlockBox').classList.toggle('warn',!safe);
+ $('interlockIcon').textContent=safe?'✓':'!';
+ $('interlockTitle').textContent=title;
+ $('interlockText').textContent=text;
+}
+function updateVisual(){
+ const s=state.stage;
+ setClass('cassetteLeaf','extended',s===4||s===5);
+ setClass('ledPanel','parked',s>=3&&s<=7);
+ setClass('servicePod','deployed',s===4||s===5);
+ $('selectedShellCell').classList.toggle('service',s===4||s===5);
+ $('airflow').classList.toggle('active',s===2||s===7);
+ $('svgStageLabel').textContent='РЕЖИМ: '+stages[s].label;
+ $('svgStageHint').textContent=stages[s].hint;
+ $('stageTitle').textContent=stages[s].title;
+ $('stageCopy').textContent=stages[s].copy;
+ $('stageTrack').replaceChildren(...stages.map((_,i)=>{const el=document.createElement('span');el.className='stage-step'+(i<s?' done':i===s?' current':'');return el;}));
+ $('prevBtn').disabled=s===0;
+ $('nextBtn').disabled=s===stages.length-1;
+ $('nextBtn').textContent=s===stages.length-1?'Цикл завершён':'Следующая стадия →';
+ updatePressure();updateIce();updateInterlock();
+}
+function showNotice(title,text){$('interlockTitle').textContent=title;$('interlockText').textContent=text;$('interlockBox').classList.add('warn');}
+function stopAuto(){if(state.autoTimer){clearInterval(state.autoTimer);state.autoTimer=null;}$('autoBtn').classList.remove('active');$('autoBtn').textContent='Автопрогон';}
+function goTo(n){
+ const next=clamp(n,0,stages.length-1);
+ if(next>state.stage+1){showNotice('Пропуск стадий запрещён','Сервисный цикл выполняется последовательно: изоляция → баланс → парковка LED → кассета → обслуживание → герметизация → возврат давления.');return false;}
+ if(next===3&&!pressureBalanced(state.outsidePressure)){showNotice('Парковка LED ожидает баланса','Сначала дождитесь выравнивания давления сервисной камеры с наружным контуром.');return false;}
+ if(next===4||next===5){
+  if(!state.pressure||!pressureBalanced(state.outsidePressure)){showNotice('Выдвижение запрещено','Наружный доступ разрешён только при включённом контуре давления и перепаде не более 0,35 kPa.');return false;}
+  if(state.stage<3){showNotice('LED-панель не припаркована','Сначала отведите внутреннюю LED-панель в защищённую нишу.');return false;}
+ }
+ if(next===7){
+  if(state.stage!==6){showNotice('Наружная кассета не закрыта','Сначала верните кассету, зафиксируйте замки и подтвердите закрытие внешней границы.');return false;}
+  if(!state.pressure){showNotice('Балансировка невозможна','Включите автоматический контур давления. Внутренний шлюз остаётся заперт.');return false;}
+ }
+ if(next===8){
+  if(state.stage!==7||!pressureBalanced(state.insidePressure)){showNotice('Внутренний шлюз заблокирован','Сначала завершите выравнивание давления камеры с внутренней климатической зоной.');return false;}
+ }
+ state.stage=next;updateVisual();return true;
+}
+function pressureTick(){
+ if(state.pressure){
+  const target=pressureTarget(),delta=target-state.chamberPressure,step=state.pressureRate*.1;
+  state.chamberPressure+=Math.sign(delta)*Math.min(Math.abs(delta),step);
+ }
+ updatePressure();updateInterlock();
+ if(state.autoTimer && ((state.stage===2&&pressureBalanced(state.outsidePressure))||(state.stage===7&&pressureBalanced(state.insidePressure)))){
+  const next=state.stage+1;
+  if(next<=8)goTo(next);
+ }
+}
+$('prevBtn').addEventListener('click',()=>{stopAuto();if(state.stage===4||state.stage===5)goTo(3);else goTo(state.stage-1);});
+$('nextBtn').addEventListener('click',()=>{stopAuto();goTo(state.stage+1);});
+$('resetBtn').addEventListener('click',()=>{
+ stopAuto();state.stage=0;state.outsidePressure=88;state.outsideTemp=-25;state.humidity=82;state.wind=8;state.precipitation=true;state.antiIce=true;state.pressure=true;state.chamberPressure=state.insidePressure;state.selectedCassette=25;
+ $('outsidePressure').value='88';$('outsideTemp').value='-25';$('humidity').value='82';$('wind').value='8';$('cassetteIndex').value='25';
+ $('antiIceToggle').setAttribute('aria-pressed','true');$('pressureToggle').setAttribute('aria-pressed','true');$('precipToggle').setAttribute('aria-pressed','true');updateModule();updateVisual();
+});
+$('autoBtn').addEventListener('click',()=>{
+ if(state.autoTimer){stopAuto();return;}
+ if(state.stage===8){state.stage=0;state.chamberPressure=state.insidePressure;updateVisual();}
+ $('autoBtn').classList.add('active');$('autoBtn').textContent='Остановить';
+ state.autoTimer=setInterval(()=>{
+  if(state.stage>=8){stopAuto();return;}
+  if(state.stage===2&&!pressureBalanced(state.outsidePressure))return;
+  if(state.stage===7&&!pressureBalanced(state.insidePressure))return;
+  if(!goTo(state.stage+1)){stopAuto();return;}
+  if(state.stage===8)stopAuto();
+ },1200);
+});
+$('antiIceToggle').addEventListener('click',e=>{state.antiIce=!state.antiIce;e.currentTarget.setAttribute('aria-pressed',String(state.antiIce));updateIce();});
+$('pressureToggle').addEventListener('click',e=>{
+ state.pressure=!state.pressure;e.currentTarget.setAttribute('aria-pressed',String(state.pressure));
+ if(!state.pressure&&(state.stage===4||state.stage===5)){state.stage=3;stopAuto();updateVisual();showNotice('Кассета автоматически возвращена','Потеря контура давления инициировала закрытие наружной кассеты. Внутренняя граница остаётся изолированной.');return;}
+ if(!state.pressure&&state.stage===2)showNotice('Балансировка остановлена','Без активного контура давления доступ к сервисной камере запрещён.');
+ updatePressure();updateInterlock();
+});
+$('precipToggle').addEventListener('click',e=>{state.precipitation=!state.precipitation;e.currentTarget.setAttribute('aria-pressed',String(state.precipitation));updateIce();});
+$('outsidePressure').addEventListener('input',e=>{
+ state.outsidePressure=Number(e.target.value);
+ if(state.stage===4||state.stage===5){state.stage=3;stopAuto();updateVisual();showNotice('Изменение наружного давления','Кассета закрыта автоматически из-за изменения внешних условий. Камера повторно согласует давление.');return;}
+ updatePressure();updateInterlock();
+});
+$('outsideTemp').addEventListener('input',e=>{state.outsideTemp=Number(e.target.value);updateIce();});
+$('humidity').addEventListener('input',e=>{state.humidity=Number(e.target.value);updateIce();});
+$('wind').addEventListener('input',e=>{state.wind=Number(e.target.value);updateIce();});
+$('cassetteIndex').addEventListener('input',e=>{state.selectedCassette=Number(e.target.value);updateModule();});
+document.addEventListener('keydown',e=>{
+ if(e.altKey||e.ctrlKey||e.metaKey||['INPUT','BUTTON'].includes(document.activeElement?.tagName))return;
+ if(e.key==='ArrowRight'&&!$('nextBtn').disabled){stopAuto();goTo(state.stage+1);}
+ if(e.key==='ArrowLeft'&&!$('prevBtn').disabled){stopAuto();if(state.stage===4||state.stage===5)goTo(3);else goTo(state.stage-1);}
+ if(e.key==='Home'){$('resetBtn').click();}
+});
+window.A01_ENGINEERING_MODEL={state,stages,goTo,updateVisual,updatePressure,updateIce,iceModel,pressureBalanced,moduleCode};
+state.pressureTimer=setInterval(pressureTick,100);
+updateModule();updateVisual();
+window.addEventListener('pagehide',()=>{stopAuto();if(state.pressureTimer)clearInterval(state.pressureTimer);},{once:true});
+})();
+</script>
+</body>
+</html>
