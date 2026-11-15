@@ -8,6 +8,7 @@
 - [A-01 lift-up hatch and vertical pod transfer v0.1](../architecture/A01-LIFT-UP-HATCH-VERTICAL-POD-TRANSFER-RU-v0.1.md)
 - [A-01 thermal, anti-icing and pressure management v0.1](../architecture/A01-THERMAL-ANTI-ICING-PRESSURE-MANAGEMENT-RU-v0.1.md)
 - [A-01 digital twin v3.2.0 — lift-up hatch, carriage and climate systems](../digital-twin/README_RU_v320.md)
+- [A-01 digital twin v3.2.1 — 13-stage engineering cycle inspector](../digital-twin/README_RU_v321.md)
 - [Architecture notes](../architecture/README.md)
 - [Digital twin](../digital-twin/README.md)
 - [A-01 v3.0.0 — Parametric Modular Shell](../digital-twin/README_RU_v300.md)

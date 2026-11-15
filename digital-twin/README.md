@@ -27,3 +27,12 @@ All geometry remains concept-level and uses uncalibrated model units. Full brows
 - [Changelog](CHANGELOG_v320.md)
 
 This is an experimental concept prototype. The hatch, carriage, anti-icing traces and pressure equalization are visual concepts only; no physical or safety verification is implied.
+
+
+## Experimental branch v3.2.1
+
+- [Russian v3.2.1 documentation](README_RU_v321.md)
+- [HTML prototype — Engineering Cycle Inspector](eva-sphere-a01-v321-engineering-cycle-inspector.html)
+- [Changelog](CHANGELOG_v321.md)
+
+v3.2.1 is based on the separate v3.2.0 lift-up hatch / vertical carriage experiment. It adds a manual 13-stage inspector, pause and step controls, camera tracking and model-derived movement readouts. It does not replace or modify v3.2.0, and it does not certify physical clearances or safety.
