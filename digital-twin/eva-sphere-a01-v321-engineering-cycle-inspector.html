@@ -4323,7 +4323,7 @@ function startDolekMovementCycle(id){
  dome.visible=false;shellPanelGroup.visible=true;projectionScreenGroup.visible=true;
  closeObjectDetails();
  $('objectPanelActions')?.querySelectorAll('button').forEach(button=>{button.disabled=true;});
- dolekMovementDemo={item,group,original:group.position.clone(),angle:Number(item.angle)||0,stroke,verticalTravel,panels,rig,start:performance.now(),phase:-1,previousVisibility,previousShellParent,inspector:dolekInspectorEnabled?{stage:0,progress:.04,playing:false,phaseStartProgress:.04,phaseStartedAt:performance.now(),phaseDuration:4200,followCamera:true}:null};
+ dolekMovementDemo={item,group,original:group.position.clone(),angle:Number(item.angle)||0,stroke,verticalTravel,panels,rig,start:performance.now(),phase:-1,previousVisibility,previousShellParent,inspector:dolekInspectorEnabled?{stage:0,progress:0,playing:false,phaseStartProgress:0,phaseStartedAt:performance.now(),phaseDuration:4200,followCamera:true}:null};
  if(dolekMovementDemo.inspector){createDolekEngineeringInspector(dolekMovementDemo);}
  updateSkyServiceStatus('01 · ИЗОЛЯЦИЯ И ПРОВЕРКА','Долька освобождена от людей. Внутренняя граница закрыта, инженерные подключения переведены в безопасное состояние.',.04);
  requestSceneRender();
