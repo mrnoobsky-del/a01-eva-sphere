@@ -4155,9 +4155,17 @@ function makeDolekMovementRig(item,bodyHeight,shellRadius,stroke,width,verticalT
  heat(new THREE.BoxGeometry(.08,.045,clearWidth*.9),[.18,-.025,0],'Подогрев водосборного канала');
  const drain=new THREE.Mesh(new THREE.BoxGeometry(.20,.045,clearWidth*.78),new THREE.MeshStandardMaterial({color:0x416b78,metalness:.5,roughness:.3}));drain.position.set(.25,-.07,0);drain.name='Слив талой воды наружу';antiIce.add(drain);
  const purge=new THREE.Mesh(new THREE.CylinderGeometry(.035,.035,clearWidth*.66,10),new THREE.MeshStandardMaterial({color:0x82b9c4,metalness:.42,roughness:.32}));purge.rotation.x=Math.PI/2;purge.position.set(-.20,.10+clearHeight*.78,0);purge.name='Коллектор сухой продувки уплотнения';antiIce.add(purge);
- const tempLights=[];for(const pos of [[.20,.10,0],[.20,.10+clearHeight,0],[.20,centerY,clearWidth*.45],[.20,centerY,-clearWidth*.45]]){const led=new THREE.Mesh(new THREE.SphereGeometry(.045,8,6),new THREE.MeshBasicMaterial({color:0xd49b55}));led.position.set(...pos);led.name='Датчик температуры/точки росы';antiIce.add(led);tempLights.push(led);}
+ const tempLights=[];for(const pos of [[.20,.10,0],[.20,.10+clearHeight,0],[.20,centerY,clearWidth*.45],[.20,centerY,-clearWidth*.45],[.29,.04,clearWidth*.30]]){const led=new THREE.Mesh(new THREE.SphereGeometry(.045,8,6),new THREE.MeshBasicMaterial({color:0xd49b55}));led.position.set(...pos);led.name='Датчик температуры/точки росы';antiIce.add(led);tempLights.push(led);}
  const radialStart=DOLEK_OUTER_RADIUS-.42,podDepth=DOLEK_OUTER_RADIUS-DOLEK_INNER_RADIUS,liftX=(DOLEK_INNER_RADIUS+DOLEK_OUTER_RADIUS)/2+stroke,radialEnd=liftX+podDepth/2+.36,radialLength=Math.max(.8,radialEnd-radialStart);
  for(const side of [-1,1]){const rail=new THREE.Mesh(new THREE.BoxGeometry(radialLength,.075,.105),metal);rail.position.set(radialStart+radialLength/2,.045,side*portalWidth*.37);rail.name='Радиальная направляющая выезда';rig.add(rail);const track=new THREE.Mesh(new THREE.BoxGeometry(radialLength,.025,.14),amber);track.position.set(radialStart+radialLength/2,.095,side*portalWidth*.37);track.name='Привод радиального трансфера';rig.add(track);}
+ const sleeveRings=[];
+ for(let i=0;i<3;i++){
+  const ring=new THREE.Group();ring.name='Телескопическое кольцо погодного рукава '+(i+1);
+  const postGeo=new THREE.BoxGeometry(.055,portalHeight-.06,.055),barGeo=new THREE.BoxGeometry(.055,.055,portalWidth-.06);
+  for(const side of [-1,1]){const post=new THREE.Mesh(postGeo,seal);post.position.set(0,centerY,side*(portalWidth-.06)/2);ring.add(post);}
+  for(const yy of [.13,bodyHeight+.07]){const bar=new THREE.Mesh(barGeo,seal);bar.position.set(0,yy,0);ring.add(bar);}
+  ring.visible=false;rig.add(ring);sleeveRings.push(ring);
+ }
  const verticalLift=new THREE.Group();verticalLift.name='Отдельная вертикальная рама направляющих';verticalLift.position.set(liftX,0,0);
  const platformWidth=portalWidth+.44,platformDepth=podDepth+.54,railHeight=bodyHeight+verticalTravel+.42;
  for(const side of [-1,1]){
@@ -4177,7 +4185,7 @@ function makeDolekMovementRig(item,bodyHeight,shellRadius,stroke,width,verticalT
  function equalizer(name,z){const unit=new THREE.Group();unit.name=name;unit.position.set(-.17,centerY,z);const pipe=new THREE.Mesh(new THREE.CylinderGeometry(.055,.055,.62,12),pipeMat);pipe.rotation.z=Math.PI/2;pipe.name='Канал байпасного выравнивания';unit.add(pipe);const valve=new THREE.Group();const body=new THREE.Mesh(new THREE.CylinderGeometry(.105,.105,.15,12),dark);body.rotation.z=Math.PI/2;valve.add(body);const handle=new THREE.Mesh(new THREE.BoxGeometry(.25,.035,.045),amber);handle.position.y=.16;valve.add(handle);unit.add(valve);const led=new THREE.Mesh(new THREE.SphereGeometry(.055,10,8),new THREE.MeshBasicMaterial({color:0xd49b55}));led.position.set(.05,.18,.15);unit.add(led);pressure.add(unit);return{valve,status:led};}
  const outerEqualizer=equalizer('Выравнивание тамбур ↔ улица',portalWidth/2+.24),innerEqualizer=equalizer('Выравнивание тамбур ↔ внутренний объём',-portalWidth/2-.24);
  const dpSensor=new THREE.Mesh(new THREE.BoxGeometry(.13,.20,.10),pipeMat);dpSensor.position.set(-.26,centerY,0);dpSensor.name='Датчик перепада давления через наружную створку';pressure.add(dpSensor);
- rig.userData.portalX=shellRadius;rig.userData.sleeveRings=[];rig.userData.width=width;rig.userData.height=bodyHeight;rig.userData.hatchWidth=hatchWidth;rig.userData.hatchHeight=hatchHeight;rig.userData.hatchOpenAngle=1.56;rig.userData.outerHatch=hatch;
+ rig.userData.portalX=shellRadius;rig.userData.sleeveRings=sleeveRings;rig.userData.width=width;rig.userData.height=bodyHeight;rig.userData.hatchWidth=hatchWidth;rig.userData.hatchHeight=hatchHeight;rig.userData.hatchOpenAngle=1.56;rig.userData.outerHatch=hatch;
  rig.userData.innerGate=innerGate;rig.userData.outerGate=outerGate;rig.userData.vestibule=vestibule;rig.userData.verticalLift=verticalLift;rig.userData.liftCarriage=carriage;rig.userData.liftTravel=verticalTravel;rig.userData.liftStartY=centerY;
  rig.userData.heatLines=heatLines;rig.userData.tempLights=tempLights;rig.userData.outerEqualizer=outerEqualizer;rig.userData.innerEqualizer=innerEqualizer;
  return rig;
