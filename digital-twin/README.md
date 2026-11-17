@@ -28,3 +28,11 @@ This is an experimental visual candidate based on v3.5.0. It is not a stable rel
 - [Visual match pass changelog](CHANGELOG_v360_dev2.md)
 
 This candidate adds a persistent camera preset in the stage top toolbar and parametric wavy gallery fascias. It remains on an experimental feature branch; it is not merged into main or deployed to the uCoz site.
+
+
+## A-01 v3.6.0-dev.3 — Reproducible Reference Capture
+
+- [Open reference-atrium build](eva-sphere-a01-v360-reference-atrium.html)
+- [Reference capture changelog](CHANGELOG_v360_dev3.md)
+
+The build adds the named 1200×675 reference camera preset and paired PNG / camera-JSON export. It remains an experimental feature branch and is not merged into main or deployed to the uCoz site.
