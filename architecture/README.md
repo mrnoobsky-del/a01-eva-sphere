@@ -31,3 +31,10 @@ The cassette document is a proposed interface and verification brief. It does no
 - [Dependency-free layout generator](../tools/generate-cassette-layout.mjs)
 
 The proposed grid contains 12 parent sectors and 144 candidate cassette records. All dimensions remain in uncalibrated model units.
+
+
+## v3.6.0 architecture and visual specification
+
+- [A-01 v3.6.0 — архитектура, визуальная система и инженерная интеграция](A01-V360-ARCHITECTURE-VISUAL-ENGINEERING-SPEC_RU.md)
+
+The specification is a proposed design brief. It does not mark v3.6.0 as implemented or released.
