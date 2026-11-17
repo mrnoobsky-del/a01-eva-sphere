@@ -14,7 +14,7 @@ A-01 is an open project record for a long-term vision: a resilient, human-centre
 **Eva Sphere workspace:** https://evasphere.usite.pro/  
 **Support the project:** [Voluntary contribution](https://yoomoney.ru/to/410015357551847)
 
-**Languages:** [English](README.md) · [Русский](README_RU.md)
+**Languages:** [English](README.md) · [Русский](README_RU.md) · [简体中文](README_ZH.md)
 
 ## Project status
 
@@ -158,3 +158,13 @@ This development candidate is based on the v3.5.0 integrated digital twin. It is
 - [Architecture and visual engineering specification](architecture/A01-V360-ARCHITECTURE-VISUAL-ENGINEERING-SPEC_RU.md)
 
 The camera preset is placed in the always-visible stage top toolbar. This remains a development candidate, not a stable release.
+
+
+## Release candidate — A-01 v3.6.0-rc1
+
+- [Open the RC digital twin](digital-twin/eva-sphere-a01-v360-reference-atrium.html)
+- [English, Russian and Simplified Chinese release notes](digital-twin/README_v360.md) · [Русский](digital-twin/README_RU_v360.md) · [简体中文](digital-twin/README_ZH_v360.md)
+- [Golden-section proportion study](architecture/A01-GOLDEN-SECTION-STUDY-v0.1.md)
+- [598 geometry-only component passports](geometry/a01-component-passports-v0.1.json)
+
+This RC is maintained on the release/a01-v360-architecture-i18n-rc1 branch. It is not merged into main and is not deployed to the public uCoz workspace. It separates STR / ENV / CAS / SKY in the model, adds conceptual support geometry, corrects the speaker floor-local coordinate bug, and enables RU / EN / zh-CN UI dictionaries. Engineering quantities without source evidence remain null / TBD.
