@@ -149,3 +149,12 @@ The layout is derived from the digital-twin dome parameters, uses uncalibrated m
 - [Russian architecture and visual engineering specification](architecture/A01-V360-ARCHITECTURE-VISUAL-ENGINEERING-SPEC_RU.md)
 
 This development candidate is based on the v3.5.0 integrated digital twin. It is intentionally kept on a feature branch and is not a stable release or a deployment to the public uCoz workspace. Full cross-device WebGL verification and professional engineering validation remain outstanding. The main branch continues to identify v3.5.0 as its latest integrated experimental line.
+
+
+## Experimental architecture candidate — A-01 v3.6.0-dev.2
+
+- [Open reference-atrium camera and visual match build](digital-twin/eva-sphere-a01-v360-reference-atrium.html)
+- [v3.6.0-dev.2 changelog](digital-twin/CHANGELOG_v360_dev2.md)
+- [Architecture and visual engineering specification](architecture/A01-V360-ARCHITECTURE-VISUAL-ENGINEERING-SPEC_RU.md)
+
+The camera preset is placed in the always-visible stage top toolbar. This remains a development candidate, not a stable release.
