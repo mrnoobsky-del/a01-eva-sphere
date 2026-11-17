@@ -4,7 +4,7 @@
 **Status:** experimental visual iteration; not a stable release.
 
 ## Added in this pass
-- Camera preset `Ракурс как на фото`: smooth flight to a centered, elevated interior atrium view with a wide architectural field of view.
+- Always-visible camera preset in the stage top toolbar: `Ракурс как на фото`, with a smooth flight to a centered, elevated interior atrium view and a wide architectural field of view.
 - Smooth transition of camera field of view as well as camera position and target.
 - Reset restores the original general overview and original field of view.
 - Replaced rigid cylindrical ring fascias with parametric, gently undulating continuous fascia surfaces and rounded upper/lower edges on the five circular floor levels.
