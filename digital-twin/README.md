@@ -20,3 +20,11 @@ The v3.1.2 build improves the first-arrival sequence, splits the interior LED sk
 - [Architecture and visual engineering specification](../architecture/A01-V360-ARCHITECTURE-VISUAL-ENGINEERING-SPEC_RU.md)
 
 This is an experimental visual candidate based on v3.5.0. It is not a stable release, has not been merged into main, and has not yet passed cross-device WebGL verification or physical engineering review.
+
+
+## A-01 v3.6.0-dev.2 — Reference Atrium Visual Match
+
+- [Open experimental reference-atrium view](eva-sphere-a01-v360-reference-atrium.html)
+- [Visual match pass changelog](CHANGELOG_v360_dev2.md)
+
+This candidate adds a persistent camera preset in the stage top toolbar and parametric wavy gallery fascias. It remains on an experimental feature branch; it is not merged into main or deployed to the uCoz site.
