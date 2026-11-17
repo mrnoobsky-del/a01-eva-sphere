@@ -4859,10 +4859,67 @@ function renderFrame(now){
  lastRenderTimestamp=now;sceneNeedsRender=false;
  if(hasContinuousSceneMotion()||controlsMoving){if(!renderRequestId)renderRequestId=requestAnimationFrame(renderFrame);}
 }
+function buildA01ComponentManifest(){
+ const records=[],seen=new Map();let meshIndex=0;
+ scene.updateMatrixWorld(true);
+ scene.traverse(object=>{
+  if(!object.isMesh||!object.geometry)return;
+  meshIndex++;
+  const proposed=object.userData.componentTag||object.userData.assetTag||'A01-CMP-'+String(meshIndex).padStart(6,'0');
+  const duplicateCount=(seen.get(proposed)||0)+1;seen.set(proposed,duplicateCount);
+  const componentTag=duplicateCount===1?proposed:proposed+'-R'+String(duplicateCount).padStart(2,'0');
+  object.userData.componentTag=componentTag;
+  if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();
+  const bounds=object.geometry.boundingBox?object.geometry.boundingBox.getSize(new THREE.Vector3()):null;
+  const worldPosition=object.getWorldPosition(new THREE.Vector3());
+  let ancestor=object.parent,parentAssetTag=object.userData.parentAssetTag||object.userData.itemId||null,system=object.userData.system||null;
+  while(ancestor&&(!parentAssetTag||!system)){
+   if(!parentAssetTag)parentAssetTag=ancestor.userData?.assetTag||ancestor.userData?.item?.id||null;
+   if(!system)system=ancestor.userData?.system||null;
+   ancestor=ancestor.parent;
+  }
+  system=system||'ARC';
+  const record={
+   componentTag,assetTag:object.userData.assetTag||componentTag,parentAssetTag,system,
+   role:object.userData.role||object.name||object.geometry.type||'mesh',
+   geometryType:object.geometry.type||'BufferGeometry',units:'model-unit',
+   worldPositionModelUnit:{x:worldPosition.x,y:worldPosition.y,z:worldPosition.z},
+   localTransform:{position:{x:object.position.x,y:object.position.y,z:object.position.z},rotation:{x:object.rotation.x,y:object.rotation.y,z:object.rotation.z},scale:{x:object.scale.x,y:object.scale.y,z:object.scale.z}},
+   localBoundsModelUnit:bounds?{x:bounds.x,y:bounds.y,z:bounds.z}:null,
+   quantity:object.isInstancedMesh?object.count:1,
+   materialStatus:'not selected',mass_kg:null,designActions:null,
+   verificationState:object.userData.verificationState||'unknown'
+  };
+  object.userData.componentPassport=record;records.push(record);
+ });
+ return {
+  schemaVersion:'0.1.0',projectId:'A-01',assemblyId:'A01-DIGITAL-TWIN-DEV4',
+  status:'proposed digital component register',units:'model-unit',scaleToMetres:null,
+  componentCount:records.length,
+  designStudies:{goldenRatio:A01_GOLDEN_RATIO_STUDY,structure:a01StructureModel},
+  supportSystems:{acoustics:a01AcousticSupportRecords},
+  components:records,
+  warnings:[
+   'Geometry positions and bounds are in uncalibrated model units, not metres.',
+   'InstancedMesh quantity is an aggregate count; individual instance-level schedules require a separate expansion.',
+   'Material grades, mass, load cases, design actions, connections, capacities and code compliance are not inferred from render geometry.',
+   'Verification state remains unknown until supporting calculations, product data and competent review are linked.'
+  ]
+ };
+}
+function exportA01ComponentManifest(){
+ const data=buildA01ComponentManifest();
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+ const url=URL.createObjectURL(blob),link=document.createElement('a');
+ link.href=url;link.download='A01_COMPONENT_MANIFEST_v0.1.json';
+ document.body.appendChild(link);link.click();link.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1500);
+ return data.componentCount;
+}
 requestSceneRender();
 window.EVA_SPHERE={
  THREE,scene,camera,controls,renderer,world,
- structure:a01StructureModel,goldenRatioStudy:A01_GOLDEN_RATIO_STUDY,
+ structure:a01StructureModel,goldenRatioStudy:A01_GOLDEN_RATIO_STUDY,buildComponentManifest:buildA01ComponentManifest,exportComponentManifest:exportA01ComponentManifest,
  selectItem,openObjectDetails,setExteriorMode,requestSceneRender,
  CONFIG:{domeRadius:DOME_BASE_RADIUS*DOME_SCALE_XZ,domeHeight:DOME_BASE_RADIUS*DOME_SCALE_Y,atriumRadius:ATRIUM_RADIUS,outerRadius:OUTER_RADIUS,walkRadius,levels:levelInfo,levelY:{...levelY},viewingTerraces:a01TerraceSpec},
  acoustics:{state:a01AcousticState,speakers:a01SpeakerRecords,viewingTerraces:a01ViewRecords,baffles:a01AcousticBaffleGroup,soffits:a01SoffitGroup,accessiblePositions:a01ViewRecords.filter(x=>x.accessible),setMode:mode=>{a01AcousticState.mode=mode;a01ApplyAcoustics();},setZone:(zone,on)=>{a01AcousticState.zones[zone]=!!on;a01ApplyAcoustics();},showSightlines:on=>{a01AcousticState.showSightlines=!!on;a01ApplyAcoustics();}},
