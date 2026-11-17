@@ -2768,6 +2768,23 @@ function addA01DigitalScreen(parent,item,config={}){
  parent.add(mount);return mount;
 }
 
+function registerBuildingComponents(group,item){
+ group.userData.assetTag=item.id;group.userData.system='ARC';group.userData.units='model-unit';
+ let part=0;
+ group.traverse(object=>{
+  if(!object.isMesh||!object.geometry)return;
+  part++;
+  const componentTag=String(item.id)+'-PART-'+String(part).padStart(3,'0');
+  if(!object.userData.assetTag)object.userData.assetTag=componentTag;
+  object.userData.componentTag=componentTag;object.userData.parentAssetTag=item.id;object.userData.system=object.userData.system||'ARC';object.userData.quantity=object.isInstancedMesh?object.count:1;object.userData.units='model-unit';object.userData.verificationState=object.userData.verificationState||'unknown';
+  if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();
+  const box=object.geometry.boundingBox;
+  const size=box?box.getSize(new THREE.Vector3()):null;
+  object.userData.geometryPassport={componentTag,parentAssetTag:item.id,geometryType:object.geometry.type||'BufferGeometry',localPosition:{x:object.position.x,y:object.position.y,z:object.position.z},localRotation:{x:object.rotation.x,y:object.rotation.y,z:object.rotation.z},localScale:{x:object.scale.x,y:object.scale.y,z:object.scale.z},localBoundsModelUnit:size?{x:size.x,y:size.y,z:size.z}:null,quantity:object.isInstancedMesh?object.count:1,materialStatus:'not selected',mass_kg:null,designActions:null,verificationState:'unknown'};
+ });
+ group.userData.componentCount=part;return part;
+}
+
 function makeBuilding(item,parent){
  const g=new THREE.Group();
  if(item.kind==='atrium'){
@@ -2776,7 +2793,7 @@ function makeBuilding(item,parent){
   const inner=addMesh(g,new THREE.TorusGeometry(1.55,.045,8,100),materials.glow,[0,.06,0],[Math.PI/2,0,0]);inner.userData.itemId=item.id;
   for(let n=0;n<8;n++){const a=n*Math.PI/4;const bridge=addMesh(g,new THREE.BoxGeometry(ATRIUM_RADIUS-1.58,.075,.32),materials.light,[Math.cos(a)*((ATRIUM_RADIUS+1.58)/2),.04,Math.sin(a)*((ATRIUM_RADIUS+1.58)/2)],[0,-a,0]);bridge.userData.itemId=item.id;}
   for(let n=0;n<3;n++){const a=n*Math.PI*2/3,r=ATRIUM_RADIUS-.42;addA01DigitalScreen(g,item,{position:[Math.cos(a)*r,0,Math.sin(a)*r],rotationY:-Math.PI/2-a,width:.62,height:.42,screenY:1.08,screenKind:'atrium'});}
-  parent.add(g);itemGroups.set(item.id,g);return g;
+  registerBuildingComponents(g,item);parent.add(g);itemGroups.set(item.id,g);return g;
  }
  if(item.kind==='waste-node'){
   const a=item.angle||-Math.PI/2;g.position.set(Math.cos(a)*item.r,0,Math.sin(a)*item.r);g.rotation.y=-a;g.userData.item=item;
@@ -2792,7 +2809,7 @@ function makeBuilding(item,parent){
    const light=addMesh(g,new THREE.BoxGeometry(.075,.025,.025),new THREE.MeshBasicMaterial({color:[0x75d7a5,0x83c8f4,0xf1bd74,0xb7bec4][b]}),[x,.81,.43]);light.userData.itemId=item.id;
   }
   const status=addMesh(g,new THREE.BoxGeometry(.28,.12,.025),new THREE.MeshBasicMaterial({color:0x9fe4da}),[0,.98,.414]);status.userData.itemId=item.id;
-  parent.add(g);itemGroups.set(item.id,g);itemMeshes.push(shell,roofCap,front);return g;
+  registerBuildingComponents(g,item);parent.add(g);itemGroups.set(item.id,g);itemMeshes.push(shell,roofCap,front);return g;
  }
  if(item.kind==='data-center'){
   g.position.set(0,-2.12,0);g.userData.item=item;g.name='Подземный вычислительный уровень B1';
@@ -2820,7 +2837,7 @@ function makeBuilding(item,parent){
   const warmLoop=addMesh(g,new THREE.TorusGeometry(3.07,.035,8,96),new THREE.MeshStandardMaterial({color:0xe6a45f,emissive:0x75431c,emissiveIntensity:.55,roughness:.36,metalness:.3}),[0,.34,0],[Math.PI/2,0,0]);warmLoop.userData.itemId=item.id;
   const upsA=addMesh(g,new THREE.BoxGeometry(.50,.74,.48),new THREE.MeshStandardMaterial({color:0x5c4d63,roughness:.48,metalness:.3}),[-2.96,-.28,.25],[0,.2,0]);upsA.userData.itemId=item.id;upsA.name='Отдельная электрическая зона / UPS';
   const partition=addMesh(g,new THREE.BoxGeometry(.06,1.25,1.25),dcGlassMat,[-2.58,-.08,.25]);partition.userData.itemId=item.id;
-  parent.add(g);itemGroups.set(item.id,g);itemMeshes.push(dcFloor,outerWall,innerWall,ceilingRing);return g;
+  registerBuildingComponents(g,item);parent.add(g);itemGroups.set(item.id,g);itemMeshes.push(dcFloor,outerWall,innerWall,ceilingRing);return g;
  }
  const a=item.angle||0;
  if(item.isDolek){g.position.set(0,0,0);g.rotation.y=-a;}
@@ -2899,7 +2916,7 @@ function makeBuilding(item,parent){
   const cfg=screenMap[item.kind];
   addA01DigitalScreen(g,item,{...cfg,position:[inner+.34,0,.34],rotationY:-Math.PI/2,screenKind:item.kind});
  }
- parent.add(g);itemGroups.set(item.id,g);itemMeshes.push(body,base,roof);return g;
+ registerBuildingComponents(g,item);parent.add(g);itemGroups.set(item.id,g);itemMeshes.push(body,base,roof);return g;
 }
 for(const item of items){const parent=floorGroups.get(item.level);makeBuilding(item,parent);}
 
