@@ -2784,6 +2784,19 @@ function registerBuildingComponents(group,item){
  });
  group.userData.componentCount=part;return part;
 }
+function registerSystemAssetGroup(group,feature,system){
+ group.userData.assetTag=feature.id;group.userData.system=system;group.userData.units='model-unit';
+ let part=0;
+ group.traverse(object=>{
+  if(!object.isMesh||!object.geometry)return;part++;
+  const componentTag=String(feature.id)+'-PART-'+String(part).padStart(3,'0');
+  object.userData.assetTag=object.userData.assetTag||componentTag;object.userData.componentTag=componentTag;object.userData.parentAssetTag=feature.id;object.userData.system=system;object.userData.quantity=object.isInstancedMesh?object.count:1;object.userData.units='model-unit';object.userData.verificationState=object.userData.verificationState||'unknown';
+  if(!object.geometry.boundingBox)object.geometry.computeBoundingBox();
+  const size=object.geometry.boundingBox?object.geometry.boundingBox.getSize(new THREE.Vector3()):null;
+  object.userData.geometryPassport={componentTag,parentAssetTag:feature.id,system,geometryType:object.geometry.type||'BufferGeometry',localPosition:{x:object.position.x,y:object.position.y,z:object.position.z},localRotation:{x:object.rotation.x,y:object.rotation.y,z:object.rotation.z},localScale:{x:object.scale.x,y:object.scale.y,z:object.scale.z},localBoundsModelUnit:size?{x:size.x,y:size.y,z:size.z}:null,quantity:object.isInstancedMesh?object.count:1,materialStatus:'not selected',mass_kg:null,designActions:null,verificationStatus:'unknown'};
+ });
+ group.userData.componentCount=part;return part;
+}
 
 function makeBuilding(item,parent){
  const g=new THREE.Group();
@@ -2960,6 +2973,7 @@ const DOME_BASE_RADIUS=8.55;
 const DOME_SCALE_XZ=1.22;
 const DOME_SCALE_Y=1.35;
 const shellGroup=new THREE.Group();
+shellGroup.visible=false;
 shellGroup.position.y=.56;
 shellGroup.scale.set(DOME_SCALE_XZ,DOME_SCALE_Y,DOME_SCALE_XZ);
 world.add(shellGroup);
@@ -3066,7 +3080,7 @@ for(let sector=1;sector<=12;sector++)for(let column=1;column<=2;column++)for(let
  group.userData.servicePhi=phiStart+phiLength/2;group.userData.panelIndex=panelIndex;
  const mesh=new THREE.Mesh(geo,shellPanelMaterial.clone());mesh.userData.itemId=id;mesh.name=feature.name;group.add(mesh);
  const edges=makeSphericalPanelOutline(DOME_BASE_RADIUS*1.006,phiStart,phiLength,thetaStart,thetaEnd,shellPanelEdgeMaterial);edges.userData.itemId=id;edges.renderOrder=3;group.add(edges);
- shellPanelGroup.add(group);itemGroups.set(id,group);shellPanelFeatures.push(feature);allFeatures.push(feature);featureById.set(id,feature);
+ registerSystemAssetGroup(group,feature,'CAS');shellPanelGroup.add(group);itemGroups.set(id,group);shellPanelFeatures.push(feature);allFeatures.push(feature);featureById.set(id,feature);
 }
 
 // A-01 v3.4.0 — dedicated, selectable shell service node A01-L03-D01.
@@ -3164,7 +3178,7 @@ for(let sector=1;sector<=12;sector++)for(let column=1;column<=2;column++)for(let
  const panelMaterial=new THREE.MeshBasicMaterial({map:projectionSkyTexture,side:THREE.DoubleSide,depthWrite:false,fog:false,toneMapped:false});
  const mesh=new THREE.Mesh(geo,panelMaterial);mesh.userData.itemId=id;mesh.name=feature.name;mesh.renderOrder=-2;module.add(mesh);
  group.add(module);group.userData.serviceModule=module;group.userData.serviceCavity=cavity;
- projectionScreenGroup.add(group);itemGroups.set(id,group);skyPanelFeatures.push(feature);allFeatures.push(feature);featureById.set(id,feature);
+ registerSystemAssetGroup(group,feature,'SKY');projectionScreenGroup.add(group);itemGroups.set(id,group);skyPanelFeatures.push(feature);allFeatures.push(feature);featureById.set(id,feature);
 }
 // Fine seams correspond to the 24 azimuth columns and six meridional courses.
 const projectionSeamMaterial=new THREE.LineBasicMaterial({color:0xc8efff,transparent:true,opacity:.14,depthWrite:false,fog:false});
