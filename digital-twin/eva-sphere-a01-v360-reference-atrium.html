@@ -3916,7 +3916,7 @@ addMesh(evaGuideGroup,new THREE.CapsuleGeometry(.16,.34,4,10),evaGuideMat,[0,.48
 addMesh(evaGuideGroup,new THREE.SphereGeometry(.15,18,14),evaGuideMat,[0,.82,0]);
 addMesh(evaGuideGroup,new THREE.TorusGeometry(.18,.012,6,32),evaGuideGlow,[0,.82,0],[Math.PI/2,0,0]);
 addMesh(evaGuideGroup,new THREE.SphereGeometry(.035,12,10),evaGuideGlow,[0,.83,-.145]);
-evaGuideGroup.position.set(0,levelY[1]+.08,walkRadius+.20);evaGuideGroup.rotation.y=Math.PI;world.add(evaGuideGroup);
+evaGuideGroup.position.set(0,levelY[1]+.09,walkRadius+.20);evaGuideGroup.rotation.y=Math.PI;evaGuideGroup.userData={assetTag:"A01-OPS-EVA-GUIDE-01",system:"OPS",supportStatus:"floor-anchored",supportAnchor:"A01-STR-FLOOR-L01"};world.add(evaGuideGroup);
 const evaGuideLight=new THREE.PointLight(0x83dfff,.65,4,2);evaGuideLight.position.set(0,levelY[1]+.9,walkRadius+.18);world.add(evaGuideLight);
 const evaGuide={group:evaGuideGroup,light:evaGuideLight,level:1,theta:Math.PI/2};
 const robotGroup=new THREE.Group();
@@ -3933,7 +3933,7 @@ for(const x of [-.19,.19]){
 }
 const robotBeacon=addMesh(robotGroup,new THREE.SphereGeometry(.035,10,8),robotScreenMat,[0,.66,0]);
 world.add(robotGroup);
-const serviceRobot={group:robotGroup,level:1,theta:2.15,radius:4.20,speed:.10,phase:2.15};robotGroup.position.set(Math.cos(2.15)*4.20,levelY[1]+.08,Math.sin(2.15)*4.20);robotGroup.rotation.y=Math.PI-2.15;
+const serviceRobot={group:robotGroup,level:1,theta:2.15,radius:4.20,speed:.10,phase:2.15};robotGroup.userData={assetTag:"A01-MOB-SERVICE-ROBOT-01",system:"MOB",supportStatus:"floor-constrained-dynamic",supportAnchor:"A01-STR-FLOOR-L01",motionPath:{level:1,radiusModelUnit:4.20}};robotGroup.position.set(Math.cos(2.15)*4.20,levelY[1]+.065,Math.sin(2.15)*4.20);robotGroup.rotation.y=Math.PI-2.15;
 let activeWalkInteraction=null;
 function setWalkInteraction(target){
  if(activeWalkInteraction===target)return;activeWalkInteraction=target;
@@ -4809,8 +4809,8 @@ function renderFrame(now){
   for(const door of walkDoors){
    if(Math.abs(door.open-door.target)>.001){door.open+=(door.target-door.open)*Math.min(1,dt*5);if(Math.abs(door.open-door.target)<.002)door.open=door.target;door.left.position.x=-.245-door.open*.24;door.right.position.x=.245+door.open*.24;}
   }
-  const robotTheta=t*serviceRobot.speed+serviceRobot.phase;serviceRobot.group.position.set(Math.cos(robotTheta)*serviceRobot.radius,levelY[serviceRobot.level]+.08,Math.sin(robotTheta)*serviceRobot.radius);serviceRobot.group.rotation.y=Math.PI-robotTheta;robotBeacon.scale.setScalar(1+Math.sin(t*3.5)*.13);
-  evaGuide.group.position.y=levelY[evaGuide.level]+.08+Math.sin(t*1.35)*.035;evaGuide.group.rotation.y=Math.PI+Math.sin(t*.3)*.06;evaGuideLight.intensity=.48+Math.sin(t*2.1)*.12;
+  const robotTheta=t*serviceRobot.speed+serviceRobot.phase;serviceRobot.group.position.set(Math.cos(robotTheta)*serviceRobot.radius,levelY[serviceRobot.level]+.065,Math.sin(robotTheta)*serviceRobot.radius);serviceRobot.group.rotation.y=Math.PI-robotTheta;robotBeacon.scale.setScalar(1+Math.sin(t*3.5)*.13);
+  evaGuide.group.position.y=levelY[evaGuide.level]+.09;evaGuide.group.rotation.y=Math.PI+Math.sin(t*.3)*.06;evaGuideLight.intensity=.48+Math.sin(t*2.1)*.12;
   if(now-lastWalkGazeCheck>125){lastWalkGazeCheck=now;updateWalkGazeObject();}
  }else{
   controls.enabled=true;
