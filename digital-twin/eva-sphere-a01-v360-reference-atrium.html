@@ -2229,7 +2229,7 @@ const floorGroups = new Map();
 const itemGroups = new Map();
 const itemMeshes = [];
 const levelY = {0:.65,1:2.0,2:3.65,3:5.3,4:6.95};
-const ATRIUM_RADIUS = 3.72;
+const ATRIUM_RADIUS = 3.67231043; // Golden-section study: inner circulation band / outer circulation band = phi; model-unit proportion only, not egress sizing.
 const OUTER_RADIUS = 7.85;
 const levelInfo = {
   0:{name:'Пространство заботы и восстановления',short:'Забота',tone:0x9ce6c6,description:'Целевой базовый контур для каждого: питьевая вода, питание, одежда по сезону, душ, санитария, отдых и первичная поддержка независимо от дохода.'},
@@ -3937,7 +3937,7 @@ const energyModes={
 };
 const energyCalcParams={scale:2.4,pv:30,eff:19,cop:3.2,u:1.4,evPosts:4,robotPads:4};
 const energyDemandByKind={garden:40,terrace:40,lounge:25,'quiet-lounge':25,'nutrition-lounge':25,'rest-hall':25,'calm-rooms':25,market:60,shop:60,retail:60,cafe:60,service:45,workshop:45,operations:45,rooms:30,home:30,guest:30,care:70,welcome:70,hydration:70,restrooms:70,'family-care':70,showers:70,'comfort-wardrobe-lockers':70,'first-aid':70,control:80,eva:80,energy:80,lab:120,office:45,studio:45,cowork:45,view:25};
-const energyNumber=value=>Number(value).toLocaleString(document.documentElement.lang==='en'?'en-US':'ru-RU',{maximumFractionDigits:0});
+const energyNumber=value=>{const lang=document.documentElement.lang||'ru';return Number(value).toLocaleString(lang==='en'?'en-US':lang==='zh-CN'?'zh-CN':'ru-RU',{maximumFractionDigits:0});};
 function calculateEnergyModel(p){
  const q=1.6075;
  const a=DOME_BASE_RADIUS*DOME_SCALE_XZ*p.scale;
@@ -3967,7 +3967,7 @@ function calculateEnergyModel(p){
  return {usefulArea,shell,buildingKw,pvPeak,solarSummer,solarWinter,loadSummer,loadWinter,coverageSummer:Math.min(100,solarSummer/Math.max(1,loadSummer)*100),coverageWinter:Math.min(100,solarWinter/Math.max(1,loadWinter)*100),battery,heatDaily,evDaily,robotDaily};
 }
 function renderEnergyCalculator(){
- const p=energyCalcParams,m=calculateEnergyModel(p),en=document.documentElement.lang==='en',locale=en?'en-US':'ru-RU';
+ const p=energyCalcParams,m=calculateEnergyModel(p),lang=document.documentElement.lang||'ru',en=lang==='en',zh=lang==='zh-CN',locale=en?'en-US':zh?'zh-CN':'ru-RU';
  const values={calcScaleOut:p.scale.toLocaleString(locale,{maximumFractionDigits:1}),calcPvOut:String(p.pv),calcEffOut:p.eff.toLocaleString(locale,{maximumFractionDigits:1}),calcCopOut:p.cop.toLocaleString(locale,{maximumFractionDigits:1}),calcUOut:p.u.toLocaleString(locale,{maximumFractionDigits:1}),calcEvOut:String(p.evPosts),calcRobotOut:String(p.robotPads)};
  for(const [id,value] of Object.entries(values))$(id).textContent=value;
  const areaUnit=en?' m²':' м²',powerUnit=en?' kW':' кВт',energyUnit=en?' kWh':' кВт·ч';
@@ -4177,8 +4177,11 @@ function setExteriorMode(enabled){
  $('exteriorBtn').querySelector('.exterior-label').textContent=enabled?'Внутренний обзор':'Внешний облик';
  $('stageTitle').querySelector('b').textContent=enabled?'СЕКТОР A-01 / ВНЕШНЯЯ АРХИТЕКТУРА':'СЕКТОР A-01 / ВНУТРЕННЯЯ СТРУКТУРА';
  $('stageTitle').querySelector('span').textContent=enabled?'Архитектурная концепция · стекло, металл, ландшафт и дневной свет':'Панорамные экраны небосвода · зимний сад · пять уровней · климат и энергетика по запросу';
- const sceneIsEnglish=(document.documentElement.lang||'ru').toLowerCase().startsWith('en');
- stage.setAttribute('aria-label',sceneIsEnglish?(enabled?'Interactive 3D model of the A-01 exterior architecture':'Interactive 3D model of the A-01 interior structure'):(enabled?'Интерактивная 3D-модель внешней архитектуры Сферы Евы A-01':'Интерактивная 3D-модель внутренней структуры Сферы Евы A-01'));
+ const sceneLanguage=document.documentElement.lang||'ru',sceneIsEnglish=sceneLanguage==='en',sceneIsChinese=sceneLanguage==='zh-CN';
+ $('exteriorBtn').querySelector('.exterior-label').textContent=enabled?(sceneIsEnglish?'Interior view':sceneIsChinese?'内部视图':'Внутренний обзор'):(sceneIsEnglish?'Exterior view':sceneIsChinese?'外观':'Внешний облик');
+ $('stageTitle').querySelector('b').textContent=enabled?(sceneIsEnglish?'A-01 / EXTERIOR ARCHITECTURE':sceneIsChinese?'A-01 区域 / 外部建筑':'СЕКТОР A-01 / ВНЕШНЯЯ АРХИТЕКТУРА'):(sceneIsEnglish?'A-01 / INTERNAL STRUCTURE':sceneIsChinese?'A-01 区域 / 内部结构':'СЕКТОР A-01 / ВНУТРЕННЯЯ СТРУКТУРА');
+ $('stageTitle').querySelector('span').textContent=enabled?(sceneIsEnglish?'Weather skin · modular cassettes · daylight':sceneIsChinese?'外部气候围护层 · 模块化面板 · 日光':'Наружная погодная оболочка · сменные кассеты · дневной свет'):(sceneIsEnglish?'Panoramic LED sky · winter garden · five levels':sceneIsChinese?'全景 LED 天幕 · 冬园 · 五层空间':'Панорамный LED-небосвод · зимний сад · пять уровней');
+ stage.setAttribute('aria-label',sceneIsEnglish?(enabled?'Interactive 3D model of the A-01 exterior architecture':'Interactive 3D model of the A-01 interior structure'):sceneIsChinese?(enabled?'A-01 外部建筑交互式 3D 模型':'A-01 内部结构交互式 3D 模型'):(enabled?'Интерактивная 3D-модель внешней архитектуры Сферы Евы A-01':'Интерактивная 3D-модель внутренней структуры Сферы Евы A-01'));
  if(enabled){
   scene.background=exteriorSkyTexture;scene.environment=exteriorSkyTexture;renderer.shadowMap.enabled=true;renderer.shadowMap.needsUpdate=true;
   scene.fog=new THREE.Fog(0xc6dce4,62,165);
