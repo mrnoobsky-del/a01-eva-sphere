@@ -1699,7 +1699,7 @@ html[data-theme="dark"] #stage #sphereIntroOverlay .sphere-intro-mood-line{color
   <button class="btn dock-secondary" id="dockFocusBtn" type="button" title="Перейти к выбранному объекту"><span aria-hidden="true">◎</span><span>К объекту</span></button>
   <button class="btn dock-secondary" id="dockLevelsBtn" type="button" title="Открыть уровни"><span aria-hidden="true">▤</span><span>Уровни</span></button>
  </div>
- <button class="btn tools-toggle" id="toolsToggle" type="button" aria-expanded="false">Инструменты вида <span aria-hidden="true">⌄</span></button><div class="tools" id="stageTools"><button class="btn" id="shellBtn" type="button" aria-pressed="true">Оболочка: вкл.</button><button class="btn" id="climateToggle" type="button" aria-pressed="false">Климат: показать</button><button class="btn" id="energyToggle" aria-pressed="false">Энергия: показать</button><button class="btn" id="skyToggle" type="button" aria-pressed="false">Небосвод: показать</button><button class="btn" id="routesBtn" type="button" aria-pressed="false">Маршруты</button><button class="btn" id="streetsBtn" type="button" aria-pressed="false">Внутренние улицы</button><button class="btn" id="transitBtn" type="button" aria-pressed="false">Движение</button><button class="btn" id="lightBtn" type="button" aria-pressed="false">Свет: день</button><button class="btn" id="explodeBtn" type="button" aria-pressed="false">Разобрать уровни</button><button class="btn" id="spinBtn" type="button" aria-pressed="false">Автовращение</button><button class="btn" id="resetBtn" type="button">Сбросить вид</button></div></div><button class="stage-wake-button" id="stageWakeButton" type="button" aria-label="Показать элементы управления" aria-hidden="true"><span>Показать управление</span><b>+</b></button><div class="walk-controls hidden" id="walkControls" aria-label="Панель свободного исследования">
+ <button class="btn tools-toggle" id="toolsToggle" type="button" aria-expanded="false">Инструменты вида <span aria-hidden="true">⌄</span></button><div class="tools" id="stageTools"><button class="btn" id="shellBtn" type="button" aria-pressed="false">Каркас: скрыт</button><button class="btn" id="climateToggle" type="button" aria-pressed="false">Климат: показать</button><button class="btn" id="energyToggle" aria-pressed="false">Энергия: показать</button><button class="btn" id="skyToggle" type="button" aria-pressed="false">Небосвод: показать</button><button class="btn" id="routesBtn" type="button" aria-pressed="false">Маршруты</button><button class="btn" id="streetsBtn" type="button" aria-pressed="false">Внутренние улицы</button><button class="btn" id="transitBtn" type="button" aria-pressed="false">Движение</button><button class="btn" id="lightBtn" type="button" aria-pressed="false">Свет: день</button><button class="btn" id="explodeBtn" type="button" aria-pressed="false">Разобрать уровни</button><button class="btn" id="spinBtn" type="button" aria-pressed="false">Автовращение</button><button class="btn" id="resetBtn" type="button">Сбросить вид</button></div></div><button class="stage-wake-button" id="stageWakeButton" type="button" aria-label="Показать элементы управления" aria-hidden="true"><span>Показать управление</span><b>+</b></button><div class="walk-controls hidden" id="walkControls" aria-label="Панель свободного исследования">
  <div class="walk-hud-panel">
   <div class="walk-hud-head">
    <div class="walk-hud-brand"><span class="walk-hud-kicker">EVA SPHERE · EXPLORATION</span><strong id="walkLiftStatus">СВОБОДНЫЙ ПОЛЁТ · УРОВЕНЬ 01</strong></div>
@@ -2686,6 +2686,7 @@ for(let level=0;level<=4;level++){
   a01StructureRecords.push({assetTag:tag,elementType:'core tie girder',level,centerlineLengthModelUnit:coreSpan,sectionModelUnit:{width:.14,depth:.12},geometryVolumeModelUnit3:coreSpan*.14*.12,material:'not selected',mass_kg:null,designActions:null,verificationState:'unknown'});
  }
 }
+const a01FoundationRing=addRing(a01StructureGroup,A01_STRUCTURE_RING_RADIUS,.14,.10,a01StructureSteelMat);a01FoundationRing.name='A01-STR-BASE-001';a01FoundationRing.userData={assetTag:'A01-STR-BASE-001',system:'STR',role:'foundation-tie-ring',units:'model-unit',verificationState:'unknown'};a01StructureRecords.push({assetTag:'A01-STR-BASE-001',elementType:'foundation tie ring',centerRadiusModelUnit:A01_STRUCTURE_RING_RADIUS,sectionRadiusModelUnit:.14,centerlineLengthModelUnit:Math.PI*2*A01_STRUCTURE_RING_RADIUS,foundationType:'not selected',geotechnicalVerification:'unknown',verificationState:'unknown'});
 const a01StructureModel={schemaVersion:'0.1.0',assemblyId:'A01-STR-FRAME-0001',status:'proposed digital structural geometry',units:'model-unit',scaleToMetres:null,loadCases:[],materialGrades:[],connectionDesign:'not defined',records:a01StructureRecords,notes:['All members are placed as a continuous load-path concept: ground-supported piers → ring beams → radial girders → floor plates.','The central lift/core line is tied into each inner ring by radial members; the core itself is not yet verified as a shear wall or braced core.','No mass, wind, snow, seismic, live-load, buckling, deflection, connection, foundation or fire-resistance calculations are claimed.','Cross-sections are visual/model parameters in uncalibrated units, not construction sizes.']};
 
 // Central atrium void, glass lift core and four illuminated sky bridges.
@@ -3370,7 +3371,7 @@ for(let i=0;i<32;i++){const phi=i/32*Math.PI*2;for(const theta of [1.405,1.445,1
 domeNodes.instanceMatrix.needsUpdate=true;exteriorGroup.add(domeNodes);
 // Eight additional slender radial braces visually divide the glass into engineered panels.
 const domeBraceMat=new THREE.MeshStandardMaterial({color:0x8ca8b0,roughness:.3,metalness:.76,transparent:true,opacity:.72,envMap:exteriorSkyTexture,envMapIntensity:.8});
-for(let i=0;i<8;i++){const phi=(i+.5)/8*Math.PI*2;const pts=[];for(let j=0;j<=42;j++){const theta=(Math.PI/2)*(j/42),rr=DOME_BASE_RADIUS*Math.sin(theta);pts.push(new THREE.Vector3(rr*Math.cos(phi)*DOME_SCALE_XZ,.58+DOME_BASE_RADIUS*Math.cos(theta)*DOME_SCALE_Y,rr*Math.sin(phi)*DOME_SCALE_XZ));}addMesh(exteriorGroup,new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),84,.012,5,false),domeBraceMat);}
+for(let i=0;i<8;i++){const phi=(i+.5)/8*Math.PI*2;const pts=[];for(let j=0;j<=42;j++){const theta=1.40+(.17079632679)*(j/42),rr=DOME_BASE_RADIUS*Math.sin(theta);pts.push(new THREE.Vector3(rr*Math.cos(phi)*DOME_SCALE_XZ,.58+DOME_BASE_RADIUS*Math.cos(theta)*DOME_SCALE_Y,rr*Math.sin(phi)*DOME_SCALE_XZ));}addMesh(exteriorGroup,new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),84,.012,5,false),domeBraceMat);}
 
 // A-01 v3.6.0-dev.1 · finer exterior glazing grid.
 const a01ExteriorGridPositions=[],a01ExteriorRoofRadius=DOME_BASE_RADIUS*1.004;
@@ -3958,7 +3959,7 @@ function interactWalkTarget(){
 }
 
 
-let selectedId='A01-L01-01';let focusedLevel=null;let exploded=false;let shellVisible=true;let hoveredId=null;let explodeProgress=0;let explodeTarget=0;
+let selectedId='A01-L01-01';let focusedLevel=null;let exploded=false;let shellVisible=false;let hoveredId=null;let explodeProgress=0;let explodeTarget=0;
 let routesVisible=false,streetsVisible=false,transitRunning=false,lightMode=0;
 let uiTheme='light';
 let energyVisible=false;
@@ -4359,7 +4360,7 @@ window.addEventListener('keydown',event=>{if(!walkMode)return;const target=event
 window.addEventListener('keyup',event=>{const k=event.key.toLowerCase();const map={w:'forward',arrowup:'forward',s:'back',arrowdown:'back',a:'left',arrowleft:'left',d:'right',arrowright:'right',q:'down',e:'up',shift:'fast'};if(map[k])walkKeys[map[k]]=false;});
 $('allBtn').addEventListener('click',()=>focusLevel(null));
 $('explodeBtn').addEventListener('click',()=>{if(!walkMode)setExplode(!exploded);else showWalkToast('Разборка уровней доступна в общем обзоре.');});
-$('shellBtn').addEventListener('click',()=>{shellVisible=!shellVisible;shellGroup.visible=exteriorMode?false:shellVisible; $('shellBtn').textContent=`Оболочка: ${shellVisible?'вкл.':'выкл.'}`;$('shellBtn').classList.toggle('active',!shellVisible);$('shellBtn').setAttribute('aria-pressed',String(shellVisible));});
+$('shellBtn').addEventListener('click',()=>{shellVisible=!shellVisible;shellGroup.visible=exteriorMode?false:shellVisible; $('shellBtn').textContent=`Каркас: ${shellVisible?'показан':'скрыт'}`;$('shellBtn').classList.toggle('active',!shellVisible);$('shellBtn').setAttribute('aria-pressed',String(shellVisible));});
 $('routesBtn').addEventListener('click',()=>{routesVisible=!routesVisible;routeGroup.visible=routesVisible;syncSimulationUI();});
 $('streetsBtn').addEventListener('click',()=>{streetsVisible=!streetsVisible;streetGroup.visible=streetsVisible;for(const [n,g] of streetLevelGroups)g.visible=focusedLevel===null||n===focusedLevel;syncSimulationUI();});
 $('transitBtn').addEventListener('click',()=>{transitRunning=!transitRunning;syncSimulationUI();});
@@ -4375,7 +4376,7 @@ $('referenceCaptureBtn').addEventListener('click',()=>{
  const oldAspect=camera.aspect;
  const target=controls.target.clone();
  const cameraData={
-  preset:'A01_REFERENCE_ATRIUM_1200x675',model:'A-01',version:'3.6.0-dev.3',
+  preset:'A01_REFERENCE_ATRIUM_1200x675',model:'A-01',version:'3.6.0-dev.4',
   capturedAt:new Date().toISOString(),
   frame:{width,height,aspect:'16:9'},
   camera:{position:{x:camera.position.x,y:camera.position.y,z:camera.position.z},target:{x:target.x,y:target.y,z:target.z},fov:camera.fov,near:camera.near,far:camera.far,aspect:width/height},
@@ -4816,6 +4817,7 @@ function renderFrame(now){
 requestSceneRender();
 window.EVA_SPHERE={
  THREE,scene,camera,controls,renderer,world,
+ structure:a01StructureModel,goldenRatioStudy:A01_GOLDEN_RATIO_STUDY,
  selectItem,openObjectDetails,setExteriorMode,requestSceneRender,
  CONFIG:{domeRadius:DOME_BASE_RADIUS*DOME_SCALE_XZ,domeHeight:DOME_BASE_RADIUS*DOME_SCALE_Y,atriumRadius:ATRIUM_RADIUS,outerRadius:OUTER_RADIUS,walkRadius,levels:levelInfo,levelY:{...levelY},viewingTerraces:a01TerraceSpec},
  acoustics:{state:a01AcousticState,speakers:a01SpeakerRecords,viewingTerraces:a01ViewRecords,baffles:a01AcousticBaffleGroup,soffits:a01SoffitGroup,accessiblePositions:a01ViewRecords.filter(x=>x.accessible),setMode:mode=>{a01AcousticState.mode=mode;a01ApplyAcoustics();},setZone:(zone,on)=>{a01AcousticState.zones[zone]=!!on;a01ApplyAcoustics();},showSightlines:on=>{a01AcousticState.showSightlines=!!on;a01ApplyAcoustics();}},
