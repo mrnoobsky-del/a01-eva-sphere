@@ -3226,10 +3226,11 @@ function syncProjectionSkyVisibility(){
  const screenVisible=!exteriorMode,controlsVisible=screenVisible&&!walkMode&&skyPreviewVisible;
  projectionScreenGroup.visible=screenVisible;if(shellPanelGroup)shellPanelGroup.visible=!!exteriorMode;
  stage.classList.toggle('sky-preview',controlsVisible);
- const button=$('skyToggle'),en=document.documentElement.lang==='en',active=skyPreviewVisible;
- if(button){button.textContent=en?(active?'Sky · settings':'Sky · auto'):(active?'Небо · настройки':'Небо · авто');button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));}
+ const lang=(document.documentElement.lang||'ru').toLowerCase(),en=lang==='en',zh=lang.startsWith('zh'),active=skyPreviewVisible;
+ const button=$('skyToggle');
+ if(button){button.textContent=en?(active?'Sky · settings':'Sky · auto'):zh?(active?'天空 · 设置':'智能天空 · 自动'):(active?'Небо · настройки':'Небо · авто');button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));}
  const quick=$('smartSkyToggle');
- if(quick){quick.classList.toggle('active',active);quick.setAttribute('aria-pressed',String(active));const label=quick.querySelector('span:last-child');if(label)label.textContent=en?(active?'Smart sky · Settings':'Smart sky · Auto'):(active?'Умное небо · настройки':'Умное небо · Авто');}
+ if(quick){quick.classList.toggle('active',active);quick.setAttribute('aria-pressed',String(active));const label=quick.querySelector('span:last-child');if(label)label.textContent=en?(active?'Smart sky · Settings':'Smart sky · Auto'):zh?(active?'智能天空 · 设置':'智能天空 · 自动'):(active?'Умное небо · настройки':'Умное небо · Авто');}
  if(screenVisible){projectionSkyLastDraw=0;updateProjectionSkyUI();}
  requestSceneRender();
 }
@@ -3240,7 +3241,7 @@ function updateProjectionSkyUI(){
  const label=$('skyTimeLabel');
  const fast=$('skyFastToggle');
  const shownMinutes=projectionSkyMode==='auto'?(projectionSkyFast?projectionMinutesFromPhase(projectionSkyPhase):localClockMinutes()):projectionSkyManualMinutes;
- if(status){const en=document.documentElement.lang==='en';const presetLabels={morning:en?'MORNING':'УТРО',day:en?'DAY':'ДЕНЬ',sunset:en?'SUNSET':'ЗАКАТ',night:en?'NIGHT':'НОЧЬ'};const modeLabel=projectionSkyMode==='auto'?(en?(projectionSkyFast?'AUTO · 90 SEC':'AUTO · LOCAL TIME'):(projectionSkyFast?'АВТО · 90 СЕК':'АВТО · МЕСТНОЕ ВРЕМЯ')):projectionSkyMode==='manual'?(en?'MANUAL TIME':'РУЧНОЕ ВРЕМЯ'):(en?'PRESET · ':'СЦЕНАРИЙ · ')+(presetLabels[projectionSkyMode]||projectionSkyMode.toUpperCase());const skyState=projectionSkyLabel(projectionSkyPhase);const skyStateText=en?({НОЧЬ:'NIGHT',ЗАКАТ:'SUNSET',РАССВЕТ:'DAWN',ДЕНЬ:'DAY'}[skyState]||skyState):skyState;status.textContent=`${modeLabel} · ${projectionClockLabel(shownMinutes)} · ${skyStateText}`;}
+ if(status){const lang=(document.documentElement.lang||'ru').toLowerCase(),en=lang==='en',zh=lang.startsWith('zh');const presetLabels=en?{morning:'MORNING',day:'DAY',sunset:'SUNSET',night:'NIGHT'}:zh?{morning:'早晨',day:'白天',sunset:'日落',night:'夜晚'}:{morning:'УТРО',day:'ДЕНЬ',sunset:'ЗАКАТ',night:'НОЧЬ'};const modeLabel=projectionSkyMode==='auto'?(en?(projectionSkyFast?'AUTO · 90 SEC':'AUTO · LOCAL TIME'):zh?(projectionSkyFast?'自动 · 90 秒':'自动 · 本地时间'):(projectionSkyFast?'АВТО · 90 СЕК':'АВТО · МЕСТНОЕ ВРЕМЯ')):projectionSkyMode==='manual'?(en?'MANUAL TIME':zh?'手动时间':'РУЧНОЕ ВРЕМЯ'):(en?'PRESET · ':zh?'场景 · ':'СЦЕНАРИЙ · ')+(presetLabels[projectionSkyMode]||projectionSkyMode.toUpperCase());const skyState=projectionSkyLabel(projectionSkyPhase);const skyStateText=en?({НОЧЬ:'NIGHT',ЗАКАТ:'SUNSET',РАССВЕТ:'DAWN',ДЕНЬ:'DAY'}[skyState]||skyState):zh?({НОЧЬ:'夜晚',ЗАКАТ:'日落',РАССВЕТ:'黎明',ДЕНЬ:'白天'}[skyState]||skyState):skyState;status.textContent=`${modeLabel} · ${projectionClockLabel(shownMinutes)} · ${skyStateText}`;}
  if(range&&document.activeElement!==range)range.value=String(Math.round(shownMinutes));
  if(label)label.textContent=projectionClockLabel(shownMinutes);
  const walkSkyMode=document.getElementById('walkSkyModeSelect'),walkSkyTime=document.getElementById('walkSkyTimeRange'),walkSkyTimeValue=document.getElementById('walkSkyTimeValue'),walkSkyFast=document.getElementById('walkSkyFastToggle');if(walkSkyMode&&document.activeElement!==walkSkyMode)walkSkyMode.value=projectionSkyMode==='manual'?'auto':projectionSkyMode;if(walkSkyTime&&document.activeElement!==walkSkyTime)walkSkyTime.value=String(Math.round(shownMinutes));if(walkSkyTimeValue)walkSkyTimeValue.textContent=projectionClockLabel(shownMinutes);if(walkSkyFast&&document.activeElement!==walkSkyFast)walkSkyFast.checked=projectionSkyFast;
@@ -4020,10 +4021,10 @@ function calculateEnergyModel(p){
  return {usefulArea,shell,buildingKw,pvPeak,solarSummer,solarWinter,loadSummer,loadWinter,coverageSummer:Math.min(100,solarSummer/Math.max(1,loadSummer)*100),coverageWinter:Math.min(100,solarWinter/Math.max(1,loadWinter)*100),battery,heatDaily,evDaily,robotDaily};
 }
 function renderEnergyCalculator(){
- const p=energyCalcParams,m=calculateEnergyModel(p),en=document.documentElement.lang==='en',locale=en?'en-US':'ru-RU';
+ const p=energyCalcParams,m=calculateEnergyModel(p),lang=(document.documentElement.lang||'ru').toLowerCase(),en=lang==='en',zh=lang.startsWith('zh'),locale=en?'en-US':zh?'zh-CN':'ru-RU';
  const values={calcScaleOut:p.scale.toLocaleString(locale,{maximumFractionDigits:1}),calcPvOut:String(p.pv),calcEffOut:p.eff.toLocaleString(locale,{maximumFractionDigits:1}),calcCopOut:p.cop.toLocaleString(locale,{maximumFractionDigits:1}),calcUOut:p.u.toLocaleString(locale,{maximumFractionDigits:1}),calcEvOut:String(p.evPosts),calcRobotOut:String(p.robotPads)};
  for(const [id,value] of Object.entries(values))$(id).textContent=value;
- const areaUnit=en?' m²':' м²',powerUnit=en?' kW':' кВт',energyUnit=en?' kWh':' кВт·ч';
+ const areaUnit=en?' m²':zh?' 平方米':' м²',powerUnit=en?' kW':zh?' 千瓦':' кВт',energyUnit=en?' kWh':zh?' 千瓦时':' кВт·ч';
  $('calcArea').textContent=energyNumber(m.usefulArea)+areaUnit;
  $('calcShell').textContent=energyNumber(m.shell)+areaUnit;
  $('calcLoadKw').textContent=energyNumber(m.buildingKw)+powerUnit;
@@ -4032,7 +4033,7 @@ function renderEnergyCalculator(){
  $('calcLoadDaily').textContent=energyNumber(m.loadSummer)+' / '+energyNumber(m.loadWinter)+energyUnit;
  $('calcCoverage').textContent=energyNumber(m.coverageSummer)+'% / '+energyNumber(m.coverageWinter)+'%';
  $('calcBattery').textContent=energyNumber(m.battery)+energyUnit;
- $('calcWarning').textContent=m.coverageWinter<100?(en?`With these assumptions, winter solar generation covers about ${energyNumber(m.coverageWinter)}% of estimated daily demand. An external source, backup and separate seasonal-storage assessment are required.`:`При выбранных допущениях солнечная генерация зимой покрывает около ${energyNumber(m.coverageWinter)}% расчётной суточной нагрузки. Нужны внешний источник, резерв и отдельный расчёт сезонного хранения.`):(en?'In this scenario, PV generation reaches the estimated daily load in winter. This does not establish autonomy: hourly demand, seasonality, backup and grid constraints have not been modelled.':'Сценарная генерация PV достигает расчётной суточной нагрузки в зимнем сценарии. Это не подтверждает автономность: почасовой профиль, сезонность, резерв и сетевые ограничения ещё не рассчитаны.');
+ $('calcWarning').textContent=m.coverageWinter<100?(en?`With these assumptions, winter solar generation covers about ${energyNumber(m.coverageWinter)}% of estimated daily demand. An external source, backup and separate seasonal-storage assessment are required.`:zh?`按当前假设，冬季太阳能发电约覆盖估算日负荷的 ${energyNumber(m.coverageWinter)}%。仍需外部能源、备用系统和独立的季节储能评估。`:`При выбранных допущениях солнечная генерация зимой покрывает около ${energyNumber(m.coverageWinter)}% расчётной суточной нагрузки. Нужны внешний источник, резерв и отдельный расчёт сезонного хранения.`):(en?'In this scenario, PV generation reaches the estimated daily load in winter. This does not establish autonomy: hourly demand, seasonality, backup and grid constraints have not been modelled.':zh?'在此情景中，冬季光伏发电达到估算日负荷，但这并不能证明能源 автономность；尚未模拟逐小时需求、季节变化、备用电源和电网限制。':'Сценарная генерация PV достигает расчётной суточной нагрузки в зимнем сценарии. Это не подтверждает автономность: почасовой профиль, сезонность, резерв и сетевые ограничения ещё не рассчитаны.');
 }
 for(const [id,key] of [['calcScale','scale'],['calcPv','pv'],['calcEff','eff'],['calcCop','cop'],['calcU','u'],['calcEv','evPosts'],['calcRobot','robotPads']])$(id).addEventListener('input',event=>{energyCalcParams[key]=Number(event.target.value);renderEnergyCalculator();});
 renderEnergyCalculator();
@@ -4228,10 +4229,10 @@ function setExteriorMode(enabled){
  stage.classList.toggle('cinematic',enabled);
  $('exteriorBtn').setAttribute('aria-pressed',String(enabled));
  $('exteriorBtn').querySelector('.exterior-label').textContent=enabled?'Внутренний обзор':'Внешний облик';
- $('stageTitle').querySelector('b').textContent=enabled?'СЕКТОР A-01 / ВНЕШНЯЯ АРХИТЕКТУРА':'СЕКТОР A-01 / ВНУТРЕННЯЯ СТРУКТУРА';
- $('stageTitle').querySelector('span').textContent=enabled?'Архитектурная концепция · стекло, металл, ландшафт и дневной свет':'Панорамные экраны небосвода · зимний сад · пять уровней · климат и энергетика по запросу';
- const sceneIsEnglish=(document.documentElement.lang||'ru').toLowerCase().startsWith('en');
- stage.setAttribute('aria-label',sceneIsEnglish?(enabled?'Interactive 3D model of the A-01 exterior architecture':'Interactive 3D model of the A-01 interior structure'):(enabled?'Интерактивная 3D-модель внешней архитектуры Сферы Евы A-01':'Интерактивная 3D-модель внутренней структуры Сферы Евы A-01'));
+ $('stageTitle').querySelector('b').textContent=sceneIsEnglish?(enabled?'SECTOR A-01 / EXTERIOR ARCHITECTURE':'SECTOR A-01 / INTERIOR STRUCTURE'):sceneIsChinese?(enabled?'A-01 区域 / 外部建筑':'A-01 区域 / 内部结构'):(enabled?'СЕКТОР A-01 / ВНЕШНЯЯ АРХИТЕКТУРА':'СЕКТОР A-01 / ВНУТРЕННЯЯ СТРУКТУРА');
+ $('stageTitle').querySelector('span').textContent=sceneIsEnglish?(enabled?'Architectural concept · envelope, metal, landscape and daylight':'Panoramic digital LED sky · winter garden · five levels · climate and energy on demand'):sceneIsChinese?(enabled?'建筑概念 · 外围护、金属、景观与日光':'全景 LED 数字天空 · 冬季花园 · 五层空间 · 气候与能源系统'):(enabled?'Архитектурная концепция · оболочка, металл, ландшафт и дневной свет':'Панорамные экраны небосвода · зимний сад · пять уровней · климат и энергетика по запросу');
+ const sceneLang=(document.documentElement.lang||'ru').toLowerCase(),sceneIsEnglish=sceneLang.startsWith('en'),sceneIsChinese=sceneLang.startsWith('zh');
+ stage.setAttribute('aria-label',sceneIsEnglish?(enabled?'Interactive 3D model of the A-01 exterior architecture':'Interactive 3D model of the A-01 interior structure'):sceneIsChinese?(enabled?'A-01 外部建筑交互式三维模型':'A-01 内部结构交互式三维模型'):(enabled?'Интерактивная 3D-модель внешней архитектуры Сферы Евы A-01':'Интерактивная 3D-модель внутренней структуры Сферы Евы A-01'));
  if(enabled){
   scene.background=exteriorSkyTexture;scene.environment=exteriorSkyTexture;renderer.shadowMap.enabled=true;renderer.shadowMap.needsUpdate=true;
   scene.fog=new THREE.Fog(0xc6dce4,62,165);
