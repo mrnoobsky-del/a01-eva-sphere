@@ -3814,9 +3814,26 @@ for(let i=0;i<2;i++){
  const shell=addMesh(cabin,new THREE.BoxGeometry(.62,1.0,.60),themeBind(new THREE.MeshPhysicalMaterial({color:0xa8e8ff,transparent:true,opacity:.66,roughness:.12,metalness:.22,emissive:0x16425d}),'#e1f0ed',0xffffff),[0,0,0]);
  addMesh(cabin,new THREE.BoxGeometry(.48,.045,.46),new THREE.MeshBasicMaterial({color:0xc9f5ff}),[0,-.47,0]);
  const beacon=addMesh(cabin,new THREE.SphereGeometry(.075,10,8),new THREE.MeshBasicMaterial({color:i===0?0x9df4d6:0xffd99a}),[0,.56,0]);
- cabin.position.set(i===0?-.43:.43,1.1,0);world.add(cabin);liftCabins.push({group:cabin,phase:i*Math.PI});
+ cabin.position.set(i===0?-.43:.43,1.1,0);cabin.userData={assetTag:'A01-MOB-LIFT-CABIN-'+String(i+1).padStart(2,'0'),system:'MOB',motionAxis:'Y',guideSystem:'A01-MOB-LIFT-GUIDE',supportStatus:'guided-dynamic'};world.add(cabin);liftCabins.push({group:cabin,phase:i*Math.PI});
 }
 
+
+// Explicit guide rails and end frames constrain both animated cabins to the lift shaft.
+const a01LiftGuideGroup=new THREE.Group();a01LiftGuideGroup.name='A01-MOB-LIFT-GUIDE · four-corner guide rails and end frames';a01LiftGuideGroup.userData={system:'MOB',componentRole:'lift-guide-frame',verificationState:'unknown'};world.add(a01LiftGuideGroup);
+const a01LiftRailMat=themeBind(mat(0x7f9695,.36,.72),'#9aaead',0x526767,.98,.62);
+for(let cabinIndex=0;cabinIndex<2;cabinIndex++){
+ const centerX=cabinIndex===0?-.43:.43;
+ for(const sx of [-1,1])for(const sz of [-1,1]){
+  const x=centerX+sx*.35,z=sz*.35;
+  const rail=addMesh(a01LiftGuideGroup,new THREE.CylinderGeometry(.025,.025,7.55,10),a01LiftRailMat,[x,3.925,z]);
+  rail.name='A01-MOB-LIFT-RAIL-'+String(cabinIndex+1).padStart(2,'0')+'-'+(sx<0?'L':'R')+(sz<0?'B':'F');
+  rail.userData={assetTag:rail.name,system:'MOB',componentRole:'vertical-guide-rail',cabinTag:'A01-MOB-LIFT-CABIN-'+String(cabinIndex+1).padStart(2,'0'),bottomElevationModelUnit:.15,topElevationModelUnit:7.70,verificationState:'proposed'};
+ }
+ const head=addMesh(a01LiftGuideGroup,new THREE.BoxGeometry(.78,.07,.08),a01FrameNodeMat,[centerX,7.68,0]);
+ head.name='A01-MOB-LIFT-HEAD-FRAME-'+String(cabinIndex+1).padStart(2,'0');head.userData={assetTag:head.name,system:'MOB',componentRole:'lift-head-frame',verificationState:'unknown'};
+ const pit=addMesh(a01LiftGuideGroup,new THREE.BoxGeometry(.78,.07,.08),a01FrameNodeMat,[centerX,.17,0]);
+ pit.name='A01-MOB-LIFT-PIT-FRAME-'+String(cabinIndex+1).padStart(2,'0');pit.userData={assetTag:pit.name,system:'MOB',componentRole:'lift-pit-frame',verificationState:'unknown'};
+}
 
 // Lightweight visitor avatar for the optional third-person walkthrough.
 const avatarGroup=new THREE.Group();world.add(avatarGroup);avatarGroup.scale.setScalar(.70);avatarGroup.userData.scaleNote="Human-scale visitor avatar aligned to the conceptual door height";avatarGroup.visible=false;
