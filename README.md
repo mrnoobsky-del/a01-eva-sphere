@@ -141,3 +141,11 @@ The standard is a project-specific information model, not a building code or con
 - [Cassette layout generator](tools/generate-cassette-layout.mjs)
 
 The layout is derived from the digital-twin dome parameters, uses uncalibrated model units and is not a fabrication or structural design.
+
+
+## Experimental architecture candidate — A-01 v3.6.0-dev.1
+
+- [Open experimental architectural blockout](digital-twin/eva-sphere-a01-v360-architecture-blockout.html)
+- [Russian architecture and visual engineering specification](architecture/A01-V360-ARCHITECTURE-VISUAL-ENGINEERING-SPEC_RU.md)
+
+This development candidate is based on the v3.5.0 integrated digital twin. It is intentionally kept on a feature branch and is not a stable release or a deployment to the public uCoz workspace. Full cross-device WebGL verification and professional engineering validation remain outstanding. The main branch continues to identify v3.5.0 as its latest integrated experimental line.
