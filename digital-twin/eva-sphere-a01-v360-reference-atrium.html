@@ -2659,7 +2659,9 @@ for(let support=0;support<A01_STRUCTURE_SUPPORT_COUNT;support++){
  const capital=addMesh(supportGroup,new THREE.BoxGeometry(.34,.12,.38),a01StructureSteelMat,[0,a01StructureTopY-.06,0]);
  capital.userData={assetTag:assetTag+'-CAP',parentAssetTag:assetTag,role:'ring-beam-capital',system:'STR',units:'model-unit',verificationState:'unknown'};
  a01StructureGroup.add(supportGroup);
+ a01StructureRecords.push({assetTag:assetTag+'-BASE',elementType:'base shoe',parentAssetTag:assetTag,position:{x,y:a01StructureBaseY+.08,z},sectionModelUnit:{width:.42,depth:.42,height:.16},geometryVolumeModelUnit3:.42*.42*.16,material:'not selected',mass_kg:null,designActions:null,verificationState:'unknown'});
  a01StructureRecords.push({assetTag,elementType:'vertical pier',parentAssembly:'A01-STR-FRAME-0001',position:{x,y:0,z},baseY:a01StructureBaseY,topY:a01StructureTopY,sectionModelUnit:{width:.22,depth:.30},geometryVolumeModelUnit3:.22*.30*a01StructureHeight,material:'not selected',mass_kg:null,designActions:null,verificationState:'unknown'});
+ a01StructureRecords.push({assetTag:assetTag+'-CAP',elementType:'ring-beam capital',parentAssetTag:assetTag,position:{x,y:a01StructureTopY-.06,z},sectionModelUnit:{width:.34,depth:.38,height:.12},geometryVolumeModelUnit3:.34*.38*.12,material:'not selected',mass_kg:null,designActions:null,verificationState:'unknown'});
 }
 for(let level=0;level<=4;level++){
  const beamY=levelY[level]-.22;
@@ -2676,6 +2678,14 @@ for(let level=0;level<=4;level++){
   const mesh=addMesh(a01StructureGroup,new THREE.BoxGeometry(outerSpan,.16,.12),a01StructureSteelMat,[Math.cos(angle)*(A01_STRUCTURE_INNER_RING_RADIUS+outerSpan/2),beamY,Math.sin(angle)*(A01_STRUCTURE_INNER_RING_RADIUS+outerSpan/2)],[0,-angle,0]);
   mesh.name=tag;mesh.userData={assetTag:tag,system:'STR',role:'radial-floor-girder',level,units:'model-unit',verificationState:'unknown'};
   a01StructureRecords.push({assetTag:tag,elementType:'radial floor girder',level,centerlineLengthModelUnit:outerSpan,sectionModelUnit:{width:.16,depth:.12},geometryVolumeModelUnit3:outerSpan*.16*.12,material:'not selected',mass_kg:null,designActions:null,verificationState:'unknown'});
+ }
+ const outerCantileverSpan=10.47-A01_STRUCTURE_RING_RADIUS;
+ for(let arm=0;arm<A01_STRUCTURE_SUPPORT_COUNT;arm++){
+  const angle=arm*Math.PI*2/A01_STRUCTURE_SUPPORT_COUNT;
+  const tag='A01-STR-OUTRIGGER-L'+String(level).padStart(2,'0')+'-'+String(arm+1).padStart(2,'0');
+  const beam=addMesh(a01StructureGroup,new THREE.BoxGeometry(outerCantileverSpan,.14,.18),a01StructureSteelMat,[Math.cos(angle)*(A01_STRUCTURE_RING_RADIUS+outerCantileverSpan/2),beamY,Math.sin(angle)*(A01_STRUCTURE_RING_RADIUS+outerCantileverSpan/2)],[0,-angle,0]);
+  beam.name=tag;beam.userData={assetTag:tag,system:'STR',role:'outer-drum-cantilever-outrigger',level,units:'model-unit',verificationState:'unknown'};
+  a01StructureRecords.push({assetTag:tag,elementType:'outer-drum cantilever outrigger',level,centerlineLengthModelUnit:outerCantileverSpan,sectionModelUnit:{width:.14,depth:.18},geometryVolumeModelUnit3:outerCantileverSpan*.14*.18,material:'not selected',mass_kg:null,designActions:null,verificationState:'unknown'});
  }
  const coreSpan=A01_STRUCTURE_INNER_RING_RADIUS-1.55;
  for(let spoke=0;spoke<12;spoke++){
