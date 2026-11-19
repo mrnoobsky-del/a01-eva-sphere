@@ -221,3 +221,16 @@ Recommended sequence:
 ---
 
 *This document records an early A-01 research direction. It is not a NASA document, NASA endorsement, competition submission, engineering certification, or construction design.*
+
+
+## A-01 AIR-01 — Autonomous Atmospheric Infrastructure
+
+A-01 AIR-01 is the proposed atmosphere and life-support subsystem for the lunar habitat. It separates the external regolith-processing factory from the clean habitat ECLSS, combines lunar-resource oxygen research with water electrolysis and air revitalization, and documents the initial crew mass balance, reserve scenarios, power-budget method, and failure-mode map.
+
+- [AIR-01 engineering concept brief (English)](air-01/README.md)
+- [Концепция AIR-01 на русском](air-01/README_RU.md)
+- [AIR-01 工程概念说明（简体中文）](air-01/README_ZH.md)
+- [Traceable mass-balance data (JSON)](air-01/mass-balance.json)
+- [System block diagram (Mermaid source)](air-01/system-block-diagram.mmd)
+
+The preliminary four-person reference case uses 0.84 kg O2 and 1.0 kg CO2 per crewmember-day from a NASA life-support study. The arithmetic highlights that hydrogen from water electrolysis alone is insufficient to process all metabolic CO2 through an ideal Sabatier loop. MRE results are treated as a ground-demonstration reference, not a lunar operating rating. Total system power, mass, atmosphere composition, storage sizing, and qualification remain open engineering tasks.
