@@ -2742,14 +2742,7 @@ function makeBuilding(item,parent){
    mesh(root,name+' · датчик',new THREE.SphereGeometry(.065,12,8),material,[radius+.06,height*.76,0]);
    return root;
   };
-  const addFlow=(parent,points,material,count=5,speed=.13)=>{
-   const curve=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));const particles=[];
-   for(let i=0;i<count;i++)particles.push(mesh(parent,'Индикатор направления потока',new THREE.SphereGeometry(.065,10,8),new THREE.MeshBasicMaterial({color:material.color,transparent:true,opacity:.95}),[0,0,0]));
-   const record={curve,particles,speed,phase:Math.random()};
-   airSystemVisual?.flowPaths?.push(record);
-   return record;
-  };
-  // Separate skid: external regolith preparation and molten-regolith oxygen extraction.
+    // Separate skid: external regolith preparation and molten-regolith oxygen extraction.
   box(parts.resource,'AIR-01 · наружная монтажная платформа',[5.55,.18,3.5],mats.dark,[-11.12,.12,4.72]);
   box(parts.resource,'MRE · защитный кожух реактора',[1.92,1.66,2.22],mats.glass,[-12.62,1.02,4.72]);
   box(parts.resource,'MRE · силовая рама',[2.03,.10,2.32],mats.frame,[-12.62,.19,4.72]);
@@ -4024,6 +4017,15 @@ renderEnergyCalculator();
 const languageObserver=new MutationObserver(()=>{syncProjectionSkyVisibility();updateProjectionSkyUI();renderEnergyCalculator();});
 languageObserver.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 
+let airVisible=false;
+let airMode='all';
+let airFlowRunning=false;
+const airModes={
+ all:{name:'Полная схема',desc:'Показаны оба раздельных контура: внешняя фабрика MRE и чистая система жизнеобеспечения. Газ передаётся через двойную границу только после очистки и анализа.',parts:['resource','electrolysis','scrubber','storage','distributionO2','distributionCO2','distributionWater','flowO2','flowCO2','flowWater','flowH2']},
+ oxygen:{name:'Получение O₂',desc:'Внешний MRE, газоочистка, водный электролиз и резервуары O₂. Показанные линии — сценарная визуализация; 0,07 кг/ч — результат девятичасовой наземной демонстрации, не непрерывный рабочий режим.',parts:['resource','electrolysis','storage','distributionO2','distributionWater','flowO2','flowWater','flowH2']},
+ recovery:{name:'Восстановление воздуха',desc:'Возвратный воздух проходит удаление CO₂ и следовых загрязнителей; часть CO₂ направляется в Сабатье. При идеальном балансе остаётся около 1,69 кг CO₂/сутки для четырёх человек — цикл пока не замкнут.',parts:['electrolysis','scrubber','storage','distributionO2','distributionCO2','distributionWater','flowO2','flowCO2','flowWater','flowH2']},
+ backup:{name:'Резерв · MRE остановлен',desc:'Сценарий отказа ресурсной фабрики: MRE и электролиз изолированы, чистая очистка воздуха остаётся видимой, O₂ поступает из буферного запаса. Это визуальная демонстрация архитектуры, не проверенная аварийная процедура.',parts:['scrubber','storage','distributionO2','distributionCO2','flowO2','flowCO2']}
+};
 function refreshOverlayNote(){
  const parts=[];
  if(climateVisible)parts.push(`КЛИМАТ · ${climateModes[climateMode].name.toUpperCase()}`);
@@ -4042,15 +4044,6 @@ function setEnergyMode(mode){if(!energyModes[mode])return;energyMode=mode;energy
 function setEnergyVisible(value){energyVisible=!!value;energyGroup.visible=energyVisible;updateEnergyUI();requestSceneRender();}
 document.querySelectorAll('[data-energy]').forEach(b=>b.addEventListener('click',()=>setEnergyMode(b.dataset.energy)));
 $('energyToggle').addEventListener('click',()=>setEnergyVisible(!energyVisible));
-let airVisible=false;
-let airMode='all';
-let airFlowRunning=false;
-const airModes={
- all:{name:'Полная схема',desc:'Показаны оба раздельных контура: внешняя фабрика MRE и чистая система жизнеобеспечения. Газ передаётся через двойную границу только после очистки и анализа.',parts:['resource','electrolysis','scrubber','storage','distributionO2','distributionCO2','distributionWater','flowO2','flowCO2','flowWater','flowH2']},
- oxygen:{name:'Получение O₂',desc:'Внешний MRE, газоочистка, водный электролиз и резервуары O₂. Показанные линии — сценарная визуализация; 0,07 кг/ч — результат девятичасовой наземной демонстрации, не непрерывный рабочий режим.',parts:['resource','electrolysis','storage','distributionO2','distributionWater','flowO2','flowWater','flowH2']},
- recovery:{name:'Восстановление воздуха',desc:'Возвратный воздух проходит удаление CO₂ и следовых загрязнителей; часть CO₂ направляется в Сабатье. При идеальном балансе остаётся около 1,69 кг CO₂/сутки для четырёх человек — цикл пока не замкнут.',parts:['electrolysis','scrubber','storage','distributionO2','distributionCO2','distributionWater','flowO2','flowCO2','flowWater','flowH2']},
- backup:{name:'Резерв · MRE остановлен',desc:'Сценарий отказа ресурсной фабрики: MRE и электролиз изолированы, чистая очистка воздуха остаётся видимой, O₂ поступает из буферного запаса. Это визуальная демонстрация архитектуры, не проверенная аварийная процедура.',parts:['scrubber','storage','distributionO2','distributionCO2','flowO2','flowCO2']}
-};
 function updateAirUI(){
  const mode=airModes[airMode];
  if($('airDesc'))$('airDesc').textContent=mode.desc;
