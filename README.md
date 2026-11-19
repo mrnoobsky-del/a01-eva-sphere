@@ -14,7 +14,7 @@ A-01 is an open project record for a long-term vision: a resilient, human-centre
 **Eva Sphere workspace:** https://evasphere.usite.pro/  
 **Support the project:** [Voluntary contribution](https://yoomoney.ru/to/410015357551847)
 
-**Languages:** [English](README.md) · [Русский](README_RU.md)
+**Languages:** [English](README.md) · [Русский](README_RU.md) · [简体中文](README_ZH.md)
 
 ## Project status
 
@@ -141,3 +141,12 @@ The standard is a project-specific information model, not a building code or con
 - [Cassette layout generator](tools/generate-cassette-layout.mjs)
 
 The layout is derived from the digital-twin dome parameters, uses uncalibrated model units and is not a fabrication or structural design.
+
+
+## A-01 LUNA — lunar habitat research
+
+- [A-01 LUNA concept brief (English)](lunar/README.md)
+- [Концептуальная записка A-01 LUNA (русский)](lunar/README_RU.md)
+- [A-01 LUNA 概念说明（简体中文）](lunar/README_ZH.md)
+
+A-01 LUNA is a separate research concept for a robotically deployed and serviceable regolith-protection system around a standard lunar habitat module. It is not a NASA design or endorsement. The brief records the NASA Moon Base Challenge student eligibility and authorship rules, the proposed engineering scope, and the evidence still required. A GitHub publication is not an official competition entry.
