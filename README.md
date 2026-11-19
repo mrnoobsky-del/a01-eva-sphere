@@ -150,3 +150,12 @@ The layout is derived from the digital-twin dome parameters, uses uncalibrated m
 - [A-01 LUNA 概念说明（简体中文）](lunar/README_ZH.md)
 
 A-01 LUNA is a separate research concept for a robotically deployed and serviceable regolith-protection system around a standard lunar habitat module. It is not a NASA design or endorsement. The brief records the NASA Moon Base Challenge student eligibility and authorship rules, the proposed engineering scope, and the evidence still required. A GitHub publication is not an official competition entry.
+
+
+## Integrated digital twin A-01 v3.6.0 — AIR-01 autonomous atmosphere
+
+- [Open v3.6.0 3D model](digital-twin/eva-sphere-a01-v360-air-01-life-support.html)
+- [English documentation](digital-twin/README_v360.md) · [Русская документация](digital-twin/README_RU_v360.md) · [简体中文说明](digital-twin/README_ZH_v360.md)
+- [AIR-01 engineering concept](lunar/air-01/README.md)
+
+v3.6.0 adds the AIR-01 lunar atmosphere subsystem as a selectable 3D engineering object: external MRE resource processing, clean ECLSS equipment, gas conditioning, storage, and separate O₂ / CO₂-return / water distribution paths. The scene includes four display modes and the preliminary four-person mass-balance figures. It is a visual software concept only; there is no live equipment or telemetry, no calibrated geometry, and no physical or safety validation. JavaScript syntax parsing passed; a live WebGL browser walk-through remains outstanding.
