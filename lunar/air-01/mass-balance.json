@@ -1,0 +1,97 @@
+{
+  "schema_version": "0.1",
+  "module": "A-01 AIR-01",
+  "title": "Autonomous Atmospheric Infrastructure",
+  "as_of": "2026-11-19",
+  "status": "early_research_concept_not_qualified",
+  "reference_case": {
+    "crew_count": 4,
+    "oxygen_demand_kg_per_crew_day": 0.84,
+    "carbon_dioxide_generation_kg_per_crew_day": 1.0,
+    "source": "https://ntrs.nasa.gov/citations/20190027610",
+    "values_are_planning_assumptions_not_medical_requirements": true
+  },
+  "derived_daily_balance": {
+    "oxygen_demand_kg_per_day": 3.36,
+    "carbon_dioxide_generation_kg_per_day": 4.0,
+    "water_electrolysis_feed_kg_per_day_ideal": 3.78,
+    "hydrogen_byproduct_kg_per_day_ideal": 0.42,
+    "basis": "2 H2O -> 2 H2 + O2; ideal stoichiometry; no real-system losses"
+  },
+  "sabatier_ideal_limit": {
+    "reaction": "CO2 + 4 H2 -> CH4 + 2 H2O",
+    "hydrogen_available_kg_per_day": 0.42,
+    "carbon_dioxide_processed_kg_per_day": 2.31,
+    "water_returned_kg_per_day": 1.89,
+    "methane_produced_kg_per_day": 0.84,
+    "carbon_dioxide_remaining_kg_per_day": 1.69,
+    "note": "Ideal stoichiometric upper bound using all hydrogen from the reference water-electrolysis flow; not demonstrated system performance."
+  },
+  "oxygen_buffer_scenarios": {
+    "24h_kg": 3.36,
+    "72h_kg": 10.08,
+    "7d_kg": 23.52,
+    "status": "A-01 planning scenarios, not NASA reserve requirements",
+    "excludes": [
+      "cabin atmosphere inventory",
+      "line fill and tank heel",
+      "leakage and process losses",
+      "EVA and other mission consumers",
+      "fire response and medical contingencies",
+      "inert-gas inventory"
+    ]
+  },
+  "mre_demonstration_reference": {
+    "regolith_simulant_processed_kg": 25,
+    "average_oxygen_rate_kg_per_hour": 0.07,
+    "demonstration_duration_hours": 9,
+    "source": "https://ntrs.nasa.gov/citations/20260003760",
+    "continuous_24h_arithmetic_extrapolation_kg_per_day": 1.68,
+    "fraction_of_four_person_reference_demand_percent": 50,
+    "average_rate_needed_for_reference_demand_kg_per_hour": 0.14,
+    "warning": "The 24-hour extrapolation is arithmetic only. The demonstration did not establish continuous operation, lunar deployment, qualified output purity, or a rated production capacity."
+  },
+  "water_recovery_reference": {
+    "iss_reported_recovery_fraction": 0.9,
+    "source": "https://www.nasa.gov/reference/environmental-control-and-life-support-systems-eclss/",
+    "note": "ISS benchmark; not an assumed lunar-system performance guarantee."
+  },
+  "power_budget": {
+    "total_kw": null,
+    "daily_kwh": null,
+    "night_storage_kwh": null,
+    "status": "not_sized",
+    "required_load_groups": [
+      "regolith excavation and handling",
+      "MRE reactor and preheat",
+      "oxygen separation, purification, drying and compression",
+      "water recovery and electrolysis",
+      "CO2 capture and sorbent regeneration",
+      "Sabatier or alternative CO2 reduction",
+      "habitat air circulation and humidity control",
+      "thermal control",
+      "sensors and control",
+      "optional cryogenic oxygen liquefaction"
+    ],
+    "reason": "Cited public NASA abstracts identify modelling work but do not supply validated AIR-01 subsystem power values."
+  },
+  "atmosphere_control": {
+    "total_pressure": "mission_specific_tbd",
+    "oxygen_partial_pressure": "mission_specific_tbd",
+    "inert_diluent_inventory": "separate_budget_required",
+    "carbon_dioxide_limit": "apply_current_NASA_human_systems_requirements",
+    "humidity_temperature_trace_contaminants": "mission_specific_tbd",
+    "standard_reference": "https://www.nasa.gov/reference/6-0-natural-and-induced-environments-vol-2/"
+  },
+  "evidence_gaps": [
+    "MRE continuous duty, degradation and maintenance",
+    "MRE product-gas impurity characterization and breathable-gas qualification",
+    "validated mass, power and thermal budgets",
+    "water source and lunar ice prospecting evidence",
+    "inert-gas sourcing and inventory",
+    "CO2 reduction beyond the hydrogen-limited Sabatier fraction",
+    "methane handling and carbon closure",
+    "pressure-vessel, fire-safety and human-systems qualification",
+    "integrated long-duration testing and fault-injection results"
+  ]
+}
