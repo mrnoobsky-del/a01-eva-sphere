@@ -1,0 +1,22 @@
+flowchart TD
+  A[Local regolith] --> B[Robotic feed preparation]
+  B --> C[MRE oxygen extraction]
+  C --> D[Gas collection and separation]
+  D --> E[Purification, drying and analysis]
+  E --> F[Qualified O2 buffer]
+  G[Water and wastewater] --> H[Water recovery and purification]
+  H --> I[Water electrolysis]
+  I --> F
+  I --> J[Hydrogen buffer and conditioning]
+  K[Habitat return air] --> L[CO2 and trace-contaminant removal]
+  L --> M[Clean recirculated air]
+  L --> N[Captured CO2]
+  J --> O[Sabatier or alternative CO2 reduction]
+  N --> O
+  O --> P[Water recovery]
+  O --> Q[Methane handling]
+  F --> R[Atmosphere management]
+  M --> R
+  S[Inert-gas inventory] --> R
+  R --> T[Habitat atmosphere]
+  U[Independent sensors and safety controller] --> R
