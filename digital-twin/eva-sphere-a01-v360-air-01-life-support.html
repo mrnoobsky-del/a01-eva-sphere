@@ -3130,9 +3130,10 @@ function setGullwingPose(rig,doorOpen,gateOpen,trayOut){
  rig.gateGroup.rotation.z=-THREE.MathUtils.clamp(gateOpen,0,1)*1.35;
  rig.cradle.position.x=rig.original.cradleX+THREE.MathUtils.clamp(trayOut,0,1)*.62;
  const h=rig.doorHeight,p=rig.doorGroup.position;
+ const theta=rig.doorGroup.rotation.z;
  const anchors=[
-  {a:new THREE.Vector3(p.x-.05,p.y-h*.18,-rig.width*.39),b:new THREE.Vector3(p.x+.18,p.y-h*.48,-rig.width*.39)},
-  {a:new THREE.Vector3(p.x-.05,p.y-h*.18,rig.width*.39),b:new THREE.Vector3(p.x+.18,p.y-h*.48,rig.width*.39)}
+  {a:new THREE.Vector3(p.x-.16,p.y-h*.28,-rig.width*.39),b:new THREE.Vector3(p.x+.12+Math.sin(theta)*h*.52,p.y-Math.cos(theta)*h*.52,-rig.width*.39)},
+  {a:new THREE.Vector3(p.x-.16,p.y-h*.28,rig.width*.39),b:new THREE.Vector3(p.x+.12+Math.sin(theta)*h*.52,p.y-Math.cos(theta)*h*.52,rig.width*.39)}
  ];
  anchors.forEach((v,i)=>placeGullStrut(rig.actuators[i],v.a,v.b));
 }
@@ -4435,7 +4436,7 @@ function setClimateMode(mode){if(!climateModes[mode])return;climateMode=mode;cli
  climateMats.exhaust.emissiveIntensity=mode==='humid'?.75:.45;
  climateMats.garden.emissiveIntensity=mode==='humid'?1.1:.7;
  setCrownTarget(CROWN_MODE_TARGETS[mode]??0);
- if(mode==='night_purge'||mode==='fire_smoke'){crownLayerVisible=true;crownAssembly.visible=true;}
+ if(crownLayerVisible)crownAssembly.visible=true;
  updateClimateUI();requestSceneRender();
 }
 function setClimateVisible(value){climateVisible=!!value;climateGroup.visible=climateVisible;crownAssembly.visible=climateVisible&&crownLayerVisible;updateClimateUI();requestSceneRender();}
