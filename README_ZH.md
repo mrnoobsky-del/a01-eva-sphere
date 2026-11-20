@@ -67,3 +67,13 @@ AI 系统不得对关键基础设施、财务、应急响应或影响权利的�
 - [AIR-01 工程概念](lunar/air-01/README_ZH.md)
 
 v3.6.0 将月球 AIR-01 大气子系统加入可选择的 3D 工程对象：外部 MRE 月壤资源处理、洁净 ECLSS 设备、气体调质、储存以及独立的 O₂ / CO₂ 回流 / 水分配管线。场景包含四种显示模式和四人初步质量平衡数据。这只是软件可视化概念，没有连接真实设备或遥测，几何尺寸未校准，也未进行实体或安全验证。JavaScript 语法检查已通过；真实 WebGL 浏览器漫游仍未完成。
+
+
+## A-01 v3.7.0 — Gull-wing 检修入口与冠部通风
+
+- [打开 v3.7.0 集成数字孪生](digital-twin/eva-sphere-a01-v370-gullwing-crown-air-01.html)
+- [A01-GW-01 / A01-CV-01 工程范围说明](docs/engineering/A01-GW-01-CV-01-v370.md)
+- [多语言变更记录](digital-twin/CHANGELOG_v370.md) · [俄文版本说明](releases/v3.7.0/RELEASE-NOTES_RU.md)
+- [保留的 v3.6.0 / AIR-01 基线](digital-twin/eva-sphere-a01-v360-air-01-life-support.html)
+
+v3.7.0 分支保留 AIR-01，并加入冠部通风概念模型与初步情景计算器，以及带上铰链舱门、内侧气闸边界和短行程检修托盘的 Gull-wing 检修入口可视化演示。本版本尚未实现载人模块整体拆卸或沿外壳外部轨道下降。嵌入式 JavaScript 已通过静态语法检查；WebGL 浏览器运行、移动端布局和交互测试仍待完成。几何与工程参数尚未校准；该版本不是施工、结构、暖通或消防安全设计文件。GitHub 分支发布不会自动部署到 uCoz 网站。
