@@ -50,7 +50,7 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 
 ## Current digital workspace
 
-The repository preserves **A-01 v2.1.0** as the stable digital-twin baseline. The integrated experimental line has advanced to **A-01 v3.1.2**, combining the 144-candidate modular shell, waste-service concepts, underground B1 data-centre concept, serviceable interior LED sky and corrected first-arrival sequence. The separate **A-01 v2.0.13** archive in releases/v2.0.13/ is an integrated /evasphere/ site-workspace snapshot and belongs to a different version track.
+The stable digital-twin baseline is preserved separately as **A-01 v2.1.0**. The experimental integrated line progressed through v3.1.2, v3.4.0 and v3.5.0; v3.6.0 added AIR-01. The next integration branch, **v3.7.0**, combines AIR-01 with the Crown ventilation and Gull-wing service-access concepts. Historical versions remain preserved. A GitHub release does not automatically deploy to the uCoz website.
 
 The v2.0.13 archive passed static HTML and JavaScript checks, but live browser/WebGL verification, production Worker verification and deployment to the public website have not been confirmed. See the release notes for scope and limitations.
 
@@ -159,3 +159,13 @@ A-01 LUNA is a separate research concept for a robotically deployed and servicea
 - [AIR-01 engineering concept](lunar/air-01/README.md)
 
 v3.6.0 adds the AIR-01 lunar atmosphere subsystem as a selectable 3D engineering object: external MRE resource processing, clean ECLSS equipment, gas conditioning, storage, and separate O₂ / CO₂-return / water distribution paths. The scene includes four display modes and the preliminary four-person mass-balance figures. It is a visual software concept only; there is no live equipment or telemetry, no calibrated geometry, and no physical or safety validation. JavaScript syntax parsing passed; a live WebGL browser walk-through remains outstanding.
+
+
+## A-01 v3.7.0 — Gull-wing service access and Crown ventilation
+
+- [Open the integrated v3.7.0 digital twin](digital-twin/eva-sphere-a01-v370-gullwing-crown-air-01.html)
+- [A01-GW-01 / A01-CV-01 engineering scope](docs/engineering/A01-GW-01-CV-01-v370.md)
+- [Multilingual change log](digital-twin/CHANGELOG_v370.md) · [Russian release notes](releases/v3.7.0/RELEASE-NOTES_RU.md)
+- [Preserved v3.6.0 / AIR-01 baseline](digital-twin/eva-sphere-a01-v360-air-01-life-support.html)
+
+The v3.7.0 branch retains AIR-01 and adds a conceptual Crown ventilation assembly with a preliminary scenario calculator, plus a visual Gull-wing access demonstrator with an upper-hinged leaf, inner vestibule boundary and short service tray. Full residential-module extraction and descent along exterior rails are not implemented. Embedded JavaScript passed static syntax parsing; live WebGL, mobile-layout and interaction testing remain outstanding. Geometry and engineering parameters are uncalibrated; this is not construction, structural, HVAC or fire-safety documentation. Publishing a GitHub branch does not deploy the changes to the uCoz site.
