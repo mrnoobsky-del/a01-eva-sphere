@@ -1,0 +1,36 @@
+name: A-01 EnergyPlus geometry bridge
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "tools/a01-energyplus/**"
+      - "geometry/a01-shell-parameters-v0.1.json"
+      - ".github/workflows/a01-energyplus-bridge.yml"
+  push:
+    branches: ["feature/a01-v370-gullwing-crown"]
+    paths:
+      - "tools/a01-energyplus/**"
+      - "geometry/a01-shell-parameters-v0.1.json"
+      - ".github/workflows/a01-energyplus-bridge.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: tools/a01-energyplus
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Geometry unit tests
+        run: npm test
+      - name: Production build with EnergyPlus WASM and schemas
+        run: npm run build
