@@ -137,6 +137,8 @@ const coreGroup = new THREE.Group();scene.add(coreGroup);
 const serviceGroup = new THREE.Group();scene.add(serviceGroup);
 const greenGroup = new THREE.Group();scene.add(greenGroup);
 const levelGroups = [];
+const podLevelGroups = [];
+const walkwayLevelGroups = [];
 const deckMeshes = [];
 const levelNames = [
   {name:'Входной и сервисный уровень',desc:'Главный вход, тамбур, первичная навигация, стойка помощи, логистика, санитарные и технические помещения.'},
@@ -208,14 +210,15 @@ function addLevel(index){
   const count=index===0?12:(index===1?18:(index===2?20:(index===3?16:12)));
   const roomMaterial=index===0?blueMaterial:(index===1?publicMaterial:(index===2?goldMaterial:(index===3?greenMaterial:publicMaterial)));
   const rooms=addPodSet(index,count,roomMaterial);
-  levelGroup.add(rooms);
+  levelGroup.add(rooms);podLevelGroups.push(rooms);
   for(let p=0;p<12;p++){
     const a=Math.PI*2*p/12;
     const px=Math.cos(a)*20.7,pz=Math.sin(a)*20.7;
     const column=new THREE.Mesh(new THREE.CylinderGeometry(.13,.18,4.2,8),darkMaterial);
     column.position.set(px,y+2.1,pz);levelGroup.add(column);
   }
-  [0,Math.PI/2,Math.PI,Math.PI*1.5].forEach(a=>addBridge(levelGroup,a,y+.17));
+  const bridgeLayer=new THREE.Group();levelGroup.add(bridgeLayer);walkwayLevelGroups.push(bridgeLayer);
+  [0,Math.PI/2,Math.PI,Math.PI*1.5].forEach(a=>addBridge(bridgeLayer,a,y+.17));
   const rim=new THREE.Mesh(new THREE.TorusGeometry(21.95,.12,8,128),edgeMaterial);
   rim.rotation.x=Math.PI/2;rim.position.y=y+.06;levelGroup.add(rim);
   if(index===0){
@@ -295,8 +298,10 @@ function selectLevel(index){
 }
 document.querySelectorAll('.level-btn').forEach(b=>b.addEventListener('click',()=>selectLevel(Number(b.dataset.level))));
 document.getElementById('onlyLevel').addEventListener('change',e=>{onlySelected=e.target.checked;selectLevel(selectedLevel);});
-const toggles={showShell:shellGroup,showPods:podGroup,showWalkways:walkwayGroup,showCore:coreGroup,showService:serviceGroup,showGreen:greenGroup};
+const toggles={showShell:shellGroup,showCore:coreGroup,showService:serviceGroup,showGreen:greenGroup};
 Object.keys(toggles).forEach(id=>document.getElementById(id).addEventListener('change',e=>{toggles[id].visible=e.target.checked;}));
+document.getElementById('showPods').addEventListener('change',e=>podLevelGroups.forEach(g=>{g.visible=e.target.checked;}));
+document.getElementById('showWalkways').addEventListener('change',e=>{walkwayGroup.visible=e.target.checked;walkwayLevelGroups.forEach(g=>{g.visible=e.target.checked;});});
 
 const cameraViews={
   atrium:{p:[34,27,39],t:[0,9,0]},
@@ -309,7 +314,7 @@ function setView(name){
   document.querySelectorAll('.view-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
 }
 document.querySelectorAll('.view-btn').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
-document.getElementById('reset').addEventListener('click',()=>{selectLevel(2);document.getElementById('onlyLevel').checked=false;onlySelected=false;Object.keys(toggles).forEach(id=>{document.getElementById(id).checked=true;toggles[id].visible=true;});setView('atrium');});
+document.getElementById('reset').addEventListener('click',()=>{selectLevel(2);document.getElementById('onlyLevel').checked=false;onlySelected=false;Object.keys(toggles).forEach(id=>{document.getElementById(id).checked=true;toggles[id].visible=true;});document.getElementById('showPods').checked=true;podLevelGroups.forEach(g=>{g.visible=true;});document.getElementById('showWalkways').checked=true;walkwayGroup.visible=true;walkwayLevelGroups.forEach(g=>{g.visible=true;});setView('atrium');});
 
 const clock=new THREE.Clock();
 function animate(){
