@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0d12">
+<title>A-01 · EnergyPlus Workbench</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0d12;--panel:#141821;--line:#2a303b;--muted:#9ba5b5;--text:#f4f6fa;--accent:#b9d6ff;--good:#a8dfc1;--warn:#f1d49a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 24px;border-bottom:1px solid var(--line);background:#0f1219}
+.brand{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:650}.brand span{color:var(--muted);font-weight:400}
+nav{display:flex;gap:10px;flex-wrap:wrap}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid #526078;border-radius:9px;padding:9px 13px;color:var(--text);background:#1a2230;font:inherit}
+main{max-width:1440px;margin:0 auto;padding:26px 22px 40px}.intro{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:end;margin-bottom:20px}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}h1{font-size:clamp(26px,4vw,42px);line-height:1.06;letter-spacing:-.04em;margin:8px 0 10px}.lede{color:var(--muted);max-width:760px;margin:0}
+.status{display:flex;gap:12px;align-items:flex-start;padding:15px 17px;border:1px solid #66583b;background:#211d15;border-radius:12px;margin:18px 0 20px;color:#f0e1c2}.status strong{display:block;color:var(--warn);margin-bottom:3px}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}.workspace{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel)}
+.workspace-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 15px;border-bottom:1px solid var(--line)}.workspace-head strong{font-size:13px}
+iframe{display:block;width:100%;height:min(76vh,900px);min-height:620px;border:0;background:#fff}
+.side{display:grid;gap:12px}.card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:16px}.card h2{font-size:13px;margin:0 0 10px}.card p,.card li{font-size:12px;color:var(--muted)}.card ol{padding-left:18px;margin:8px 0}.tag{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--good);border:1px solid #355a4b;border-radius:99px;padding:4px 8px;margin-bottom:10px}
+.metric{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:12px}.metric:last-child{border:0}.metric span{color:var(--muted)}
+footer{max-width:1440px;margin:0 auto;padding:0 22px 28px;color:var(--muted);font-size:11px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}.side{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.intro{grid-template-columns:1fr}.intro nav{justify-content:flex-start}iframe{height:75vh;min-height:560px}}
+@media(max-width:520px){header{padding:14px 16px;align-items:flex-start;flex-direction:column}main{padding:20px 12px 28px}.workspace-head{align-items:flex-start;flex-direction:column}iframe{min-height:520px;height:72vh}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">A-01 <span>/ инженерная среда</span></div>
+  <nav>
+    <a class="btn" href="https://app.idfkit.com/" target="_blank" rel="noopener">Открыть Envelop отдельно ↗</a>
+    <a class="btn" href="https://shoebox.idfkit.com/" target="_blank" rel="noopener">Демонстрация EnergyPlus ↗</a>
+  </nav>
+</header>
+<main>
+  <section class="intro">
+    <div>
+      <div class="eyebrow">A-01 · v3.7.8 · расчётная рабочая среда</div>
+      <h1>EnergyPlus Workbench</h1>
+      <p class="lede">Готовый браузерный редактор idfkit Envelop и движок EnergyPlus/WebAssembly. Моделирование выполняется локально в браузере после загрузки вычислительных файлов; сервер для самого расчёта не нужен.</p>
+    </div>
+  </section>
+  <div class="status" role="status">
+    <div aria-hidden="true">!</div>
+    <div><strong>Расчётный движок доступен, цифровой двойник A-01 ещё не передан в него как физическая модель.</strong>
+    Сейчас Envelop работает как самостоятельная расчётная среда. Полный автоматический расчёт именно Сферы Евы станет достоверным после передачи откалиброванной геометрии в метрах, зон, материалов, остекления, графиков и систем HVAC. Текущая 3D-геометрия A-01 имеет непривязанный физический масштаб.</div>
+  </div>
+  <div class="grid">
+    <section class="workspace">
+      <div class="workspace-head">
+        <strong>idfkit Envelop · внешний расчётный редактор</strong>
+        <a href="https://app.idfkit.com/" target="_blank" rel="noopener">Если редактор не загрузился — открыть в новой вкладке ↗</a>
+      </div>
+      <iframe src="https://app.idfkit.com/" title="idfkit Envelop EnergyPlus editor" loading="eager" referrerpolicy="no-referrer" allow="fullscreen"></iframe>
+    </section>
+    <aside class="side">
+      <section class="card">
+        <span class="tag">Готовое решение</span>
+        <h2>Что уже выполняет Envelop</h2>
+        <div class="metric"><b>EnergyPlus</b><span>физический движок</span></div>
+        <div class="metric"><b>WebAssembly</b><span>в браузере</span></div>
+        <div class="metric"><b>3D + HVAC</b><span>геометрия и схемы</span></div>
+        <div class="metric"><b>EPW / TMYx</b><span>погодные данные</span></div>
+        <div class="metric"><b>8760 часов</b><span>годовой расчёт</span></div>
+      </section>
+      <section class="card">
+        <h2>Путь к расчёту A-01</h2>
+        <ol>
+          <li>Зафиксировать физический масштаб и геометрию оболочки.</li>
+          <li>Разбить купол на реальные тепловые зоны и атриум.</li>
+          <li>Назначить материалы, U-значения, остекление и затенение.</li>
+          <li>Подключить Бийск EPW/DDY и климатические сценарии.</li>
+          <li>Сформировать HVAC-модель, вентиляцию и рекуперацию.</li>
+          <li>Синхронизировать параметры и результаты с цифровым двойником.</li>
+        </ol>
+      </section>
+      <section class="card">
+        <h2>Статус входных данных</h2>
+        <div class="metric"><b>Климатическая база</b><span>подготовлена</span></div>
+        <div class="metric"><b>Физический масштаб</b><span>не задан</span></div>
+        <div class="metric"><b>Зональная геометрия</b><span>не подтверждена</span></div>
+        <div class="metric"><b>Ограждения и U</b><span>не заданы</span></div>
+        <div class="metric"><b>HVAC-параметры</b><span>не заданы</span></div>
+      </section>
+      <section class="card">
+        <h2>Исходники</h2>
+        <p><a href="https://github.com/idfkit/idfkit-shoebox" target="_blank" rel="noopener">Shoebox · пример интеграции</a></p>
+        <p><a href="https://github.com/idfkit/idfkit-js" target="_blank" rel="noopener">idfkit-js · модель IDF/epJSON</a></p>
+        <p><a href="https://www.npmjs.com/package/@idfkit/engine" target="_blank" rel="noopener">@idfkit/engine · EnergyPlus в WASM</a></p>
+        <p><a href="https://www.npmjs.com/package/@idfkit/weather" target="_blank" rel="noopener">@idfkit/weather · погодные файлы</a></p>
+      </section>
+    </aside>
+  </div>
+</main>
+<footer>A-01 / инженерный прототип. Результаты самостоятельных моделей Envelop не являются расчётом Сферы Евы. Все физические проектные параметры должны быть подтверждены до использования результатов для подбора оборудования или строительства.</footer>
+</body>
+</html>
