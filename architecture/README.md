@@ -10,6 +10,13 @@ Visualizations must be captioned as concept imagery.
 
 - [A-01 modular shell, waste logistics, digital sky and underground data-centre research v0.1](modular-systems-research-v0.1.md)
 
+## Floor and ceiling engineering
+
+- [A-01 Floor & Ceiling Engineering v0.1 — interactive concept module](../engineering/a01-floor-ceiling-engineering-v0.1.html)
+- [Engineering note and verification gates](A01-FLOOR-CEILING-ENGINEERING-v0.1.md)
+
+The module keeps the floor above, structural system, MEP reservation zone, acoustic/fire requirements and ceiling below in one coordinated assembly. All displayed thicknesses are editable demonstration placeholders; model units are not calibrated physical dimensions.
+
 ## A-01 Sphere Standard
 
 - [A-01 Sphere Standard v0.1](../standards/A01-SPHERE-STANDARD-v0.1.md)
