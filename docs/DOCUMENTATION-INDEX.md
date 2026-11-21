@@ -26,3 +26,12 @@ The reference cassette remains a concept. Its construction details and verificat
 - [工程集成矩阵 — 简体中文](engineering/A01-INTEGRATION-MATRIX-v373-ZH.md)
 
 The matrix consolidates Engineering Core, Climate & Crown, Serviceable Shell, Energy & Resilience and Smart Operations. It distinguishes visual/software concepts from engineering work still required and records safety boundaries, phone permissions, interfaces, calculations and staged verification. It does not certify physical systems or code compliance.
+
+
+## A-01 v3.7.4 — A01-SEC-01 secure device control specification
+
+- [Спецификация безопасного управления устройствами — RU](engineering/A01-SEC-01-DEVICE-CONTROL-SPEC-v374-RU.md)
+- [Secure Device Control Engineering Specification — EN](engineering/A01-SEC-01-DEVICE-CONTROL-SPEC-v374.md)
+- [安全设备控制工程规范 — 简体中文](engineering/A01-SEC-01-DEVICE-CONTROL-SPEC-v374-ZH.md)
+
+The specification defines device criticality classes, user/staff roles, the phone-to-local-controller command path, command lifecycle, independent state feedback, offline and fault behaviour, privacy/security requirements, and staged acceptance gates. It is a requirements document only; no physical control is implemented or certified.
