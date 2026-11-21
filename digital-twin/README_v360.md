@@ -14,6 +14,13 @@
 - [AIR-01 mass-balance JSON](../lunar/air-01/mass-balance.json)
 - [Version changelog](CHANGELOG_v360.md)
 
+## Related engineering module — A-01 floors and ceilings
+
+- [Open the interactive Floor & Ceiling Engineering v0.1 module](../engineering/a01-floor-ceiling-engineering-v0.1.html)
+- [Engineering note](../architecture/A01-FLOOR-CEILING-ENGINEERING-v0.1.md)
+
+This is a separate standalone research module, not a feature embedded in the v3.6.0 scene. It visualises the inter-floor assembly and scenarios for wet rooms, terraces, the atrium, ground-contact floors and the upper level beneath the dome. Editable thicknesses are demonstration placeholders; scene geometry is not calibrated in metres.
+
 ## 1. What changed
 
 v3.6.0 adds AIR-01 as a selectable global engineering object in the A-01 scene registry:
