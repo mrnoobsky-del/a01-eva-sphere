@@ -38,3 +38,11 @@ The cassette document is a proposed interface and verification brief. It does no
 - [Dependency-free layout generator](../tools/generate-cassette-layout.mjs)
 
 The proposed grid contains 12 parent sectors and 144 candidate cassette records. All dimensions remain in uncalibrated model units.
+
+## Universal accessibility and family comfort
+
+- [A-01 Universal Accessibility & Family Comfort Standard v0.1 (RU)](../standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.md)
+- [English version](../standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.en.md)
+- [简体中文版](../standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.zh.md)
+
+This concept standard coordinates step-free circulation, lifts, sanitary facilities, family care rooms, sensory wayfinding, rest points, operations and evacuation with the architectural and engineering model.
