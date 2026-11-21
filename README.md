@@ -169,3 +169,12 @@ v3.6.0 adds the AIR-01 lunar atmosphere subsystem as a selectable 3D engineering
 - [Preserved v3.6.0 / AIR-01 baseline](digital-twin/eva-sphere-a01-v360-air-01-life-support.html)
 
 The v3.7.0 branch retains AIR-01 and adds a conceptual Crown ventilation assembly with a preliminary scenario calculator, plus a visual Gull-wing access demonstrator with an upper-hinged leaf, inner vestibule boundary and short service tray. Full residential-module extraction and descent along exterior rails are not implemented. Embedded JavaScript passed static syntax parsing; live WebGL, mobile-layout and interaction testing remain outstanding. Geometry and engineering parameters are uncalibrated; this is not construction, structural, HVAC or fire-safety documentation. Publishing a GitHub branch does not deploy the changes to the uCoz site.
+
+
+## A-01 v3.7.3 — engineering integration matrix
+
+- [Engineering Integration Matrix — English](docs/engineering/A01-INTEGRATION-MATRIX-v373.md)
+- [Матрица интеграции — Русский](docs/engineering/A01-INTEGRATION-MATRIX-v373-RU.md)
+- [工程集成矩阵 — 简体中文](docs/engineering/A01-INTEGRATION-MATRIX-v373-ZH.md)
+
+The matrix consolidates Engineering Core, Climate & Crown, Serviceable Shell, Energy & Resilience and Smart Operations. It separates software demonstrators from engineering work requiring calculations, tests and independent review. It does not certify physical implementation or code compliance.
