@@ -23,6 +23,7 @@ Vite откроет локальную страницу на http://127.0.0.1:41
 
     npm test
     npm run build
+    npm run check
     npm run preview
 
 Скрипты predev и prebuild автоматически подготавливают EnergyPlus WASM assets, схемы EnergyPlus и исходный JSON геометрии в локальной папке public/.
