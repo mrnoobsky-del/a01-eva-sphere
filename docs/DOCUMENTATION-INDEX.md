@@ -71,3 +71,12 @@ Connects A01-CV-01, A01-CV-02 and A04 Energy & Resilience. Uses SP 131.13330.202
 - [EnergyPlus / idfkit integration boundary — RU](engineering/A01-EN-02-ENERGYPLUS-INTEGRATION-v378-RU.md)
 
 Adds an A-01-branded entry point to the free browser-based idfkit Envelop editor and its EnergyPlus/WebAssembly ecosystem. The page embeds the external editor with a new-tab fallback and explicitly distinguishes the editor's own models from an A-01 whole-dome simulation. The bridge to A-01 remains gated by physical geometry, zones, constructions, HVAC inputs and a site-representative hourly weather file.
+
+
+## A-01 v3.7.9 — calibrated dome geometry bridge to EnergyPlus
+
+- [A-01 EnergyPlus Geometry Bridge — browser application](../tools/a01-energyplus/)
+- [Bridge source and run instructions](../tools/a01-energyplus/README_RU.md)
+- [Geometry-to-EnergyPlus engineering note — RU](engineering/A01-EN-03-GEOMETRY-ENERGYPLUS-BRIDGE-v379-RU.md)
+
+Adds an actual IDF geometry generator and EnergyPlus 26.1.0 WebAssembly runner for a single calibrated dome air-volume zone. The bridge consumes the canonical ellipsoid parameter JSON, maps Y-up to EnergyPlus Z-up, creates a closed triangular shell and adiabatic base, and requires an explicit physical support-ring diameter, shell U-value, solar absorptance and EPW file. It does not yet contain internal floors, room zoning, glazing, occupancy schedules or real HVAC equipment. Build and annual EPW simulation must be run and reviewed before treating outputs as accepted engineering results.
