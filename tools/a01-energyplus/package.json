@@ -10,7 +10,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "node --test",
-    "pretest": "node scripts/copy-schemas.mjs && node scripts/stage-geometry.mjs"
+    "pretest": "node scripts/copy-schemas.mjs && node scripts/stage-geometry.mjs",
+    "check": "npm test && npm run build"
   },
   "dependencies": {
     "@idfkit/core": "0.4.0",
