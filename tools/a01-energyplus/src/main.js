@@ -27,7 +27,7 @@ const engineLog = [];
 
 function setStatus(message, kind = '') {
   statusEl.textContent = message;
-  statusEl.className = \`status \${kind}\`.trim();
+  statusEl.className = `status ${kind}`.trim();
 }
 
 function log(message) {
@@ -47,10 +47,10 @@ function readNumber(id, label, required = true) {
   const raw = $(id).value.trim();
   if (!raw) {
     if (!required) return 0;
-    throw new Error(\`Заполните поле «\${label}».\`);
+    throw new Error(`Заполните поле «${label}».`);
   }
   const value = Number(raw);
-  if (!Number.isFinite(value)) throw new Error(\`Проверьте поле «\${label}».\`);
+  if (!Number.isFinite(value)) throw new Error(`Проверьте поле «${label}».`);
   return value;
 }
 
@@ -75,12 +75,12 @@ function updateGeometry() {
     const subdivisions = Number($('subdivisions').value);
     const geometry = buildDomeGeometry(shellParameters, { rimDiameterM, subdivisions });
     latestGeometry = geometry;
-    $('shell-area').textContent = geometry.calibrated ? \`\${format(geometry.shellArea)} м²\` : \`\${format(geometry.shellArea)} ед²\`;
-    $('base-area').textContent = geometry.calibrated ? \`\${format(geometry.baseArea)} м²\` : \`\${format(geometry.baseArea)} ед²\`;
-    $('volume').textContent = geometry.calibrated ? \`\${format(geometry.enclosedVolume)} м³\` : \`\${format(geometry.enclosedVolume)} ед³\`;
-    $('height').textContent = geometry.calibrated ? \`\${format(geometry.height)} м\` : \`\${format(geometry.height)} ед.\`;
+    $('shell-area').textContent = geometry.calibrated ? `${format(geometry.shellArea)} м²` : `${format(geometry.shellArea)} ед²`;
+    $('base-area').textContent = geometry.calibrated ? `${format(geometry.baseArea)} м²` : `${format(geometry.baseArea)} ед²`;
+    $('volume').textContent = geometry.calibrated ? `${format(geometry.enclosedVolume)} м³` : `${format(geometry.enclosedVolume)} ед³`;
+    $('height').textContent = geometry.calibrated ? `${format(geometry.height)} м` : `${format(geometry.height)} ед.`;
     $('facets').textContent = geometry.counts.shellTriangles.toLocaleString('ru-RU');
-    $('scale').textContent = geometry.calibrated ? \`\${format(geometry.scaleToMetres, 4)} м/ед.\` : 'не задан';
+    $('scale').textContent = geometry.calibrated ? `${format(geometry.scaleToMetres, 4)} м/ед.` : 'не задан';
     if (!geometry.calibrated) {
       setStatus('Геометрия прочитана. Для физических расчётов укажите подтверждённый диаметр опорного кольца.', 'warn');
     }
@@ -144,11 +144,11 @@ function renderResult(result, seconds, runRevision, weatherName) {
     settings: settings()
   };
   const parts = [
-    \`EnergyPlus \${ENERGYPLUS_VERSION}\`,
-    \`Код завершения: \${result.exitCode}\`,
-    \`Время расчёта: \${format(seconds, 2)} с\`,
-    \`Ошибки severe/fatal: \${severe.length}\`,
-    \`Предупреждения: \${warnings.length}\`
+    `EnergyPlus ${ENERGYPLUS_VERSION}`,
+    `Код завершения: ${result.exitCode}`,
+    `Время расчёта: ${format(seconds, 2)} с`,
+    `Ошибки severe/fatal: ${severe.length}`,
+    `Предупреждения: ${warnings.length}`
   ];
   if (!result.success) {
     setStatus(result.fatalError || 'EnergyPlus завершил расчёт с ошибкой.', 'bad');
@@ -176,7 +176,7 @@ function renderResult(result, seconds, runRevision, weatherName) {
   }
   if (severe.length || warnings.length) {
     const pre = document.createElement('pre');
-    pre.textContent = [...severe, ...warnings].map((entry) => \`[\${entry.severity}] \${entry.message}\`).join('\\n');
+    pre.textContent = [...severe, ...warnings].map((entry) => `[${entry.severity}] ${entry.message}`).join('\\n');
     host.append(pre);
   }
 }
@@ -203,16 +203,16 @@ async function runLatest() {
   try {
     const result = await engine.run({ idf: modelSnapshot.idf, epw: weatherSnapshot });
     const seconds = (performance.now() - start) / 1000;
-    log(\`Run finished in \${format(seconds, 2)} s; exit code \${result.exitCode}; success \${result.success}.\`);
-    for (const entry of result.err?.entries ?? []) log(\`[\${entry.severity}] \${entry.message}\`);
+    log(`Run finished in ${format(seconds, 2)} s; exit code ${result.exitCode}; success ${result.success}.`);
+    for (const entry of result.err?.entries ?? []) log(`[${entry.severity}] ${entry.message}`);
     if (runRevision === revision) renderResult(result, seconds, runRevision, weatherName);
     else {
       runPending = true;
       setStatus('Входные данные изменились во время предыдущего запуска. Старый результат не будет показан как текущий.', 'warn');
     }
   } catch (error) {
-    log(\`Engine run failed: \${error?.stack || error}\`);
-    setStatus(\`Ошибка EnergyPlus: \${error?.message || error}\`, 'bad');
+    log(`Engine run failed: ${error?.stack || error}`);
+    setStatus(`Ошибка EnergyPlus: ${error?.message || error}`, 'bad');
   } finally {
     activeRun = false;
     runButton.disabled = !refreshModel() || !engine || !epwText;
@@ -265,8 +265,8 @@ $('epw-file').addEventListener('change', async (event) => {
     epwText = text;
     epwName = file.name;
     $('epw-info').textContent =
-      \`\${location.city}, \${location.country} · \${location.latitude.toFixed(3)}, \${location.longitude.toFixed(3)} · \${file.name}\`;
-    log(\`Loaded EPW header: \${location.city}, \${location.country}; station \${location.station}.\`);
+      `${location.city}, ${location.country} · ${location.latitude.toFixed(3)}, ${location.longitude.toFixed(3)} · ${file.name}`;
+    log(`Loaded EPW header: ${location.city}, ${location.country}; station ${location.station}.`);
     refreshModel();
     queueRun(350);
   } catch (error) {
@@ -298,35 +298,35 @@ $('auto-run').addEventListener('change', () => {
 async function boot() {
   try {
     setStatus('Загружаем исходные параметры оболочки A-01…');
-    const geometryResponse = await fetch(\`\${import.meta.env.BASE_URL}geometry/a01-shell-parameters-v0.1.json\`);
-    if (!geometryResponse.ok) throw new Error(\`Geometry file unavailable: HTTP \${geometryResponse.status}\`);
+    const geometryResponse = await fetch(`${import.meta.env.BASE_URL}geometry/a01-shell-parameters-v0.1.json`);
+    if (!geometryResponse.ok) throw new Error(`Geometry file unavailable: HTTP ${geometryResponse.status}`);
     shellParameters = await geometryResponse.json();
     updateGeometry();
     setStatus('Загружаем схему EnergyPlus и WebAssembly-движок…');
 
     const [loadedSchema, loadedEngine] = await Promise.all([
-      new SchemaBundle(httpSource(\`\${import.meta.env.BASE_URL}schemas/\`)).load(ENERGYPLUS_VERSION),
+      new SchemaBundle(httpSource(`${import.meta.env.BASE_URL}schemas/`)).load(ENERGYPLUS_VERSION),
       createEnergyPlus({
-        assetBaseUrl: \`\${import.meta.env.BASE_URL}energyplus\`,
+        assetBaseUrl: `${import.meta.env.BASE_URL}energyplus`,
         wasmFile: ENGINE_WASM_FILE,
         onConsole: (line) => log(line),
         onProgress: ({ phase, message }) => {
-          engineBadge.textContent = \`\${phase}\`;
+          engineBadge.textContent = `${phase}`;
           if (message) setStatus(message);
         }
       })
     ]);
     schema = loadedSchema;
     engine = loadedEngine;
-    engineBadge.textContent = \`EnergyPlus \${ENERGYPLUS_VERSION} готов\`;
+    engineBadge.textContent = `EnergyPlus ${ENERGYPLUS_VERSION} готов`;
     engineBadge.style.color = 'var(--good)';
-    log(\`EnergyPlus \${ENERGYPLUS_VERSION} initialized; geometry source loaded.\`);
+    log(`EnergyPlus ${ENERGYPLUS_VERSION} initialized; geometry source loaded.`);
     setStatus('Движок готов. Заполните физический диаметр, U оболочки, солнечное поглощение и загрузите EPW.', 'warn');
     refreshModel();
   } catch (error) {
     engineBadge.textContent = 'Ошибка загрузки';
     engineBadge.style.color = 'var(--bad)';
-    setStatus(\`Не удалось подготовить расчётную среду: \${error?.message || error}\`, 'bad');
+    setStatus(`Не удалось подготовить расчётную среду: ${error?.message || error}`, 'bad');
     log(error?.stack || error);
   }
 }
