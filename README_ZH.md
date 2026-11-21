@@ -81,3 +81,11 @@ v3.6.0 将月球 AIR-01 大气子系统加入可选择的 3D 工程对象：外�
 - [Русская версия](standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.md) · [English version](standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.en.md)
 
 文件涵盖各楼层连续无台阶路线、电梯与自动扶梯、通用卫生间和淋浴、家庭照护室、导向、感官舒适、运营及疏散。法规尺寸仅在适用时作为参考最小值；本项目标准不是施工文件，也不构成合规证明。
+
+## A-01 v3.7.0 集成数字孪生 — 人文舒适工程
+
+- [打开 v3.7.0](digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html)
+- [Русская документация](digital-twin/README_RU_v370.md) · [English documentation](digital-twin/README_v370.md) · [简体中文说明](digital-twin/README_ZH_v370.md)
+- [变更记录](digital-twin/CHANGELOG_v370.md) · [工程说明](architecture/A01-HUMAN-COMFORT-ENGINEERING-v0.1.md)
+
+v3.7.0 保留包含 AIR-01 的 v3.6.0，并在集成导航中增加“舒适”入口。内嵌工作区涵盖无台阶交通、电梯与辅助自动扶梯、通用卫生间和淋浴、家庭照护、给排水分流、楼层/天花概念及疏散。垂直剖面为交互式 SVG 示意图，不是新的 Three.js 空间几何；工程计算、比例校准和真实设备验证尚未完成。v3.6.0 原文件单独保留。
