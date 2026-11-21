@@ -9,7 +9,8 @@
     "prebuild": "idfkit-engine-assets public/energyplus && node scripts/copy-schemas.mjs && node scripts/stage-geometry.mjs",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --test"
+    "test": "node --test",
+    "pretest": "node scripts/copy-schemas.mjs && node scripts/stage-geometry.mjs"
   },
   "dependencies": {
     "@idfkit/core": "0.4.0",
