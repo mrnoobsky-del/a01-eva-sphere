@@ -35,3 +35,12 @@ The matrix consolidates Engineering Core, Climate & Crown, Serviceable Shell, En
 - [安全设备控制工程规范 — 简体中文](engineering/A01-SEC-01-DEVICE-CONTROL-SPEC-v374-ZH.md)
 
 The specification defines device criticality classes, user/staff roles, the phone-to-local-controller command path, command lifecycle, independent state feedback, offline and fault behaviour, privacy/security requirements, and staged acceptance gates. It is a requirements document only; no physical control is implemented or certified.
+
+
+## A-01 v3.7.5 — A01-CV-01 crown ventilation specification
+
+- [Инженерная спецификация коронной вентиляции — RU](engineering/A01-CV-01-CROWN-VENTILATION-SPEC-v375-RU.md)
+- [Crown Ventilation Engineering Specification — EN](engineering/A01-CV-01-CROWN-VENTILATION-SPEC-v375.md)
+- [穹顶冠部通风工程规范 — 简体中文](engineering/A01-CV-01-CROWN-VENTILATION-SPEC-v375-ZH.md)
+
+Defines separate normal, night-purge, winter/weather-protection and fire/smoke functions; proposed instrumentation; local control and safe-state requirements; calculation inputs; commissioning gates; and phone/Eva boundaries. No numerical setpoints or equipment selections are asserted without site and design data. Fire/smoke control remains a separate engineered system.
