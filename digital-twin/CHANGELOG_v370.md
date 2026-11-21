@@ -94,3 +94,29 @@
 - 提供俄语、英语和简体中文版本，并更新文档索引。
 
 **Status / Статус / 状态:** requirements specification only. No physical device control, commissioning or code compliance is claimed.
+
+
+## A-01 v3.7.5 — A01-CV-01 crown ventilation specification
+
+### Русский
+- Добавлена расширенная спецификация коронной вентиляции на русском, английском и китайском языках.
+- Разделены обычная вентиляция, ночная продувка, зимняя/погодная защита и независимая пожарная стратегия.
+- Определены предлагаемые группы датчиков, локальные блокировки, обратная связь приводов, требования к безопасным состояниям и обслуживанию.
+- Составлен перечень необходимых аэродинамических, тепловлажностных, акустических и дымовых расчётов и этапов испытаний.
+- Не назначены числовые уставки и оборудование без площадочных данных; визуальный режим и калькулятор остаются моделью.
+
+### English
+- Added the expanded crown ventilation specification in Russian, English and Simplified Chinese.
+- Separated normal ventilation, night purge, winter/weather protection and independent fire strategy.
+- Defined proposed sensor groups, local interlocks, actuator feedback, safe-state and maintenance requirements.
+- Listed required aerodynamic, hygrothermal, acoustic and smoke calculations and test stages.
+- No numerical setpoints or equipment selections are asserted without site data; visual modes and calculator remain a model.
+
+### 简体中文
+- 新增俄语、英语和简体中文冠部通风扩展规范。
+- 区分常规通风、夜间排热、冬季/天气保护和独立消防策略。
+- 定义建议传感器组、本地联锁、执行器反馈、安全状态和维护要求。
+- 列出空气动力、热湿、声学、排烟计算及测试阶段。
+- 缺少场地数据时不指定数值设定点或设备选型；可视化模式和计算器仍属于模型。
+
+**Status / Статус / 状态:** engineering requirements specification only. Physical system not implemented; calculations and code compliance not verified.
