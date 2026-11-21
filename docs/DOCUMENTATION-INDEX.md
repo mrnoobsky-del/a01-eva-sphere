@@ -18,3 +18,6 @@ The reference cassette remains a concept. Its construction details and verificat
 - [Parametric exterior cassette geometry v0.1](../architecture/A01-CAS-PANEL-GEOMETRY-v0.1.md)
 - [Cassette parameter model and generated geometry](../geometry/README.md)
 - [Cassette layout register](../templates/cassette-layout-register-v0.1.csv)
+- [A-01 Universal Accessibility & Family Comfort Standard v0.1 (RU)](../standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.md)
+- [English version](../standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.en.md)
+- [简体中文版](../standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.zh.md)
