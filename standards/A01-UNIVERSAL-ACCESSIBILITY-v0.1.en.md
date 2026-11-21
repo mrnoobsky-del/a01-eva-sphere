@@ -117,9 +117,10 @@ Clauses 6.3.2–6.3.3 of SP 59.13330.2020 specify more than room geometry. In a 
 | Enclosed shower | 1.80 × 1.80 m |
 | Combined shower, toilet and washbasin room | 2.30 × 2.40 m |
 | Combined sanitary room with shower and changing area | 2.70 × 2.70 m |
+| Women’s personal hygiene room | 1.80 × 2.60 m |
 | Mother-and-child room (table entry) | 2.50 × 3.00 m |
 
-These are regulatory reference minima, not recommended comfort dimensions for every A-01 room. A-01 should provide additional clear space wherever needed for a wheelchair, companion, safe transfer and child care. Accessible showers require wheelchair approach space, a slip-resistant floor, a threshold-free tray, an outward-opening door, a fold-down seat no higher than 0.48 m above the shower tray, a handheld shower and wall-mounted grab rails; the seat must be at least 0.5 m deep and long. Taps in accessible sanitary rooms should have lever operation and a thermostat; separate hot- and cold-water controls are not used. Table dimensions do not replace a detailed layout and fixture check.
+These are regulatory reference minima, not recommended comfort dimensions for every A-01 room. A-01 should provide additional clear space wherever needed for a wheelchair, companion, safe transfer and child care. Accessible showers require wheelchair approach space, a slip-resistant floor, a threshold-free tray, an outward-opening door, a fold-down seat no higher than 0.48 m above the shower tray, a handheld shower and wall-mounted grab rails; the seat must be at least 0.5 m deep and long. Under the note to Table 6.1, both the shower tray and the clear approach area must be at least 0.9 × 1.5 m. Taps in accessible sanitary rooms should have lever operation and a thermostat; separate hot- and cold-water controls are not used. Table dimensions do not replace a detailed layout and fixture check.
 
 ### 5.2. Toilet equipment
 
@@ -166,6 +167,7 @@ Base provision:
 
 - safe changing surface with raised sides and a restraint strap;
 - clear space for a stroller and wheelchair maneuvering;
+- where clause 5.64 of SP 118.13330.2022 applies, a toilet, washbasin and shower tray/zone within the mother-and-child room; for A-01, preferably combine these in an accessible family sanitary suite without a raised threshold;
 - comfortable feeding and recovery chair;
 - private area for breastfeeding and expressing milk;
 - handwashing basin and child-hygiene provision;
@@ -180,7 +182,7 @@ A breast-milk refrigerator may be an option only with temperature monitoring, st
 
 The room should provide a privacy lock while preserving emergency release and an assistance call. Breastfeeding must not be restricted to this room: it is an additional option, not a mandatory place to feed.
 
-SP 118.13330.2022, clause 5.64, specifies mother-and-child rooms for the building types listed there and a ratio of one place per 1,000 visitors for the specified facilities. This ratio must not be applied automatically to every building type; verify A-01’s actual classification. A-01 includes family care as a user-centred design function, with capacity to be calculated separately.
+SP 118.13330.2022, clause 5.64, specifies mother-and-child rooms for the building types listed there and a ratio of one place per 1,000 visitors for the specified facilities; the listed equipment includes a changing table, shower tray, toilet and washbasin. This ratio must not be applied automatically to every building type; verify A-01’s actual classification. Where the clause applies, include the listed equipment within the room or in a directly connected family sanitary suite. A-01 includes family care as a user-centred design function, with capacity to be calculated separately.
 
 ## 7. Wayfinding, vision, hearing and cognitive access
 
