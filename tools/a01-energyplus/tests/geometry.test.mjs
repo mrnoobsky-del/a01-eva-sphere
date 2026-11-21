@@ -58,3 +58,11 @@ test('every generated facet has finite non-zero area', () => {
     ) > 0);
   }
 });
+
+
+test('the base polygon follows every shell rim vertex at each mesh resolution', () => {
+  for (const subdivisions of [1, 2, 3, 4]) {
+    const geometry = buildDomeGeometry(parameters, { rimDiameterM: 24, subdivisions });
+    assert.equal(geometry.floorVertices.length, geometry.counts.azimuthCells);
+  }
+});
