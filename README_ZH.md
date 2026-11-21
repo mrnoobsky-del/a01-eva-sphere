@@ -47,6 +47,13 @@ A-01 LUNA 是独立研究概念，探索围绕标准栖居模块部署和维护�
 - [A-01 Sphere Standard v0.1](standards/A01-SPHERE-STANDARD-v0.1.md)
 - [模块化系统研究](architecture/modular-systems-research-v0.1.md)
 
+## A-01 楼层结构与天花系统
+
+- [交互式 Floor & Ceiling Engineering v0.1 模块](engineering/a01-floor-ceiling-engineering-v0.1.html)
+- [工程说明与验证关口](architecture/A01-FLOOR-CEILING-ENGINEERING-v0.1.md)
+
+该模块探索 L00–L04 的地面饰层、承重楼板与梁、机电夹层、声学层及下层天花。它分别展示湿区、绿色露台、中庭环廊、地面接触式楼板和穹顶下顶层等方案。可编辑厚度仅为演示占位值，不是工程设计尺寸；数字孪生场景单位尚未校准为米。
+
 ## 安全、工程与治理
 
 本仓库中的工程数值和系统描述均为初步概念，除非另有明确说明。它们不是施工文件、认证工程计算、专家意见、许可或安全证明。实体实施需要合格专业人员、场地专项研究、法规审查、独立验证和适当的人类治理。
