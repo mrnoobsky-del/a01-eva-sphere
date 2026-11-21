@@ -201,3 +201,32 @@
 - 明确外部编辑器尚未连接 A-01 几何。整穹顶模拟仍受物理比例、分区清单、围护结构和 HVAC 输入缺失的限制。
 
 **Status / Статус / 状态:** browser workbench entry point added; external Envelop model is not an A-01 simulation. No whole-dome run, deployment or physical validation is claimed.
+
+
+## A-01 v3.7.9 — calibrated dome geometry bridge to EnergyPlus
+
+### Русский
+- Добавлен отдельный модуль tools/a01-energyplus с генератором расчётной геометрии купола A-01 и реальным EnergyPlus 26.1.0 WebAssembly engine.
+- Источником оболочки служит канонический JSON параметров эллипсоида; координаты преобразуются из Y-up в Z-up, математическая вершина закрывается треугольным веером, а основание имеет согласованные с оболочкой граничные узлы.
+- Физический масштаб не придумывается: IDF и запуск заблокированы до ввода подтверждённого диаметра опорного кольца в метрах.
+- Для первой модели пользователь также задаёт U-value оболочки, солнечное поглощение и почасовой EPW. EPW LOCATION используется для Site:Location.
+- Создаётся одна общая воздушная зона, наружная оболочка, адиабатическое основание, термостат и Ideal Loads. 12 секторов и 144 кандидатные кассеты не выдаются за тепловые зоны.
+- Добавлены тесты геометрии и CI-сборка. До успешного запуска сборки и расчёта на площадочном EPW результаты не считаются подтверждёнными.
+
+### English
+- Added the standalone tools/a01-energyplus module with an A-01 dome geometry generator and the actual EnergyPlus 26.1.0 WebAssembly engine.
+- The canonical ellipsoid JSON is the shell source. Coordinates are transformed from Y-up to Z-up, the mathematical apex is closed with a triangle fan, and the base boundary uses matching shell-ring vertices.
+- Physical scale is never guessed: IDF export and simulation require a confirmed support-ring diameter in metres.
+- The first model also requires a user-supplied shell U-value, solar absorptance and hourly EPW weather file. The EPW LOCATION header supplies Site:Location.
+- The first calculation uses one shared air zone, the external shell, an adiabatic base, thermostat and Ideal Loads. The 12 sectors and 144 candidate cassettes are not represented as thermal zones.
+- Geometry tests and a CI build workflow were added. Results are not validated until the build and a site-representative EPW simulation complete successfully.
+
+### 简体中文
+- 新增独立的 tools/a01-energyplus 模块，包含 A-01 穹顶几何生成器和真正的 EnergyPlus 26.1.0 WebAssembly 计算引擎。
+- 外壳几何读取规范椭球参数 JSON。坐标从 Y-up 转换为 EnergyPlus 的 Z-up，顶部使用三角扇闭合，底边节点与外壳网格一致。
+- 不猜测物理比例：必须输入经确认的支撑环直径（米），才能导出 IDF 和运行模拟。
+- 首版还要求输入围护结构 U 值、太阳吸收率和逐小时 EPW 天气文件；Site:Location 从 EPW 的 LOCATION 行读取。
+- 首版采用一个整体空气热区、外壳、绝热底面、恒温器和 Ideal Loads。12 个扇区和 144 个候选舱板不作为热区处理。
+- 增加几何测试和 CI 构建流程。只有构建成功并使用代表实际场地的 EPW 完成模拟后，结果才能进入工程审核。
+
+**Status / Статус / 状态:** source integration and build workflow added; physical dimensions and envelope properties remain user-supplied inputs. No successful browser build, annual run, engineering approval or deployment is claimed.
