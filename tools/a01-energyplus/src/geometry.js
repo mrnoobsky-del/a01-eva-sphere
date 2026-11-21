@@ -137,16 +137,16 @@ export function buildDomeGeometry(parameters, {
   const apex = point(0, 0);
   for (let i = 0; i < azimuthCells; i += 1) {
     const p0 = i * phiStep;
-    const p1 = (i + 1) * phiStep;
+    const p1 = ((i + 1) % azimuthCells) * phiStep;
     pushTriangle([apex, point(p0, e.thetaStartRad), point(p1, e.thetaStartRad)]);
   }
 
   for (let i = 0; i < azimuthCells; i += 1) {
     const phi0 = i * phiStep;
-    const phi1 = (i + 1) * phiStep;
+    const phi1 = ((i + 1) % azimuthCells) * phiStep;
     for (let j = 0; j < thetaCells; j += 1) {
       const theta0 = e.thetaStartRad + j * thetaStep;
-      const theta1 = e.thetaStartRad + (j + 1) * thetaStep;
+      const theta1 = j + 1 === thetaCells ? thetaEnd : e.thetaStartRad + (j + 1) * thetaStep;
       const p00 = point(phi0, theta0);
       const p10 = point(phi1, theta0);
       const p11 = point(phi1, theta1);
