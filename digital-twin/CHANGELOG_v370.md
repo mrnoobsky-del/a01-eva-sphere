@@ -42,3 +42,29 @@
 - The baseline v3.6.0 file is preserved separately from the new v3.7.0 HTML file.
 - A live browser/WebGL interaction test was not completed; runtime behaviour and mobile layout remain to be checked.
 - Model geometry remains uncalibrated; no physical, structural, HVAC or fire-safety validation is claimed.
+
+
+## A-01 v3.7.3 — engineering integration documentation
+
+### Русский
+- Добавлена матрица интеграции Engineering Core, Climate & Crown, Serviceable Shell, Energy & Resilience и Smart Operations.
+- Подготовлены RU/EN/简体中文 документы; обновлены корневые README и индекс документации.
+- Зафиксированы границы цифровой симуляции, предлагаемые датчики и локальные безопасные состояния, права мобильного доступа, интерфейсы и этапы проверки.
+- Отмечены ограничения исходного калькулятора v3.1.6: фиксированная разность температур 30 °C в оценке теплопотерь оболочки и условные солнечные часы.
+- Полное извлечение жилой дольки остаётся исследовательской концепцией; пожарная безопасность не подчиняется Еве, облаку или обычному мобильному управлению.
+
+### English
+- Added the integration matrix for Engineering Core, Climate & Crown, Serviceable Shell, Energy & Resilience and Smart Operations.
+- Added RU/EN/Simplified Chinese documents and updated root READMEs and the documentation index.
+- Recorded simulation boundaries, proposed sensors and local safe states, mobile permissions, interfaces and staged verification.
+- Flagged v3.1.6 calculator limitations: fixed 30 °C envelope heat-loss ΔT and illustrative solar-hour assumptions.
+- Full occupied-module extraction remains experimental; fire safety is independent of Eva, cloud and ordinary mobile control.
+
+### 简体中文
+- 新增 Engineering Core、Climate & Crown、Serviceable Shell、Energy & Resilience 和 Smart Operations 集成矩阵。
+- 新增俄语、英语和简体中文文档，并更新根目录 README 与文档索引。
+- 记录数字模拟边界、建议传感器、本地安全状态、移动端权限、接口和分阶段验证。
+- 标记 v3.1.6 计算器限制：围护结构热损失采用固定 30°C 温差，太阳小时数仅为示意假设。
+- 整体居住模块拆卸仍属实验概念；消防安全独立于 Eva、云端和普通移动控制。
+
+**Status / Статус / 状态:** documentation package only. No physical equipment, telemetry, code compliance or commissioning is implied.
