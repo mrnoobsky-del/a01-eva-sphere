@@ -181,3 +181,12 @@ The document covers continuous step-free routes across all levels, lifts and esc
 - [Changelog](digital-twin/CHANGELOG_v370.md) · [Engineering note](architecture/A01-HUMAN-COMFORT-ENGINEERING-v0.1.md)
 
 v3.7.0 preserves v3.6.0 with AIR-01 and adds a Comfort entry to the integrated navigation. The embedded workspace covers step-free circulation, lifts and supplementary escalators, universal toilets and showers, family care, separated water/waste streams, floor/ceiling concepts and evacuation. Its vertical section is an interactive SVG schematic, not new Three.js spatial geometry; calculations, scale calibration and real-equipment validation remain outstanding. The v3.6.0 source remains preserved separately.
+
+
+## A-01 v3.8.0 — Axiom-inspired Interior Blockout
+
+- [Open interactive 3D blockout](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html)
+- [Russian](digital-twin/README_RU_v380.md) · [English](digital-twin/README_v380.md) · [简体中文](digital-twin/README_ZH_v380.md) · [Changelog](digital-twin/CHANGELOG_v380.md)
+- [Architectural study](architecture/A01-AXIOM-INTERIOR-BLOCKOUT-v0.1.md)
+
+A standalone Three.js companion scene for the v3.7.0 digital twin. It explores a central atrium, ring galleries, public/residential/family zones, bridges, illustrative lift shafts and service routes. This module is linked from the digital-twin index but is not merged into the v3.7.0 main scene. Scene units are uncalibrated; no engineering or safety calculations are claimed.
