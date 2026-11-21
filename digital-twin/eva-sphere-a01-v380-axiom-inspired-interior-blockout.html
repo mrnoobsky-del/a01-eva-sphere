@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101619">
+<title>A-01 v3.8.0 — Interior Blockout</title>
+<style>
+:root{color-scheme:dark;--bg:#0c1215;--panel:rgba(16,25,29,.88);--line:rgba(196,221,220,.15);--text:#edf5f3;--muted:#9aacab;--accent:#a7ded4;--gold:#d9bd82}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}
+#scene{position:fixed;inset:0;display:block}canvas{display:block;width:100%;height:100%}
+.topbar{position:fixed;left:22px;right:22px;top:18px;display:flex;align-items:center;justify-content:space-between;pointer-events:none;z-index:3}
+.brand,.status{pointer-events:auto;backdrop-filter:blur(18px);background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:11px 15px;box-shadow:0 14px 45px rgba(0,0,0,.2)}
+.eyebrow{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700}.brand strong{display:block;margin-top:4px;font-size:14px;letter-spacing:.02em}.status{font-size:11px;color:var(--muted)}
+.panel{position:fixed;z-index:4;top:92px;left:22px;width:300px;max-height:calc(100vh - 116px);overflow:auto;background:var(--panel);backdrop-filter:blur(20px);border:1px solid var(--line);border-radius:20px;padding:17px;box-shadow:0 18px 60px rgba(0,0,0,.25)}
+.panel h2{font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin:0 0 11px;color:var(--accent)}
+.panel p{font-size:12px;line-height:1.55;color:var(--muted);margin:8px 0 14px}
+.levels{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:10px 0 13px}
+button{font:inherit;color:inherit;cursor:pointer}
+.level-btn,.view-btn,.reset-btn{border:1px solid var(--line);background:rgba(255,255,255,.035);border-radius:10px;padding:9px 5px;font-size:11px;transition:.2s}
+.level-btn.active,.view-btn.active{background:rgba(167,222,212,.16);border-color:rgba(167,222,212,.5);color:#d7fff5}
+.level-btn small{display:block;font-size:9px;color:var(--muted);margin-top:3px}
+.section{border-top:1px solid var(--line);padding-top:13px;margin-top:13px}
+.check{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;color:#dce8e6;padding:6px 0}
+.check input{accent-color:#9fd8ce;width:15px;height:15px}
+.views{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.view-btn{padding:8px 3px;font-size:10px}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.legend span{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:10px}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.info{position:fixed;z-index:3;right:22px;bottom:22px;width:min(330px,calc(100vw - 44px));background:var(--panel);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:18px;padding:15px 16px;box-shadow:0 18px 60px rgba(0,0,0,.24)}
+.info .level{font-size:10px;color:var(--accent);letter-spacing:.2em;text-transform:uppercase}.info h3{font-size:17px;margin:5px 0 5px}.info p{font-size:11px;line-height:1.5;color:var(--muted);margin:0}
+.footer-note{position:fixed;z-index:2;left:22px;bottom:18px;color:rgba(220,237,233,.57);font-size:10px;letter-spacing:.03em}
+#loading{position:fixed;inset:0;display:grid;place-items:center;background:#0c1215;z-index:10;color:#d7fff5;font-size:13px;letter-spacing:.08em}
+@media(max-width:760px){.topbar{left:12px;right:12px;top:10px}.brand,.status{padding:9px 11px}.brand strong{font-size:12px}.status{font-size:9px}.panel{left:12px;top:72px;width:240px;max-height:calc(100vh - 170px);padding:13px;border-radius:16px}.panel p{font-size:11px}.info{right:12px;bottom:12px;width:calc(100vw - 264px);min-width:160px;padding:12px}.info h3{font-size:13px}.info p{font-size:10px}.footer-note{left:12px;bottom:12px;font-size:8px;max-width:230px}.levels{gap:3px}.level-btn{font-size:10px;padding:7px 2px}}
+@media(max-width:520px){.panel{width:calc(100vw - 24px);top:auto;bottom:110px;max-height:38vh}.info{width:calc(100vw - 24px);left:12px;right:12px;bottom:12px}.footer-note{display:none}.status{max-width:125px;text-align:right}}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div id="loading">ЗАГРУЗКА ОБЪЁМНОЙ СХЕМЫ A-01…</div>
+<div id="scene"></div>
+<div class="topbar">
+  <div class="brand"><div class="eyebrow">A-01 · THE SPHERE OF EVA</div><strong>Interior Blockout / v3.8.0</strong></div>
+  <div class="status">КОНЦЕПТУАЛЬНАЯ 3D-СХЕМА · НЕ BIM</div>
+</div>
+<aside class="panel">
+  <h2>Уровни и зоны</h2>
+  <p>Архитектурный блок-аут внутренней среды: центральный атриум, кольцевые галереи, жилые и общественные сектора, вертикальные связи и сервисный пояс.</p>
+  <div class="levels" id="levels">
+    <button class="level-btn" data-level="0">L00<small>Вход</small></button>
+    <button class="level-btn" data-level="1">L01<small>Общее</small></button>
+    <button class="level-btn" data-level="2">L02<small>Жильё</small></button>
+    <button class="level-btn" data-level="3">L03<small>Семья</small></button>
+    <button class="level-btn" data-level="4">L04<small>Сфера</small></button>
+  </div>
+  <label class="check"><span>Изолировать выбранный уровень</span><input id="onlyLevel" type="checkbox"></label>
+  <div class="section">
+    <h2>Слои модели</h2>
+    <label class="check"><span>Оболочка купола</span><input id="showShell" type="checkbox" checked></label>
+    <label class="check"><span>Помещения и модули</span><input id="showPods" type="checkbox" checked></label>
+    <label class="check"><span>Галереи и мостики</span><input id="showWalkways" type="checkbox" checked></label>
+    <label class="check"><span>Лифтовое ядро</span><input id="showCore" type="checkbox" checked></label>
+    <label class="check"><span>Сервисный пояс</span><input id="showService" type="checkbox" checked></label>
+    <label class="check"><span>Озеленение</span><input id="showGreen" type="checkbox" checked></label>
+  </div>
+  <div class="section">
+    <h2>Камера</h2>
+    <div class="views">
+      <button class="view-btn active" data-view="atrium">Атриум</button>
+      <button class="view-btn" data-view="top">Сверху</button>
+      <button class="view-btn" data-view="entry">Вход</button>
+    </div>
+    <button class="reset-btn" id="reset" style="width:100%;margin-top:7px">Сбросить вид</button>
+  </div>
+  <div class="section">
+    <h2>Легенда</h2>
+    <div class="legend">
+      <span><i class="dot" style="background:#b9d7d0"></i>Общественные</span>
+      <span><i class="dot" style="background:#d6ba83"></i>Жилые</span>
+      <span><i class="dot" style="background:#85b7c6"></i>Сервис</span>
+      <span><i class="dot" style="background:#86b995"></i>Зелёные</span>
+    </div>
+  </div>
+</aside>
+<section class="info" id="info">
+  <div class="level">L02 · Жилой уровень</div>
+  <h3>Кольцевая галерея</h3>
+  <p>Жилые блоки обращены к внутренней галерее. Атриум остаётся открытым по высоте, а мостики связывают внутренний и внешний маршруты.</p>
+</section>
+<div class="footer-note">Единицы сцены условные · геометрия не откалибрована в метрах · размеры не являются проектными</div>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const host = document.getElementById('scene');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0c1215);
+scene.fog = new THREE.FogExp2(0x0c1215, 0.0085);
+
+const camera = new THREE.PerspectiveCamera(48, innerWidth / innerHeight, 0.1, 300);
+camera.position.set(34, 27, 39);
+const renderer = new THREE.WebGLRenderer({antialias:true,alpha:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.12;
+host.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera,renderer.domElement);
+controls.target.set(0,9,0);
+controls.enableDamping = true;
+controls.dampingFactor = .065;
+controls.minDistance = 15;
+controls.maxDistance = 100;
+controls.maxPolarAngle = Math.PI * .49;
+
+scene.add(new THREE.HemisphereLight(0xd8eeee,0x182328,2.0));
+const key = new THREE.DirectionalLight(0xffe6bf,3.1);
+key.position.set(18,32,14);
+scene.add(key);
+const fill = new THREE.DirectionalLight(0x82c9d4,1.25);
+fill.position.set(-22,14,-18);
+scene.add(fill);
+const ground = new THREE.Mesh(new THREE.CircleGeometry(37,96),new THREE.MeshStandardMaterial({color:0x111c20,roughness:.94}));
+ground.rotation.x=-Math.PI/2;ground.position.y=-.48;scene.add(ground);
+const grid = new THREE.GridHelper(72,36,0x375057,0x1a3036);
+grid.position.y=-.45;scene.add(grid);
+
+const shellGroup = new THREE.Group();scene.add(shellGroup);
+const podGroup = new THREE.Group();scene.add(podGroup);
+const walkwayGroup = new THREE.Group();scene.add(walkwayGroup);
+const coreGroup = new THREE.Group();scene.add(coreGroup);
+const serviceGroup = new THREE.Group();scene.add(serviceGroup);
+const greenGroup = new THREE.Group();scene.add(greenGroup);
+const levelGroups = [];
+const deckMeshes = [];
+const levelNames = [
+  {name:'Входной и сервисный уровень',desc:'Главный вход, тамбур, первичная навигация, стойка помощи, логистика, санитарные и технические помещения.'},
+  {name:'Общественный уровень',desc:'Площадь, небольшие магазины, питание, места встреч и сервисы повседневного спроса вокруг центрального атриума.'},
+  {name:'Жилой уровень',desc:'Жилые блоки, общие гостиные и тихие участки кольцевой галереи. Пространство организовано вокруг видимого центрального объёма.'},
+  {name:'Семейный и восстановительный уровень',desc:'Семейные комнаты, пространства ухода, тихий отдых, зимний сад и места восстановления.'},
+  {name:'Верхний общественный уровень',desc:'Обзорные зоны, библиотека, рабочие пространства и диспетчерский центр с обзором на атриум.'}
+];
+const floorY = [0,4.2,8.4,12.6,16.8];
+const floorMaterial = new THREE.MeshStandardMaterial({color:0x9bb9b5,metalness:.22,roughness:.55,side:THREE.DoubleSide});
+const goldMaterial = new THREE.MeshStandardMaterial({color:0xd6ba83,metalness:.24,roughness:.43});
+const publicMaterial = new THREE.MeshStandardMaterial({color:0xb9d7d0,metalness:.12,roughness:.56});
+const blueMaterial = new THREE.MeshStandardMaterial({color:0x85b7c6,metalness:.25,roughness:.45});
+const greenMaterial = new THREE.MeshStandardMaterial({color:0x86b995,metalness:.08,roughness:.68});
+const glassMaterial = new THREE.MeshPhysicalMaterial({color:0x9fd2d4,transparent:true,opacity:.18,roughness:.12,metalness:.06,side:THREE.DoubleSide,depthWrite:false});
+const darkMaterial = new THREE.MeshStandardMaterial({color:0x25373b,metalness:.25,roughness:.6});
+const edgeMaterial = new THREE.MeshStandardMaterial({color:0xe7d8b1,metalness:.55,roughness:.28});
+
+function addBox(parent,geometry,material,x,y,z,ry=0){
+  const mesh=new THREE.Mesh(geometry,material);mesh.position.set(x,y,z);mesh.rotation.y=ry;parent.add(mesh);return mesh;
+}
+function makeRing(inner,outer,y,material,parent){
+  const m=new THREE.Mesh(new THREE.RingGeometry(inner,outer,128),material);
+  m.rotation.x=-Math.PI/2;m.position.y=y;parent.add(m);return m;
+}
+function makeRail(parent,radius,y,material){
+  const rail=new THREE.Mesh(new THREE.TorusGeometry(radius,.055,8,128),material);
+  rail.rotation.x=Math.PI/2;rail.position.y=y;parent.add(rail);return rail;
+}
+function addRoom(parent,angle,radius,y,width,depth,height,material){
+  const x=Math.cos(angle)*radius,z=Math.sin(angle)*radius;
+  const g=new THREE.Group();g.position.set(x,y,z);g.rotation.y=Math.PI/2-angle;parent.add(g);
+  const body=new THREE.Mesh(new THREE.BoxGeometry(width,height,depth),material);body.position.y=height/2;g.add(body);
+  const window=new THREE.Mesh(new THREE.BoxGeometry(width*.68,height*.34,.045),glassMaterial);window.position.set(0,height*.55,depth/2+.024);g.add(window);
+  const roof=new THREE.Mesh(new THREE.BoxGeometry(width+.12,.12,depth+.12),edgeMaterial);roof.position.y=height+.06;g.add(roof);
+  return g;
+}
+function addBridge(parent,angle,y){
+  const r=10.8,x=Math.cos(angle)*r,z=Math.sin(angle)*r;
+  const g=new THREE.Group();g.position.set(x,y,z);g.rotation.y=Math.PI/2-angle;parent.add(g);
+  const deck=new THREE.Mesh(new THREE.BoxGeometry(2.05,.22,5.2),publicMaterial);deck.position.y=.18;g.add(deck);
+  for(const side of [-1,1]){
+    const rail=new THREE.Mesh(new THREE.BoxGeometry(.07,.85,5.2),glassMaterial);rail.position.set(side*.98,.62,0);g.add(rail);
+  }
+  return g;
+}
+function addTree(parent,x,y,z,scale=1){
+  const trunk=new THREE.Mesh(new THREE.CylinderGeometry(.09*scale,.13*scale,.8*scale,8),goldMaterial);
+  trunk.position.set(x,y+.4*scale,z);parent.add(trunk);
+  const crown=new THREE.Mesh(new THREE.SphereGeometry(.52*scale,12,10),greenMaterial);
+  crown.position.set(x,y+1.05*scale,z);parent.add(crown);
+}
+function addPodSet(level,count,material,radius=16.1){
+  const group=new THREE.Group();podGroup.add(group);group.userData.level=level;
+  for(let i=0;i<count;i++){
+    const a=(Math.PI*2*i/count)+(level%2)*.12;
+    const room=addRoom(group,a,radius,floorY[level]+.13,3.55,4.15,2.15,material);
+    room.userData.kind='room';
+  }
+  return group;
+}
+function addLevel(index){
+  const y=floorY[index];
+  const levelGroup=new THREE.Group();levelGroup.userData.level=index;scene.add(levelGroup);levelGroups.push(levelGroup);
+  const deckMat=floorMaterial.clone();deckMat.color.set(index===2?0x9dbbb5:0x8aa6a4);
+  const deck=makeRing(8.35,21.9,y,deckMat,levelGroup);deckMeshes.push(deck);
+  makeRail(levelGroup,8.48,y+1.03,edgeMaterial);
+  makeRail(levelGroup,21.45,y+.62,edgeMaterial);
+  const count=index===0?12:(index===1?18:(index===2?20:(index===3?16:12)));
+  const roomMaterial=index===0?blueMaterial:(index===1?publicMaterial:(index===2?goldMaterial:(index===3?greenMaterial:publicMaterial)));
+  const rooms=addPodSet(index,count,roomMaterial);
+  levelGroup.add(rooms);
+  for(let p=0;p<12;p++){
+    const a=Math.PI*2*p/12;
+    const px=Math.cos(a)*20.7,pz=Math.sin(a)*20.7;
+    const column=new THREE.Mesh(new THREE.CylinderGeometry(.13,.18,4.2,8),darkMaterial);
+    column.position.set(px,y+2.1,pz);levelGroup.add(column);
+  }
+  [0,Math.PI/2,Math.PI,Math.PI*1.5].forEach(a=>addBridge(levelGroup,a,y+.17));
+  const rim=new THREE.Mesh(new THREE.TorusGeometry(21.95,.12,8,128),edgeMaterial);
+  rim.rotation.x=Math.PI/2;rim.position.y=y+.06;levelGroup.add(rim);
+  if(index===0){
+    const plaza=new THREE.Mesh(new THREE.CircleGeometry(8.27,96),new THREE.MeshStandardMaterial({color:0x314d50,metalness:.22,roughness:.4}));
+    plaza.rotation.x=-Math.PI/2;plaza.position.y=y+.03;levelGroup.add(plaza);
+    const innerRing=makeRing(4.2,4.35,y+.08,edgeMaterial,levelGroup);
+    const water=new THREE.Mesh(new THREE.CircleGeometry(3.95,64),new THREE.MeshPhysicalMaterial({color:0x4b9ba2,metalness:.2,roughness:.16,transparent:true,opacity:.72}));
+    water.rotation.x=-Math.PI/2;water.position.y=y+.1;levelGroup.add(water);
+  }
+}
+for(let i=0;i<5;i++)addLevel(i);
+
+const shell=new THREE.Mesh(
+  new THREE.SphereGeometry(24.4,72,40,0,Math.PI*2,0,Math.PI/2),
+  new THREE.MeshPhysicalMaterial({color:0x9ec9c7,transparent:true,opacity:.085,roughness:.18,metalness:.1,side:THREE.DoubleSide,depthWrite:false})
+);
+shell.position.y=.05;shellGroup.add(shell);
+const shellWire=new THREE.Mesh(
+  new THREE.SphereGeometry(24.48,48,24,0,Math.PI*2,0,Math.PI/2),
+  new THREE.MeshBasicMaterial({color:0x80b6b3,wireframe:true,transparent:true,opacity:.14})
+);
+shellWire.position.y=.05;shellGroup.add(shellWire);
+
+// Vertical atrium lift core: three transparent shafts and separate lift cars.
+for(let i=0;i<3;i++){
+  const x=(i-1)*1.65;
+  const shaft=new THREE.Mesh(new THREE.BoxGeometry(1.12,20.4,1.35),glassMaterial);
+  shaft.position.set(x,10.2,-1.45);coreGroup.add(shaft);
+  const frame=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.12,20.4,1.35)),new THREE.LineBasicMaterial({color:0x91c4c2,transparent:true,opacity:.5}));
+  frame.position.copy(shaft.position);coreGroup.add(frame);
+  const car=new THREE.Mesh(new THREE.BoxGeometry(.82,1.35,1.02),new THREE.MeshStandardMaterial({color:i===1?0xd8bd84:0x81bbc1,metalness:.34,roughness:.25}));
+  car.position.set(x,2.2+i*6.2,-1.45);coreGroup.add(car);
+  const light=new THREE.PointLight(0xa6e6df,.4,4);light.position.set(x,car.position.y+1,-1.45);coreGroup.add(light);
+}
+
+// Accessible inner promenade, technical ring and service risers.
+makeRing(7.95,8.08,0.16,new THREE.MeshStandardMaterial({color:0x91c8c0,metalness:.25,roughness:.4}),walkwayGroup);
+const serviceRing=new THREE.Mesh(new THREE.TorusGeometry(21.05,.18,8,128),blueMaterial);
+serviceRing.rotation.x=Math.PI/2;serviceRing.position.y=.36;serviceGroup.add(serviceRing);
+for(let i=0;i<8;i++){
+  const a=Math.PI*2*i/8;
+  const x=Math.cos(a)*19.1,z=Math.sin(a)*19.1;
+  const riser=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,18.4,12),glassMaterial);
+  riser.position.set(x,9.2,z);serviceGroup.add(riser);
+  const collar=new THREE.Mesh(new THREE.TorusGeometry(.25,.05,6,16),blueMaterial);
+  collar.rotation.x=Math.PI/2;collar.position.set(x,.5,z);serviceGroup.add(collar);
+}
+const serviceHub=new THREE.Mesh(new THREE.CylinderGeometry(2.8,3.25,2.6,32),darkMaterial);
+serviceHub.position.set(0,1.3,-7.2);serviceGroup.add(serviceHub);
+const hubRoof=new THREE.Mesh(new THREE.CylinderGeometry(2.95,2.95,.18,32),blueMaterial);
+hubRoof.position.set(0,2.65,-7.2);serviceGroup.add(hubRoof);
+
+// Green and restorative pockets on L03 and L04.
+for(let i=0;i<14;i++){
+  const a=Math.PI*2*i/14,r=14.1;
+  addTree(greenGroup,Math.cos(a)*r,12.72,Math.sin(a)*r,.8+(i%3)*.08);
+}
+for(let i=0;i<8;i++){
+  const a=Math.PI*2*i/8,r=11.6;
+  addTree(greenGroup,Math.cos(a)*r,16.92,Math.sin(a)*r,.7);
+}
+const gardenRing=makeRing(10.1,13.3,12.68,new THREE.MeshStandardMaterial({color:0x5b866b,transparent:true,opacity:.22,side:THREE.DoubleSide}),greenGroup);
+
+const levelData = document.getElementById('info');
+let selectedLevel=2;
+let onlySelected=false;
+function selectLevel(index){
+  selectedLevel=index;
+  document.querySelectorAll('.level-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.level)===index));
+  const data=levelNames[index];
+  levelData.innerHTML='<div class="level">L0'+index+' · '+data.name+'</div><h3>'+ (index===2?'Кольцевая галерея':(index===0?'Входная площадь':data.name)) +'</h3><p>'+data.desc+'</p>';
+  levelGroups.forEach((g,i)=>{g.visible=!onlySelected||i===selectedLevel;});
+  deckMeshes.forEach((m,i)=>{
+    m.material.emissive.setHex(i===index?0x244941:0x000000);
+    m.material.emissiveIntensity=i===index?.8:0;
+  });
+}
+document.querySelectorAll('.level-btn').forEach(b=>b.addEventListener('click',()=>selectLevel(Number(b.dataset.level))));
+document.getElementById('onlyLevel').addEventListener('change',e=>{onlySelected=e.target.checked;selectLevel(selectedLevel);});
+const toggles={showShell:shellGroup,showPods:podGroup,showWalkways:walkwayGroup,showCore:coreGroup,showService:serviceGroup,showGreen:greenGroup};
+Object.keys(toggles).forEach(id=>document.getElementById(id).addEventListener('change',e=>{toggles[id].visible=e.target.checked;}));
+
+const cameraViews={
+  atrium:{p:[34,27,39],t:[0,9,0]},
+  top:{p:[0,52,.1],t:[0,8,0]},
+  entry:{p:[32,8,7],t:[0,6,0]}
+};
+function setView(name){
+  const v=cameraViews[name];if(!v)return;
+  camera.position.set(v.p[0],v.p[1],v.p[2]);controls.target.set(v.t[0],v.t[1],v.t[2]);controls.update();
+  document.querySelectorAll('.view-btn').forEach(b=>b.classList.toggle('active',b.dataset.view===name));
+}
+document.querySelectorAll('.view-btn').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+document.getElementById('reset').addEventListener('click',()=>{selectLevel(2);document.getElementById('onlyLevel').checked=false;onlySelected=false;Object.keys(toggles).forEach(id=>{document.getElementById(id).checked=true;toggles[id].visible=true;});setView('atrium');});
+
+const clock=new THREE.Clock();
+function animate(){
+  requestAnimationFrame(animate);
+  const t=clock.getElapsedTime();
+  controls.update();
+  // Subtle lift-car movement is illustrative only, not a transport simulation.
+  coreGroup.children.forEach((obj)=>{if(obj.geometry&&obj.geometry.type==='BoxGeometry'&&obj.material&&obj.material.color&&obj.material.color.getHex()===0x81bbc1){obj.position.y=2.2+((t*.32+Math.abs(obj.position.x))%17.4);}});
+  renderer.render(scene,camera);
+}
+function onResize(){camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);}
+window.addEventListener('resize',onResize);
+selectLevel(2);
+document.getElementById('loading').style.display='none';
+animate();
+</script>
+</body>
+</html>
