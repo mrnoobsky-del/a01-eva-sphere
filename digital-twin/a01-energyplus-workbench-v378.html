@@ -29,6 +29,7 @@ footer{max-width:1440px;margin:0 auto;padding:0 22px 28px;color:var(--muted);fon
 <header>
   <div class="brand">A-01 <span>/ инженерная среда</span></div>
   <nav>
+    <a class="btn" href="../tools/a01-energyplus/" target="_blank" rel="noopener">A-01 Geometry Bridge ↗</a>
     <a class="btn" href="https://app.idfkit.com/" target="_blank" rel="noopener">Открыть Envelop отдельно ↗</a>
     <a class="btn" href="https://shoebox.idfkit.com/" target="_blank" rel="noopener">Демонстрация EnergyPlus ↗</a>
   </nav>
@@ -36,15 +37,15 @@ footer{max-width:1440px;margin:0 auto;padding:0 22px 28px;color:var(--muted);fon
 <main>
   <section class="intro">
     <div>
-      <div class="eyebrow">A-01 · v3.7.8 · расчётная рабочая среда</div>
+      <div class="eyebrow">A-01 · v3.7.9 · расчётная рабочая среда</div>
       <h1>EnergyPlus Workbench</h1>
       <p class="lede">Готовый браузерный редактор idfkit Envelop и движок EnergyPlus/WebAssembly. Моделирование выполняется локально в браузере после загрузки вычислительных файлов; сервер для самого расчёта не нужен.</p>
     </div>
   </section>
   <div class="status" role="status">
     <div aria-hidden="true">!</div>
-    <div><strong>Расчётный движок доступен, цифровой двойник A-01 ещё не передан в него как физическая модель.</strong>
-    Сейчас Envelop работает как самостоятельная расчётная среда. Полный автоматический расчёт именно Сферы Евы станет достоверным после передачи откалиброванной геометрии в метрах, зон, материалов, остекления, графиков и систем HVAC. Текущая 3D-геометрия A-01 имеет непривязанный физический масштаб.</div>
+    <div><strong>Добавлен первый прямой мост геометрии A-01 в EnergyPlus.</strong>
+    В Geometry Bridge оболочка передаётся в IDF как замкнутая триангулированная поверхность и рассчитывается настоящим EnergyPlus/WebAssembly. Для запуска требуются подтверждённый диаметр опорного кольца, U-value оболочки, солнечное поглощение и почасовой EPW. Пока это одна общая воздушная зона с адиабатическим основанием; внутренние этажи и HVAC-установки ещё не связаны. Внешний Envelop остаётся отдельной расчётной средой.</div>
   </div>
   <div class="grid">
     <section class="workspace">
