@@ -106,7 +106,7 @@
 
       <section class="card">
         <h2>3. Почасовой климатический файл</h2>
-        <p class="sub">EnergyPlus использует EPW. Месячные температуры и HDD из климатической записки не заменяют погодный файл.</p>
+        <p class="sub">Для первого прогона доступен кандидатный локальный TMYx: <a href="https://climate.onebuilding.org/WMO_Region_2_Asia/RUS_Russian_Federation/ALT_Altai/RUS_ALT_Biysk-Zonalnoye.299390_TMYx.2011-2025.zip" target="_blank" rel="noopener">Biysk-Zonalnoye · WMO 299390 · 2011–2025 (ZIP)</a>. Распакуйте архив и выберите EPW. Перед инженерным применением проверьте координаты и высоту станции из заголовка LOCATION. Месячные температуры и HDD не заменяют почасовой EPW.</p>
         <label class="wide">Выбрать EPW-файл
           <input id="epw-file" type="file" accept=".epw,text/plain">
         </label>
