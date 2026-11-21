@@ -1,0 +1,23 @@
+{
+  "name": "a01-energyplus-geometry-bridge",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "predev": "idfkit-engine-assets public/energyplus && node scripts/copy-schemas.mjs && node scripts/stage-geometry.mjs",
+    "dev": "vite",
+    "prebuild": "idfkit-engine-assets public/energyplus && node scripts/copy-schemas.mjs && node scripts/stage-geometry.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@idfkit/core": "0.4.0",
+    "@idfkit/engine": "0.1.0",
+    "@idfkit/engine-assets": "26.1.0",
+    "@idfkit/schemas": "0.4.0"
+  },
+  "devDependencies": {
+    "vite": "7.0.0"
+  }
+}
