@@ -18,3 +18,11 @@ The reference cassette remains a concept. Its construction details and verificat
 - [Parametric exterior cassette geometry v0.1](../architecture/A01-CAS-PANEL-GEOMETRY-v0.1.md)
 - [Cassette parameter model and generated geometry](../geometry/README.md)
 - [Cassette layout register](../templates/cassette-layout-register-v0.1.csv)
+
+## A-01 v3.7.3 — Engineering integration matrix
+
+- [Матрица интеграции инженерных разработок — RU](engineering/A01-INTEGRATION-MATRIX-v373-RU.md)
+- [Engineering Integration Matrix — EN](engineering/A01-INTEGRATION-MATRIX-v373.md)
+- [工程集成矩阵 — 简体中文](engineering/A01-INTEGRATION-MATRIX-v373-ZH.md)
+
+The matrix consolidates Engineering Core, Climate & Crown, Serviceable Shell, Energy & Resilience and Smart Operations. It distinguishes visual/software concepts from engineering work still required and records safety boundaries, phone permissions, interfaces, calculations and staged verification. It does not certify physical systems or code compliance.
