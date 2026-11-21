@@ -71,7 +71,7 @@ function triangleTetraVolume([a, b, c]) {
 export function buildDomeGeometry(parameters, {
   rimDiameterM = null,
   subdivisions = 2,
-  floorSegments = 48
+  floorSegments = null
 } = {}) {
   if (!parameters || !parameters.ellipsoid) {
     throw new Error('A-01 shell parameter JSON is missing its ellipsoid section.');
@@ -95,9 +95,6 @@ export function buildDomeGeometry(parameters, {
   }
   if (!Number.isInteger(subdivisions) || subdivisions < 1 || subdivisions > 6) {
     throw new Error('Mesh subdivisions must be an integer from 1 to 6.');
-  }
-  if (!Number.isInteger(floorSegments) || floorSegments < 24 || floorSegments > 180) {
-    throw new Error('Floor segments must be an integer from 24 to 180.');
   }
 
   const thetaEnd = Math.PI * e.thetaEndPiFactor;
@@ -163,8 +160,12 @@ export function buildDomeGeometry(parameters, {
     }
   }
 
-  let floor = Array.from({ length: floorSegments }, (_, i) => {
-    const phi = (2 * Math.PI * i) / floorSegments;
+  const matchingFloorSegments = floorSegments ?? azimuthCells;
+  if (matchingFloorSegments !== azimuthCells) {
+    throw new Error('The EnergyPlus base polygon must match every shell rim vertex.');
+  }
+  let floor = Array.from({ length: matchingFloorSegments }, (_, i) => {
+    const phi = (2 * Math.PI * i) / matchingFloorSegments;
     return point(phi, thetaEnd);
   });
 
