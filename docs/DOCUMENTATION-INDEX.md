@@ -44,3 +44,12 @@ The specification defines device criticality classes, user/staff roles, the phon
 - [穹顶冠部通风工程规范 — 简体中文](engineering/A01-CV-01-CROWN-VENTILATION-SPEC-v375-ZH.md)
 
 Defines separate normal, night-purge, winter/weather-protection and fire/smoke functions; proposed instrumentation; local control and safe-state requirements; calculation inputs; commissioning gates; and phone/Eva boundaries. No numerical setpoints or equipment selections are asserted without site and design data. Fire/smoke control remains a separate engineered system.
+
+
+## A-01 v3.7.6 — A01-CV-02 whole-dome climate control
+
+- [Система климат-контроля всего купола — RU](engineering/A01-CV-02-WHOLE-DOME-CLIMATE-SPEC-v376-RU.md)
+- [Whole-Dome Climate Control System — EN](engineering/A01-CV-02-WHOLE-DOME-CLIMATE-SPEC-v376.md)
+- [穹顶整体气候控制系统 — 简体中文](engineering/A01-CV-02-WHOLE-DOME-CLIMATE-SPEC-v376-ZH.md)
+
+Defines whole-building zone architecture, supply/exhaust distribution, atrium stratification, humidity and condensation management, filtration, heat recovery, acoustics, local controls, operating modes, calculation inputs and staged verification. Coordinates with A01-CV-01; fire/smoke systems remain independent. Requirements specification only; no equipment, setpoints, performance or code compliance are claimed.
