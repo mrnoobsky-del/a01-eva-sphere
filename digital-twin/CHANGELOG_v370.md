@@ -210,6 +210,7 @@
 - Источником оболочки служит канонический JSON параметров эллипсоида; координаты преобразуются из Y-up в Z-up, математическая вершина закрывается треугольным веером, а основание имеет согласованные с оболочкой граничные узлы.
 - Физический масштаб не придумывается: IDF и запуск заблокированы до ввода подтверждённого диаметра опорного кольца в метрах.
 - Для первой модели пользователь также задаёт U-value оболочки, солнечное поглощение и почасовой EPW. EPW LOCATION используется для Site:Location.
+- Найден кандидатный погодный архив Biysk-Zonalnoye TMYx 2011–2025 (WMO 299390); ссылка добавлена в интерфейс. Его пригодность для точной площадки A-01 должна быть проверена по LOCATION.
 - Создаётся одна общая воздушная зона, наружная оболочка, адиабатическое основание, термостат и Ideal Loads. 12 секторов и 144 кандидатные кассеты не выдаются за тепловые зоны.
 - Добавлены тесты геометрии и CI-сборка. До успешного запуска сборки и расчёта на площадочном EPW результаты не считаются подтверждёнными.
 
@@ -218,6 +219,7 @@
 - The canonical ellipsoid JSON is the shell source. Coordinates are transformed from Y-up to Z-up, the mathematical apex is closed with a triangle fan, and the base boundary uses matching shell-ring vertices.
 - Physical scale is never guessed: IDF export and simulation require a confirmed support-ring diameter in metres.
 - The first model also requires a user-supplied shell U-value, solar absorptance and hourly EPW weather file. The EPW LOCATION header supplies Site:Location.
+- A candidate Biysk-Zonalnoye TMYx 2011–2025 archive (WMO 299390) was found and linked in the workbench; its suitability for the exact A-01 site must be checked from EPW LOCATION.
 - The first calculation uses one shared air zone, the external shell, an adiabatic base, thermostat and Ideal Loads. The 12 sectors and 144 candidate cassettes are not represented as thermal zones.
 - Geometry tests and a CI build workflow were added. Results are not validated until the build and a site-representative EPW simulation complete successfully.
 
@@ -226,7 +228,8 @@
 - 外壳几何读取规范椭球参数 JSON。坐标从 Y-up 转换为 EnergyPlus 的 Z-up，顶部使用三角扇闭合，底边节点与外壳网格一致。
 - 不猜测物理比例：必须输入经确认的支撑环直径（米），才能导出 IDF 和运行模拟。
 - 首版还要求输入围护结构 U 值、太阳吸收率和逐小时 EPW 天气文件；Site:Location 从 EPW 的 LOCATION 行读取。
+- 找到 Biysk-Zonalnoye TMYx 2011–2025（WMO 299390）候选气象档案并添加到工作台链接；其是否适用于 A-01 的具体场址仍需核对 EPW LOCATION。
 - 首版采用一个整体空气热区、外壳、绝热底面、恒温器和 Ideal Loads。12 个扇区和 144 个候选舱板不作为热区处理。
 - 增加几何测试和 CI 构建流程。只有构建成功并使用代表实际场地的 EPW 完成模拟后，结果才能进入工程审核。
 
-**Status / Статус / 状态:** source integration and build workflow added; physical dimensions and envelope properties remain user-supplied inputs. No successful browser build, annual run, engineering approval or deployment is claimed.
+**Status / Статус / 状态:** source integration is in the feature branch; GitHub Actions run #15 passed all 9 tests, schema-backed IDF generation and the production build. Physical dimensions and envelope properties remain user-supplied. No annual EPW EnergyPlus run, engineering approval, merge or deployment is claimed.
