@@ -68,3 +68,29 @@
 - 整体居住模块拆卸仍属实验概念；消防安全独立于 Eva、云端和普通移动控制。
 
 **Status / Статус / 状态:** documentation package only. No physical equipment, telemetry, code compliance or commissioning is implied.
+
+
+## A-01 v3.7.4 — A01-SEC-01 secure device control specification
+
+### Русский
+- Подготовлена расширенная инженерная спецификация управления устройствами со смартфона.
+- Введены классы критичности U1–U5, роли пользователей и персонала, жизненный цикл команды и обязательная независимая обратная связь.
+- Описаны отказ сети/контроллера, отзыв сессии, защита от повторных команд, локальное управление, приватность и этапы допуска.
+- Запрещено обычное мобильное управление пожарными и другими жизненно важными цепями; универсальная команда «выключить всё» не предусматривается.
+- Подготовлены RU/EN/简体中文 версии и обновлён индекс документации.
+
+### English
+- Added an expanded phone-based device-control engineering specification.
+- Defined U1–U5 criticality classes, resident/staff roles, command lifecycle and independent state feedback.
+- Documented network/controller failures, session revocation, replay protection, local control, privacy and implementation gates.
+- Ordinary mobile control of fire and other life-safety circuits is prohibited; no universal “turn everything off” command is provided.
+- Added RU/EN/Simplified Chinese versions and updated the documentation index.
+
+### 简体中文
+- 新增手机设备控制扩展工程规范。
+- 定义 U1–U5 关键等级、居民/工作人员角色、命令生命周期和独立状态反馈。
+- 记录网络/控制器故障、会话撤销、防重放、本地控制、隐私和实施验收阶段。
+- 普通手机应用不得控制消防及其他生命安全回路；不设置通用“全部关闭”命令。
+- 提供俄语、英语和简体中文版本，并更新文档索引。
+
+**Status / Статус / 状态:** requirements specification only. No physical device control, commissioning or code compliance is claimed.
