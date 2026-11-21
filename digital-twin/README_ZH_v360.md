@@ -14,6 +14,13 @@
 - [AIR-01 质量平衡 JSON](../lunar/air-01/mass-balance.json)
 - [版本变更记录](CHANGELOG_v360.md)
 
+## 相关工程模块 — A-01 楼层结构与天花
+
+- [打开交互式 Floor & Ceiling Engineering v0.1 模块](../engineering/a01-floor-ceiling-engineering-v0.1.html)
+- [工程说明](../architecture/A01-FLOOR-CEILING-ENGINEERING-v0.1.md)
+
+这是一个独立的研究模块，并非 v3.6.0 场景中已集成的功能。它展示楼层结构、湿区、露台、中庭、地面接触式楼板和穹顶下顶层等方案。可编辑厚度仅为演示占位值；场景几何尚未校准为米。
+
 ## 1. 本次更新内容
 
 v3.6.0 将 AIR-01 加入 A-01 场景对象注册表，作为可选择的全局工程对象：
