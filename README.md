@@ -124,6 +124,13 @@ A separate, browser-tested concept module for the A01-L03-D01 shell-service node
 We welcome evidence-backed ideas, technical reviews, test reports and independent Sphere proposals. A community Sphere is recorded as its own project; the current digital-twin viewer does not yet dynamically load community manifests. The registry and template are the first step toward a future multi-Sphere catalogue. See the contribution guide for the current process and licensing status.
 
 
+## A-01 Floor and Ceiling Engineering
+
+- [Interactive Floor & Ceiling Engineering v0.1 module](engineering/a01-floor-ceiling-engineering-v0.1.html)
+- [Engineering note and verification gates](architecture/A01-FLOOR-CEILING-ENGINEERING-v0.1.md)
+
+The module explores layered floor, structural slab/beam, service-plenum, acoustic and lower-ceiling concepts across L00–L04. It includes separate scenarios for wet rooms, a green terrace, the atrium gallery, ground-contact floors and the upper level beneath the dome. Editable thicknesses are demonstration placeholders, not design dimensions. The digital-twin scene units remain uncalibrated in metres.
+
 ## A-01 Sphere Standard
 
 - [A-01 Sphere Standard v0.1](standards/A01-SPHERE-STANDARD-v0.1.md)
