@@ -8,4 +8,4 @@ const to = resolve(root, 'public/schemas');
 
 mkdirSync(dirname(to), { recursive: true });
 cpSync(from, to, { recursive: true });
-console.log(\`EnergyPlus schemas copied to \${to}\`);
+console.log(`EnergyPlus schemas copied to ${to}`);
