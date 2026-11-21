@@ -173,3 +173,11 @@ v3.6.0 adds the AIR-01 lunar atmosphere subsystem as a selectable 3D engineering
 - [Русская версия](standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.md) · [简体中文版](standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.zh.md)
 
 The document covers continuous step-free routes across all levels, lifts and escalators, universal toilets and showers, family care rooms, wayfinding, sensory comfort, operations and evacuation. Regulatory dimensions are listed as reference minima where applicable; this project standard is not construction documentation or proof of compliance.
+
+## Integrated digital twin A-01 v3.7.0 — Human Comfort Engineering
+
+- [Open v3.7.0](digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html)
+- [Русская документация](digital-twin/README_RU_v370.md) · [English documentation](digital-twin/README_v370.md) · [简体中文说明](digital-twin/README_ZH_v370.md)
+- [Changelog](digital-twin/CHANGELOG_v370.md) · [Engineering note](architecture/A01-HUMAN-COMFORT-ENGINEERING-v0.1.md)
+
+v3.7.0 preserves v3.6.0 with AIR-01 and adds a Comfort entry to the integrated navigation. The embedded workspace covers step-free circulation, lifts and supplementary escalators, universal toilets and showers, family care, separated water/waste streams, floor/ceiling concepts and evacuation. Its vertical section is an interactive SVG schematic, not new Three.js spatial geometry; calculations, scale calibration and real-equipment validation remain outstanding. The v3.6.0 source remains preserved separately.
