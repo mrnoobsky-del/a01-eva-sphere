@@ -89,3 +89,12 @@ v3.6.0 将月球 AIR-01 大气子系统加入可选择的 3D 工程对象：外�
 - [变更记录](digital-twin/CHANGELOG_v370.md) · [工程说明](architecture/A01-HUMAN-COMFORT-ENGINEERING-v0.1.md)
 
 v3.7.0 保留包含 AIR-01 的 v3.6.0，并在集成导航中增加“舒适”入口。内嵌工作区涵盖无台阶交通、电梯与辅助自动扶梯、通用卫生间和淋浴、家庭照护、给排水分流、楼层/天花概念及疏散。垂直剖面为交互式 SVG 示意图，不是新的 Three.js 空间几何；工程计算、比例校准和真实设备验证尚未完成。v3.6.0 原文件单独保留。
+
+
+## A-01 v3.8.0 — Axiom 启发式内部空间模型
+
+- [打开交互式 3D 内部空间模型](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html)
+- [Русская документация](digital-twin/README_RU_v380.md) · [English](digital-twin/README_v380.md) · [简体中文](digital-twin/README_ZH_v380.md)
+- [更新日志](digital-twin/CHANGELOG_v380.md) · [架构研究](architecture/A01-AXIOM-INTERIOR-BLOCKOUT-v0.1.md)
+
+这是 v3.7.0 数字孪生的独立 Three.js 配套场景，探索中央中庭、环形走廊、公共/居住/家庭区域、连桥、电梯井示意和服务路线。它已加入数字孪生索引，但尚未合并到 v3.7.0 主场景。场景单位未按米标定，不代表工程或安全计算。
