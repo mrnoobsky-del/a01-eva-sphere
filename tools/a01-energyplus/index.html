@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e13">
+  <title>A-01 · Геометрия купола → EnergyPlus</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b0e13;--panel:#131923;--panel2:#182230;--line:#2b3747;--text:#f3f6fa;--muted:#9eacbd;--accent:#b8d6ff;--good:#9adbb8;--warn:#edca86;--bad:#ff9f9f}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+    header{padding:20px clamp(16px,3vw,36px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:18px;background:#0e131b}
+    .brand{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}.brand span{color:var(--muted);font-weight:400}
+    a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+    main{max-width:1460px;margin:0 auto;padding:26px clamp(12px,2.5vw,32px) 44px}
+    .hero{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:22px}.eyebrow{font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}h1{font-size:clamp(27px,4vw,44px);line-height:1.08;letter-spacing:-.04em;margin:8px 0 10px}.lede{max-width:780px;color:var(--muted);margin:0}
+    .badge{border:1px solid #365345;color:var(--good);padding:7px 11px;border-radius:99px;font-size:11px;white-space:nowrap}
+    .notice{border:1px solid #655637;background:#211d15;color:#eddfc1;padding:14px 16px;border-radius:12px;margin:18px 0 20px}
+    .notice b{color:var(--warn)}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+    .maincol,.side{display:grid;gap:14px}.card{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:17px;min-width:0}
+    .card h2{font-size:14px;margin:0 0 13px}.sub{font-size:12px;color:var(--muted);margin:-6px 0 14px}
+    .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    label{display:grid;gap:6px;color:var(--muted);font-size:12px}
+    input,select,button{font:inherit;color:var(--text)}input[type=number],input[type=file]{width:100%;background:#0d131b;border:1px solid var(--line);border-radius:9px;padding:10px 11px;min-width:0}
+    input:focus,button:focus-visible{outline:2px solid #8fbfff;outline-offset:2px}
+    .wide{grid-column:1/-1}.hint{font-size:11px;color:var(--muted)}
+    .actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+    button{border:1px solid #536d8e;background:#203249;border-radius:9px;padding:10px 14px;cursor:pointer}
+    button.secondary{background:#141d29;border-color:var(--line)}button:disabled{opacity:.45;cursor:not-allowed}
+    .toggle{display:flex;align-items:center;gap:8px;margin-top:13px;color:var(--muted);font-size:12px}.toggle input{accent-color:#9ac2f7}
+    .status{padding:12px 14px;border-radius:10px;background:#172232;border:1px solid #354c66;color:#dbeaff;white-space:pre-wrap;overflow-wrap:anywhere}
+    .status.good{border-color:#355b49;color:var(--good)}.status.warn{border-color:#6c5934;color:var(--warn)}.status.bad{border-color:#713d43;color:var(--bad)}
+    .metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+    .metric{padding:11px;border:1px solid var(--line);background:#0f151e;border-radius:10px;min-width:0}.metric span{display:block;font-size:11px;color:var(--muted)}.metric strong{display:block;font-size:18px;font-variant-numeric:tabular-nums;margin-top:4px;overflow-wrap:anywhere}
+    .metric.full{grid-column:1/-1}
+    .result{min-height:60px;color:var(--muted);font-size:12px}.result iframe{width:100%;height:560px;border:1px solid var(--line);border-radius:9px;background:white}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:260px;overflow:auto;background:#0a0e14;padding:12px;border-radius:9px;color:#b6c2d2;font:11px/1.5 ui-monospace,Consolas,monospace}
+    .muted{color:var(--muted)}.small{font-size:11px;color:var(--muted)}footer{padding:22px clamp(16px,3vw,36px) 30px;color:var(--muted);font-size:11px;border-top:1px solid var(--line)}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.side{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:620px){header{align-items:flex-start;flex-direction:column}.hero{align-items:flex-start;flex-direction:column}.fields{grid-template-columns:1fr}.wide{grid-column:auto}.side{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.actions button{flex:1}.result iframe{height:470px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand">A-01 <span>/ Сфера Евы · инженерная среда</span></div>
+  <a href="../../digital-twin/a01-energyplus-workbench-v378.html">Назад к EnergyPlus Workbench ↗</a>
+</header>
+<main>
+  <section class="hero">
+    <div>
+      <div class="eyebrow">A-01 · v3.7.9 · geometry bridge</div>
+      <h1>Геометрия купола → EnergyPlus</h1>
+      <p class="lede">Исходная параметрическая оболочка A-01 преобразуется в замкнутую расчётную поверхность. Модель запускает настоящий EnergyPlus 26.1.0 в WebAssembly прямо в браузере.</p>
+    </div>
+    <span class="badge" id="engine-badge">Движок загружается</span>
+  </section>
+
+  <div class="notice"><b>Важно:</b> физический масштаб нельзя угадать. Введите подтверждённый диаметр опорного кольца, характеристику оболочки и EPW-файл. До этого расчёт и экспорт IDF заблокированы. Текущая версия моделирует один общий воздушный объём купола с адиабатическим основанием; внутренние этажи, перегородки и отдельные помещения пока не включены.</div>
+
+  <div class="layout">
+    <div class="maincol">
+      <section class="card">
+        <h2>1. Геометрия и физический масштаб</h2>
+        <p class="sub">Параметры формы берутся из geometry/a01-shell-parameters-v0.1.json. Меняется только привязка к метрам и плотность сетки.</p>
+        <div class="fields">
+          <label>Диаметр опорного кольца, м
+            <input id="rim-diameter" type="number" min="0.1" max="1000" step="0.01" placeholder="Введите проектный размер">
+            <span class="hint">Нужен размер по фактической границе купола, а не декоративный внешний контур</span>
+          </label>
+          <label>Детализация оболочки
+            <select id="subdivisions">
+              <option value="1">Базовая</option>
+              <option value="2" selected>Средняя</option>
+              <option value="3">Высокая</option>
+              <option value="4">Очень высокая</option>
+            </select>
+            <span class="hint">Больше треугольников — дольше расчёт</span>
+          </label>
+          <label>U оболочки, Вт/(м²·К)
+            <input id="shell-u" type="number" min="0.01" max="20" step="0.01" placeholder="Введите расчётное значение">
+          </label>
+          <label>Солнечное поглощение оболочки, 0–1
+            <input id="solar-absorptance" type="number" min="0" max="1" step="0.01" placeholder="Введите значение">
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2. Режим помещения и воздухообмен</h2>
+        <p class="sub">Уставки ниже — стартовые сценарные значения, их можно менять. Нулевые расходы означают, что воздухообмен в эту пробную модель не добавлен.</p>
+        <div class="fields">
+          <label>Температура отопления, °C
+            <input id="heating-setpoint" type="number" min="5" max="30" step="0.5" value="20">
+          </label>
+          <label>Температура охлаждения, °C
+            <input id="cooling-setpoint" type="number" min="16" max="40" step="0.5" value="26">
+          </label>
+          <label>Инфильтрация, ACH
+            <input id="infiltration-ach" type="number" min="0" max="20" step="0.05" value="0">
+          </label>
+          <label>Наружный воздухообмен, ACH
+            <input id="ventilation-ach" type="number" min="0" max="30" step="0.05" value="0">
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>3. Почасовой климатический файл</h2>
+        <p class="sub">EnergyPlus использует EPW. Месячные температуры и HDD из климатической записки не заменяют погодный файл.</p>
+        <label class="wide">Выбрать EPW-файл
+          <input id="epw-file" type="file" accept=".epw,text/plain">
+        </label>
+        <div class="small" id="epw-info">Файл пока не выбран.</div>
+        <div class="actions">
+          <button id="run-now" disabled>Рассчитать сейчас</button>
+          <button id="download-idf" class="secondary" disabled>Скачать IDF</button>
+        </div>
+        <label class="toggle"><input id="auto-run" type="checkbox" checked> Автоматически пересчитывать после изменения параметров</label>
+      </section>
+
+      <section class="card">
+        <h2>4. Состояние расчёта</h2>
+        <div id="status" class="status">Загрузка расчётного движка и параметров геометрии…</div>
+        <div class="metrics" style="margin-top:12px">
+          <div class="metric"><span>Площадь оболочки</span><strong id="shell-area">—</strong></div>
+          <div class="metric"><span>Площадь основания</span><strong id="base-area">—</strong></div>
+          <div class="metric"><span>Объём воздушной зоны</span><strong id="volume">—</strong></div>
+          <div class="metric"><span>Высота купола</span><strong id="height">—</strong></div>
+          <div class="metric"><span>Расчётные поверхности</span><strong id="facets">—</strong></div>
+          <div class="metric"><span>Масштаб</span><strong id="scale">не задан</strong></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>5. Результаты EnergyPlus</h2>
+        <div class="result" id="result">Результатов пока нет. После успешного расчёта здесь появится официальный отчёт EnergyPlus.</div>
+        <details style="margin-top:12px">
+          <summary>Журнал расчётного движка</summary>
+          <pre id="log">Журнал появится при загрузке и запуске EnergyPlus.</pre>
+        </details>
+      </section>
+    </div>
+
+    <aside class="side">
+      <section class="card">
+        <h2>Что передаётся в EnergyPlus</h2>
+        <div class="metrics">
+          <div class="metric"><span>Воздушных зон</span><strong>1</strong></div>
+          <div class="metric"><span>Секторов оболочки</span><strong>12</strong></div>
+          <div class="metric"><span>Кандидатов кассет</span><strong>144</strong></div>
+          <div class="metric"><span>Движок</span><strong>26.1.0</strong></div>
+        </div>
+        <p class="small">Сектора и кассеты служат маркировкой оболочки. Они не объявляются отдельными тепловыми зонами.</p>
+      </section>
+      <section class="card">
+        <h2>Что будет рассчитано</h2>
+        <p class="small">Годовая динамика одной зоны с оболочкой, погодой из EPW, заданными уставками и включёнными вручную сценариями инфильтрации/наружного воздухообмена. Ideal Loads показывает требуемую тепловую/холодильную нагрузку идеальной системы, а не модель выбранного оборудования.</p>
+      </section>
+      <section class="card">
+        <h2>Следующие уровни детализации</h2>
+        <p class="small">После проверки общей оболочки добавим реальные плиты перекрытий, этажи, центральный атриум, внутренние перегородки, двери/стекло, расписания людей и оборудования, приточно-вытяжные установки, рекуперацию, коронную вентиляцию и отдельные тепловые зоны.</p>
+      </section>
+      <section class="card">
+        <h2>Границы применения</h2>
+        <p class="small">Это предварительная цифровая модель, не рабочий проект и не подбор оборудования. Не включает динамику давления, конденсацию, обледенение, дымозащиту, CFD, конструктивный расчёт, реальные мостики холода или проверку норм. Не используйте результаты для строительства без профильной инженерной проверки.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+<footer>A-01 · EnergyPlus geometry bridge. Результат хранится вместе с введёнными параметрами и конкретным EPW. Исходная геометрия и данные остаются проектными допущениями до подтверждения инженером и площадкой.</footer>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
