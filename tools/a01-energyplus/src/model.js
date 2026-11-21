@@ -248,7 +248,7 @@ export function buildEnergyPlusModel({ schema, geometry, settings, epwText }) {
     zone_equipment_cooling_sequence: 1,
     zone_equipment_heating_or_no_load_sequence: 1
   }]);
-  doc.add('ZoneHVAC:EquipmentConnections', 'A01 Zone Connections', {
+  doc.add('ZoneHVAC:EquipmentConnections', null, {
     zone_name: ZONE_NAME,
     zone_conditioning_equipment_list_name: EQUIPMENT_LIST,
     zone_air_inlet_node_or_nodelist_name: 'A01_DOME_SUPPLY_NODE',
