@@ -166,3 +166,10 @@ A-01 LUNA is a separate research concept for a robotically deployed and servicea
 - [AIR-01 engineering concept](lunar/air-01/README.md)
 
 v3.6.0 adds the AIR-01 lunar atmosphere subsystem as a selectable 3D engineering object: external MRE resource processing, clean ECLSS equipment, gas conditioning, storage, and separate O₂ / CO₂-return / water distribution paths. The scene includes four display modes and the preliminary four-person mass-balance figures. It is a visual software concept only; there is no live equipment or telemetry, no calibrated geometry, and no physical or safety validation. JavaScript syntax parsing passed; a live WebGL browser walk-through remains outstanding.
+
+## A-01 Universal Accessibility & Family Comfort
+
+- [Universal Accessibility & Family Comfort Standard v0.1 (English)](standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.en.md)
+- [Русская версия](standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.md) · [简体中文版](standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.zh.md)
+
+The document covers continuous step-free routes across all levels, lifts and escalators, universal toilets and showers, family care rooms, wayfinding, sensory comfort, operations and evacuation. Regulatory dimensions are listed as reference minima where applicable; this project standard is not construction documentation or proof of compliance.
