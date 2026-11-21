@@ -77,3 +77,12 @@ v3.6.0 将月球 AIR-01 大气子系统加入可选择的 3D 工程对象：外�
 - [保留的 v3.6.0 / AIR-01 基线](digital-twin/eva-sphere-a01-v360-air-01-life-support.html)
 
 v3.7.0 分支保留 AIR-01，并加入冠部通风概念模型与初步情景计算器，以及带上铰链舱门、内侧气闸边界和短行程检修托盘的 Gull-wing 检修入口可视化演示。本版本尚未实现载人模块整体拆卸或沿外壳外部轨道下降。嵌入式 JavaScript 已通过静态语法检查；WebGL 浏览器运行、移动端布局和交互测试仍待完成。几何与工程参数尚未校准；该版本不是施工、结构、暖通或消防安全设计文件。GitHub 分支发布不会自动部署到 uCoz 网站。
+
+
+## A-01 v3.7.3 — 工程集成矩阵
+
+- [工程集成矩阵 — 简体中文](docs/engineering/A01-INTEGRATION-MATRIX-v373-ZH.md)
+- [Engineering Integration Matrix — English](docs/engineering/A01-INTEGRATION-MATRIX-v373.md)
+- [Матрица интеграции — Русский](docs/engineering/A01-INTEGRATION-MATRIX-v373-RU.md)
+
+该矩阵整合 Engineering Core、Climate & Crown、Serviceable Shell、Energy & Resilience 和 Smart Operations，明确区分软件演示与仍需计算、测试和独立审查的工程工作。它不代表实体系统已实施或已符合规范。
