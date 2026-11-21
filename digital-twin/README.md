@@ -20,3 +20,12 @@ v3.7.0 is based on v3.6.0 and retains AIR-01. It adds an embedded Comfort worksp
 - [Stable v2.1.0 baseline](eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](README_RU_v210.md)
 
 The v3.1.2 build improves the first-arrival sequence, splits the interior LED sky into serviceable curved cassettes and documents a separate protected exterior shell maintenance path. It remains an experimental digital twin; its geometry is not a fabrication or construction design. Full live WebGL interaction and physical device testing have not been completed.
+
+
+## Standalone companion module — A-01 v3.8.0 Interior Blockout
+
+- [Open interactive 3D interior blockout](eva-sphere-a01-v380-axiom-inspired-interior-blockout.html)
+- [Russian documentation](README_RU_v380.md) · [English documentation](README_v380.md) · [简体中文文档](README_ZH_v380.md)
+- [Changelog](CHANGELOG_v380.md) · [Architectural study](../architecture/A01-AXIOM-INTERIOR-BLOCKOUT-v0.1.md)
+
+v3.8.0 is a standalone Three.js companion scene exploring a central atrium, ring galleries, public/residential/family zones, bridges, illustrative lift shafts and service routes. It is linked from this index but is not merged into the v3.7.0 main scene. All units are schematic and uncalibrated; no engineering or safety calculations are claimed.
