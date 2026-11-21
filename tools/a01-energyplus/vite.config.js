@@ -4,7 +4,7 @@ import { energyPlusVersion, wasmFile } from '@idfkit/engine-assets';
 const requiredVersion = '26.1.0';
 if (String(energyPlusVersion) !== requiredVersion) {
   throw new Error(
-    \`A-01 expects EnergyPlus assets \${requiredVersion}, but the installed package reports \${energyPlusVersion}.\`
+    `A-01 expects EnergyPlus assets ${requiredVersion}, but the installed package reports ${energyPlusVersion}.`
   );
 }
 
