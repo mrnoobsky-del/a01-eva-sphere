@@ -66,3 +66,17 @@ test('the base polygon follows every shell rim vertex at each mesh resolution', 
     assert.equal(geometry.floorVertices.length, geometry.counts.azimuthCells);
   }
 });
+
+
+test('every base vertex is reused by the shell rim within numeric tolerance', () => {
+  const geometry = buildDomeGeometry(parameters, { rimDiameterM: 24, subdivisions: 3 });
+  const key = (v) => v.map((n) => Math.round(n * 1e8)).join(':');
+  const shellRim = new Set(
+    geometry.shellTriangles.flatMap((triangle) => triangle)
+      .filter((vertex) => Math.abs(vertex[2]) < 1e-8)
+      .map(key)
+  );
+  for (const vertex of geometry.floorVertices) {
+    assert.ok(shellRim.has(key(vertex)));
+  }
+});
