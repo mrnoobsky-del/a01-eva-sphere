@@ -175,3 +175,29 @@
 - 未声称整栋建筑容量或季节能耗预测：几何尚无物理比例（`scaleToMetres=null`），面积、U 值、风量、负荷和设备季节性能仍未确定。
 
 **Status / Статус / 状态:** preliminary calculation basis and normalized indicators only. Whole-building loads, annual energy use, equipment sizing and code compliance are not verified.
+
+
+## A-01 v3.7.8 — EnergyPlus / idfkit integration entry point
+
+### Русский
+- Добавлена отдельная рабочая страница A-01 с встраиваемым редактором idfkit Envelop и резервной ссылкой для открытия в новой вкладке.
+- Выбран готовый вычислительный стек: EnergyPlus/WebAssembly, idfkit model tooling и погодные файлы EPW/TMYx.
+- В качестве открытого эталона интеграции изучен idfkit-shoebox: создание IDF, загрузка WASM-движка, автоматический пересчёт и годовые прогоны.
+- Зафиксировано важное разграничение: idfkit-js редактирует IDF/epJSON, а расчёт выполняет отдельный пакет EnergyPlus engine.
+- Явно обозначено, что внешний редактор пока не связан с геометрией A-01. Полный расчёт купола заблокирован отсутствием физического масштаба, ведомости зон, конструкций и HVAC-параметров.
+
+### English
+- Added a dedicated A-01 workbench page embedding the idfkit Envelop editor, with a new-tab fallback.
+- Selected the ready-made EnergyPlus/WebAssembly, idfkit model tooling and EPW/TMYx weather stack.
+- Reviewed idfkit-shoebox as the open reference for IDF authoring, WASM engine loading, automatic re-solving and annual runs.
+- Recorded the boundary: idfkit-js edits IDF/epJSON; a separate EnergyPlus engine performs the simulation.
+- Clearly stated that the external editor is not yet connected to A-01 geometry. Whole-dome simulation remains gated by physical scale, zone schedule, constructions and HVAC inputs.
+
+### 简体中文
+- 新增独立的 A-01 工作台页面，嵌入 idfkit Envelop 编辑器，并提供新标签页打开的备用链接。
+- 选定现成的 EnergyPlus/WebAssembly、idfkit 模型工具及 EPW/TMYx 气象数据技术栈。
+- 研究 idfkit-shoebox 开源示例，作为 IDF 建模、WASM 引擎加载、自动重新计算和全年模拟的参考。
+- 明确技术边界：idfkit-js 用于编辑 IDF/epJSON，实际模拟由独立的 EnergyPlus 引擎执行。
+- 明确外部编辑器尚未连接 A-01 几何。整穹顶模拟仍受物理比例、分区清单、围护结构和 HVAC 输入缺失的限制。
+
+**Status / Статус / 状态:** browser workbench entry point added; external Envelop model is not an A-01 simulation. No whole-dome run, deployment or physical validation is claimed.
