@@ -107,7 +107,7 @@ Where multiple universal cubicles are provided, layouts should allow transfer to
 
 ### 5.1. Regulatory dimensional references
 
-Table 6.1 of SP 59.13330.2020 lists the following minimum plan dimensions, measured clear, for the applicable room types. Applicability depends on building use and configuration. Actual fixture placement, transfer zones and door swings must be checked on drawings.
+Clauses 6.3.2–6.3.3 of SP 59.13330.2020 specify more than room geometry. In a building accessible to people with reduced mobility that has visitor toilets, at least one universal toilet room is required; accessible cubicles within toilet blocks are additionally provided at 5% of the total cubicle count. A universal room may also serve as a family toilet for parents with children. An accessible cubicle must provide at least 0.8 m of clear space beside the toilet for a wheelchair, a 1.4 m diameter turning space, and an outward-opening door. Universal rooms require fixed and fold-up support rails. Accessible toilet rooms use a toilet with back support, a 0.45–0.50 m seat height and a 0.70 m length. Table 6.1 lists the following minimum plan dimensions, measured clear, for the applicable room types. Applicability depends on building use and configuration. Actual fixture placement, transfer zones and door swings must be checked on drawings.
 
 | Room type | Minimum clear plan dimensions |
 |---|---:|
@@ -119,7 +119,7 @@ Table 6.1 of SP 59.13330.2020 lists the following minimum plan dimensions, measu
 | Combined sanitary room with shower and changing area | 2.70 × 2.70 m |
 | Mother-and-child room (table entry) | 2.50 × 3.00 m |
 
-These are regulatory reference minima, not recommended comfort dimensions for every A-01 room. A-01 should provide additional clear space wherever needed for a wheelchair, companion, safe transfer and child care. Table dimensions do not replace a detailed layout check.
+These are regulatory reference minima, not recommended comfort dimensions for every A-01 room. A-01 should provide additional clear space wherever needed for a wheelchair, companion, safe transfer and child care. Accessible showers require wheelchair approach space, a slip-resistant floor, a threshold-free tray, an outward-opening door, a fold-down seat no higher than 0.48 m above the shower tray, a handheld shower and wall-mounted grab rails; the seat must be at least 0.5 m deep and long. Taps in accessible sanitary rooms should have lever operation and a thermostat; separate hot- and cold-water controls are not used. Table dimensions do not replace a detailed layout and fixture check.
 
 ### 5.2. Toilet equipment
 
@@ -134,7 +134,7 @@ These are regulatory reference minima, not recommended comfort dimensions for ev
 - emergency call or two-way communication as required by applicable rules, with an activation device reachable from floor level;
 - authorized emergency external door release while preserving everyday privacy.
 
-An alarm must reach a staffed response point, provide confirmation and have an operating response procedure. A decorative indicator without a real response process is not an emergency system.
+An alarm must reach a staffed response point, provide confirmation and have an operating response procedure. Call activation should be confirmed to the user (for example visually, audibly and/or by vibration, as applicable). A decorative indicator without a real response process is not an emergency system.
 
 ### 5.3. Showers
 
@@ -299,9 +299,10 @@ A 3D visualization, presentation or apparently spacious room does not prove acce
 Sources checked on 2026-11-21. For the Russian design branch, verify current editions and amendments at the date of the design brief, design, review and construction.
 
 1. [SP 59.13330.2020 — Accessibility of buildings and structures for persons with reduced mobility](https://protect.gost.ru/sp/details/9a314146-2e12-458d-a3dc-914eaa364d51) — Rosstandart record, marked active. Check amendments 1–4 and the full current text. [Public text including Table 6.1](https://meganorm.ru/mega_doc/dop_fire/opredelenie_verkhovnogo_suda_rf_ot_20_11_2023_N/0/sp_59_13330_2020_svod_pravil_dostupnost_zdaniy_i_sooruzheniy.html).
-2. [SP 118.13330.2022 — Public buildings and structures](https://protect.gost.ru/sp/details/ced01945-2f53-47c9-bdb8-4875c2b9800e) — Rosstandart record, marked active. For mother-and-child rooms, check clause 5.64 and the building-type applicability; [text of clause 5.64](https://www.consultant.ru/document/cons_doc_LAW_404976079/).
+2. [SP 118.13330.2022 — Public buildings and structures](https://protect.gost.ru/sp/details/ced01945-2f53-47c9-bdb8-4875c2b9800e) — Rosstandart record, marked active. For mother-and-child rooms, check clause 5.64 and the building-type applicability; [text of clause 5.64](https://base.garant.ru/404976079/).
 3. [GOST R 52875-2025 — Tactile ground-surface indicators for people with vision disabilities](https://protect.gost.ru/gost/details/bd093a65-0b11-4778-b1c4-43bb73ed7061) — Rosstandart record; effective 2026-07-01, replacing GOST R 52875-2018.
 4. [SP 1.13130.2020 — Fire protection systems. Evacuation routes and exits](https://www.consultant.ru/document/cons_doc_LAW_351940/6f497c85a39d21d105d1272a54a2d2f0a6f9254b/) — order and code text with amendments, including Amendment 3 of 2025-06-16; applicability must be confirmed for the building.
+5. Additional standards referenced by SP 59.13330.2020 and to be checked for the relevant systems include GOST 33652-2019 (lift accessibility requirements), GOST R 51261-2022 (fixed support devices), GOST R 51671-2020 (accessible public communication and information systems), GOST R 52131-2019 (symbolic information displays), GOST R 56832-2020 (Braille) and GOST R 58512-2019 (relief-graphic images). Verify their current status, applicability and editions separately through Rosstandart.
 
 Regulatory texts are copyrighted. This standard lists designations, links and limited reference dimensions; it does not reproduce the regulations. Verify the official edition and the applicability of each clause at every project stage.
 
