@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "1.0.0",
+  "document": "A01-EN-01",
+  "packageVersion": "3.7.7",
+  "status": "preliminary-climate-basis-normalized-indicators-only",
+  "location": {
+    "city": "Biysk",
+    "region": "Altai Krai",
+    "country": "RU",
+    "exactSite": "TBD",
+    "elevation_m": null,
+    "station": "Biysk (with Biysk-Zonalnaya references where table specifies)",
+    "siteApplicability": "to be confirmed"
+  },
+  "source": {
+    "standard": "SP 131.13330.2025",
+    "title": "Building Climatology",
+    "order": "470/pr",
+    "approved": "2025-08-08",
+    "effective": "2025-09-09",
+    "replaces": "SP 131.13330.2020",
+    "rosstandart": "https://protect.gost.ru/sp/details/0634a74e-9f91-4571-82a8-b04c3a9b6c99",
+    "publishedText": "https://meganorm.ru/mega_doc/norm_update_01112025/pravila/0/sp_131_13330_2025_svod_pravil_stroitelnaya_klimatologiya.html"
+  },
+  "climate": {
+    "cold": {
+      "table": "5.1",
+      "coldestDay_C": {
+        "p098": -43,
+        "p092": -40
+      },
+      "coldestFiveDay_C": {
+        "p098": -36,
+        "p092": -35
+      },
+      "temperature_C_p094": -22,
+      "absoluteMinimum_C": -52,
+      "meanDailyRangeColdMonth_C": 11.9,
+      "periodMeanDailyTempLE0": {
+        "days": 157,
+        "mean_C": -10.9
+      },
+      "periodMeanDailyTempLE8": {
+        "days": 210,
+        "mean_C": -7.1
+      },
+      "periodMeanDailyTempLE10": {
+        "days": 227,
+        "mean_C": -5.9
+      },
+      "meanRHColdMonth_pct": 77,
+      "rhAt15ColdMonth_pct": 71,
+      "precipNovMar_mm": 179,
+      "prevailingWindDecFeb": "SW",
+      "maxMeanDirectionalWindJan_mps": 4.5,
+      "meanWindDuringPeriodLE8_mps": 2.2
+    },
+    "warm": {
+      "table": "6.1",
+      "barometricPressure_hPa": 993,
+      "parameterA_C_p095": 24,
+      "parameterB_C_p098": 27,
+      "meanMaxWarmestMonth_C": 26.9,
+      "absoluteMaximum_C": 39,
+      "meanDailyRangeWarmestMonth_C": 13.4,
+      "meanRHWarmestMonth_pct": 69,
+      "rhAt15WarmestMonth_pct": 50,
+      "precipAprOct_mm": 357,
+      "prevailingWindJunAug": "NE",
+      "minimumMeanDirectionalWindJul_mps": 0,
+      "section16MinimumDesignWind_mps": 1
+    },
+    "monthlyMeanTemperature_C": {
+      "Jan": -16.1,
+      "Feb": -14.5,
+      "Mar": -6.7,
+      "Apr": 4.5,
+      "May": 12.5,
+      "Jun": 17.9,
+      "Jul": 19.7,
+      "Aug": 17.3,
+      "Sep": 11.1,
+      "Oct": 3.6,
+      "Nov": -6.1,
+      "Dec": -12.8,
+      "annual": 2.5
+    },
+    "additional": {
+      "julyMeanMaxDailyRange_C": 14.2,
+      "julyMaxDailyRange_C": 24.6,
+      "annualPrecipBiyskZonalnaya_mm": 536
+    }
+  },
+  "derivedIndicators": {
+    "method": "Heating period mean approximation using 210 days with mean outdoor temperature -7.1 C; screening indicator only, not hourly TMY or official HDD dataset.",
+    "HDD18_Kday": 5271,
+    "HDD20_Kday": 5691,
+    "seasonalEnvelopeTransmissionFactorAtHDD20_kWhPerWPerK": 136.6,
+    "winterExample": {
+      "assumedIndoor_C": 20,
+      "parameterBOutdoor_C": -35,
+      "deltaT_K": 55,
+      "airVolumetricHeatCapacity_kJ_m3K": 1.2,
+      "ventilationGross_kW_per_m3s": 66,
+      "postRecovery_kW_per_m3s": {
+        "efficiency50pct": 33,
+        "efficiency60pct": 26.4,
+        "efficiency70pct": 19.8,
+        "efficiency80pct": 13.2
+      },
+      "status": "normalized sensitivity example; not equipment selection or whole-building load"
+    }
+  },
+  "geometry": {
+    "source": "geometry/a01-shell-parameters-v0.1.json",
+    "baseRadius_modelUnits": 8.55,
+    "scaleXZ": 1.22,
+    "scaleY": 1.35,
+    "scaleToMetres": null,
+    "physicalAreasAndVolumes": "not derivable until calibrated"
+  },
+  "unresolvedInputs": [
+    "exact site/elevation and station applicability",
+    "hourly TMY/EPW weather including coincident humidity and solar radiation",
+    "physical geometry scale and zone volumes",
+    "envelope/glazing areas by orientation",
+    "U-values and thermal bridges",
+    "airtightness/infiltration",
+    "occupancy and schedules",
+    "zone ventilation flows",
+    "heat recovery curves and frost/defrost",
+    "heating/cooling plant seasonal performance",
+    "domestic hot water and process loads",
+    "PV/BESS and grid connection/tariff"
+  ],
+  "notes": [
+    "Biysk is not listed in SP Table 16.2 ready city enthalpy/humidity list; obtain coincident weather data or specialist derivation.",
+    "Do not use prior fixed 30 C deltaT as universal input.",
+    "Do not use illustrative 5h summer/1h winter sun-hour assumptions for PV or solar gain."
+  ]
+}
