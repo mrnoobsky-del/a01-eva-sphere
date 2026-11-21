@@ -120,3 +120,29 @@
 - 缺少场地数据时不指定数值设定点或设备选型；可视化模式和计算器仍属于模型。
 
 **Status / Статус / 状态:** engineering requirements specification only. Physical system not implemented; calculations and code compliance not verified.
+
+
+## A-01 v3.7.6 — A01-CV-02 whole-dome climate control specification
+
+### Русский
+- Добавлена инженерная спецификация климат-контроля всего купола на русском, английском и китайском языках.
+- Описаны зонирование помещений, приточные и вытяжные контуры, температурная стратификация атриума, влажность/конденсат, фильтрация, рекуперация тепла и акустика.
+- Определены интерфейсы с A01-CV-01, группы датчиков, локальная автоматика, режимы работы, безопасные состояния и этапы проверки.
+- Пожарная вентиляция и дымозащита остаются отдельной инженерной системой и не зависят от Евы, облака или мобильного приложения.
+- Не назначены численные расходы воздуха, мощности, уставки или оборудование без исходных данных площадки и помещений.
+
+### English
+- Added the whole-dome climate-control engineering specification in Russian, English and Simplified Chinese.
+- Defined room zoning, supply/exhaust circuits, atrium thermal stratification, humidity/condensation, filtration, heat recovery and acoustics.
+- Recorded interfaces with A01-CV-01, sensor groups, local automation, operating modes, safe states and verification stages.
+- Fire ventilation and smoke control remain a separate engineered system, independent of Eva, cloud services and the mobile app.
+- No airflow rates, capacities, setpoints or equipment are selected without site and room design inputs.
+
+### 简体中文
+- 新增俄语、英语和简体中文穹顶整体气候控制工程规范。
+- 定义房间分区、送排风回路、中庭热分层、湿度/结露、过滤、热回收和声学要求。
+- 记录与 A01-CV-01 的接口、传感器类别、本地自动化、运行模式、安全状态和验证阶段。
+- 消防通风与排烟仍是独立工程系统，不依赖 Eva、云服务或手机应用。
+- 缺少场地和房间设计数据时，不指定风量、容量、设定值或设备选型。
+
+**Status / Статус / 状态:** requirements specification only. No physical HVAC system, measured performance, commissioning or code compliance is claimed.
