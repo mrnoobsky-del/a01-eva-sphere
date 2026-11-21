@@ -12,7 +12,7 @@ const EQUIPMENT_LIST = 'A01_Zone_Equipment';
 const number = (value, label, { min = -Infinity, max = Infinity, exclusiveMin = false } = {}) => {
   const n = Number(value);
   if (!Number.isFinite(n) || (exclusiveMin ? n <= min : n < min) || n > max) {
-    throw new Error(\`\${label} is outside the allowed range.\`);
+    throw new Error(`${label} is outside the allowed range.`);
   }
   return n;
 };
@@ -202,7 +202,7 @@ export function buildEnergyPlusModel({ schema, geometry, settings, epwText }) {
 
   geometry.shellTriangles.forEach((triangle, index) => {
     const isRoof = outwardNormalZ(triangle) > 0.25;
-    const surface = doc.add('BuildingSurface:Detailed', \`A01_DOME_SHELL_\${String(index + 1).padStart(4, '0')}\`, {
+    const surface = doc.add('BuildingSurface:Detailed', `A01_DOME_SHELL_${String(index + 1).padStart(4, '0')}`, {
       surface_type: isRoof ? 'Roof' : 'Wall',
       construction_name: 'A01 Dome Shell Construction',
       zone_name: ZONE_NAME,
