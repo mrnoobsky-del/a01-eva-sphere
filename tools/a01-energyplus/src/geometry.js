@@ -1,5 +1,5 @@
 const assertFinite = (value, label) => {
-  if (!Number.isFinite(value)) throw new Error(\`\${label} must be a finite number.\`);
+  if (!Number.isFinite(value)) throw new Error(`${label} must be a finite number.`);
 };
 
 const cross = (a, b, c) => {
@@ -51,10 +51,6 @@ function polygonArea(vertices) {
   return length(floorNormal(vertices)) / 2;
 }
 
-function signedTetraVolume([a, b, c]) {
-  return dot(a, cross([0, 0, 0], b, c)) / 6;
-}
-
 function triangleTetraVolume([a, b, c]) {
   return dot(a, [
     b[1] * c[2] - b[2] * c[1],
@@ -91,7 +87,7 @@ export function buildDomeGeometry(parameters, {
   ];
   for (const [name, value] of required) {
     assertFinite(value, name);
-    if (!(value > 0)) throw new Error(\`\${name} must be greater than zero.\`);
+    if (!(value > 0)) throw new Error(`${name} must be greater than zero.`);
   }
   if (!Number.isInteger(subdivisions) || subdivisions < 1 || subdivisions > 6) {
     throw new Error('Mesh subdivisions must be an integer from 1 to 6.');
