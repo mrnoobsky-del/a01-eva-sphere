@@ -322,7 +322,7 @@ async function boot() {
     engineBadge.style.color = 'var(--good)';
     log(`EnergyPlus ${ENERGYPLUS_VERSION} initialized; geometry source loaded.`);
     setStatus('Движок готов. Заполните физический диаметр, U оболочки, солнечное поглощение и загрузите EPW.', 'warn');
-    refreshModel();
+    if (refreshModel()) queueRun(250);
   } catch (error) {
     engineBadge.textContent = 'Ошибка загрузки';
     engineBadge.style.color = 'var(--bad)';
