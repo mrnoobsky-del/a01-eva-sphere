@@ -74,3 +74,10 @@ AI 系统不得对关键基础设施、财务、应急响应或影响权利的�
 - [AIR-01 工程概念](lunar/air-01/README_ZH.md)
 
 v3.6.0 将月球 AIR-01 大气子系统加入可选择的 3D 工程对象：外部 MRE 月壤资源处理、洁净 ECLSS 设备、气体调质、储存以及独立的 O₂ / CO₂ 回流 / 水分配管线。场景包含四种显示模式和四人初步质量平衡数据。这只是软件可视化概念，没有连接真实设备或遥测，几何尺寸未校准，也未进行实体或安全验证。JavaScript 语法检查已通过；真实 WebGL 浏览器漫游仍未完成。
+
+## A-01 无障碍通用设计与家庭关怀
+
+- [简体中文标准 v0.1](standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.zh.md)
+- [Русская версия](standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.md) · [English version](standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.en.md)
+
+文件涵盖各楼层连续无台阶路线、电梯与自动扶梯、通用卫生间和淋浴、家庭照护室、导向、感官舒适、运营及疏散。法规尺寸仅在适用时作为参考最小值；本项目标准不是施工文件，也不构成合规证明。
