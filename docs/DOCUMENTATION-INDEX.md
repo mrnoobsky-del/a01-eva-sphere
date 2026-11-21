@@ -53,3 +53,13 @@ Defines separate normal, night-purge, winter/weather-protection and fire/smoke f
 - [穹顶整体气候控制系统 — 简体中文](engineering/A01-CV-02-WHOLE-DOME-CLIMATE-SPEC-v376-ZH.md)
 
 Defines whole-building zone architecture, supply/exhaust distribution, atrium stratification, humidity and condensation management, filtration, heat recovery, acoustics, local controls, operating modes, calculation inputs and staged verification. Coordinates with A01-CV-01; fire/smoke systems remain independent. Requirements specification only; no equipment, setpoints, performance or code compliance are claimed.
+
+
+## A-01 v3.7.7 — A01-EN-01 integrated thermal and energy balance
+
+- [Объединённый тепловой и энергетический баланс — RU](engineering/A01-EN-01-INTEGRATED-THERMAL-ENERGY-BALANCE-v377-RU.md)
+- [Integrated Thermal and Energy Balance — EN](engineering/A01-EN-01-INTEGRATED-THERMAL-ENERGY-BALANCE-v377.md)
+- [整体热工与能源平衡 — 简体中文](engineering/A01-EN-01-INTEGRATED-THERMAL-ENERGY-BALANCE-v377-ZH.md)
+- [Biysk climate basis — machine-readable JSON](../engineering-data/A01-EN-01-BIYSK-CLIMATE-BASIS-v377.json)
+
+Connects A01-CV-01, A01-CV-02 and A04 Energy & Resilience. Uses SP 131.13330.2025 Biysk climate parameters, records derived HDD screening indicators and normalized ventilation/recovery examples, defines load and seasonal-energy methods, and identifies missing physical geometry/weather/HVAC inputs. Not a completed whole-building load or annual energy prediction.
