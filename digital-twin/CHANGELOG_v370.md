@@ -146,3 +146,32 @@
 - 缺少场地和房间设计数据时，不指定风量、容量、设定值或设备选型。
 
 **Status / Статус / 状态:** requirements specification only. No physical HVAC system, measured performance, commissioning or code compliance is claimed.
+
+
+## A-01 v3.7.7 — A01-EN-01 integrated thermal and energy balance
+
+### Русский
+- Добавлена связанная расчётная основа климатической системы и направления A04 Energy & Resilience на русском, английском и китайском языках.
+- Использованы климатические параметры Бийска из СП 131.13330.2025: зимние и летние расчётные параметры, отопительный период, влажность, ветер и среднемесячные температуры.
+- Пересмотрены прежние условные допущения: фиксированный перепад 30 °C и солнечные часы 5/1 не применяются как универсальные вводы.
+- Рассчитаны производные индикаторы HDD18 = 5 271 К·сут и HDD20 = 5 691 К·сут, а также нормированная вентиляционная нагрузка 66 кВт на 1 м³/с при примере ΔT 55 K до рекуперации.
+- Опубликована машиночитаемая климатическая база JSON.
+- Полная мощность и сезонное энергопотребление здания не заявлены: физический масштаб геометрии отсутствует (`scaleToMetres=null`), а площади, U-значения, расходы воздуха, нагрузки и сезонные характеристики оборудования не заданы.
+
+### English
+- Added a linked calculation basis for whole-dome climate and A04 Energy & Resilience in RU/EN/Simplified Chinese.
+- Adopted Biysk climate parameters from SP 131.13330.2025: winter/summer design values, heating period, humidity, wind and monthly mean temperatures.
+- Retired the former universal fixed 30 °C temperature difference and illustrative 5/1 sunshine-hour assumptions.
+- Calculated derived HDD18 = 5,271 K·day and HDD20 = 5,691 K·day, plus a normalized 66 kW per 1 m³/s ventilation example at ΔT 55 K before recovery.
+- Published a machine-readable JSON climate basis.
+- No whole-building capacity or seasonal energy prediction is claimed: geometry has no physical scale (`scaleToMetres=null`), and areas, U-values, airflow rates, loads and seasonal plant performance remain unspecified.
+
+### 简体中文
+- 新增穹顶整体气候与 A04 Energy & Resilience 的关联计算基础，提供俄语、英语和简体中文版本。
+- 采用 SP 131.13330.2025 比斯克气候参数，包括冬夏设计值、供暖期、湿度、风和月平均温度。
+- 不再将固定 30°C 温差及示意性夏季/冬季 5/1 小时日照作为通用输入。
+- 计算推导指标 HDD18 = 5,271 K·day、HDD20 = 5,691 K·day，以及 ΔT 55 K、热回收前每 1 m³/s 约 66 kW 的单位化通风示例。
+- 发布机器可读 JSON 气候基础数据。
+- 未声称整栋建筑容量或季节能耗预测：几何尚无物理比例（`scaleToMetres=null`），面积、U 值、风量、负荷和设备季节性能仍未确定。
+
+**Status / Статус / 状态:** preliminary calculation basis and normalized indicators only. Whole-building loads, annual energy use, equipment sizing and code compliance are not verified.
