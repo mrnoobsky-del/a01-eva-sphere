@@ -63,3 +63,11 @@ Defines whole-building zone architecture, supply/exhaust distribution, atrium st
 - [Biysk climate basis — machine-readable JSON](../engineering-data/A01-EN-01-BIYSK-CLIMATE-BASIS-v377.json)
 
 Connects A01-CV-01, A01-CV-02 and A04 Energy & Resilience. Uses SP 131.13330.2025 Biysk climate parameters, records derived HDD screening indicators and normalized ventilation/recovery examples, defines load and seasonal-energy methods, and identifies missing physical geometry/weather/HVAC inputs. Not a completed whole-building load or annual energy prediction.
+
+
+## A-01 v3.7.8 — EnergyPlus / idfkit integration entry point
+
+- [A-01 EnergyPlus Workbench — browser entry point](../digital-twin/a01-energyplus-workbench-v378.html)
+- [EnergyPlus / idfkit integration boundary — RU](engineering/A01-EN-02-ENERGYPLUS-INTEGRATION-v378-RU.md)
+
+Adds an A-01-branded entry point to the free browser-based idfkit Envelop editor and its EnergyPlus/WebAssembly ecosystem. The page embeds the external editor with a new-tab fallback and explicitly distinguishes the editor's own models from an A-01 whole-dome simulation. The bridge to A-01 remains gated by physical geometry, zones, constructions, HVAC inputs and a site-representative hourly weather file.
