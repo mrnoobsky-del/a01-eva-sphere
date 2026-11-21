@@ -46,3 +46,11 @@ The proposed grid contains 12 parent sectors and 144 candidate cassette records.
 - [简体中文版](../standards/A01-UNIVERSAL-ACCESSIBILITY-v0.1.zh.md)
 
 This concept standard coordinates step-free circulation, lifts, sanitary facilities, family care rooms, sensory wayfinding, rest points, operations and evacuation with the architectural and engineering model.
+
+## Human comfort and sanitary engineering
+
+- [A-01 Human Comfort & Sanitary Engineering v0.1](A01-HUMAN-COMFORT-ENGINEERING-v0.1.md)
+- [Integrated digital twin v3.7.0](../digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html)
+- [v3.7.0 documentation (RU)](../digital-twin/README_RU_v370.md) · [English](../digital-twin/README_v370.md) · [简体中文](../digital-twin/README_ZH_v370.md)
+
+This note coordinates step-free circulation, lifts, sanitary rooms, family care, water and wastewater streams, acoustic/odour control, floor/ceiling services and evacuation. The v3.7.0 embedded SVG section is a concept schematic, not a 3D BIM or engineering calculation.
