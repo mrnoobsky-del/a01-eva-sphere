@@ -1,5 +1,12 @@
 # Digital Twin
 
+## Live website continuation — A-01 v3.1.8
+
+- [Russian documentation](README_RU_v318.md) · [English](README_v318.md) · [简体中文](README_ZH_v318.md)
+- [Spatial coordination report](../releases/mainline-v3.1.8/SPATIAL-COORDINATION-AND-CLASH-AUDIT_RU.md) · [Release overview](../releases/mainline-v3.1.8/README_RU.md) · [Changelog](CHANGELOG_v318.md)
+
+v3.1.8 is based on the live website v3.1.6 and the prepared v3.1.7 Agent Runtime integration. It reconciles selected route, door/stair, service logistics, MEP/HVAC, atrium tower and gallery interfaces. This is the latest prepared build of the separate website track; it is not yet deployed to uCoz. Static/analytic checks pass; live browser/WebGL and hardware acceptance remain pending.
+
 ## Live website line — A-01 v3.1.7 (separate build track)
 
 - **Published website baseline:** v3.1.6, build `3.1.6-gullwing-crown-vent-calcs`, checked 22 November 2026 at [evasphere.usite.pro](https://evasphere.usite.pro/).
