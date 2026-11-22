@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrnoobsky-del/a01-eva-sphere/blob/main/schemas/a01-x-perception-event-v0.2.schema.json",
+  "title": "A-01 X Perception and Decision Event v0.2",
+  "type": "object",
+  "required": [
+    "schema",
+    "event_id",
+    "session_id",
+    "sequence",
+    "occurred_at",
+    "event_type",
+    "actor",
+    "summary",
+    "observation_refs",
+    "riddle_id",
+    "recommendation",
+    "approval",
+    "action",
+    "verification"
+  ],
+  "properties": {
+    "schema": {
+      "const": "a01x.perception-event.v0.2"
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "event_type": {
+      "enum": [
+        "observation_received",
+        "quality_warning",
+        "perception_result",
+        "hypothesis_created",
+        "riddle_created",
+        "recommendation_created",
+        "approval_granted",
+        "approval_denied",
+        "command_dispatched",
+        "action_completed",
+        "action_failed",
+        "verification_result",
+        "session_stopped"
+      ]
+    },
+    "actor": {
+      "enum": [
+        "sensor_gateway",
+        "localizer",
+        "observer_model",
+        "sphere_intelligence",
+        "operator",
+        "motion_planner",
+        "safety_supervisor",
+        "android_01",
+        "building_system"
+      ]
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "observation_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "riddle_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "recommendation": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "recommendation_id": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1
+        },
+        "uncertainty_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "recommendation_id",
+        "description",
+        "confidence",
+        "uncertainty_notes"
+      ],
+      "additionalProperties": false
+    },
+    "approval": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "granted",
+            "denied",
+            "not_required",
+            "pending"
+          ]
+        },
+        "approved_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "approved_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "policy_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "approved_by",
+        "approved_at",
+        "policy_id",
+        "reason"
+      ],
+      "additionalProperties": false
+    },
+    "action": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "action_id": {
+          "type": "string"
+        },
+        "command_name": {
+          "type": "string"
+        },
+        "arguments": {
+          "type": "object"
+        },
+        "dispatched_by": {
+          "type": "string"
+        },
+        "dispatched_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "safety_check_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "action_id",
+        "command_name",
+        "arguments",
+        "dispatched_by",
+        "dispatched_at",
+        "safety_check_id"
+      ],
+      "additionalProperties": false
+    },
+    "verification": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "passed",
+            "failed",
+            "inconclusive",
+            "not_run"
+          ]
+        },
+        "verified_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "verified_at",
+        "evidence_refs",
+        "notes"
+      ],
+      "additionalProperties": false
+    },
+    "previous_event_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "event_hash": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-fA-F0-9]{64}$"
+    }
+  },
+  "additionalProperties": false
+}
