@@ -1,5 +1,9 @@
 # Documentation index
 
+- [A-01 v3.1.9 — immersive object study (RU)](../digital-twin/README_RU_v319.md) · [EN](../digital-twin/README_v319.md) · [简体中文](../digital-twin/README_ZH_v319.md)
+- [v3.1.9 object-study mode report (RU)](../releases/mainline-v3.1.9/OBJECT-STUDY-MODE-REPORT_RU.md)
+- [v3.1.9 release overview (RU)](../releases/mainline-v3.1.9/README_RU.md)
+- [v3.1.9 changelog](../digital-twin/CHANGELOG_v319.md)
 - [A-01 v3.1.8 — main website spatial coordination (RU)](../digital-twin/README_RU_v318.md) · [EN](../digital-twin/README_v318.md) · [简体中文](../digital-twin/README_ZH_v318.md)
 - [v3.1.8 spatial coordination and clash audit (RU)](../releases/mainline-v3.1.8/SPATIAL-COORDINATION-AND-CLASH-AUDIT_RU.md)
 - [v3.1.8 release overview (RU)](../releases/mainline-v3.1.8/README_RU.md)

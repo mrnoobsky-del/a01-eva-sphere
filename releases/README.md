@@ -1,5 +1,12 @@
 # Release index
 
+## A-01 main website line v3.1.9 — Immersive Object Study
+
+- [Release overview (RU)](mainline-v3.1.9/README_RU.md)
+- [Object-study mode report (RU)](mainline-v3.1.9/OBJECT-STUDY-MODE-REPORT_RU.md)
+- [Digital twin documentation: RU](../digital-twin/README_RU_v319.md) · [EN](../digital-twin/README_v319.md) · [简体中文](../digital-twin/README_ZH_v319.md) · [Changelog](../digital-twin/CHANGELOG_v319.md)
+- Status: prepared mainline UI improvement based on v3.1.8. Full-screen study mode, object camera focus, temporary hiding of workspace chrome, and restoration on close/Escape. Local syntax, agent, spatial and study-mode tests pass. Browser/WebGL visual acceptance remains pending. Not deployed to uCoz.
+
 ## A-01 main website line v3.1.8 — Spatial Clearance
 
 - [Release overview (RU)](mainline-v3.1.8/README_RU.md)

@@ -4,18 +4,26 @@
 
 - **网站：** [evasphere.usite.pro](https://evasphere.usite.pro/)
 - **2026 年 11 月 22 日检查到的已发布 build：** `3.1.6-gullwing-crown-vent-calcs`。
-- **前一准备阶段：** A-01 v3.1.7 — Android-01 初步集成。当前准备版本为 v3.1.8。
+- **前一准备阶段：** A-01 v3.1.7 — Android-01 初步集成。当前准备版本为 v3.1.9。
 - [v3.1.7 俄文文档](digital-twin/README_RU_v317.md) · [英文文档](digital-twin/README_v317.md) · [简体中文文档](digital-twin/README_ZH_v317.md) · [集成报告](releases/mainline-v3.1.7/INTEGRATION-REPORT_RU.md)。
 
-此网站版本线独立于 GitHub 集成数字孪生 v3.7.0 和独立内部空间研究 v3.8.0。准备好的 v3.1.8 HTML 尚未部署到 uCoz；GitHub PR 不会自动发布网站。
+此网站版本线独立于 GitHub 集成数字孪生 v3.7.0 和独立内部空间研究 v3.8.0。准备好的 v3.1.9 HTML 尚未部署到 uCoz；GitHub PR 不会自动发布网站。
 
-## 已准备的主线版本 A-01 v3.1.8
+## 前一准备版本 A-01 v3.1.8
 
 - [俄文文档](digital-twin/README_RU_v318.md) · [英文文档](digital-twin/README_v318.md) · [简体中文文档](digital-twin/README_ZH_v318.md)
 - [空间协调报告（俄文）](releases/mainline-v3.1.8/SPATIAL-COORDINATION-AND-CLASH-AUDIT_RU.md)
 - [版本概览（俄文）](releases/mainline-v3.1.8/README_RU.md)
 
 v3.1.8 保留 v3.1.6 网站场景，并修正服务物流、MEP/HVAC、中庭、廊道、门和 Android-01 路线的部分空间接口。本地自动检查通过；浏览器/WebGL 验收仍待完成。这是准备好的版本，尚未部署到 uCoz。
+
+## 已准备的主线版本 A-01 v3.1.9 — 全屏对象研究
+
+- [俄文文档](digital-twin/README_RU_v319.md) · [英文文档](digital-twin/README_v319.md) · [简体中文文档](digital-twin/README_ZH_v319.md)
+- [对象研究模式验证报告（俄文）](releases/mainline-v3.1.9/OBJECT-STUDY-MODE-REPORT_RU.md)
+- [版本概览（俄文）](releases/mainline-v3.1.9/README_RU.md)
+
+点击“Изучить объект”后，模型进入全屏视图，摄像机聚焦对象，常规界面隐藏，信息卡片保留在模型上方。关闭卡片或按 Escape 即恢复原界面和上下文面板状态。自动检查通过；完整 WebGL 视觉验收仍待完成。uCoz 网站未更改。
 
 **能源 · 智能 · 生命**
 
