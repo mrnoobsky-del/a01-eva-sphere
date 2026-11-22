@@ -28,7 +28,8 @@ assert.ok(fs.existsSync(manifestPath), 'build manifest is required');
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 assert.equal(manifest.version, '3.3.0');
 assert.equal(manifest.engine.three, '0.185.0');
-assert.equal(manifest.mandatoryRuntimeNetworkRequests, 0);
+assert.equal(manifest.requiredRuntimeNetworkRequests, 0);
+assert.ok(html.includes('id="a01-third-party-notices"'), 'Third-party license notice must be embedded');
 
 console.log(JSON.stringify({
   result: 'PASS',
