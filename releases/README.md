@@ -93,3 +93,10 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Release notes](v2.0.27/RELEASE-NOTES.md)
 - [Engineering research brief](../../architecture/modular-systems-research-v0.1.md)
 - Status: experimental design-study snapshot, separate from the main v2.1.0 baseline. Seven inline JavaScript blocks passed syntax checks; 234 HTML IDs were checked with no duplicates; embedded JSON is valid. Browser/WebGL and physical-engineering validation remain outstanding.
+
+
+## A-01 X Sensory Bridge v0.2 — Living Perception Loop
+
+- [Release overview — RU](a01-x-sensory-bridge-v0.2/README_RU.md) · [EN](a01-x-sensory-bridge-v0.2/README.md) · [简体中文](a01-x-sensory-bridge-v0.2/README_ZH.md)
+- [Architecture](../architecture/A01-X-LIVING-PERCEPTION-LOOP-v0.2.md) · [Observation schema](../schemas/a01-x-sensory-observation-v0.2.schema.json) · [Perception event schema](../schemas/a01-x-perception-event-v0.2.schema.json)
+- Status: documentation and integration-contract release. No physical Android-01, sensor hardware or live endpoint is connected. Synthetic examples are labelled as simulation.
