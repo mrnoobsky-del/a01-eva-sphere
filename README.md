@@ -33,6 +33,12 @@ v3.1.8 preserves the v3.1.6 website scene and resolves selected service-logistic
 
 Three.js r185 and OrbitControls now use relative local paths. The ZIP contains a PowerShell bootstrap that downloads the official engine files from GitHub Raw once on first run and assembles the core; after that, the 3D scene uses local files without a CDN or network access. The ZIP does not preload the complete engine files. A localhost launcher is provided for browser ES modules. Eva chat remains online-only. Browser/WebGL visual acceptance and execution of the PowerShell launcher on Windows are still pending; uCoz has not been updated.
 
+## Prepared build A-01 v3.2.1 — Navigation Flow
+
+- [Release notes (RU)](releases/mainline-v3.2.1/README_RU.md) · [Layout verification report (RU)](releases/mainline-v3.2.1/NAVIGATION-FLOW-RU.md)
+
+On desktop/tablet, the expanded sidebar now reserves its own layout column: the central 3D scene shifts and narrows instead of being covered. Collapsing the menu restores workspace width. The mobile drawer remains an overlay. Geometry was checked in Chromium at 781, 900, 1024, 1120, 1279 and 1440 px, plus a 390 px mobile viewport. Project checks and ZIP integrity pass. uCoz has not been updated.
+
 **Energy · Intelligence · Life**
 
 A-01 is an open project record for a long-term vision: a resilient, human-centred environment combining architecture, energy systems, digital infrastructure, knowledge preservation and AI-assisted services.
