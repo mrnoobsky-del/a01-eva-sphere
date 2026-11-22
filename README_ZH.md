@@ -109,9 +109,12 @@ v3.7.0 保留包含 AIR-01 的 v3.6.0，并在集成导航中增加“舒适”�
 v0.3.0 是纯文档研究规范，说明球体如何减少可避免的人体负担并支持恢复；尚未连接真实建筑设备，也没有证明 13 小时的实体舒适性。
 
 
-## A-01 X 感知桥接研究
+## A-01 X 感知桥接 — Living Perception Loop v0.2
 
-- [第一人称视觉与传感器融合架构](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
-- [观测数据 JSON Schema](schemas/a01-x-sensory-observation.schema.json) · [示例](schemas/a01-x-sensory-observation.example.json)
+- [v0.2 发布说明（简体中文）](releases/a01-x-sensory-bridge-v0.2/README_ZH.md) · [RU](releases/a01-x-sensory-bridge-v0.2/README_RU.md) · [EN](releases/a01-x-sensory-bridge-v0.2/README.md)
+- [Living Perception Loop 架构（俄文）](architecture/A01-X-LIVING-PERCEPTION-LOOP-v0.2.md)
+- [观测数据 JSON Schema](schemas/a01-x-sensory-observation-v0.2.schema.json) · [示例](schemas/a01-x-sensory-observation-v0.2.example.json)
+- [感知事件 JSON Schema](schemas/a01-x-perception-event-v0.2.schema.json) · [事件链示例](schemas/a01-x-perception-event-v0.2.example.json)
+- [v0.1 架构](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
-这是架构研究，不是已连接的机器人运行时。当前公开仓库中没有 Android-01 v0.3.5 运行包或实时感知端点。
+v0.2 定义了类型化传感器数据、身体与房间坐标关联、时间同步、独立的媒体权限，以及从观测到验证的可追溯事件链。本版本仅为文档与集成协议，尚未连接真实 Android-01 运行时或感知端点。
