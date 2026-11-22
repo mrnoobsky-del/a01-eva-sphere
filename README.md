@@ -199,3 +199,11 @@ A standalone Three.js companion scene for the v3.7.0 digital twin. It explores a
 - [References and standards](releases/a01-x-v0.3.0/REFERENCES.md) · [Riddle JSON Schema](releases/a01-x-v0.3.0/riddle.schema.json) · [Release notes](releases/a01-x-v0.3.0/RELEASE-NOTES.md)
 
 v0.3.0 is a documentation-only research specification. It defines how the Sphere should reduce avoidable human burden and support recovery; it does not connect real building equipment or prove 13-hour comfort.
+
+
+## A-01 X — Sensory Bridge: first-person vision and sensor fusion
+
+- [Sensory bridge architecture](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
+- [Observation envelope JSON Schema](schemas/a01-x-sensory-observation.schema.json) · [Example](schemas/a01-x-sensory-observation.example.json)
+
+This is a future integration architecture, not a connected robot runtime. The current public repository does not contain the Android-01 v0.3.5 package or a live sensory endpoint.
