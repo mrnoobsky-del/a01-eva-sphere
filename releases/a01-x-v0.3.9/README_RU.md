@@ -1,30 +1,27 @@
 # A-01 X v0.3.9 — Agent Runtime E2E
 
-**Сквозной исполняемый выпуск** на основе Agent Runtime v0.3.8.
+**Сквозная проверка управления миссиями через MCP и локальный API.**
 
-## Состав релиза
+v0.3.9 добавляет сквозные тесты между MCP stdio, HTTP API, browser bridge и Agent Runtime. Эта ветка содержит документацию и отчёт проверки; полный исполняемый пакет не загружен в GitHub.
 
-- `source/` — полный исходный проект, распакованный из проверенного архива; структура сохранена как самостоятельный Node.js/Python-пакет.
-- [Русская документация Agent Runtime](source/docs/AGENT-RUNTIME-ANTIGRAVITY-INSPIRED_RU.md)
-- [Отчёт сквозной проверки](source/docs/AGENT-RUNTIME-E2E-VALIDATION_RU.md)
-- [Схема миссии](source/schemas/a01-agent-mission-v0.1.schema.json)
-- [Пример миссии](source/schemas/a01-agent-mission-v0.1.example.json)
+- [Отчёт сквозной проверки (RU)](E2E-VALIDATION_RU.md)
+- [Предыдущий релиз Agent Runtime v0.3.8 — документация и контракт миссии](https://github.com/mrnoobsky-del/a01-eva-sphere/tree/release/a01-x-v0.3.8-agent-runtime)
+- [Pull request v0.3.9](https://github.com/mrnoobsky-del/a01-eva-sphere/pulls)
 
-## Что добавлено в v0.3.9
+## Результат
 
-Сквозная проверка проходит через локальный HTTP-сервер, настоящий Python MCP stdio-процесс, browser bridge и production Agent Runtime. Заявки на перемещение, позу и поворот головы не выполняются до подтверждения оператором. Проверяются выполнение после подтверждения, отмена, отклонение неизвестных точек и немедленный Stop.
+Локальный `npm run check` завершился PASS: синтаксис, Agent World, AgentEyeCamera, Agent Runtime, Sensory Bridge/API, HTTP API, MCP stdio, E2E и 190 статических проверок геометрии/UI.
 
-## Проверка
+## Безопасность и границы
 
-Из каталога `source/`:
+Внешние MCP/HTTP-команды перемещения, позы и направления головы создают только заявки на миссию. Исполнение требует явного подтверждения оператором в браузерном Agent Manager; Stop доступен немедленно.
 
-```bash
-npm install
-npm run check
-```
+Android-01 остаётся симуляцией. E2E использует тестовый адаптер вместо живой Three.js/WebGL-сцены. GPU/browser acceptance, физическая навигация, реальные камеры, приводы и системы здания не подключены.
 
-Локальная проверка пакета прошла: Agent World, AgentEyeCamera, Agent Runtime, Sensory Bridge/API, HTTP API, MCP stdio, E2E и аудит геометрии/UI (190 проверок).
+## Полный исполняемый пакет
 
-## Ограничения
+ZIP-пакет `a01-x-v0.3.9-agent-runtime-e2e.zip` подготовлен отдельно и передан в чат. Размер: 175 729 байт. SHA-256:
 
-E2E-адаптер использует тестовую сцену вместо браузерного WebGL-рендера. Проверки DOM/GPU в Chrome, физическая навигация, калибровка координат и физический Android-01 не подтверждены. Android-01 остаётся симуляцией; реальные камеры, приводы и инфраструктура здания не подключены.
+`73006b87fd39da3c30496a4ff8313c771f05378153d05b44ee1c0303761260b5`
+
+Этот архив пока не является файлом GitHub-репозитория или GitHub Release Asset.
