@@ -201,9 +201,12 @@ A standalone Three.js companion scene for the v3.7.0 digital twin. It explores a
 v0.3.0 is a documentation-only research specification. It defines how the Sphere should reduce avoidable human burden and support recovery; it does not connect real building equipment or prove 13-hour comfort.
 
 
-## A-01 X — Sensory Bridge: first-person vision and sensor fusion
+## A-01 X — Sensory Bridge: Living Perception Loop v0.2
 
-- [Sensory bridge architecture](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
-- [Observation envelope JSON Schema](schemas/a01-x-sensory-observation.schema.json) · [Example](schemas/a01-x-sensory-observation.example.json)
+- [Release v0.2 (EN)](releases/a01-x-sensory-bridge-v0.2/README.md) · [RU](releases/a01-x-sensory-bridge-v0.2/README_RU.md) · [简体中文](releases/a01-x-sensory-bridge-v0.2/README_ZH.md)
+- [Living Perception Loop architecture (RU)](architecture/A01-X-LIVING-PERCEPTION-LOOP-v0.2.md)
+- [Observation JSON Schema](schemas/a01-x-sensory-observation-v0.2.schema.json) · [example](schemas/a01-x-sensory-observation-v0.2.example.json)
+- [Perception event JSON Schema](schemas/a01-x-perception-event-v0.2.schema.json) · [event-chain example](schemas/a01-x-perception-event-v0.2.example.json)
+- [Previous v0.1 architecture](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
-This is a future integration architecture, not a connected robot runtime. The current public repository does not contain the Android-01 v0.3.5 package or a live sensory endpoint.
+v0.2 defines typed sensor packets, body/room frame mapping, time synchronization, separate media permissions and a traceable observation-to-verification event trail. This is a documentation release; no physical Android-01 runtime or sensory endpoint is connected.
