@@ -1,3 +1,12 @@
+
+
+## Автономная архитектура A-01 v3.3.0
+
+- [Спецификация RU](digital-twin/README_RU_v330_offline.md) · [EN](digital-twin/README_v330_offline.md) · [简体中文](digital-twin/README_ZH_v330_offline.md)
+- [План релиза](releases/mainline-v3.3.0/README_RU.md) · [Матрица автономной приёмки](releases/mainline-v3.3.0/ACCEPTANCE-MATRIX_RU.md)
+- [Changelog](digital-twin/CHANGELOG_v330_offline.md)
+
+Это архитектурный этап, а не готовый автономный исполняемый файл. v3.2.2 остаётся онлайн-зависимой сборкой; полноценный Offline Edition должен пройти запуск через file:// при заранее отключённой сети.
 # A-01 — Сфера Евы
 
 ## Текущая опубликованная веб-линия Сферы Евы
