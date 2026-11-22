@@ -7,6 +7,8 @@ const path = require('node:path');
 function createHarness() {
   const listeners = new Map();
   const animationFrames = new Map();
+  const timers = new Map();
+  let nextTimerId = 1;
   let nextFrameId = 1;
   let lastRenderer = null;
   class FakeCustomEvent {
@@ -63,8 +65,8 @@ function createHarness() {
     dispatchEvent(event) { (listeners.get(event.type) || []).forEach(callback => callback(event)); },
     requestAnimationFrame(callback) { const id = nextFrameId++; animationFrames.set(id, callback); return id; },
     cancelAnimationFrame(id) { animationFrames.delete(id); },
-    setTimeout(callback) { return setTimeout(callback, 60_000); },
-    clearTimeout(id) { clearTimeout(id); }
+    setTimeout(callback, delay) { const id = nextTimerId++; timers.set(id, { callback, delay }); return id; },
+    clearTimeout(id) { timers.delete(id); }
   };
   const document = {
     createElement(name) {
@@ -85,7 +87,7 @@ function createHarness() {
   const context = { window, document, CustomEvent: FakeCustomEvent, console: window.console, Date, Promise, Number, Boolean, Object, Array, Math, Error, String, JSON };
   const sourcePath = path.join(__dirname, '..', 'agent-eye-camera.js');
   vm.runInNewContext(fs.readFileSync(sourcePath, 'utf8'), context, { filename: sourcePath });
-  return { window, document, api, scene, spectatorCamera, spectatorRenderer, animationFrames, get eyeRenderer() { return lastRenderer; } };
+  return { window, document, api, scene, spectatorCamera, spectatorRenderer, animationFrames, timers, get eyeRenderer() { return lastRenderer; } };
 }
 
 const permission = () => ({
@@ -164,4 +166,20 @@ test('rejects a non-Object3D head target and detach preserves the main scene cam
   assert.equal(head.children.length, 0);
   assert.equal(h.window.A01_AGENT_EYE_CAMERA.getStatus().status, 'idle');
   assert.equal(h.api.camera, h.spectatorCamera);
+});
+
+test('expires the local stream when the operator authorization reaches its deadline', () => {
+  const h = createHarness();
+  const head = new h.api.THREE.PerspectiveCamera();
+  h.window.A01_AGENT_EYE_CAMERA.attach({ headObject: head });
+  const expiredEvents = [];
+  h.window.addEventListener('a01-agent-eye:permission-expired', event => expiredEvents.push(event.detail));
+  const stream = h.window.A01_AGENT_EYE_CAMERA.start({ authorization: permission() });
+  const [timerId, timer] = h.timers.entries().next().value;
+  assert.ok(timer.delay > 0);
+  h.timers.delete(timerId);
+  timer.callback();
+  assert.equal(h.window.A01_AGENT_EYE_CAMERA.getStatus().status, 'attached');
+  assert.equal(stream.tracks[0].stopped, true);
+  assert.equal(expiredEvents.length, 1);
 });
