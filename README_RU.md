@@ -50,15 +50,15 @@ A-01 развивается как концепция и проект цифро
 
 ## Текущая основная версия цифрового двойника
 
-- **A-01 v4.0.0 — Primary Architecture Baseline:** [Открыть основной HTML](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
+- **A-01 v4.0.1 — Primary Architecture Baseline:** [Открыть основной HTML](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Документация RU](digital-twin/README_RU_v400.md) · [EN](digital-twin/README_v400.md) · [История изменений](digital-twin/CHANGELOG_v400.md)
-- [Архитектурная записка](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Заметки к выпуску](releases/v4.0.0/RELEASE-NOTES_RU.md)
+- [Архитектурная записка](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Заметки к выпуску](releases/v4.0.1/RELEASE-NOTES_RU.md)
 
-v4.0.0 сохраняет интегрированное рабочее пространство линии v3.1.6 и меняет архитектурный базис внутренних долек, дверных проёмов, тамбуров и человеческого маршрута. В модели пять уровней и 60 радиальных модулей. Это основная версия репозитория GitHub main; она не означает, что физическая Сфера построена или введена в эксплуатацию.
+v4.0.1 сохраняет интегрированное рабочее пространство линии v3.1.6 и меняет архитектурный базис внутренних долек, дверных проёмов, тамбуров и человеческого маршрута. В модели пять уровней и 60 радиальных модулей. Это основная версия репозитория GitHub main; она не означает, что физическая Сфера построена или введена в эксплуатацию.
 
-На 22 ноября 2026 года публичная страница [evasphere.usite.pro](https://evasphere.usite.pro/) всё ещё сообщает метаданные v3.1.6. Публикация в GitHub не обновляет uCoz автоматически. Статические проверки v4.0.0 пройдены; браузерная/WebGL-приёмка и инженерная верификация остаются незавершёнными.
+На 22 ноября 2026 года публичная страница [evasphere.usite.pro](https://evasphere.usite.pro/) всё ещё сообщает метаданные v3.1.6. Публикация в GitHub не обновляет uCoz автоматически. Статические проверки v4.0.1 пройдены; браузерная/WebGL-приёмка и инженерная верификация остаются незавершёнными.
 
-Сохранённые предыдущие линии: [v3.8.0 — отдельный Axiom-inspired блок-аут](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html), [v3.7.0 — человеческий комфорт](digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html), [v3.1.2 — сервисный LED-небосвод](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html), [стабильный архив v2.1.0](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html). Эти файлы не перезаписываются выпуском v4.0.0.
+Сохранённые предыдущие линии: [v3.8.0 — отдельный Axiom-inspired блок-аут](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html), [v3.7.0 — человеческий комфорт](digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html), [v3.1.2 — сервисный LED-небосвод](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html), [стабильный архив v2.1.0](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html). Эти файлы не перезаписываются выпуском v4.0.1.
 
 
 
