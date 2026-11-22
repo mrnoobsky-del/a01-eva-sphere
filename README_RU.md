@@ -27,7 +27,7 @@ v3.1.8 сохраняет сцену сайта v3.1.6 и добавляет и�
 
 ## Подготовленная сборка A-01 v3.2.0 — локальный 3D-движок
 
-- [Инструкция по автономному запуску (RU)](releases/mainline-v3.2.0-offline-engine/README_RU.md)
+- [Инструкция по автономному запуску (RU)](releases/mainline-v3.2.0-offline-engine/README_RU.md) · [Исправление шапки меню (RU)](releases/mainline-v3.2.0-offline-engine/NAV-HEADER-FIX_RU.md)
 - [Развёртывание на uCoz (RU)](releases/mainline-v3.2.0-offline-engine/DEPLOYMENT_UCOZ_RU.md)
 - [История изменений](releases/mainline-v3.2.0-offline-engine/CHANGELOG.md)
 
