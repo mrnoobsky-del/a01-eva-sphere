@@ -109,3 +109,13 @@ These counts are source-level observations, not runtime network telemetry.
 - Visual WebGL acceptance: **NOT TESTED**
 
 This audit records why a dependency bundle and browser-level acceptance are required before using the Offline Edition label.
+
+## Дополнительные локальные ссылки
+
+Внутри HTML также обнаружены ссылки на:
+- `./eva-sphere-documentation-v19.html`
+- `./eva-sphere-registry-v19.html`
+
+Они открываются из навигации и поиска. Эти два HTML-файла отсутствуют в составе v3.2.2 Single HTML ZIP. Значит, локальная документация и реестр не могут считаться включёнными в этот архив. Для Single HTML Offline их содержимое нужно интегрировать в приложение (предпочтительно единая встроенная база/просмотрщик) либо включить в Portable Pack и изменить ссылки на гарантированно доступные локальные ресурсы.
+
+**Обновлённая оценка Local Knowledge:** не полностью упакована в проверенные архивы; требуется аудит содержимого двух документов и их внутренних изображений/ресурсов.
