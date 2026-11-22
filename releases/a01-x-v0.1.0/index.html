@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#090d12" />
+    <meta name="description" content="A-01 X — цифровой двойник Сферы Евы. Интерактивный прототип архитектуры и внутреннего атриума." />
+    <title>A-01 X · Сфера Евы</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="viewport" aria-label="Интерактивная 3D-модель Сферы Евы"></div>
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="A-01 X — Сфера Евы">
+          <span class="brand-mark">A</span>
+          <span><strong>A-01 X</strong><small>THE SPHERE OF EVA</small></span>
+        </a>
+        <div class="top-actions">
+          <div class="top-state"><span class="state-dot"></span><span data-i18n="prototype">ЦИФРОВОЙ ПРОТОТИП</span></div>
+          <select id="languageSelect" class="language-select" aria-label="Язык">
+            <option value="ru">RU</option><option value="en">EN</option><option value="zh">中文</option>
+          </select>
+        </div>
+        <button id="menuButton" class="icon-button" aria-label="Открыть настройки">☰</button>
+      </header>
+      <aside class="left-panel glass-panel">
+        <div class="panel-kicker">A-01 X / REALITY VIEW</div>
+        <h1 data-i18n="sphere">Сфера Евы</h1>
+        <p class="panel-subtitle" data-i18n="tagline">Энергия · Интеллект · Жизнь</p>
+        <div class="panel-divider"></div>
+        <div class="stat-row"><span data-i18n="scene">Сцена</span><strong data-i18n="centralAtrium">Центральный атриум</strong></div>
+        <div class="stat-row"><span data-i18n="levels">Уровни</span><strong>5</strong></div>
+        <div class="stat-row"><span data-i18n="dataMode">Режим данных</span><strong class="simulation-label" data-i18n="simulation">Симуляция</strong></div>
+        <div class="panel-divider"></div>
+        <div class="section-label" data-i18n="navigation">НАВИГАЦИЯ ПО УРОВНЯМ</div>
+        <div id="floorButtons" class="floor-grid">
+          <button class="floor-button active" data-floor="0"><strong>L00</strong><span data-floor-label="0">Площадь</span></button>
+          <button class="floor-button" data-floor="1"><strong>L01</strong><span data-floor-label="1">Галерея</span></button>
+          <button class="floor-button" data-floor="2"><strong>L02</strong><span data-floor-label="2">Галерея</span></button>
+          <button class="floor-button" data-floor="3"><strong>L03</strong><span data-floor-label="3">Галерея</span></button>
+          <button class="floor-button" data-floor="4"><strong>L04</strong><span data-floor-label="4">Верхний ярус</span></button>
+        </div>
+        <div class="panel-divider"></div>
+        <div class="section-label" data-i18n="camera">КАМЕРА</div>
+        <div class="mode-row">
+          <button id="orbitButton" class="mode-button active" data-i18n="orbit">Обзор</button>
+          <button id="walkButton" class="mode-button" data-i18n="walk">Прогулка</button>
+        </div>
+        <button id="resetButton" class="wide-button" data-i18n="reset">Вернуть обзор</button>
+      </aside>
+      <aside id="rightPanel" class="right-panel glass-panel">
+        <div class="panel-heading">
+          <div><div class="panel-kicker" data-i18n="systemMonitor">SYSTEM MONITOR</div><h2 data-i18n="sceneState">Состояние сцены</h2></div>
+          <button id="closePanel" class="close-button" aria-label="Закрыть">×</button>
+        </div>
+        <div class="monitor-card"><span data-i18n="frameRate">Частота кадров</span><strong id="fpsValue">— FPS</strong><div class="meter"><i id="fpsMeter"></i></div></div>
+        <div class="monitor-card"><span data-i18n="qualityProfile">Профиль качества</span><strong id="qualityValue">AUTO</strong><div class="quality-options"><button data-quality="low">Low</button><button data-quality="medium">Medium</button><button data-quality="high">High</button><button data-quality="ultra">Ultra</button><button data-quality="auto" class="selected">Auto</button></div></div>
+        <div class="monitor-card"><span data-i18n="graphicsMode">Графический режим</span><strong>WebGL · PBR</strong></div>
+        <div class="monitor-card"><span data-i18n="engineeringData">Инженерные данные</span><strong class="muted-value" data-i18n="notConnected">Не подключены</strong></div>
+        <p class="panel-note" data-i18n="demoNote">Показатели относятся к локальной демонстрационной сцене.</p>
+      </aside>
+      <div class="bottom-hud">
+        <div class="hint"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span data-i18n="movement">движение</span><kbd>ESC</kbd><span data-i18n="exit">выход</span></div>
+        <div class="bottom-right"><span id="cameraLabel">ORBIT VIEW</span><span class="hud-separator"></span><span id="levelLabel">L00 · ПЛОЩАДЬ</span></div>
+      </div>
+      <div id="walkTip" class="walk-tip hidden" data-i18n="walkTip">Кликните по сцене, чтобы захватить курсор · WASD — движение · ESC — выход</div>
+      <div id="loadingScreen" class="loading-screen"><div class="loading-logo">A-01 X</div><div class="loading-bar"><i></i></div><span data-i18n="loading">ЗАГРУЗКА ЦИФРОВОЙ СЦЕНЫ</span></div>
+      <div id="webglFallback" class="webgl-fallback hidden"><h2 data-i18n="webglTitle">3D-режим недоступен</h2><p data-i18n="webglNote">Браузер не смог создать WebGL-контекст.</p></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

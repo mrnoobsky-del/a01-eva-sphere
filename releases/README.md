@@ -1,3 +1,9 @@
+## A-01 X — v0.1.0 experimental technology line
+
+- [Russian overview](a01-x-v0.1.0/README_RU.md) · [Release notes](a01-x-v0.1.0/RELEASE-NOTES.md)
+- [Source code: package, Vite, TypeScript and Three.js](a01-x-v0.1.0/)
+- Status: experimental A-01 technology line. Preserves all preceding A-01 versions; not a separate A-02 and not a replacement for the established digital-twin baseline. Local npm installation and production build remain pending; see release notes.
+
 # Releases
 
 Versioned snapshots and their release notes are kept here.

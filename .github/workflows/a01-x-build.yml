@@ -1,0 +1,28 @@
+name: A-01 X build
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/a01-x-v0.1.0/**'
+      - '.github/workflows/a01-x-build.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'releases/a01-x-v0.1.0/**'
+      - '.github/workflows/a01-x-build.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: releases/a01-x-v0.1.0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: releases/a01-x-v0.1.0/package.json
+      - run: npm install --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run build
