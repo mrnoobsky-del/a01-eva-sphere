@@ -8,7 +8,6 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 const input = process.argv[2];
 if (!input) {
