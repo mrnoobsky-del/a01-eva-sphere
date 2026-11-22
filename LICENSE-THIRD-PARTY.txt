@@ -1,0 +1,14 @@
+A-01 v3.3.0 Offline Edition — Third-Party Notices
+
+Three.js r185
+Copyright 2010-2026 Three.js Authors
+License: MIT
+Source: https://github.com/mrdoob/three.js
+The build bundles Three.js and OrbitControls from the same pinned three@0.185.0 package.
+The complete MIT license text is included in the bundled runtime by esbuild legalComments="inline".
+
+esbuild 0.25.11
+Copyright F. Schier
+License: MIT
+Source: https://github.com/evanw/esbuild
+Build-time tool only; not part of the browser runtime.
