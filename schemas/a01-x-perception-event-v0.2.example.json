@@ -1,0 +1,110 @@
+[
+  {
+    "schema": "a01x.perception-event.v0.2",
+    "event_id": "evt-001",
+    "session_id": "sim-inspection-2026-11-22-001",
+    "sequence": 1,
+    "occurred_at": "2026-11-22T03:30:00Z",
+    "event_type": "observation_received",
+    "actor": "sensor_gateway",
+    "summary": "Получен синтетический пакет наблюдений: глазной кадр, IMU и температура зоны.",
+    "observation_refs": [
+      "packet:1/vision.rgb",
+      "packet:1/imu",
+      "packet:1/environment.air_temperature"
+    ],
+    "riddle_id": null,
+    "recommendation": null,
+    "approval": null,
+    "action": null,
+    "verification": {
+      "status": "not_run",
+      "verified_at": null,
+      "evidence_refs": [],
+      "notes": "Приём пакета ещё не означает интерпретацию."
+    },
+    "previous_event_hash": null,
+    "event_hash": null
+  },
+  {
+    "schema": "a01x.perception-event.v0.2",
+    "event_id": "evt-002",
+    "session_id": "sim-inspection-2026-11-22-001",
+    "sequence": 2,
+    "occurred_at": "2026-11-22T03:30:01Z",
+    "event_type": "perception_result",
+    "actor": "observer_model",
+    "summary": "В кадре предположительно виден дверной проём; точное состояние дверной створки не подтверждено.",
+    "observation_refs": [
+      "packet:1/vision.rgb"
+    ],
+    "riddle_id": null,
+    "recommendation": {
+      "recommendation_id": "rec-001",
+      "description": "Запросить второй ракурс и проверить связанный датчик состояния двери.",
+      "confidence": 0.72,
+      "uncertainty_notes": [
+        "Отражение мешает определить положение створки.",
+        "Второй ракурс отсутствует."
+      ]
+    },
+    "approval": null,
+    "action": null,
+    "verification": {
+      "status": "not_run",
+      "verified_at": null,
+      "evidence_refs": [],
+      "notes": "Это интерпретация изображения, не измерение состояния двери."
+    },
+    "previous_event_hash": null,
+    "event_hash": null
+  },
+  {
+    "schema": "a01x.perception-event.v0.2",
+    "event_id": "evt-003",
+    "session_id": "sim-inspection-2026-11-22-001",
+    "sequence": 3,
+    "occurred_at": "2026-11-22T03:30:02Z",
+    "event_type": "riddle_created",
+    "actor": "sphere_intelligence",
+    "summary": "Создана инженерная загадка: можно ли подтвердить состояние двери по независимому источнику?",
+    "observation_refs": [
+      "packet:1/vision.rgb"
+    ],
+    "riddle_id": "R-016",
+    "recommendation": null,
+    "approval": null,
+    "action": null,
+    "verification": {
+      "status": "not_run",
+      "verified_at": null,
+      "evidence_refs": [],
+      "notes": "Карточка загадки ожидает проверки независимого датчика."
+    },
+    "previous_event_hash": null,
+    "event_hash": null
+  },
+  {
+    "schema": "a01x.perception-event.v0.2",
+    "event_id": "evt-004",
+    "session_id": "sim-inspection-2026-11-22-001",
+    "sequence": 4,
+    "occurred_at": "2026-11-22T03:30:03Z",
+    "event_type": "session_stopped",
+    "actor": "operator",
+    "summary": "Демонстрационная сессия остановлена оператором.",
+    "observation_refs": [],
+    "riddle_id": "R-016",
+    "recommendation": null,
+    "approval": null,
+    "action": null,
+    "verification": {
+      "status": "not_run",
+      "verified_at": null,
+      "evidence_refs": [],
+      "notes": "Никакая команда оборудованию не отправлялась."
+    },
+    "previous_event_hash": null,
+    "event_hash": null
+  }
+]
