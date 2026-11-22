@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrnoobsky-del/a01-eva-sphere/blob/main/schemas/a01-x-sensory-observation.schema.json",
+  "title": "A-01 X Sensory Observation Envelope",
+  "type": "object",
+  "required": [
+    "schema",
+    "agent_id",
+    "sequence",
+    "captured_at",
+    "source_mode",
+    "observations"
+  ],
+  "properties": {
+    "schema": {
+      "const": "a01x.sensory.v0.1"
+    },
+    "agent_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_mode": {
+      "enum": [
+        "simulation",
+        "physical_robot",
+        "human_consented_device"
+      ]
+    },
+    "coordinate_frames": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "parent"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "parent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "transform": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 7,
+            "maxItems": 7
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "channel",
+          "source_id",
+          "modality",
+          "provenance",
+          "captured_at",
+          "quality"
+        ],
+        "properties": {
+          "channel": {
+            "enum": [
+              "vision.rgb",
+              "vision.depth",
+              "audio",
+              "imu",
+              "joint_state",
+              "tactile",
+              "force_torque",
+              "range",
+              "point_cloud",
+              "environment.air_temperature",
+              "environment.relative_humidity",
+              "environment.pressure",
+              "environment.co2",
+              "environment.pm25",
+              "environment.pm10",
+              "environment.co",
+              "environment.voc",
+              "environment.illuminance",
+              "environment.sound_level",
+              "navigation.pose",
+              "navigation.route",
+              "energy.battery",
+              "actuator.temperature",
+              "diagnostics"
+            ]
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "modality": {
+            "enum": [
+              "image",
+              "video_frame",
+              "audio_chunk",
+              "vector3",
+              "quaternion",
+              "joint_array",
+              "scalar",
+              "pose",
+              "point_cloud",
+              "json"
+            ]
+          },
+          "provenance": {
+            "enum": [
+              "measured",
+              "simulated",
+              "derived",
+              "inferred"
+            ]
+          },
+          "captured_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "frame_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "type": [
+              "number",
+              "integer",
+              "string",
+              "boolean",
+              "object",
+              "array",
+              "null"
+            ]
+          },
+          "media_ref": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "quality": {
+            "type": "object",
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "valid",
+                  "degraded",
+                  "stale",
+                  "uncalibrated",
+                  "missing",
+                  "fault"
+                ]
+              },
+              "confidence": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 1
+              },
+              "calibration_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "age_ms": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "notes": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "synchronization": {
+      "type": "object",
+      "properties": {
+        "clock_id": {
+          "type": "string"
+        },
+        "max_skew_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "synchronized": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "session": {
+      "type": "object",
+      "properties": {
+        "consent_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "video_enabled": {
+          "type": "boolean"
+        },
+        "audio_enabled": {
+          "type": "boolean"
+        },
+        "retention_seconds": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
