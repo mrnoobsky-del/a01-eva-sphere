@@ -210,3 +210,10 @@ v0.3.0 is a documentation-only research specification. It defines how the Sphere
 - [Previous v0.1 architecture](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
 v0.2 defines typed sensor packets, body/room frame mapping, time synchronization, separate media permissions and a traceable observation-to-verification event trail. This is a documentation release; no physical Android-01 runtime or sensory endpoint is connected.
+
+## A-01 X v0.3.6 — Android-01 first-person eye camera
+
+- [Release overview (RU)](releases/a01-x-v0.3.6/README_RU.md) · [Release notes](releases/a01-x-v0.3.6/RELEASE-NOTES.md)
+- [AgentEyeCamera source](releases/a01-x-v0.3.6/agent-eye-camera.js) · [Integration details (RU)](releases/a01-x-v0.3.6/SENSORY-BRIDGE-INTEGRATION_RU.md) · [Tests](releases/a01-x-v0.3.6/agent-eye-camera-check.mjs)
+
+The v0.3.6 package mounts the independent eye camera directly on `worldRoot.androidRig.head` in the original 17-bone rig. The spectator camera remains unchanged. Local streaming requires an explicit operator action and expiring permission. Frames are marked `simulated`. The full runnable v0.3.6 archive is attached separately in the conversation; browser/WebGL/GPU acceptance remains pending.
