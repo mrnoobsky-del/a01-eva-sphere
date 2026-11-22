@@ -25,6 +25,14 @@ v3.1.8 preserves the v3.1.6 website scene and resolves selected service-logistic
 
 “Изучить объект” now opens a full-screen view: the camera focuses on the object, the usual interface is hidden, and an information card stays over the model. Close or Escape restores the previous UI and context-drawer state. Automated checks pass; full WebGL visual acceptance remains pending. The uCoz site has not been changed.
 
+## Prepared build A-01 v3.2.0 — Local 3D Engine
+
+- [Offline launch guide (RU)](releases/mainline-v3.2.0-offline-engine/README_RU.md)
+- [uCoz deployment guide (RU)](releases/mainline-v3.2.0-offline-engine/DEPLOYMENT_UCOZ_RU.md)
+- [Changelog](releases/mainline-v3.2.0-offline-engine/CHANGELOG.md)
+
+Three.js r185 and OrbitControls now use relative local paths. The ZIP contains a PowerShell bootstrap that downloads the official engine files from GitHub Raw once on first run and assembles the core; after that, the 3D scene uses local files without a CDN or network access. The ZIP does not preload the complete engine files. A localhost launcher is provided for browser ES modules. Eva chat remains online-only. Browser/WebGL visual acceptance and execution of the PowerShell launcher on Windows are still pending; uCoz has not been updated.
+
 **Energy · Intelligence · Life**
 
 A-01 is an open project record for a long-term vision: a resilient, human-centred environment combining architecture, energy systems, digital infrastructure, knowledge preservation and AI-assisted services.
