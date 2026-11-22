@@ -118,3 +118,10 @@ v0.3.0 是纯文档研究规范，说明球体如何减少可避免的人体负�
 - [v0.1 架构](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
 v0.2 定义了类型化传感器数据、身体与房间坐标关联、时间同步、独立的媒体权限，以及从观测到验证的可追溯事件链。本版本仅为文档与集成协议，尚未连接真实 Android-01 运行时或感知端点。
+
+## A-01 X v0.3.9 — Agent Runtime E2E
+
+- [版本概览（简体中文）](releases/a01-x-v0.3.9/README_ZH.md) · [RU](releases/a01-x-v0.3.9/README_RU.md) · [EN](releases/a01-x-v0.3.9/README.md)
+- [端到端验证报告（俄文）](releases/a01-x-v0.3.9/E2E-VALIDATION_RU.md)
+
+本版本记录 MCP、HTTP、浏览器 bridge 与 Agent Runtime 的端到端验证。完整可运行 ZIP 单独提供，目前尚未纳入仓库文件。

@@ -100,3 +100,10 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Release overview — RU](a01-x-sensory-bridge-v0.2/README_RU.md) · [EN](a01-x-sensory-bridge-v0.2/README.md) · [简体中文](a01-x-sensory-bridge-v0.2/README_ZH.md)
 - [Architecture](../architecture/A01-X-LIVING-PERCEPTION-LOOP-v0.2.md) · [Observation schema](../schemas/a01-x-sensory-observation-v0.2.schema.json) · [Perception event schema](../schemas/a01-x-perception-event-v0.2.schema.json)
 - Status: documentation and integration-contract release. No physical Android-01, sensor hardware or live endpoint is connected. Synthetic examples are labelled as simulation.
+
+## A-01 X v0.3.9 — Agent Runtime E2E
+
+- [Release overview (RU)](a01-x-v0.3.9/README_RU.md) · [EN](a01-x-v0.3.9/README.md) · [简体中文](a01-x-v0.3.9/README_ZH.md)
+- [E2E validation report (RU)](a01-x-v0.3.9/E2E-VALIDATION_RU.md)
+
+This is a documentation and validation-report publication. The complete runnable ZIP is supplied separately; it is not mirrored as source files or a GitHub Release Asset in this branch.

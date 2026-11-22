@@ -210,3 +210,10 @@ v0.3.0 is a documentation-only research specification. It defines how the Sphere
 - [Previous v0.1 architecture](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
 v0.2 defines typed sensor packets, body/room frame mapping, time synchronization, separate media permissions and a traceable observation-to-verification event trail. This is a documentation release; no physical Android-01 runtime or sensory endpoint is connected.
+
+## A-01 X v0.3.9 — Agent Runtime E2E
+
+- [Release overview (EN)](releases/a01-x-v0.3.9/README.md) · [RU](releases/a01-x-v0.3.9/README_RU.md) · [简体中文](releases/a01-x-v0.3.9/README_ZH.md)
+- [End-to-end validation report (RU)](releases/a01-x-v0.3.9/E2E-VALIDATION_RU.md)
+
+This release documents MCP / HTTP / browser bridge / Agent Runtime end-to-end validation. The complete runnable ZIP is supplied separately and is not yet part of the repository files.
