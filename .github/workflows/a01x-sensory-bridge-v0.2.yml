@@ -1,0 +1,33 @@
+name: A-01 X Sensory Bridge v0.2 validation
+
+on:
+  push:
+    paths:
+      - "schemas/a01-x-sensory-observation-v0.2.*"
+      - "schemas/a01-x-perception-event-v0.2.*"
+      - "tools/validate-sensory-bridge-v0.2.py"
+      - "requirements-dev.txt"
+      - ".github/workflows/a01x-sensory-bridge-v0.2.yml"
+  pull_request:
+    paths:
+      - "schemas/a01-x-sensory-observation-v0.2.*"
+      - "schemas/a01-x-perception-event-v0.2.*"
+      - "tools/validate-sensory-bridge-v0.2.py"
+      - "requirements-dev.txt"
+      - ".github/workflows/a01x-sensory-bridge-v0.2.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation dependency
+        run: python -m pip install -r requirements-dev.txt
+      - name: Validate schemas and examples
+        run: python tools/validate-sensory-bridge-v0.2.py
