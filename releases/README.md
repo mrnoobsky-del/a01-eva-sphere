@@ -20,11 +20,11 @@
 
 # Releases
 
-## A-01 v4.0.1 — Primary Architecture Baseline (primary repository release)
+## A-01 v4.0.0 — Primary Architecture Baseline (primary repository release)
 
 - [Open primary HTML build](../digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Russian documentation](../digital-twin/README_RU_v400.md) · [English documentation](../digital-twin/README_v400.md) · [Changelog](../digital-twin/CHANGELOG_v400.md)
-- [Architecture note](../architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](v4.0.1/RELEASE-NOTES_RU.md)
+- [Architecture note](../architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](v4.0.0/RELEASE-NOTES_RU.md)
 - Status: primary architecture baseline on GitHub main. Static source checks passed (298 IDs, no duplicates; seven inline JavaScript blocks; valid import map). Browser/WebGL visual acceptance and engineering validation remain outstanding. The public uCoz page still reports v3.1.6; GitHub does not deploy to uCoz automatically.
 
 
