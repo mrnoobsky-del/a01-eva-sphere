@@ -21,10 +21,12 @@ A-01 X continues the existing Sphere of Eva project. It does not create a separa
 
 ## Verification status
 
-- Source tree, package metadata and project naming inspected.
-- A local TypeScript check was attempted, but dependencies were not installed; it stopped on unresolved Three.js imports and consequent typing errors.
-- A full npm install, production build, browser/WebGL test and device test have not been completed.
-- GitHub Actions is configured to install dependencies, type-check and build after publication.
+- GitHub Actions run #2 completed successfully on 22 November 2026.
+- Dependency installation completed successfully.
+- `npm run typecheck` passed.
+- `npm run build` passed; Vite produced the production bundle.
+- The first CI run identified the missing `@types/three` dependency; version `0.187.0` was added to match Three.js `0.187.0`, and the next run passed.
+- Browser interaction, WebGL visual quality, mobile-device performance and physical engineering have not been independently validated.
 
 ## Important limits
 
