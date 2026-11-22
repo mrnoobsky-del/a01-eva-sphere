@@ -1,5 +1,9 @@
 # A-01 v3.3.0 Offline Edition
 
+- [Prepared v3.3.0 offline HTML candidate](../releases/mainline-v3.3.0/eva-sphere-a01-v330-offline.html)
+- [v3.3.0 build report (RU)](../releases/mainline-v3.3.0/BUILD-REPORT_RU.md)
+- [v3.3.0 build manifest](../releases/mainline-v3.3.0/BUILD-MANIFEST.json)
+
 - [Architecture RU](../digital-twin/README_RU_v330_offline.md) · [EN](../digital-twin/README_v330_offline.md) · [简体中文](../digital-twin/README_ZH_v330_offline.md)
 - [Release plan (RU)](../releases/mainline-v3.3.0/README_RU.md)
 - [Offline acceptance matrix (RU)](../releases/mainline-v3.3.0/ACCEPTANCE-MATRIX_RU.md)
