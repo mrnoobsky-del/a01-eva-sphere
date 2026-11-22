@@ -1,0 +1,1671 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrnoobsky-del/a01-eva-sphere/blob/main/schemas/a01-x-sensory-observation-v0.2.schema.json",
+  "title": "A-01 X Sensory Observation Envelope v0.2",
+  "type": "object",
+  "required": [
+    "schema",
+    "agent_id",
+    "session_id",
+    "sequence",
+    "captured_at",
+    "source_mode",
+    "coordinate_frames",
+    "sources",
+    "observations",
+    "synchronization",
+    "session"
+  ],
+  "properties": {
+    "schema": {
+      "const": "a01x.sensory.v0.2"
+    },
+    "agent_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "captured_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_mode": {
+      "enum": [
+        "simulation",
+        "physical_robot",
+        "human_consented_device"
+      ]
+    },
+    "coordinate_frames": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "parent",
+          "convention",
+          "transform_to_parent"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parent": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "convention": {
+            "enum": [
+              "ros_rep_103_body",
+              "ros_optical",
+              "enu",
+              "custom"
+            ]
+          },
+          "transform_to_parent": {
+            "type": "object",
+            "required": [
+              "translation_m",
+              "rotation_xyzw"
+            ],
+            "properties": {
+              "translation_m": {
+                "type": "array",
+                "minItems": 3,
+                "maxItems": 3,
+                "items": {
+                  "type": "number"
+                }
+              },
+              "rotation_xyzw": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "items": {
+                  "type": "number"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "source_id",
+          "sensor_class",
+          "mount",
+          "frame_id",
+          "location",
+          "calibration",
+          "health"
+        ],
+        "properties": {
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sensor_class": {
+            "enum": [
+              "camera",
+              "rgbd_camera",
+              "imu",
+              "joint_encoder",
+              "force_torque",
+              "tactile",
+              "range",
+              "environmental",
+              "localizer",
+              "battery",
+              "actuator",
+              "building_sensor",
+              "simulator"
+            ]
+          },
+          "mount": {
+            "enum": [
+              "agent_head",
+              "agent_body",
+              "agent_base",
+              "agent_joint",
+              "agent_tool",
+              "zone",
+              "asset",
+              "world",
+              "simulator"
+            ]
+          },
+          "frame_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "location": {
+            "type": "object",
+            "required": [
+              "sphere_id",
+              "level_id",
+              "zone_id",
+              "room_id",
+              "asset_id"
+            ],
+            "properties": {
+              "sphere_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "level_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "zone_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "room_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "asset_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "calibration": {
+            "type": "object",
+            "required": [
+              "status",
+              "calibration_id"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "calibrated",
+                  "uncalibrated",
+                  "not_applicable",
+                  "expired"
+                ]
+              },
+              "calibration_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "calibrated_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "due_at": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              },
+              "artifact_ref": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "uri"
+              }
+            },
+            "additionalProperties": false
+          },
+          "health": {
+            "enum": [
+              "ok",
+              "degraded",
+              "stale",
+              "fault",
+              "unknown"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "channel",
+          "source_id",
+          "modality",
+          "provenance",
+          "captured_at",
+          "frame_id",
+          "quality",
+          "value"
+        ],
+        "properties": {
+          "channel": {
+            "enum": [
+              "vision.rgb",
+              "vision.depth",
+              "audio",
+              "imu",
+              "joint_state",
+              "tactile",
+              "force_torque",
+              "range",
+              "point_cloud",
+              "environment.air_temperature",
+              "environment.relative_humidity",
+              "environment.pressure",
+              "environment.co2",
+              "environment.pm25",
+              "environment.pm10",
+              "environment.co",
+              "environment.voc",
+              "environment.illuminance",
+              "environment.sound_level",
+              "environment.air_speed",
+              "environment.radiant_temperature",
+              "environment.differential_pressure",
+              "navigation.pose",
+              "navigation.route",
+              "energy.battery",
+              "actuator.temperature",
+              "diagnostics"
+            ]
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "modality": {
+            "enum": [
+              "image_frame",
+              "depth_frame",
+              "audio_chunk",
+              "imu_sample",
+              "joint_state",
+              "tactile_grid",
+              "wrench",
+              "range_array",
+              "point_cloud",
+              "scalar",
+              "vector3",
+              "quaternion",
+              "pose",
+              "route",
+              "diagnostic"
+            ]
+          },
+          "provenance": {
+            "enum": [
+              "measured",
+              "simulated",
+              "derived",
+              "inferred"
+            ]
+          },
+          "captured_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "frame_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "unit": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "value": {
+            "type": [
+              "number",
+              "integer",
+              "string",
+              "boolean",
+              "object",
+              "array",
+              "null"
+            ]
+          },
+          "media": {
+            "type": "object",
+            "required": [
+              "uri",
+              "mime_type",
+              "expires_at"
+            ],
+            "properties": {
+              "uri": {
+                "type": "string",
+                "format": "uri"
+              },
+              "mime_type": {
+                "type": "string",
+                "minLength": 3
+              },
+              "expires_at": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "byte_length": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "sha256": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[a-fA-F0-9]{64}$"
+              }
+            },
+            "additionalProperties": false
+          },
+          "quality": {
+            "type": "object",
+            "required": [
+              "status",
+              "age_ms",
+              "calibration_id"
+            ],
+            "properties": {
+              "status": {
+                "enum": [
+                  "valid",
+                  "degraded",
+                  "stale",
+                  "uncalibrated",
+                  "missing",
+                  "fault"
+                ]
+              },
+              "age_ms": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "calibration_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "uncertainty": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "confidence": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0,
+                "maximum": 1
+              },
+              "notes": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "vision.rgb"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "image_frame"
+                },
+                "frame_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "width",
+                    "height",
+                    "encoding"
+                  ],
+                  "properties": {
+                    "width": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "height": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "encoding": {
+                      "enum": [
+                        "image/jpeg",
+                        "image/png",
+                        "image/webp"
+                      ]
+                    },
+                    "frame_index": {
+                      "type": [
+                        "integer",
+                        "null"
+                      ],
+                      "minimum": 0
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "media"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "vision.depth"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "depth_frame"
+                },
+                "frame_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "width",
+                    "height",
+                    "encoding",
+                    "depth_unit"
+                  ],
+                  "properties": {
+                    "width": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "height": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "encoding": {
+                      "type": "string"
+                    },
+                    "depth_unit": {
+                      "enum": [
+                        "m",
+                        "mm"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "media"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "audio"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "audio_chunk"
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "sample_rate_hz",
+                    "channels",
+                    "encoding",
+                    "duration_ms"
+                  ],
+                  "properties": {
+                    "sample_rate_hz": {
+                      "type": "integer",
+                      "minimum": 8000
+                    },
+                    "channels": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 16
+                    },
+                    "encoding": {
+                      "type": "string"
+                    },
+                    "duration_ms": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "media"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "imu"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "imu_sample"
+                },
+                "frame_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "linear_acceleration_m_s2",
+                    "angular_velocity_rad_s"
+                  ],
+                  "properties": {
+                    "linear_acceleration_m_s2": {
+                      "type": "array",
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "angular_velocity_rad_s": {
+                      "type": "array",
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "orientation_xyzw": {
+                      "type": "array",
+                      "minItems": 4,
+                      "maxItems": 4,
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "linear_acceleration_covariance": {
+                      "type": "array",
+                      "minItems": 9,
+                      "maxItems": 9,
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "angular_velocity_covariance": {
+                      "type": "array",
+                      "minItems": 9,
+                      "maxItems": 9,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "joint_state"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "joint_state"
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "joint_names"
+                  ],
+                  "properties": {
+                    "joint_names": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string"
+                      },
+                      "uniqueItems": true
+                    },
+                    "position_rad": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "velocity_rad_s": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "effort_nm": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "tactile"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "tactile_grid"
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "rows",
+                    "columns",
+                    "values"
+                  ],
+                  "properties": {
+                    "rows": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "columns": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "values": {
+                      "type": "array",
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "value_unit": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "force_torque"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "wrench"
+                },
+                "frame_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "force_n",
+                    "torque_nm"
+                  ],
+                  "properties": {
+                    "force_n": {
+                      "type": "array",
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "torque_nm": {
+                      "type": "array",
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "range"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "range_array"
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "ranges_m",
+                    "angle_min_rad",
+                    "angle_increment_rad",
+                    "range_min_m",
+                    "range_max_m"
+                  ],
+                  "properties": {
+                    "ranges_m": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": [
+                          "number",
+                          "null"
+                        ],
+                        "minimum": 0
+                      }
+                    },
+                    "angle_min_rad": {
+                      "type": "number"
+                    },
+                    "angle_increment_rad": {
+                      "type": "number"
+                    },
+                    "range_min_m": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "range_max_m": {
+                      "type": "number",
+                      "exclusiveMinimum": 0
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "point_cloud"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "point_cloud"
+                },
+                "frame_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "point_count",
+                    "encoding"
+                  ],
+                  "properties": {
+                    "point_count": {
+                      "type": "integer",
+                      "minimum": 0
+                    },
+                    "encoding": {
+                      "type": "string"
+                    },
+                    "fields": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "media"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "navigation.pose"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "pose"
+                },
+                "frame_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "position_m",
+                    "orientation_xyzw"
+                  ],
+                  "properties": {
+                    "position_m": {
+                      "type": "array",
+                      "minItems": 3,
+                      "maxItems": 3,
+                      "items": {
+                        "type": "number"
+                      }
+                    },
+                    "orientation_xyzw": {
+                      "type": "array",
+                      "minItems": 4,
+                      "maxItems": 4,
+                      "items": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "navigation.route"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "route"
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "route_id",
+                    "waypoint_ids"
+                  ],
+                  "properties": {
+                    "route_id": {
+                      "type": "string"
+                    },
+                    "waypoint_ids": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "next_waypoint_id": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "enum": [
+                    "environment.air_temperature",
+                    "environment.relative_humidity",
+                    "environment.pressure",
+                    "environment.co2",
+                    "environment.pm25",
+                    "environment.pm10",
+                    "environment.co",
+                    "environment.voc",
+                    "environment.illuminance",
+                    "environment.sound_level",
+                    "environment.air_speed",
+                    "environment.radiant_temperature",
+                    "environment.differential_pressure",
+                    "energy.battery",
+                    "actuator.temperature"
+                  ]
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "scalar"
+                },
+                "value": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "channel": {
+                  "const": "diagnostics"
+                }
+              },
+              "required": [
+                "channel"
+              ]
+            },
+            "then": {
+              "properties": {
+                "modality": {
+                  "const": "diagnostic"
+                },
+                "value": {
+                  "type": "object",
+                  "required": [
+                    "severity",
+                    "code",
+                    "message"
+                  ],
+                  "properties": {
+                    "severity": {
+                      "enum": [
+                        "info",
+                        "warning",
+                        "error",
+                        "critical"
+                      ]
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    },
+    "synchronization": {
+      "type": "object",
+      "required": [
+        "clock_id",
+        "time_basis",
+        "synchronized",
+        "max_skew_ms",
+        "method"
+      ],
+      "properties": {
+        "clock_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "time_basis": {
+          "enum": [
+            "system_clock",
+            "simulation_clock",
+            "ros_time",
+            "ptp",
+            "ntp",
+            "unknown"
+          ]
+        },
+        "synchronized": {
+          "type": "boolean"
+        },
+        "max_skew_ms": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "session": {
+      "type": "object",
+      "required": [
+        "purpose",
+        "permissions",
+        "retention_seconds"
+      ],
+      "properties": {
+        "purpose": {
+          "enum": [
+            "simulation_inspection",
+            "robot_inspection",
+            "environmental_audit",
+            "debugging",
+            "other"
+          ]
+        },
+        "permissions": {
+          "type": "object",
+          "required": [
+            "video_capture",
+            "audio_capture",
+            "external_transmission",
+            "persistent_storage"
+          ],
+          "properties": {
+            "video_capture": {
+              "type": "object",
+              "required": [
+                "enabled",
+                "authorization_id",
+                "granted_by",
+                "granted_at",
+                "expires_at",
+                "scope"
+              ],
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "authorization_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "granted_by": {
+                  "enum": [
+                    "operator",
+                    "device_owner",
+                    "user",
+                    "policy",
+                    "none"
+                  ]
+                },
+                "granted_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "expires_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "scope": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "enabled": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "enabled"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "authorization_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "granted_by": {
+                        "enum": [
+                          "operator",
+                          "device_owner",
+                          "user"
+                        ]
+                      },
+                      "granted_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "expires_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "scope": {
+                        "minItems": 1
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "authorization_id": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "granted_at": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "expires_at": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              "additionalProperties": false
+            },
+            "audio_capture": {
+              "type": "object",
+              "required": [
+                "enabled",
+                "authorization_id",
+                "granted_by",
+                "granted_at",
+                "expires_at",
+                "scope"
+              ],
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "authorization_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "granted_by": {
+                  "enum": [
+                    "operator",
+                    "device_owner",
+                    "user",
+                    "policy",
+                    "none"
+                  ]
+                },
+                "granted_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "expires_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "scope": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "enabled": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "enabled"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "authorization_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "granted_by": {
+                        "enum": [
+                          "operator",
+                          "device_owner",
+                          "user"
+                        ]
+                      },
+                      "granted_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "expires_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "scope": {
+                        "minItems": 1
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "authorization_id": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "granted_at": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "expires_at": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              "additionalProperties": false
+            },
+            "external_transmission": {
+              "type": "object",
+              "required": [
+                "enabled",
+                "authorization_id",
+                "granted_by",
+                "granted_at",
+                "expires_at",
+                "scope"
+              ],
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "authorization_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "granted_by": {
+                  "enum": [
+                    "operator",
+                    "device_owner",
+                    "user",
+                    "policy",
+                    "none"
+                  ]
+                },
+                "granted_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "expires_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "scope": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "enabled": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "enabled"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "authorization_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "granted_by": {
+                        "enum": [
+                          "operator",
+                          "device_owner",
+                          "user"
+                        ]
+                      },
+                      "granted_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "expires_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "scope": {
+                        "minItems": 1
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "authorization_id": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "granted_at": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "expires_at": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              "additionalProperties": false
+            },
+            "persistent_storage": {
+              "type": "object",
+              "required": [
+                "enabled",
+                "authorization_id",
+                "granted_by",
+                "granted_at",
+                "expires_at",
+                "scope"
+              ],
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "authorization_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "granted_by": {
+                  "enum": [
+                    "operator",
+                    "device_owner",
+                    "user",
+                    "policy",
+                    "none"
+                  ]
+                },
+                "granted_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "expires_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "scope": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "enabled": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "enabled"
+                    ]
+                  },
+                  "then": {
+                    "properties": {
+                      "authorization_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "granted_by": {
+                        "enum": [
+                          "operator",
+                          "device_owner",
+                          "user"
+                        ]
+                      },
+                      "granted_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "expires_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "scope": {
+                        "minItems": 1
+                      }
+                    }
+                  },
+                  "else": {
+                    "properties": {
+                      "authorization_id": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "granted_at": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "expires_at": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
+                }
+              ],
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "retention_seconds": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
