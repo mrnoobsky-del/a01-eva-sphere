@@ -1,3 +1,10 @@
+## A-01 X v0.2.0 — Reality View (experimental)
+
+- [Open interactive HTML prototype](a01-x-v0.2.0/eva-sphere-a01-x-v020-reality-view.html)
+- [Russian documentation](a01-x-v0.2.0/README_RU.md) · [English](a01-x-v0.2.0/README.md) · [简体中文](a01-x-v0.2.0/README_ZH.md)
+- [Release notes](a01-x-v0.2.0/RELEASE-NOTES.md)
+- Status: static JavaScript validation passed. Browser/WebGL/device validation pending. PBR materials, Poly Haven CC0 HDRI, shadows, glass, escalators, moving people/robot and Reality View layers are included. This remains a conceptual procedural model with illustrative entities and no live engineering telemetry.
+
 ## A-01 X — v0.1.0 experimental technology line
 
 - [Russian overview](a01-x-v0.1.0/README_RU.md) · [Release notes](a01-x-v0.1.0/RELEASE-NOTES.md)

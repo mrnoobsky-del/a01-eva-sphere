@@ -1,0 +1,32 @@
+name: A-01 X v0.2.0 HTML check
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/a01-x-v0.2.0/**'
+      - '.github/workflows/a01-x-v020-html-check.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'releases/a01-x-v0.2.0/**'
+      - '.github/workflows/a01-x-v020-html-check.yml'
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Extract module script and check JavaScript syntax
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          source = Path('releases/a01-x-v0.2.0/eva-sphere-a01-x-v020-reality-view.html').read_text(encoding='utf-8')
+          match = re.search(r'<script type="module">(.*?)</script>', source, re.S)
+          if not match:
+              raise SystemExit('Module script not found')
+          Path('/tmp/a01-x-v020.mjs').write_text(match.group(1), encoding='utf-8')
+          PY
+          node --check /tmp/a01-x-v020.mjs
