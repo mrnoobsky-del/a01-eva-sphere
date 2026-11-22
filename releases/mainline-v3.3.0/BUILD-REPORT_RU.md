@@ -69,3 +69,13 @@ The original source marked these scripts as optional using `onerror="this.remove
 Open the HTML in a modern desktop browser with Wi-Fi/network disabled before launch. Confirm the 3D scene renders, move the camera, open and close an object, expand/collapse the sidebar, and inspect the browser console and Network panel. Record PASS/FAIL/NOT TESTED for every item in `ACCEPTANCE-MATRIX_RU.md`.
 
 Until this browser run is complete, this artifact is a statically validated offline candidate, not a fully browser-accepted release.
+
+## Дополнительная проверка runtime
+
+После статической проверки сам встроенный engine bundle был выполнен в изолированной среде JavaScript без DOM:
+- инициализация bundle: **PASS**;
+- `THREE.REVISION`: `185`;
+- `THREE.WebGLRenderer`, `Scene`, `PerspectiveCamera`, `BufferGeometry`, `MeshStandardMaterial`: доступны;
+- `OrbitControls`: доступен.
+
+Это подтверждает, что модуль Three.js собран и его экспорты создаются без ESM-загрузчика. Это по-прежнему не проверка создания WebGL-контекста, рендеринга canvas или пользовательского интерфейса в браузере.
