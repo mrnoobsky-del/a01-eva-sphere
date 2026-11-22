@@ -56,3 +56,15 @@ v3.3.0 определяет переход от онлайн-зависимог�
 - [Матрица офлайн-приёмки](ACCEPTANCE-MATRIX_RU.md)
 - [Аудит зависимостей v3.2.2](DEPENDENCY-AUDIT-v322_RU.md)
 - [Changelog](../../digital-twin/CHANGELOG_v330_offline.md)
+
+
+## Инструмент проверки зависимостей
+
+В репозитории добавлен статический анализатор [tools/offline-audit.mjs](../../tools/offline-audit.mjs) и его тест [tests/offline-audit-check.mjs](../../tests/offline-audit-check.mjs). Запуск:
+
+```bash
+node tools/offline-audit.mjs path/to/app.html audit-report.json
+node tests/offline-audit-check.mjs
+```
+
+Для исходной v3.2.2 аудит должен завершаться с FAIL, пока CDN import map и три относительных companion-скрипта не устранены или не встроены. Сетевой вызов Евы фиксируется как online-only endpoint и не должен блокировать локальное ядро.
