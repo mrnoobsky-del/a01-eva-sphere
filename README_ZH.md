@@ -107,3 +107,11 @@ v3.7.0 保留包含 AIR-01 的 v3.6.0，并在集成导航中增加“舒适”�
 - [参考资料](releases/a01-x-v0.3.0/REFERENCES.md) · [JSON Schema](releases/a01-x-v0.3.0/riddle.schema.json) · [发布说明](releases/a01-x-v0.3.0/RELEASE-NOTES_ZH.md)
 
 v0.3.0 是纯文档研究规范，说明球体如何减少可避免的人体负担并支持恢复；尚未连接真实建筑设备，也没有证明 13 小时的实体舒适性。
+
+
+## A-01 X 感知桥接研究
+
+- [第一人称视觉与传感器融合架构](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
+- [观测数据 JSON Schema](schemas/a01-x-sensory-observation.schema.json) · [示例](schemas/a01-x-sensory-observation.example.json)
+
+这是架构研究，不是已连接的机器人运行时。当前公开仓库中没有 Android-01 v0.3.5 运行包或实时感知端点。
