@@ -1,5 +1,12 @@
 # Release index
 
+## A-01 main website line v3.1.8 — Spatial Clearance
+
+- [Release overview (RU)](mainline-v3.1.8/README_RU.md)
+- [Spatial coordination and clash audit (RU)](mainline-v3.1.8/SPATIAL-COORDINATION-AND-CLASH-AUDIT_RU.md)
+- [Digital twin documentation: RU](../digital-twin/README_RU_v318.md) · [EN](../digital-twin/README_v318.md) · [简体中文](../digital-twin/README_ZH_v318.md) · [Changelog](../digital-twin/CHANGELOG_v318.md)
+- Status: prepared spatial-clearance update based on the live v3.1.6 website scene and v3.1.7 Android-01 integration. Local syntax, route and selected-interface audit checks pass; browser/WebGL and physical verification remain open. Not deployed to uCoz.
+
 ## A-01 main website line v3.1.7 — Android-01 Agent Runtime
 
 - [Release overview (RU)](mainline-v3.1.7/README_RU.md)
