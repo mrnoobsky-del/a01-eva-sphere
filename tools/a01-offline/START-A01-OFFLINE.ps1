@@ -1,7 +1,20 @@
 $ErrorActionPreference = 'Stop'
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 & (Join-Path $Root 'SETUP-A01-OFFLINE.ps1')
-if (-not $?) { throw 'Local 3D engine setup failed.' }
+# PowerShell scripts do not set $LASTEXITCODE. Verify the actual downloaded files.
+$Required = @(
+    @{ Path = 'vendor/three/build/three.module.js'; Min = 100000 },
+    @{ Path = 'vendor/three/build/three.core.js'; Min = 100000 },
+    @{ Path = 'vendor/three/examples/jsm/controls/OrbitControls.js'; Min = 10000 }
+)
+foreach ($Asset in $Required) {
+    $Resolved = Join-Path $Root $Asset.Path
+    if (!(Test-Path -LiteralPath $Resolved -PathType Leaf)) { throw ('Required local engine file missing: ' + $Asset.Path) }
+    if ((Get-Item -LiteralPath $Resolved).Length -lt $Asset.Min) { throw ('Required local engine file is incomplete: ' + $Asset.Path) }
+}
+$CoreText = [IO.File]::ReadAllText((Join-Path $Root 'vendor/three/build/three.core.js'))
+if (!$CoreText.Contains("const REVISION = '185'")) { throw 'The local Three.js core is not revision 185.' }
+Write-Host 'Local Three.js files verified.' -ForegroundColor Green
 $Entry = 'eva-sphere-a01-v320-offline-engine.html'
 $Port = 8765
 $Listener = $null
