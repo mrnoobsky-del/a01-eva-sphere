@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "0.1.0",
+  "id": "a01-agent-eye-camera",
+  "name": "A-01 AgentEyeCamera",
+  "purpose": "Independent first-person camera attached to a supplied humanoid head transform",
+  "integration": {
+    "api": "window.EVA_SPHERE",
+    "headReadyEvent": "a01-agent:head-ready",
+    "headObjectContract": "THREE.Object3D or THREE.Bone",
+    "eyeCameraFrame": "eye_camera_optical",
+    "spectatorCameraIndependent": true,
+    "renderer": "dedicated WebGLRenderer and canvas",
+    "defaultResolution": [
+      640,
+      360
+    ],
+    "defaultFps": 6,
+    "maxFps": 15
+  },
+  "permissions": {
+    "defaultVideoCapture": false,
+    "defaultAudioCapture": false,
+    "defaultExternalTransmission": false,
+    "defaultPersistentStorage": false,
+    "localStreamScope": "local_eye_stream",
+    "requiresExpiringAuthorization": true
+  },
+  "capabilities": {
+    "attachesToHeadTransform": true,
+    "localCanvasStream": true,
+    "localStillFrameBlob": true,
+    "externalUpload": false,
+    "aiVisionProvider": false,
+    "physicalCameraDriver": false,
+    "ros2Adapter": false,
+    "actuatorControl": false
+  },
+  "validation": {
+    "automatedTests": "tests/agent-eye-camera.test.cjs",
+    "browserFixture": "agent-eye-camera-preview.html",
+    "status": "adapter-tests-pass; browser-webgl-and-real-agent-rig-pending"
+  }
+}
