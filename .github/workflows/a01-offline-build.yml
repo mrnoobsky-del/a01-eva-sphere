@@ -1,0 +1,59 @@
+name: A-01 Offline Build and Acceptance
+
+on:
+  push:
+    branches:
+      - feat/a01-v330-offline-single-html
+  pull_request:
+    branches:
+      - fix/mainline-v322-single-html-open
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install pinned build dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build single-file offline HTML
+        run: npm run build:offline
+
+      - name: Run static offline checks
+        run: |
+          npm run test:offline:static
+          node tools/offline-audit.mjs dist/eva-sphere-a01-v330-offline.html dist/offline-audit-report.json
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run real browser acceptance with network disabled
+        run: npm run test:offline:browser
+
+      - name: Package artifact
+        run: |
+          cp package-lock.json dist/
+          cp LICENSE-THIRD-PARTY.txt dist/
+          cd dist
+          zip -9 A01-v3.3.0-Offline-Single-HTML.zip eva-sphere-a01-v330-offline.html eva-sphere-a01-v330-offline.html.manifest.json offline-audit-report.json package-lock.json LICENSE-THIRD-PARTY.txt
+
+      - name: Upload offline build
+        uses: actions/upload-artifact@v4
+        with:
+          name: A01-v3.3.0-Offline-Single-HTML
+          path: dist/A01-v3.3.0-Offline-Single-HTML.zip
+          if-no-files-found: error
+          retention-days: 30
