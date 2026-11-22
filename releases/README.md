@@ -100,3 +100,10 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Release overview — RU](a01-x-sensory-bridge-v0.2/README_RU.md) · [EN](a01-x-sensory-bridge-v0.2/README.md) · [简体中文](a01-x-sensory-bridge-v0.2/README_ZH.md)
 - [Architecture](../architecture/A01-X-LIVING-PERCEPTION-LOOP-v0.2.md) · [Observation schema](../schemas/a01-x-sensory-observation-v0.2.schema.json) · [Perception event schema](../schemas/a01-x-perception-event-v0.2.schema.json)
 - Status: documentation and integration-contract release. No physical Android-01, sensor hardware or live endpoint is connected. Synthetic examples are labelled as simulation.
+
+
+## A-01 X v0.3.6 — Android-01 AgentEyeCamera
+
+- [Release overview (RU)](a01-x-v0.3.6/README_RU.md) · [Release notes (EN)](a01-x-v0.3.6/RELEASE-NOTES.md)
+- [AgentEyeCamera source](a01-x-v0.3.6/agent-eye-camera.js) · [Integration notes (RU)](a01-x-v0.3.6/SENSORY-BRIDGE-INTEGRATION_RU.md) · [Test harness](a01-x-v0.3.6/agent-eye-camera-check.mjs)
+- Status: AgentEyeCamera is integrated with the actual head Bone in the v0.3.6 package. The repository release page publishes the camera module, integration contract and tests; the complete runnable v0.3.6 package is attached separately in the conversation. Browser/WebGL acceptance remains pending; all eye frames are simulated.
