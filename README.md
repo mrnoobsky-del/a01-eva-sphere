@@ -190,3 +190,12 @@ v3.7.0 preserves v3.6.0 with AIR-01 and adds a Comfort entry to the integrated n
 - [Architectural study](architecture/A01-AXIOM-INTERIOR-BLOCKOUT-v0.1.md)
 
 A standalone Three.js companion scene for the v3.7.0 digital twin. It explores a central atrium, ring galleries, public/residential/family zones, bridges, illustrative lift shafts and service routes. This module is linked from the digital-twin index but is not merged into the v3.7.0 main scene. Scene units are uncalibrated; no engineering or safety calculations are claimed.
+
+
+## A-01 X v0.3.0 — Sphere Intelligence and Human Wellbeing
+
+- [Release overview (EN)](releases/a01-x-v0.3.0/README.md) · [RU](releases/a01-x-v0.3.0/README_RU.md) · [简体中文](releases/a01-x-v0.3.0/README_ZH.md)
+- [Riddle-driven design method](releases/a01-x-v0.3.0/DESIGN-METHOD.md) · [Sphere Intelligence specification](releases/a01-x-v0.3.0/SPHERE-INTELLIGENCE-SPEC.md) · [13-hour test protocol](releases/a01-x-v0.3.0/13-HOUR-TEST.md)
+- [References and standards](releases/a01-x-v0.3.0/REFERENCES.md) · [Riddle JSON Schema](releases/a01-x-v0.3.0/riddle.schema.json) · [Release notes](releases/a01-x-v0.3.0/RELEASE-NOTES.md)
+
+v0.3.0 is a documentation-only research specification. It defines how the Sphere should reduce avoidable human burden and support recovery; it does not connect real building equipment or prove 13-hour comfort.
