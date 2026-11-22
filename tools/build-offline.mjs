@@ -93,7 +93,13 @@ for (const fileName of optionalModules) {
 }
 
 const safeBundle = engineBundle.replace(/<\/script/gi, '<\\/script');
-const engineScript = '<script id="a01-offline-engine" data-three-version="0.185.0">\n' + safeBundle + '\n</script>\n';
+const threeLicensePath = path.resolve(process.cwd(), 'node_modules/three/LICENSE');
+if (!fs.existsSync(threeLicensePath)) throw new Error('Three.js LICENSE file is missing from installed dependency');
+const threeLicense = fs.readFileSync(threeLicensePath, 'utf8');
+const escapeHtml = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+const licenseTemplate = '<template id="a01-third-party-notices"><pre>' + escapeHtml('Three.js r185 / OrbitControls — MIT License\\n\\n' + threeLicense) + '</pre></template>\\n';
+html = html.replace('</body>', licenseTemplate + '</body>');
+const engineScript = '<script id="a01-offline-engine" data-three-version="0.185.0">\\n' + safeBundle + '\\n</script>\\n';
 const moduleOpenPattern = /<script\b(?=[^>]*\btype=["']module["'])[^>]*>/i;
 if (!moduleOpenPattern.test(html)) throw new Error('Main module opening tag disappeared');
 html = html.replace(moduleOpenPattern, match => engineScript + match);
