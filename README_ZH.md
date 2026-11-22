@@ -1,3 +1,12 @@
+
+
+## A-01 v3.3.0 离线架构
+
+- [架构文档 RU](digital-twin/README_RU_v330_offline.md) · [EN](digital-twin/README_v330_offline.md) · [简体中文](digital-twin/README_ZH_v330_offline.md)
+- [发布计划](releases/mainline-v3.3.0/README_RU.md) · [离线验收矩阵](releases/mainline-v3.3.0/ACCEPTANCE-MATRIX_RU.md)
+- [更新日志](digital-twin/CHANGELOG_v330_offline.md)
+
+这是架构文档阶段，并非已发布的可执行离线版本。v3.2.2 仍依赖网络；真正的 Offline Edition 必须在启动前断网的 file:// 环境中通过测试。
 # A-01 — 伊娃之球
 
 ## 当前网站发布版本线

@@ -1,3 +1,18 @@
+# A-01 v3.3.0 Offline Edition
+
+- [Prepared v3.3.0 offline HTML candidate](../releases/mainline-v3.3.0/eva-sphere-a01-v330-offline.html)
+- [v3.3.0 build report (RU)](../releases/mainline-v3.3.0/BUILD-REPORT_RU.md)
+- [v3.3.0 build manifest](../releases/mainline-v3.3.0/BUILD-MANIFEST.json)
+
+- [Architecture RU](../digital-twin/README_RU_v330_offline.md) · [EN](../digital-twin/README_v330_offline.md) · [简体中文](../digital-twin/README_ZH_v330_offline.md)
+- [Release plan (RU)](../releases/mainline-v3.3.0/README_RU.md)
+- [Offline acceptance matrix (RU)](../releases/mainline-v3.3.0/ACCEPTANCE-MATRIX_RU.md)
+- [Dependency audit of v3.2.2 (RU)](../releases/mainline-v3.3.0/DEPENDENCY-AUDIT-v322_RU.md)
+- [Changelog](../digital-twin/CHANGELOG_v330_offline.md)
+- [Static offline audit tool](../tools/offline-audit.mjs) · [Audit tool test](../tests/offline-audit-check.mjs)
+
+**Status:** architecture specification only; no fully offline executable artifact has passed browser acceptance yet.
+
 # Documentation index
 
 - [A-01 v3.1.9 — immersive object study (RU)](../digital-twin/README_RU_v319.md) · [EN](../digital-twin/README_v319.md) · [简体中文](../digital-twin/README_ZH_v319.md)

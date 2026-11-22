@@ -1,0 +1,43 @@
+{
+  "product": "A-01 Offline Edition",
+  "version": "3.3.0",
+  "profile": "single-html",
+  "source": "v3.2.2 baseline",
+  "three": "0.185.0",
+  "orbitControls": "0.185.0",
+  "engineBundleBytes": 2129274,
+  "htmlBytes": 3717766,
+  "embeddedKnowledgePages": true,
+  "optionalModulesMissing": [
+    "companion-motion.js",
+    "companion-ai.js",
+    "companions.js"
+  ],
+  "networkOptional": [
+    "Eva chat through Cloudflare Worker",
+    "external web and payment links"
+  ],
+  "requiredRuntimeNetworkDependencies": 0,
+  "verification": "Static assembly checks only; browser file:// startup with internet disconnected is NOT TESTED.",
+  "artifactPath": "releases/mainline-v3.3.0/eva-sphere-a01-v330-offline.html",
+  "gitBlobSha1": "3d56424ec6d1a073bf2d34a607312b5e47409595",
+  "buildAssembly": "Three.js r185 core + module exports + OrbitControls were assembled into isolated closures; app module imports are redirected to the in-page engine object.",
+  "staticChecks": {
+    "engineScriptSyntax": "PASS",
+    "mainModuleSyntax": "PASS",
+    "remainingEngineImports": 0,
+    "remainingEngineExports": 0,
+    "scriptSrcTags": 0,
+    "importMapPresent": false,
+    "threeCdnReferencePresent": false,
+    "duplicateDomIds": 0,
+    "uniqueDomIds": 319,
+    "engineEvaluation": "PASS in isolated V8 runtime",
+    "threeRevision": "185",
+    "exportedWebGLRenderer": true,
+    "exportedOrbitControls": true
+  },
+  "browserAcceptance": "NOT TESTED",
+  "deployment": "Not deployed to uCoz",
+  "browserWebGLRendering": "NOT TESTED"
+}

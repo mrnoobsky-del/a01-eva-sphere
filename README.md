@@ -1,3 +1,12 @@
+
+
+## A-01 v3.3.0 offline architecture
+
+- [Architecture RU](digital-twin/README_RU_v330_offline.md) · [EN](digital-twin/README_v330_offline.md) · [简体中文](digital-twin/README_ZH_v330_offline.md)
+- [Release plan](releases/mainline-v3.3.0/README_RU.md) · [Offline acceptance matrix](releases/mainline-v3.3.0/ACCEPTANCE-MATRIX_RU.md)
+- [Changelog](digital-twin/CHANGELOG_v330_offline.md)
+
+This is an architecture milestone, not a shipped executable offline build. v3.2.2 remains online-dependent; the actual Offline Edition must pass a file:// launch with the network disconnected before startup.
 # A-01 — The Sphere of Eva
 
 ## Current live website release line
