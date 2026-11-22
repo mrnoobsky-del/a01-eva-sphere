@@ -5,6 +5,7 @@
 - [Offline acceptance matrix (RU)](../releases/mainline-v3.3.0/ACCEPTANCE-MATRIX_RU.md)
 - [Dependency audit of v3.2.2 (RU)](../releases/mainline-v3.3.0/DEPENDENCY-AUDIT-v322_RU.md)
 - [Changelog](../digital-twin/CHANGELOG_v330_offline.md)
+- [Static offline audit tool](../tools/offline-audit.mjs) · [Audit tool test](../tests/offline-audit-check.mjs)
 
 **Status:** architecture specification only; no fully offline executable artifact has passed browser acceptance yet.
 
