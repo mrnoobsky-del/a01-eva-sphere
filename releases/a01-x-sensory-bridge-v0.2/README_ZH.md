@@ -30,3 +30,14 @@ v0.1 定义了感知通道和总体架构。v0.2 进一步规定如何把这些�
 本版本没有连接真实摄像头、麦克风、IMU、Android-01 传感器、执行器或楼宇管理系统。示例数据均为明确标记的模拟数据。实际实现还需要 Android-01 的准确运行时代码、硬件接口和独立的安全测试计划。
 
 本架构保留本地安全控制和人工审批。AI 的观察不是原始传感器测量，AI 建议也不是执行器命令。
+
+## 验证 Schema 与示例
+
+在仓库根目录运行：
+
+```bash
+python -m pip install -r requirements-dev.txt
+python tools/validate-sensory-bridge-v0.2.py
+```
+
+验证器使用 JSON Schema Draft 2020-12，并检查两个示例、观测与传感器/坐标系的引用、媒体链接有效期、音频权限和事件序列。发布文件发生变化时，GitHub Actions 会运行相同检查。
