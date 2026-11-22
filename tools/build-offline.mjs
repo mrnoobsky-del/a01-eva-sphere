@@ -9,7 +9,6 @@ if (!sourceArg || !outputArg) {
   console.error('Usage: node tools/build-offline.mjs <source.html> <output.html>');
   process.exit(2);
 }
-
 const sourcePath = path.resolve(sourceArg);
 const outputPath = path.resolve(outputArg);
 if (!fs.existsSync(sourcePath)) throw new Error('Source HTML not found: ' + sourcePath);
@@ -40,7 +39,6 @@ const engineBuild = await build({
   write: false,
   metafile: true
 });
-
 const engineBundle = engineBuild.outputFiles.find(file => file.path.endsWith('.js'))?.text;
 if (!engineBundle) throw new Error('esbuild did not produce the offline engine bundle');
 
@@ -48,14 +46,14 @@ const scriptMatches = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g
 const appModule = scriptMatches.find(match =>
   /\btype\s*=\s*["']module["']/i.test(match[1]) &&
   match[2].includes("await import('three')") &&
-  match[2].includes("OrbitControls")
+  match[2].includes('OrbitControls')
 );
 if (!appModule) throw new Error('Could not identify the A-01 main 3D module');
 
 const originalModule = appModule[2];
 const threeImportPattern = /const\s+THREE\s*=\s*await\s+import\(['"]three['"]\)\s*;\s*const\s*\{\s*OrbitControls\s*\}\s*=\s*await\s+import\(['"]three\/addons\/controls\/OrbitControls\.js['"]\)\s*;/;
 if (!threeImportPattern.test(originalModule)) {
-  throw new Error('Expected Three.js / OrbitControls import pair was not found exactly once');
+  throw new Error('Expected Three.js / OrbitControls import pair was not found');
 }
 const rewrittenModule = originalModule.replace(
   threeImportPattern,
@@ -64,24 +62,21 @@ const rewrittenModule = originalModule.replace(
 if (/\bimport\s*\(/.test(rewrittenModule) || /\bimport\s+[\s\S]{0,100}?\sfrom\s*['"]/.test(rewrittenModule)) {
   throw new Error('A runtime import remains in the main module after rewriting');
 }
-
 html = html.replace(appModule[0], appModule[0].replace(originalModule, rewrittenModule));
 
 const importMapPattern = /<script\s+type=["']importmap["']\s*>[\s\S]*?<\/script>/i;
 if (!importMapPattern.test(html)) throw new Error('Expected Three.js import map was not found');
 html = html.replace(importMapPattern, '<!-- Import map removed: runtime is bundled below. -->');
 
-const optionalModules = [
-  'companion-motion.js',
-  'companion-ai.js',
-  'companions.js'
-];
+const optionalModules = ['companion-motion.js', 'companion-ai.js', 'companions.js'];
 const optionalMissing = [];
-const escapeRegExp = value => value.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\const optionalMissing = [];
-for (const fileName');
 for (const fileName of optionalModules) {
   const relativeSrc = './modules/living-world/' + fileName;
-  const tagPattern = new RegExp('<script\\b(?=[^>]*\\bsrc=["\\']' + relativeSrc.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&') + '["\\'])[^>]*>\\s*<\\/script>', 'i');
+  const escapedSrc = relativeSrc.replaceAll('.', '\\.');
+  const tagPattern = new RegExp(
+    "<script\\b(?=[^>]*\\bsrc=[\"']" + escapedSrc + "[\"'])[^>]*>\\s*<\\/script>",
+    'i'
+  );
   const candidates = [
     path.resolve(path.dirname(sourcePath), 'modules/living-world', fileName),
     path.resolve(process.cwd(), 'modules/living-world', fileName)
@@ -89,10 +84,11 @@ for (const fileName of optionalModules) {
   const modulePath = candidates.find(candidate => fs.existsSync(candidate));
   if (modulePath) {
     const contents = fs.readFileSync(modulePath, 'utf8');
-    html = html.replace(tagPattern, '<script data-a01-inlined-module="' + fileName + '">' + contents.replace(/<\/script/gi, '<\\/script') + '</script>');
+    const safeContents = contents.replace(/<\/script/gi, '<\\/script');
+    html = html.replace(tagPattern, '<script data-a01-inlined-module="' + fileName + '">' + safeContents + '</script>');
   } else {
     optionalMissing.push(fileName);
-    html = html.replace(tagPattern, '<!-- Optional Living World module not present in source package: ' + fileName + ' -->');
+    html = html.replace(tagPattern, '<!-- Optional Living World module unavailable in source package: ' + fileName + ' -->');
   }
 }
 
@@ -121,6 +117,7 @@ if (/<script\b[^>]*\bsrc=["']\.\/modules\/living-world\//i.test(html)) {
 if (/\bimport\s*\(\s*['"]three(?:\/|['"])/.test(rewrittenModule)) {
   throw new Error('Three.js dynamic import remains');
 }
+
 fs.writeFileSync(outputPath, html, 'utf8');
 const outputSha256 = createHash('sha256').update(html).digest('hex');
 const engineSha256 = createHash('sha256').update(engineBundle).digest('hex');
@@ -146,8 +143,8 @@ const manifest = {
     'Eva Cloudflare Worker chat: https://offvibe-bot.mrnoobsky.workers.dev/site',
     'outbound website/payment links require connectivity when opened'
   ],
-  mandatoryRuntimeNetworkRequests: 0,
-  note: 'The builder creates a self-contained Three.js runtime. Real file:// browser acceptance with the network disabled is required before claiming the build is fully verified.'
+  requiredRuntimeNetworkRequests: 0,
+  note: 'Real file:// browser acceptance with the network disabled is required before claiming full offline verification.'
 };
 fs.writeFileSync(outputPath + '.manifest.json', JSON.stringify(manifest, null, 2) + '\n');
 console.log(JSON.stringify(manifest, null, 2));
