@@ -1,0 +1,297 @@
+{
+  "schema": "a01x.sensory.v0.2",
+  "agent_id": "android-01",
+  "session_id": "sim-inspection-2026-11-22-001",
+  "sequence": 1,
+  "captured_at": "2026-11-22T03:30:00Z",
+  "source_mode": "simulation",
+  "coordinate_frames": [
+    {
+      "id": "world",
+      "parent": null,
+      "convention": "ros_rep_103_body",
+      "transform_to_parent": {
+        "translation_m": [
+          0,
+          0,
+          0
+        ],
+        "rotation_xyzw": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "base_link",
+      "parent": "world",
+      "convention": "ros_rep_103_body",
+      "transform_to_parent": {
+        "translation_m": [
+          0,
+          0,
+          0
+        ],
+        "rotation_xyzw": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "head_link",
+      "parent": "base_link",
+      "convention": "ros_rep_103_body",
+      "transform_to_parent": {
+        "translation_m": [
+          0,
+          0,
+          1.55
+        ],
+        "rotation_xyzw": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "eye_camera_optical",
+      "parent": "head_link",
+      "convention": "ros_optical",
+      "transform_to_parent": {
+        "translation_m": [
+          0.08,
+          0,
+          0.04
+        ],
+        "rotation_xyzw": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "id": "zone-L01",
+      "parent": "world",
+      "convention": "ros_rep_103_body",
+      "transform_to_parent": {
+        "translation_m": [
+          2.1,
+          0,
+          0
+        ],
+        "rotation_xyzw": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "eye-camera-main",
+      "sensor_class": "camera",
+      "mount": "agent_head",
+      "frame_id": "eye_camera_optical",
+      "location": {
+        "sphere_id": "A-01",
+        "level_id": "L01",
+        "zone_id": "atrium-east",
+        "room_id": null,
+        "asset_id": null
+      },
+      "calibration": {
+        "status": "calibrated",
+        "calibration_id": "sim-camera-cal-01",
+        "calibrated_at": "2026-11-22T03:00:00Z",
+        "due_at": null,
+        "artifact_ref": null
+      },
+      "health": "ok"
+    },
+    {
+      "source_id": "head-imu-sim",
+      "sensor_class": "imu",
+      "mount": "agent_head",
+      "frame_id": "head_link",
+      "location": {
+        "sphere_id": "A-01",
+        "level_id": "L01",
+        "zone_id": "atrium-east",
+        "room_id": null,
+        "asset_id": null
+      },
+      "calibration": {
+        "status": "not_applicable",
+        "calibration_id": null,
+        "calibrated_at": null,
+        "due_at": null,
+        "artifact_ref": null
+      },
+      "health": "ok"
+    },
+    {
+      "source_id": "zone-temp-sim",
+      "sensor_class": "building_sensor",
+      "mount": "zone",
+      "frame_id": "zone-L01",
+      "location": {
+        "sphere_id": "A-01",
+        "level_id": "L01",
+        "zone_id": "atrium-east",
+        "room_id": null,
+        "asset_id": "TEMP-L01-01"
+      },
+      "calibration": {
+        "status": "not_applicable",
+        "calibration_id": null,
+        "calibrated_at": null,
+        "due_at": null,
+        "artifact_ref": null
+      },
+      "health": "ok"
+    }
+  ],
+  "observations": [
+    {
+      "channel": "vision.rgb",
+      "source_id": "eye-camera-main",
+      "modality": "image_frame",
+      "provenance": "simulated",
+      "captured_at": "2026-11-22T03:30:00Z",
+      "frame_id": "eye_camera_optical",
+      "unit": null,
+      "value": {
+        "width": 1280,
+        "height": 720,
+        "encoding": "image/jpeg",
+        "frame_index": 1
+      },
+      "media": {
+        "uri": "https://media.example.invalid/session/sim-inspection-2026-11-22-001/frame-1.jpg",
+        "mime_type": "image/jpeg",
+        "expires_at": "2026-11-22T03:35:00Z",
+        "byte_length": 45678,
+        "sha256": null
+      },
+      "quality": {
+        "status": "valid",
+        "age_ms": 0,
+        "calibration_id": "sim-camera-cal-01",
+        "uncertainty": null,
+        "confidence": 1,
+        "notes": "Synthetic render; not a physical camera frame."
+      }
+    },
+    {
+      "channel": "imu",
+      "source_id": "head-imu-sim",
+      "modality": "imu_sample",
+      "provenance": "simulated",
+      "captured_at": "2026-11-22T03:30:00Z",
+      "frame_id": "head_link",
+      "unit": null,
+      "value": {
+        "linear_acceleration_m_s2": [
+          0,
+          0,
+          9.81
+        ],
+        "angular_velocity_rad_s": [
+          0,
+          0,
+          0
+        ],
+        "orientation_xyzw": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "quality": {
+        "status": "valid",
+        "age_ms": 0,
+        "calibration_id": null,
+        "uncertainty": null,
+        "confidence": 1,
+        "notes": "Synthetic stationary IMU sample."
+      }
+    },
+    {
+      "channel": "environment.air_temperature",
+      "source_id": "zone-temp-sim",
+      "modality": "scalar",
+      "provenance": "simulated",
+      "captured_at": "2026-11-22T03:30:00Z",
+      "frame_id": "zone-L01",
+      "unit": "Cel",
+      "value": 22.4,
+      "quality": {
+        "status": "valid",
+        "age_ms": 0,
+        "calibration_id": null,
+        "uncertainty": 0.1,
+        "confidence": 1,
+        "notes": "Synthetic zone temperature; not live telemetry."
+      }
+    }
+  ],
+  "synchronization": {
+    "clock_id": "simulation-clock",
+    "time_basis": "simulation_clock",
+    "synchronized": true,
+    "max_skew_ms": 0,
+    "method": "single deterministic simulation clock"
+  },
+  "session": {
+    "purpose": "simulation_inspection",
+    "permissions": {
+      "video_capture": {
+        "enabled": true,
+        "authorization_id": "sim-session-authority-001",
+        "granted_by": "operator",
+        "granted_at": "2026-11-22T03:29:00Z",
+        "expires_at": "2026-11-22T03:35:00Z",
+        "scope": [
+          "synthetic eye-camera render only"
+        ]
+      },
+      "audio_capture": {
+        "enabled": false,
+        "authorization_id": null,
+        "granted_by": "none",
+        "granted_at": null,
+        "expires_at": null,
+        "scope": []
+      },
+      "external_transmission": {
+        "enabled": false,
+        "authorization_id": null,
+        "granted_by": "none",
+        "granted_at": null,
+        "expires_at": null,
+        "scope": []
+      },
+      "persistent_storage": {
+        "enabled": false,
+        "authorization_id": null,
+        "granted_by": "none",
+        "granted_at": null,
+        "expires_at": null,
+        "scope": []
+      }
+    },
+    "retention_seconds": 0
+  }
+}
