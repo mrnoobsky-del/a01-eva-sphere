@@ -1,0 +1,36 @@
+[
+  {
+    "id": "R-001",
+    "question": "Why can an occupant become tired even when the route is step-free and walking distance is low?",
+    "why_it_matters": "A-01 must reduce avoidable load, not merely count steps.",
+    "domain": ["movement", "climate", "acoustics", "light", "rest_mind", "nourishment"],
+    "affected_zones": ["atrium", "galleries", "rest-rooms", "food-zones"],
+    "affected_profiles": ["sedentary-visitor", "sensory-sensitive-visitor", "maintenance-worker"],
+    "known_facts": ["Fatigue is multifactorial; a step count is not a complete fatigue measure."],
+    "unknowns": ["Final geometry", "occupancy schedule", "site climate", "measured environmental ranges"],
+    "hypotheses": [
+      {
+        "statement": "Thermal, sensory, postural and recovery factors may cause avoidable burden even when walking is limited.",
+        "falsification": "Compare the scenario under controlled environmental and recovery options; reject the hypothesis if the observed burden indicators do not change and alternative causes explain the result.",
+        "evidence": ["ASHRAE 55-2023", "WHO Environmental Noise Guidelines"]
+      }
+    ],
+    "requirement": "Provide accessible seating, posture choice, hydration, quiet areas and zone-level environmental monitoring along the normal visitor network.",
+    "safety_constraints": ["Do not infer a medical condition.", "Do not use covert biometric or emotion recognition."],
+    "verification": {
+      "method": "Run synthetic profiles through the 13-hour occupancy scenario, then validate sensor placement and environment after a physical site exists.",
+      "pass_criteria": ["Recovery locations remain reachable by a step-free route.", "Environmental readings meet the project limits derived from applicable standards."],
+      "fail_criteria": ["A required service has no accessible route.", "The scenario reports comfort using only step count or a single composite score."],
+      "test_artifacts": ["A01X-HWT-13H simulation report"]
+    },
+    "side_effects": ["Seating can obstruct circulation if poorly placed.", "More HVAC operation may increase energy use.", "Feedback collection must remain voluntary and privacy-preserving."],
+    "evidence_level": "T0",
+    "status": "hypothesis",
+    "owner": null,
+    "references": [
+      "https://www.ashrae.org/technical-resources/bookstore/standard-55-thermal-environmental-conditions-for-human-occupancy",
+      "https://www.who.int/publications/i/item/9789289053563"
+    ],
+    "decision_log": []
+  }
+]
