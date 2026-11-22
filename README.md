@@ -48,7 +48,19 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 - `media/` — visual material and credits.
 - `releases/` — versioned project files.
 
-## Current digital workspace
+## Current primary digital-twin build
+
+- **A-01 v4.0.0 — Primary Architecture Baseline:** [Open primary HTML](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
+- [Russian documentation](digital-twin/README_RU_v400.md) · [English documentation](digital-twin/README_v400.md) · [Changelog](digital-twin/CHANGELOG_v400.md)
+- [Russian architecture note](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](releases/v4.0.0/RELEASE-NOTES_RU.md)
+
+v4.0.0 preserves the integrated v3.1.6 workspace line while rebuilding the architecture of the radial modules, door openings, vestibules and human circulation path. The model has five levels and 60 radial modules. This is the primary build in the GitHub main branch; it does not mean that the physical Sphere has been built or commissioned.
+
+As of 22 November 2026, the public [evasphere.usite.pro](https://evasphere.usite.pro/) page still reports v3.1.6 metadata. GitHub publication does not automatically update uCoz. Static checks for v4.0.0 passed; browser/WebGL acceptance and engineering verification remain outstanding.
+
+Preserved earlier lines: [v3.8.0 — standalone Axiom-inspired blockout](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html), [v3.7.0 — Human Comfort Engineering](digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html), [v3.1.2 — serviceable LED sky](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html), and the [v2.1.0 stable archive](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html). These snapshots are preserved and are not overwritten by v4.0.0.
+
+
 
 The repository preserves **A-01 v2.1.0** as the stable digital-twin baseline. The integrated experimental line has advanced to **A-01 v3.1.2**, combining the 144-candidate modular shell, waste-service concepts, underground B1 data-centre concept, serviceable interior LED sky and corrected first-arrival sequence. The separate **A-01 v2.0.13** archive in releases/v2.0.13/ is an integrated /evasphere/ site-workspace snapshot and belongs to a different version track.
 
@@ -183,7 +195,7 @@ The document covers continuous step-free routes across all levels, lifts and esc
 v3.7.0 preserves v3.6.0 with AIR-01 and adds a Comfort entry to the integrated navigation. The embedded workspace covers step-free circulation, lifts and supplementary escalators, universal toilets and showers, family care, separated water/waste streams, floor/ceiling concepts and evacuation. Its vertical section is an interactive SVG schematic, not new Three.js spatial geometry; calculations, scale calibration and real-equipment validation remain outstanding. The v3.6.0 source remains preserved separately.
 
 
-## A-01 v3.8.0 — Axiom-inspired Interior Blockout
+## A-01 v3.8.0 — standalone companion research module
 
 - [Open interactive 3D blockout](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html)
 - [Russian](digital-twin/README_RU_v380.md) · [English](digital-twin/README_v380.md) · [简体中文](digital-twin/README_ZH_v380.md) · [Changelog](digital-twin/CHANGELOG_v380.md)
