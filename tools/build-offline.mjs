@@ -77,6 +77,8 @@ const optionalModules = [
   'companions.js'
 ];
 const optionalMissing = [];
+const escapeRegExp = value => value.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\const optionalMissing = [];
+for (const fileName');
 for (const fileName of optionalModules) {
   const relativeSrc = './modules/living-world/' + fileName;
   const tagPattern = new RegExp('<script\\b(?=[^>]*\\bsrc=["\\']' + relativeSrc.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&') + '["\\'])[^>]*>\\s*<\\/script>', 'i');
@@ -98,7 +100,7 @@ const safeBundle = engineBundle.replace(/<\/script/gi, '<\\/script');
 const engineScript = '<script id="a01-offline-engine" data-three-version="0.185.0">\n' + safeBundle + '\n</script>\n';
 const moduleOpenPattern = /<script\b(?=[^>]*\btype=["']module["'])[^>]*>/i;
 if (!moduleOpenPattern.test(html)) throw new Error('Main module opening tag disappeared');
-html = html.replace(moduleOpenPattern, engineScript + '$&');
+html = html.replace(moduleOpenPattern, match => engineScript + match);
 
 html = html.replace(/v3\.2\.[12]/g, 'v3.3.0');
 html = html.replace(
@@ -119,10 +121,6 @@ if (/<script\b[^>]*\bsrc=["']\.\/modules\/living-world\//i.test(html)) {
 if (/\bimport\s*\(\s*['"]three(?:\/|['"])/.test(rewrittenModule)) {
   throw new Error('Three.js dynamic import remains');
 }
-if (!html.includes('globalThis.__A01_OFFLINE_ENGINE__ = { THREE, OrbitControls }')) {
-  // The exact source is inside the engine bundle, so this condition is not expected.
-}
-
 fs.writeFileSync(outputPath, html, 'utf8');
 const outputSha256 = createHash('sha256').update(html).digest('hex');
 const engineSha256 = createHash('sha256').update(engineBundle).digest('hex');
