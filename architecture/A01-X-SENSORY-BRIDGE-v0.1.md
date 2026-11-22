@@ -207,3 +207,15 @@ The sensory bridge is not accepted until:
 ## 12. Explicit limitations at this revision
 
 No live Android-01 is published at the inspected public endpoint; no eye stream or sensory packet was received in this session. No physical person, robot camera, microphone or sensors were accessed. This document defines the adapter contract and test path; it does not claim a working robot connection.
+
+
+## 13. Reference documentation
+
+- OpenAI GPT-Live WebRTC and delegated image handling: https://developers.openai.com/api/docs/guides/voice-webrtc and https://developers.openai.com/api/docs/guides/live-delegation
+- OpenAI Realtime image inputs: https://developers.openai.com/api/docs/guides/realtime-conversations
+- MDN HTMLCanvasElement.captureStream(): https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/captureStream
+- MDN MediaDevices.getUserMedia(): https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+- ROS 2 sensor_msgs message catalogue: https://github.com/ros2/common_interfaces/tree/rolling/sensor_msgs
+- Physical Intelligence openpi: https://github.com/Physical-Intelligence/openpi
+
+These sources describe available interfaces and data types. They do not imply that A-01 X has integrated them, has access to model endpoints, or has validated a robot embodiment.
