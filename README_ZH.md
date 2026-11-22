@@ -118,3 +118,10 @@ v0.3.0 是纯文档研究规范，说明球体如何减少可避免的人体负�
 - [v0.1 架构](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
 v0.2 定义了类型化传感器数据、身体与房间坐标关联、时间同步、独立的媒体权限，以及从观测到验证的可追溯事件链。本版本仅为文档与集成协议，尚未连接真实 Android-01 运行时或感知端点。
+
+## A-01 X v0.3.6 — Android-01 第一人称眼部摄像头
+
+- [发布说明（俄文）](releases/a01-x-v0.3.6/README_RU.md) · [Release notes](releases/a01-x-v0.3.6/RELEASE-NOTES.md)
+- [AgentEyeCamera 源码](releases/a01-x-v0.3.6/agent-eye-camera.js) · [集成说明（俄文）](releases/a01-x-v0.3.6/SENSORY-BRIDGE-INTEGRATION_RU.md) · [测试](releases/a01-x-v0.3.6/agent-eye-camera-check.mjs)
+
+v0.3.6 将独立眼部摄像头直接连接到原始 17 骨骼 rig 的 `worldRoot.androidRig.head`。观察者主摄像头保持不变。启动本地视频流需要操作员明确操作和限时授权。所有图像标记为 `simulated`。完整可运行的 v0.3.6 压缩包已在本聊天中单独提供；浏览器/WebGL/GPU 验收仍待完成。
