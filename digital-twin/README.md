@@ -1,5 +1,15 @@
 # Digital Twin
 
+## Live website line — A-01 v3.1.7 (separate build track)
+
+- **Published website baseline:** v3.1.6, build `3.1.6-gullwing-crown-vent-calcs`, checked 22 November 2026 at [evasphere.usite.pro](https://evasphere.usite.pro/).
+- **Prepared continuation:** v3.1.7 integrates Android-01 Agent Runtime into the existing `EVA_SPHERE` scene and preserves the current Sphere geometry.
+- [Russian documentation](README_RU_v317.md) · [English documentation](README_v317.md) · [简体中文文档](README_ZH_v317.md) · [Changelog](CHANGELOG_v317.md) · [Integration report](../releases/mainline-v3.1.7/INTEGRATION-REPORT_RU.md).
+
+This is the website's own version track and must not be confused with the GitHub integrated digital-twin build v3.7.0 or the standalone v3.8.0 interior blockout. v3.1.7 is a prepared prototype, not a deployed uCoz update. The current GitHub branch publishes its documentation; the full HTML/source package is supplied separately.
+
+
+
 This directory documents the A-01 digital workspace and its evolving software prototypes.
 
 A digital model or interface is not evidence that the corresponding physical systems have been built, commissioned or validated. Each release must state its version, scope, verification status and known limitations.

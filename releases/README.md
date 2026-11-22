@@ -1,3 +1,12 @@
+# Release index
+
+## A-01 main website line v3.1.7 — Android-01 Agent Runtime
+
+- [Release overview (RU)](mainline-v3.1.7/README_RU.md)
+- [Integration report (RU)](mainline-v3.1.7/INTEGRATION-REPORT_RU.md)
+- [Digital twin documentation: RU](../digital-twin/README_RU_v317.md) · [EN](../digital-twin/README_v317.md) · [简体中文](../digital-twin/README_ZH_v317.md) · [Changelog](../digital-twin/CHANGELOG_v317.md)
+- Status: prepared mainline website prototype based on the live v3.1.6 build. Agent Runtime reuses the existing Sphere scene. Automated local tests pass; live browser/WebGL and hardware verification remain pending. The prepared HTML is not automatically deployed to uCoz.
+
 ## A-01 X v0.3.0 — Sphere Intelligence and Human Wellbeing (documentation release)
 
 - [Release overview — RU](a01-x-v0.3.0/README_RU.md) · [EN](a01-x-v0.3.0/README.md) · [简体中文](a01-x-v0.3.0/README_ZH.md)

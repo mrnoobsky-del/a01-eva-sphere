@@ -1,5 +1,11 @@
 # Documentation index
 
+- [A-01 v3.1.7 — Main website line (RU)](../digital-twin/README_RU_v317.md) · [EN](../digital-twin/README_v317.md) · [简体中文](../digital-twin/README_ZH_v317.md)
+- [v3.1.7 integration report (RU)](../releases/mainline-v3.1.7/INTEGRATION-REPORT_RU.md)
+- [v3.1.7 release overview (RU)](../releases/mainline-v3.1.7/README_RU.md)
+- [Android-01 mainline runtime notes](../agent/mainline/README_RU.md)
+
+
 - [Project charter](PROJECT-CHARTER.md)
 - [Status and evidence](STATUS-AND-EVIDENCE.md)
 - [Architecture notes](../architecture/README.md)
