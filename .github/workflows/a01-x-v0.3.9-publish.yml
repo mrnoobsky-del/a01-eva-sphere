@@ -1,0 +1,87 @@
+name: A-01 X v0.3.9 — assemble and validate source
+
+on:
+  push:
+    branches:
+      - release/a01-x-v0.3.9-agent-runtime-e2e
+    paths:
+      - "releases/a01-x-v0.3.9/archive/READY"
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "releases/a01-x-v0.3.9/source/**"
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Reassemble and verify package archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat releases/a01-x-v0.3.9/archive/part-*.b64 | tr -d '\\r\\n' | base64 --decode > "$RUNNER_TEMP/a01-x-v0.3.9-agent-runtime-e2e.zip"
+          unzip -tq "$RUNNER_TEMP/a01-x-v0.3.9-agent-runtime-e2e.zip"
+          mkdir -p "$RUNNER_TEMP/a01-x-v0.3.9"
+          unzip -q "$RUNNER_TEMP/a01-x-v0.3.9-agent-runtime-e2e.zip" -d "$RUNNER_TEMP/a01-x-v0.3.9"
+          node -e "const p=require('$RUNNER_TEMP/a01-x-v0.3.9/package.json'); if(p.version!=='0.3.9') process.exit(1); console.log('Package version:',p.version)"
+      - name: Install package dependencies
+        working-directory: ${{ runner.temp }}/a01-x-v0.3.9
+        run: npm install --no-audit --no-fund
+      - name: Run full validation suite
+        working-directory: ${{ runner.temp }}/a01-x-v0.3.9
+        run: npm run check
+      - name: Publish source tree and ZIP into the release folder
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p releases/a01-x-v0.3.9/source
+          cp -a "$RUNNER_TEMP/a01-x-v0.3.9/." releases/a01-x-v0.3.9/source/
+          cp "$RUNNER_TEMP/a01-x-v0.3.9-agent-runtime-e2e.zip" releases/a01-x-v0.3.9/a01-x-v0.3.9-agent-runtime-e2e.zip
+          rm -rf releases/a01-x-v0.3.9/archive
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A releases/a01-x-v0.3.9
+          if git diff --cached --quiet; then
+            echo "No release files changed."
+          else
+            git commit -m "Publish complete A-01 X v0.3.9 source package"
+            git push
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: a01-x-v0.3.9-agent-runtime-e2e
+          path: ${{ runner.temp }}/a01-x-v0.3.9-agent-runtime-e2e.zip
+          if-no-files-found: error
+          retention-days: 30
+
+  validate-pr:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package dependencies
+        working-directory: releases/a01-x-v0.3.9/source
+        run: npm install --no-audit --no-fund
+      - name: Run full validation suite
+        working-directory: releases/a01-x-v0.3.9/source
+        run: npm run check
