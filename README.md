@@ -4,18 +4,26 @@
 
 - **Website:** [evasphere.usite.pro](https://evasphere.usite.pro/)
 - **Published build checked on 22 November 2026:** `3.1.6-gullwing-crown-vent-calcs`.
-- **Previous prepared step:** A-01 v3.1.7 — initial Android-01 integration. The current prepared build is v3.1.8.
+- **Previous prepared step:** A-01 v3.1.7 — initial Android-01 integration. The current prepared build is v3.1.9.
 - [v3.1.7 documentation (RU)](digital-twin/README_RU_v317.md) · [EN](digital-twin/README_v317.md) · [简体中文](digital-twin/README_ZH_v317.md) · [Integration report](releases/mainline-v3.1.7/INTEGRATION-REPORT_RU.md).
 
-This website build track is separate from the GitHub integrated digital-twin line v3.7.0 and the standalone interior study v3.8.0. The prepared v3.1.8 HTML has not yet been deployed to uCoz; a GitHub PR does not deploy the website automatically.
+This website build track is separate from the GitHub integrated digital-twin line v3.7.0 and the standalone interior study v3.8.0. The prepared v3.1.9 HTML has not yet been deployed to uCoz; a GitHub PR does not deploy the website automatically.
 
-## Prepared mainline build A-01 v3.1.8
+## Previous prepared mainline build A-01 v3.1.8
 
 - [Documentation RU](digital-twin/README_RU_v318.md) · [EN](digital-twin/README_v318.md) · [简体中文](digital-twin/README_ZH_v318.md)
 - [Spatial coordination report](releases/mainline-v3.1.8/SPATIAL-COORDINATION-AND-CLASH-AUDIT_RU.md)
 - [Release overview](releases/mainline-v3.1.8/README_RU.md)
 
 v3.1.8 preserves the v3.1.6 website scene and resolves selected service-logistics, MEP/HVAC, atrium, gallery, door and Android-01 route interfaces. Local automated checks pass; browser/WebGL acceptance remains pending. This is a prepared build, not a uCoz deployment.
+
+## Prepared mainline build A-01 v3.1.9 — Immersive Object Study
+
+- [Documentation RU](digital-twin/README_RU_v319.md) · [EN](digital-twin/README_v319.md) · [简体中文](digital-twin/README_ZH_v319.md)
+- [Object-study verification report](releases/mainline-v3.1.9/OBJECT-STUDY-MODE-REPORT_RU.md)
+- [Release overview](releases/mainline-v3.1.9/README_RU.md)
+
+“Изучить объект” now opens a full-screen view: the camera focuses on the object, the usual interface is hidden, and an information card stays over the model. Close or Escape restores the previous UI and context-drawer state. Automated checks pass; full WebGL visual acceptance remains pending. The uCoz site has not been changed.
 
 **Energy · Intelligence · Life**
 
