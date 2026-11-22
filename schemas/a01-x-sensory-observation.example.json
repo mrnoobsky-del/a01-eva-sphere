@@ -1,0 +1,123 @@
+{
+  "schema": "a01x.sensory.v0.1",
+  "agent_id": "android-01",
+  "sequence": 184,
+  "captured_at": "2026-11-22T03:30:00Z",
+  "source_mode": "simulation",
+  "coordinate_frames": [
+    {
+      "id": "world",
+      "parent": null
+    },
+    {
+      "id": "base_link",
+      "parent": "world"
+    },
+    {
+      "id": "head_link",
+      "parent": "base_link"
+    },
+    {
+      "id": "eye_camera",
+      "parent": "head_link"
+    }
+  ],
+  "observations": [
+    {
+      "channel": "vision.rgb",
+      "source_id": "eye-camera-main",
+      "modality": "video_frame",
+      "provenance": "simulated",
+      "captured_at": "2026-11-22T03:30:00Z",
+      "unit": null,
+      "frame_id": "eye_camera",
+      "value": null,
+      "media_ref": "https://example.invalid/frame/184.jpg",
+      "quality": {
+        "status": "valid",
+        "confidence": 1,
+        "calibration_id": "sim-camera-v1",
+        "age_ms": 0,
+        "notes": "Illustrative placeholder only; not a real image"
+      }
+    },
+    {
+      "channel": "imu",
+      "source_id": "head-imu-sim",
+      "modality": "vector3",
+      "provenance": "simulated",
+      "captured_at": "2026-11-22T03:30:00Z",
+      "unit": "m/s^2",
+      "frame_id": "head_link",
+      "value": [
+        0,
+        0,
+        9.81
+      ],
+      "quality": {
+        "status": "valid",
+        "confidence": 1,
+        "calibration_id": "sim-imu-v1",
+        "age_ms": 0,
+        "notes": "Gravity-aligned stationary placeholder"
+      }
+    },
+    {
+      "channel": "navigation.pose",
+      "source_id": "sim-localizer",
+      "modality": "pose",
+      "provenance": "simulated",
+      "captured_at": "2026-11-22T03:30:00Z",
+      "unit": "m, quaternion",
+      "frame_id": "world",
+      "value": {
+        "position": [
+          0,
+          1.7,
+          2.1
+        ],
+        "orientation": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "quality": {
+        "status": "valid",
+        "confidence": 0.95,
+        "calibration_id": null,
+        "age_ms": 0,
+        "notes": "Example synthetic pose"
+      }
+    },
+    {
+      "channel": "environment.air_temperature",
+      "source_id": "zone-l01-temp-sim",
+      "modality": "scalar",
+      "provenance": "simulated",
+      "captured_at": "2026-11-22T03:30:00Z",
+      "unit": "Cel",
+      "frame_id": "zone-L01",
+      "value": 22.4,
+      "quality": {
+        "status": "valid",
+        "confidence": 1,
+        "calibration_id": "simulation",
+        "age_ms": 0,
+        "notes": "Synthetic example; not live telemetry"
+      }
+    }
+  ],
+  "synchronization": {
+    "clock_id": "simulation-clock",
+    "max_skew_ms": 0,
+    "synchronized": true
+  },
+  "session": {
+    "consent_id": null,
+    "video_enabled": false,
+    "audio_enabled": false,
+    "retention_seconds": 0
+  }
+}
