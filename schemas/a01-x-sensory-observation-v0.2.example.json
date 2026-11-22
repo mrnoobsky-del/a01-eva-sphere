@@ -178,7 +178,7 @@
         "frame_index": 1
       },
       "media": {
-        "uri": "https://media.example.invalid/session/sim-inspection-2026-11-22-001/frame-1.jpg",
+        "uri": "https://localhost:8443/session/sim-inspection-2026-11-22-001/frame-1.jpg",
         "mime_type": "image/jpeg",
         "expires_at": "2026-11-22T03:35:00Z",
         "byte_length": 45678,
@@ -190,7 +190,7 @@
         "calibration_id": "sim-camera-cal-01",
         "uncertainty": null,
         "confidence": 1,
-        "notes": "Synthetic render; not a physical camera frame."
+        "notes": "Synthetic render served by a local example endpoint; not a physical camera frame."
       }
     },
     {
