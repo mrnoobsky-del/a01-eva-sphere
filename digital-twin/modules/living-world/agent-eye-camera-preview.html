@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eef1f0">
+<title>A-01 AgentEyeCamera v0.1 — rig test fixture</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/"
+  }
+}
+</script>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font:14px/1.45 Inter,system-ui,sans-serif;background:#edf1ef;color:#17232a}body{min-height:100vh}.shell{min-height:100vh;display:grid;grid-template-rows:auto minmax(0,1fr)}header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;background:#fbfcfb;border-bottom:1px solid #dbe2df}header strong{display:block;font-size:13px;letter-spacing:.12em}header span{display:block;color:#6a797c;font-size:10px}.tag{padding:7px 10px;border:1px solid #d1dcd8;border-radius:999px;font-size:9px;color:#53676d}.layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:14px;padding:14px;min-height:0}.viewport{position:relative;min-height:540px;border-radius:18px;overflow:hidden;background:#0b1723}#mainStage{position:absolute;inset:0}#mainStage canvas{display:block;width:100%;height:100%;touch-action:none}.panel{display:flex;flex-direction:column;gap:12px;min-width:0;padding:16px;border:1px solid #d8e0dd;border-radius:18px;background:#fbfcfb}.panel h2{font-size:16px;margin:0}.small{color:#65777b;font-size:10px;line-height:1.5}.video-wrap{aspect-ratio:16/9;background:#06101a;border-radius:12px;overflow:hidden}.video-wrap video{width:100%;height:100%;display:block;object-fit:contain}.actions{display:grid;grid-template-columns:1fr 1fr;gap:7px}.actions button{min-height:38px;border:1px solid #cbd7d5;border-radius:10px;background:#fff;color:#1b2b31;font:600 11px system-ui;cursor:pointer}.actions button.primary{background:#182b35;color:#fff;border-color:#182b35}.control{display:grid;gap:7px}.control label{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:#52656c}.control input{width:100%}.status{padding:10px 11px;border:1px solid #d9e1de;border-radius:11px;background:#f2f6f4;color:#52656c;font-size:10px;min-height:56px;white-space:pre-wrap}.warn{padding:10px 11px;border:1px solid #ead9ad;border-radius:11px;background:#fff8e6;color:#78602b;font-size:10px;line-height:1.45}.metrics{display:flex;justify-content:space-between;gap:8px;color:#718087;font-size:9px}@media(max-width:900px){.layout{grid-template-columns:1fr}.viewport{min-height:54vh}}@media(max-width:560px){header{padding:11px 13px;align-items:flex-start}header strong{font-size:11px}.tag{font-size:8px}.layout{padding:8px;gap:8px}.viewport{min-height:48vh}.panel{padding:12px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div><strong>A-01 · AGENT EYE CAMERA</strong><span>Изолированный тест камеры от первого лица на тестовом гуманоидном риге</span></div>
+    <div class="tag">v0.1 · TEST FIXTURE · SIMULATION</div>
+  </header>
+  <main class="layout">
+    <section class="viewport" aria-label="Камера наблюдателя"><div id="mainStage"></div></section>
+    <aside class="panel">
+      <div><h2>Глаза Android-01</h2><div class="small">Отдельный ракурс, установленный на тестовую кость головы. Не использует камеру наблюдателя.</div></div>
+      <div class="video-wrap"><video id="eyeVideo" autoplay muted playsinline></video></div>
+      <div class="metrics"><span id="eyeState">Ожидание рига</span><span id="frameCount">0 кадров</span></div>
+      <div class="actions">
+        <button id="startEye" class="primary" type="button">Включить локальный поток</button>
+        <button id="stopEye" type="button">Остановить</button>
+        <button id="captureEye" type="button">Получить кадр</button>
+        <button id="centerHead" type="button">Выровнять голову</button>
+      </div>
+      <div class="control">
+        <label for="yaw">Поворот головы <output id="yawValue">0°</output></label>
+        <input id="yaw" type="range" min="-70" max="70" value="0">
+        <label for="pitch">Наклон головы <output id="pitchValue">0°</output></label>
+        <input id="pitch" type="range" min="-35" max="35" value="0">
+      </div>
+      <div class="status" id="eyeStatus" aria-live="polite">Камера ожидает событие a01-agent:head-ready.</div>
+      <div class="warn">Это демонстрационный процедурный гуманоидный риг, а не настоящая модель Android-01. Поток остаётся локальным в браузере; сеть, микрофон и внешняя модель не используются.</div>
+      <div class="small">Поверните голову ползунком: меняется только изображение глаз. Камера наблюдателя слева остаётся независимой.</div>
+    </aside>
+  </main>
+</div>
+<script src="./agent-eye-camera.js"></script>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+const host = document.getElementById("mainStage");
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0b1723);
+scene.fog = new THREE.Fog(0x0b1723, 9, 24);
+const camera = new THREE.PerspectiveCamera(46, 1, 0.1, 80);
+camera.position.set(3.7, 2.55, 4.7);
+camera.lookAt(0, 1.0, 0);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.0;
+host.appendChild(renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 1.0, 0);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+scene.add(new THREE.HemisphereLight(0xcbe9ff, 0x29313a, 2.1));
+const key = new THREE.DirectionalLight(0xffedce, 2.2);
+key.position.set(4, 7, 5);
+scene.add(key);
+const fill = new THREE.PointLight(0x7c9cff, 18, 12);
+fill.position.set(-3, 3, -2);
+scene.add(fill);
+const floor = new THREE.Mesh(new THREE.CircleGeometry(4, 80), new THREE.MeshStandardMaterial({color:0x26353c,roughness:.88}));
+floor.rotation.x = -Math.PI / 2;
+floor.position.y = -0.03;
+scene.add(floor);
+const grid = new THREE.GridHelper(8, 20, 0x537184, 0x243f50);
+grid.position.y = -0.015;
+scene.add(grid);
+
+const robot = new THREE.Group();
+robot.name = "Android01-TestFixture";
+scene.add(robot);
+const ceramic = new THREE.MeshStandardMaterial({color:0xdce5e7,metalness:.28,roughness:.32});
+const dark = new THREE.MeshStandardMaterial({color:0x263944,metalness:.62,roughness:.28});
+const glass = new THREE.MeshStandardMaterial({color:0x142b3a,emissive:0x1c6687,emissiveIntensity:.48,metalness:.72,roughness:.18});
+const joint = new THREE.MeshStandardMaterial({color:0x526774,metalness:.72,roughness:.3});
+function addMesh(parent, geometry, material, position, scale) {
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.position.set(position[0],position[1],position[2]);
+  if(scale) mesh.scale.set(scale[0],scale[1],scale[2]);
+  mesh.castShadow = true;
+  mesh.receiveShadow = true;
+  parent.add(mesh);
+  return mesh;
+}
+addMesh(robot,new THREE.CapsuleGeometry(.26,.48,8,16),ceramic,[0,1.02,0],[1,1,1]);
+addMesh(robot,new THREE.BoxGeometry(.38,.18,.24),dark,[0,.67,0]);
+addMesh(robot,new THREE.CylinderGeometry(.075,.095,.16,20),joint,[0,1.37,0]);
+const head = new THREE.Group();
+head.name = "android-01-head-link-test-fixture";
+head.position.set(0,1.55,0);
+robot.add(head);
+addMesh(head,new THREE.SphereGeometry(.17,28,22),ceramic,[0,0,0],[1,1,.88]);
+addMesh(head,new THREE.BoxGeometry(.25,.055,.035),dark,[0,-.085,-.145]);
+addMesh(head,new THREE.SphereGeometry(.022,16,12),glass,[-.061,.024,-.15]);
+addMesh(head,new THREE.SphereGeometry(.022,16,12),glass,[.061,.024,-.15]);
+addMesh(head,new THREE.SphereGeometry(.008,10,8),ceramic,[0,-.035,-.155]);
+addMesh(head,new THREE.SphereGeometry(.045,14,12),dark,[-.17,0,0]);
+addMesh(head,new THREE.SphereGeometry(.045,14,12),dark,[.17,0,0]);
+const antenna = addMesh(head,new THREE.CylinderGeometry(.008,.008,.12,8),joint,[0,.21,0]);
+antenna.rotation.z = -.12;
+addMesh(head,new THREE.SphereGeometry(.022,12,10),glass,[0,.275,0]);
+[-1,1].forEach(side=>{
+  const shoulder = new THREE.Group();
+  shoulder.position.set(side*.31,1.19,0);
+  robot.add(shoulder);
+  addMesh(shoulder,new THREE.SphereGeometry(.09,16,12),joint,[0,0,0]);
+  const arm=addMesh(shoulder,new THREE.CapsuleGeometry(.065,.43,6,12),ceramic,[side*.035,-.31,0]);
+  arm.rotation.z=side*-.08;
+  addMesh(shoulder,new THREE.SphereGeometry(.075,14,12),dark,[side*.06,-.58,-.015]);
+  addMesh(robot,new THREE.CapsuleGeometry(.09,.42,6,12),ceramic,[side*.13,.29,0]);
+  addMesh(robot,new THREE.SphereGeometry(.10,16,12),dark,[side*.13,.055,-.01]);
+});
+
+window.EVA_SPHERE = {THREE:THREE,scene:scene,camera:camera,controls:controls,renderer:renderer};
+window.requestSceneRender = function(){renderer.render(scene,camera);};
+const eyeEvents = ["ready","streaming","stopped","frame","error","preview-blocked","permission-expired"];
+let frames = 0;
+eyeEvents.forEach(name=>window.addEventListener("a01-agent-eye:"+name,event=>{
+  if(name==="frame"){
+    frames=event.detail.sequence;
+    document.getElementById("frameCount").textContent=frames+" кадров";
+  }
+  if(name==="ready") document.getElementById("eyeState").textContent="Голова подключена";
+  if(name==="streaming") document.getElementById("eyeState").textContent="Локальный поток";
+  if(name==="stopped" || name==="permission-expired") document.getElementById("eyeState").textContent="Остановлено";
+  if(name==="error") document.getElementById("eyeState").textContent="Ошибка";
+  document.getElementById("eyeStatus").textContent=name+": "+JSON.stringify(event.detail,null,2);
+}));
+
+window.dispatchEvent(new CustomEvent("eva-a01:scene-ready"));
+window.dispatchEvent(new CustomEvent("a01-agent:head-ready",{
+  detail:{agentId:"android-01",headObject:head,api:window.EVA_SPHERE,eyeCameraOptions:{width:640,height:360,fps:6,fov:78,mountPosition:[0,0,-.19],frameId:"eye_camera_optical",sourceId:"android-01-eye-camera-test",provenance:"simulated"}}
+}));
+
+const yaw=document.getElementById("yaw");
+const pitch=document.getElementById("pitch");
+function updateHead(){
+  head.rotation.y=THREE.MathUtils.degToRad(Number(yaw.value));
+  head.rotation.x=THREE.MathUtils.degToRad(Number(pitch.value));
+  document.getElementById("yawValue").textContent=yaw.value+"°";
+  document.getElementById("pitchValue").textContent=pitch.value+"°";
+}
+yaw.addEventListener("input",updateHead);
+pitch.addEventListener("input",updateHead);
+document.getElementById("centerHead").addEventListener("click",()=>{yaw.value=0;pitch.value=0;updateHead();});
+document.getElementById("startEye").addEventListener("click",()=>{
+  try{
+    const now = new Date();
+    const expiry = new Date(now.getTime()+10*60*1000).toISOString();
+    window.A01_AGENT_EYE_CAMERA.start({
+      authorization:{authorizationId:"local-preview-user-action-"+Date.now(),grantedBy:"operator",grantedAt:now.toISOString(),expiresAt:expiry,scope:["local_eye_stream"]},
+      videoElement:document.getElementById("eyeVideo")
+    });
+  }catch(error){document.getElementById("eyeStatus").textContent=error.message;}
+});
+document.getElementById("stopEye").addEventListener("click",()=>window.A01_AGENT_EYE_CAMERA.stop());
+document.getElementById("captureEye").addEventListener("click",async()=>{
+  try{
+    const result=await window.A01_AGENT_EYE_CAMERA.captureFrame();
+    document.getElementById("eyeStatus").textContent="Кадр получен локально: "+JSON.stringify(result.metadata,null,2)+"\nBlob: "+result.blob.size+" bytes. Ничего не отправлено.";
+  }catch(error){document.getElementById("eyeStatus").textContent=error.message;}
+});
+
+function resize(){
+  const width=host.clientWidth,height=host.clientHeight;
+  if(!width||!height)return;
+  camera.aspect=width/height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width,height,false);
+  renderer.render(scene,camera);
+}
+window.addEventListener("resize",resize);
+resize();
+renderer.setAnimationLoop(()=>{controls.update();renderer.render(scene,camera);});
+</script>
+</body>
+</html>
