@@ -39,6 +39,12 @@ Three.js r185 and OrbitControls now use relative local paths. The ZIP contains a
 
 On desktop/tablet, the expanded sidebar now reserves its own layout column: the central 3D scene shifts and narrows instead of being covered. Collapsing the menu restores workspace width. The mobile drawer remains an overlay. Geometry was checked in Chromium at 781, 900, 1024, 1120, 1279 and 1440 px, plus a 390 px mobile viewport. Project checks and ZIP integrity pass. uCoz has not been updated.
 
+## A-01 v3.2.2 — Direct-open single HTML
+
+- [Guide (RU)](releases/mainline-v3.2.2/README_RU.md)
+
+An alternate build is designed to open directly by double-clicking the HTML, using Three.js r185 and OrbitControls from jsDelivr. Internet access is required; this is not an offline build. The v3.2.1 Local Engine package remains available for locally stored dependencies after setup.
+
 **Energy · Intelligence · Life**
 
 A-01 is an open project record for a long-term vision: a resilient, human-centred environment combining architecture, energy systems, digital infrastructure, knowledge preservation and AI-assisted services.
