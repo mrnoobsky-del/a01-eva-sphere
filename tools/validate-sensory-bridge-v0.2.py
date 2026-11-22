@@ -51,6 +51,16 @@ def parse_time(value: str) -> datetime:
 def check_observation_references(packet: dict[str, Any]) -> None:
     source_ids = {source["source_id"] for source in packet["sources"]}
     frame_ids = {frame["id"] for frame in packet["coordinate_frames"]}
+    for index, frame in enumerate(packet["coordinate_frames"]):
+        parent = frame["parent"]
+        if parent is not None and parent not in frame_ids:
+            raise ValueError(f"coordinate_frames[{index}] references unknown parent frame {parent!r}")
+    for index, source in enumerate(packet["sources"]):
+        if source["frame_id"] not in frame_ids:
+            raise ValueError(f"sources[{index}] references unknown frame_id {source['frame_id']!r}")
+    permissions = packet["session"]["permissions"]
+    if packet["session"]["retention_seconds"] > 0 and not permissions["persistent_storage"]["enabled"]:
+        raise ValueError("retention_seconds must be zero when persistent_storage permission is disabled")
     for index, observation in enumerate(packet["observations"]):
         if observation["source_id"] not in source_ids:
             raise ValueError(
@@ -65,9 +75,21 @@ def check_observation_references(packet: dict[str, Any]) -> None:
         media = observation.get("media")
         if media and parse_time(media["expires_at"]) <= parse_time(observation["captured_at"]):
             raise ValueError(f"observations[{index}] media link expires before or at capture time")
-        if observation["channel"] == "audio" and not packet["session"]["permissions"]["audio_capture"]["enabled"]:
+        if observation["channel"] == "audio" and not permissions["audio_capture"]["enabled"]:
             raise ValueError("Audio observation exists while audio_capture permission is disabled")
-    print("PASS observation source/frame references and media/permission invariants")
+        if observation["channel"] in ("vision.rgb", "vision.depth") and not permissions["video_capture"]["enabled"]:
+            raise ValueError("Visual observation exists while video_capture permission is disabled")
+        if observation["channel"] == "joint_state":
+            value = observation["value"]
+            expected = len(value["joint_names"])
+            for field in ("position_rad", "velocity_rad_s", "effort_nm"):
+                if field in value and len(value[field]) != expected:
+                    raise ValueError(f"observations[{index}] {field} length does not match joint_names")
+        if observation["channel"] == "tactile":
+            value = observation["value"]
+            if len(value["values"]) != value["rows"] * value["columns"]:
+                raise ValueError(f"observations[{index}] tactile grid dimensions do not match values")
+    print("PASS observation source/frame references, media expiry, typed arrays and permission invariants")
 
 
 def check_event_chain(events: list[dict[str, Any]]) -> None:
@@ -80,6 +102,12 @@ def check_event_chain(events: list[dict[str, Any]]) -> None:
     if sequences != sorted(sequences) or len(set(sequences)) != len(sequences):
         raise ValueError("Event sequence values must be strictly increasing")
     for index, event in enumerate(events):
+        if event["event_type"] == "approval_granted":
+            if event["approval"] is None or event["approval"]["status"] != "granted":
+                raise ValueError(f"events[{index}] approval_granted event has no granted approval")
+        if event["event_type"] == "approval_denied":
+            if event["approval"] is None or event["approval"]["status"] != "denied":
+                raise ValueError(f"events[{index}] approval_denied event has no denied approval")
         if event["event_type"] == "command_dispatched":
             approval = event["approval"]
             action = event["action"]
