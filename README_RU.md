@@ -210,3 +210,13 @@ v0.3.0 — документационный исследовательский �
 - [Предыдущая архитектура v0.1](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
 v0.2 уточняет привязку сенсоров к телу и помещениям, типы данных, синхронизацию времени, разрешения на медиа и журнал «наблюдение → загадка → рекомендация → разрешение → действие → проверка». Это документационный выпуск: реальный Android-01 и сенсорный endpoint не подключены.
+
+## A-01 X v0.3.8 — Agent Runtime для Android-01
+
+- [Обзор выпуска](releases/a01-x-v0.3.8/README_RU.md) · [EN](releases/a01-x-v0.3.8/README.md) · [中文](releases/a01-x-v0.3.8/README_ZH.md)
+- [Архитектура Agent Runtime](architecture/A01-X-AGENT-RUNTIME-v0.1.md)
+- [Руководство по Antigravity-inspired Runtime](docs/AGENT-RUNTIME-ANTIGRAVITY-INSPIRED_RU.md)
+- [Примеры HTTP API и MCP](docs/AGENT-API-EXAMPLES.md)
+- [JSON Schema миссии](schemas/a01-agent-mission-v0.1.schema.json) · [пример плана](schemas/a01-agent-mission-v0.1.example.json)
+
+v0.3.8 добавляет Mission Manager, проверку планов, операторское подтверждение, последовательное выполнение, верификацию и аудит. Внешние команды движения/позы/взгляда теперь только предлагают миссии; прямой HTTP обход закрыт. Полный запускаемый пакет из 41 файла приложен отдельно в чате. WebGL/GPU-приёмка ещё не подтверждена.

@@ -1,0 +1,43 @@
+{
+  "schema": "a01.agent-mission.v0.1",
+  "goal": "Осмотреть центральный атриум L01",
+  "summary": "Проверить карту, получить исходное состояние, дойти до точки обзора, принять позу осмотра и проверить прибытие.",
+  "steps": [
+    {
+      "id": "map",
+      "tool": "read_map",
+      "args": {},
+      "label": "Проверить карту и доступные точки"
+    },
+    {
+      "id": "before",
+      "tool": "inspect",
+      "args": {},
+      "label": "Снять исходное состояние Android-01"
+    },
+    {
+      "id": "move",
+      "tool": "go_to",
+      "args": {
+        "destination": "L01/RING-01",
+        "gait": "Walking"
+      },
+      "label": "Перейти к точке обзора",
+      "timeout_ms": 180000
+    },
+    {
+      "id": "inspect_pose",
+      "tool": "pose",
+      "args": {
+        "name": "Inspect"
+      },
+      "label": "Принять позу осмотра"
+    },
+    {
+      "id": "verify",
+      "tool": "inspect",
+      "args": {},
+      "label": "Проверить прибытие и состояние"
+    }
+  ]
+}

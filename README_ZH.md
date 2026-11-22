@@ -118,3 +118,13 @@ v0.3.0 是纯文档研究规范，说明球体如何减少可避免的人体负�
 - [v0.1 架构](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
 v0.2 定义了类型化传感器数据、身体与房间坐标关联、时间同步、独立的媒体权限，以及从观测到验证的可追溯事件链。本版本仅为文档与集成协议，尚未连接真实 Android-01 运行时或感知端点。
+
+## A-01 X v0.3.8 — Android-01 Agent Runtime
+
+- [发布说明（简体中文）](releases/a01-x-v0.3.8/README_ZH.md) · [RU](releases/a01-x-v0.3.8/README_RU.md) · [EN](releases/a01-x-v0.3.8/README.md)
+- [Agent Runtime 架构](architecture/A01-X-AGENT-RUNTIME-v0.1.md)
+- [Antigravity-inspired Runtime 指南（俄文）](docs/AGENT-RUNTIME-ANTIGRAVITY-INSPIRED_RU.md)
+- [HTTP API 和 MCP 示例](docs/AGENT-API-EXAMPLES.md)
+- [任务 JSON Schema](schemas/a01-agent-mission-v0.1.schema.json) · [计划示例](schemas/a01-agent-mission-v0.1.example.json)
+
+v0.3.8 增加 Mission Manager、计划验证、操作员批准、顺序执行、结果验证和审计日志。外部移动/姿态/视线调用只会创建任务提案；直接 HTTP 绕过已关闭。完整的 41 文件可运行包已在聊天中单独提供。浏览器/WebGL/GPU 验收仍待完成。

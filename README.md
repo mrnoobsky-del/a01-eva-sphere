@@ -210,3 +210,13 @@ v0.3.0 is a documentation-only research specification. It defines how the Sphere
 - [Previous v0.1 architecture](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
 v0.2 defines typed sensor packets, body/room frame mapping, time synchronization, separate media permissions and a traceable observation-to-verification event trail. This is a documentation release; no physical Android-01 runtime or sensory endpoint is connected.
+
+## A-01 X v0.3.8 — Agent Runtime for Android-01
+
+- [Release overview (EN)](releases/a01-x-v0.3.8/README.md) · [RU](releases/a01-x-v0.3.8/README_RU.md) · [中文](releases/a01-x-v0.3.8/README_ZH.md)
+- [Agent Runtime architecture](architecture/A01-X-AGENT-RUNTIME-v0.1.md)
+- [Antigravity-inspired Runtime guide (RU)](docs/AGENT-RUNTIME-ANTIGRAVITY-INSPIRED_RU.md)
+- [HTTP API and MCP examples](docs/AGENT-API-EXAMPLES.md)
+- [Mission JSON Schema](schemas/a01-agent-mission-v0.1.schema.json) · [example plan](schemas/a01-agent-mission-v0.1.example.json)
+
+v0.3.8 adds the Mission Manager, plan validation, operator approval, sequential execution, verification and an audit trail. External movement/pose/look calls only propose missions; direct HTTP bypass is closed. The full 41-file runnable package is attached separately in the conversation. Browser/WebGL/GPU acceptance remains pending.
