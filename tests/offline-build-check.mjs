@@ -29,6 +29,20 @@ const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 assert.equal(manifest.version, '3.3.0');
 assert.equal(manifest.engine.three, '0.185.0');
 assert.equal(manifest.requiredRuntimeNetworkRequests, 0);
+
+const scripts = [...html.matchAll(/<script\\b([^>]*)>([\\s\\S]*?)<\\/script>/gi)];
+const engineSource = scripts.find(match => match[1].includes('a01-offline-engine'))?.[2];
+const mainModuleSource = scripts.find(match => /\\btype\\s*=\\s*["']module["']/i.test(match[1]))?.[2];
+assert.ok(engineSource, 'embedded engine script is required');
+assert.ok(mainModuleSource, 'main module script is required');
+new Function(engineSource);
+new Function(mainModuleSource);
+new Function(engineSource)();
+const runtime = globalThis.__A01_OFFLINE_ENGINE__;
+assert.equal(runtime?.THREE?.REVISION, '185', 'Three.js r185 must initialize');
+assert.equal(typeof runtime?.THREE?.WebGLRenderer, 'function');
+assert.equal(typeof runtime?.OrbitControls, 'function');
+delete globalThis.__A01_OFFLINE_ENGINE__;
 assert.ok(html.includes('id="a01-third-party-notices"'), 'Third-party license notice must be embedded');
 
 console.log(JSON.stringify({
