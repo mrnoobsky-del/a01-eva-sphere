@@ -1,3 +1,10 @@
+## A-01 X v0.3.0 — Sphere Intelligence and Human Wellbeing (documentation release)
+
+- [Release overview — RU](a01-x-v0.3.0/README_RU.md) · [EN](a01-x-v0.3.0/README.md) · [简体中文](a01-x-v0.3.0/README_ZH.md)
+- [Riddle-driven design method](a01-x-v0.3.0/DESIGN-METHOD_RU.md) · [Sphere Intelligence specification](a01-x-v0.3.0/SPHERE-INTELLIGENCE-SPEC_RU.md) · [13-hour test protocol](a01-x-v0.3.0/13-HOUR-TEST_RU.md)
+- [References](a01-x-v0.3.0/REFERENCES.md) · [Riddle JSON Schema](a01-x-v0.3.0/riddle.schema.json) · [Release notes](a01-x-v0.3.0/RELEASE-NOTES.md)
+- Status: documentation-only specification. No physical sensors, BMS, HVAC, elevators, water or life-safety systems are connected. The 13-hour protocol is a test plan, not a fatigue-free guarantee or evidence of real-building performance.
+
 ## A-01 X v0.2.0 — Reality View (experimental)
 
 - [Open interactive HTML prototype](a01-x-v0.2.0/eva-sphere-a01-x-v020-reality-view.html)
