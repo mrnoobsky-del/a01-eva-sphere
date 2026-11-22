@@ -98,3 +98,12 @@ v3.7.0 保留包含 AIR-01 的 v3.6.0，并在集成导航中增加“舒适”�
 - [更新日志](digital-twin/CHANGELOG_v380.md) · [架构研究](architecture/A01-AXIOM-INTERIOR-BLOCKOUT-v0.1.md)
 
 这是 v3.7.0 数字孪生的独立 Three.js 配套场景，探索中央中庭、环形走廊、公共/居住/家庭区域、连桥、电梯井示意和服务路线。它已加入数字孪生索引，但尚未合并到 v3.7.0 主场景。场景单位未按米标定，不代表工程或安全计算。
+
+
+## A-01 X v0.3.0 — Sphere Intelligence 与人体舒适
+
+- [版本概览（中文）](releases/a01-x-v0.3.0/README_ZH.md) · [RU](releases/a01-x-v0.3.0/README_RU.md) · [EN](releases/a01-x-v0.3.0/README.md)
+- [谜题驱动设计方法](releases/a01-x-v0.3.0/DESIGN-METHOD_ZH.md) · [Sphere Intelligence 技术规范](releases/a01-x-v0.3.0/SPHERE-INTELLIGENCE-SPEC_ZH.md) · [13 小时测试协议](releases/a01-x-v0.3.0/13-HOUR-TEST_ZH.md)
+- [参考资料](releases/a01-x-v0.3.0/REFERENCES.md) · [JSON Schema](releases/a01-x-v0.3.0/riddle.schema.json) · [发布说明](releases/a01-x-v0.3.0/RELEASE-NOTES_ZH.md)
+
+v0.3.0 是纯文档研究规范，说明球体如何减少可避免的人体负担并支持恢复；尚未连接真实建筑设备，也没有证明 13 小时的实体舒适性。
