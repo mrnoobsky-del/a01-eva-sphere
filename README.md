@@ -95,14 +95,13 @@ Eva Sphere workspace: https://evasphere.usite.pro/
 
 The repository is a public development record. Project status may change; check the dated release notes before relying on any implementation detail.
 
-## Latest digital twin build
+## Primary digital twin build — A-01 v4.0.0
 
-- **A-01 v3.1.2 — Serviceable LED sky and intro sequencing:** [Open HTML prototype](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html)
-- [Russian documentation](digital-twin/README_RU_v312.md) · [English documentation](digital-twin/README_v312.md) · [Changelog](digital-twin/CHANGELOG_v312.md)
-- **Previous v3.1.1 build:** [Open HTML prototype](digital-twin/eva-sphere-a01-v311-ochre-hover-arrival-flight-hud.html) · [Documentation](digital-twin/README_v311.md)
-- **Stable v2.1.0 baseline:** [Open HTML prototype](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](digital-twin/README_RU_v210.md)
+- **Open the primary HTML build:** [A-01 v4.0.0](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
+- [Russian documentation](digital-twin/README_RU_v400.md) · [English documentation](digital-twin/README_v400.md) · [Changelog](digital-twin/CHANGELOG_v400.md)
+- [Architecture note](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](releases/v4.0.0/RELEASE-NOTES_RU.md)
 
-The v3.1.2 release improves first-entry sequencing, divides the interior LED sky into serviceable curved cassettes and documents a separate protected maintenance path for the exterior skin. The geometry uses uncalibrated model units and is not a fabrication, structural or construction design.
+v4.0.0 is the repository's primary integrated digital-twin build. Earlier v3.x and v2.x snapshots remain preserved as historical or companion versions. The build has passed static source checks; browser/WebGL visual acceptance and engineering validation remain open. The live uCoz page still reports v3.1.6 as of 22 November 2026, and GitHub does not deploy to uCoz automatically.
 
 ## Integrated digital twin A-01 v3.5.0 — atrium acoustics and viewing galleries
 
