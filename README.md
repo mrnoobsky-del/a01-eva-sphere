@@ -1,5 +1,16 @@
 # A-01 — The Sphere of Eva
 
+## Current live website release line
+
+- **Website:** [evasphere.usite.pro](https://evasphere.usite.pro/)
+- **Published build checked on 22 November 2026:** `3.1.6-gullwing-crown-vent-calcs`.
+- **Prepared next build:** A-01 v3.1.7 — Android-01 Agent Runtime, built on the current website scene.
+- [v3.1.7 documentation (RU)](digital-twin/README_RU_v317.md) · [EN](digital-twin/README_v317.md) · [简体中文](digital-twin/README_ZH_v317.md) · [Integration report](releases/mainline-v3.1.7/INTEGRATION-REPORT_RU.md).
+
+This website build track is separate from the GitHub integrated digital-twin line v3.7.0 and the standalone interior study v3.8.0. The prepared v3.1.7 HTML has not yet been deployed to uCoz; a GitHub PR does not deploy the website automatically.
+
+
+
 **Energy · Intelligence · Life**
 
 A-01 is an open project record for a long-term vision: a resilient, human-centred environment combining architecture, energy systems, digital infrastructure, knowledge preservation and AI-assisted services.
