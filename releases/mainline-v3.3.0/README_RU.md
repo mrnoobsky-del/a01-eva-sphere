@@ -54,4 +54,5 @@ v3.3.0 определяет переход от онлайн-зависимог�
 - [Architecture EN](../../digital-twin/README_v330_offline.md)
 - [架构文档 ZH](../../digital-twin/README_ZH_v330_offline.md)
 - [Матрица офлайн-приёмки](ACCEPTANCE-MATRIX_RU.md)
+- [Аудит зависимостей v3.2.2](DEPENDENCY-AUDIT-v322_RU.md)
 - [Changelog](../../digital-twin/CHANGELOG_v330_offline.md)
