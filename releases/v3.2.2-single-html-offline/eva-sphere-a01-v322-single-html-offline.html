@@ -1563,6 +1563,35 @@ body.object-study-active #stage.object-study-active canvas{pointer-events:none!i
 }
 </style>
 <meta name="a01-three-engine" content="Three.js r185 + OrbitControls embedded; no CDN/vendor imports.">
+
+<!-- THIRD-PARTY SOFTWARE LICENSES
+Three.js r185 and OrbitControls
+Copyright 2010-2026 Three.js Authors.
+SPDX-License-Identifier: MIT
+
+The MIT License
+
+Copyright © 2010-2026 three.js authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+-->
 </head>
 <body data-theme="light">
 <div class="app nav-expanded" id="appShell">
@@ -2110,8 +2139,7 @@ const a01DecodeRuntime = id => {
   for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
   return new TextDecoder().decode(bytes);
 };
-const a01CoreBlob = new Blob([a01DecodeRuntime("a01ThreeCoreData")], {type:"text/javascript"});
-const a01CoreUrl = URL.createObjectURL(a01CoreBlob);
+const a01CoreUrl = URL.createObjectURL(new Blob([a01DecodeRuntime("a01ThreeCoreData")], {type:"text/javascript"}));
 const a01ThreeSource = a01DecodeRuntime("a01ThreeModuleData").replaceAll('"./three.core.min.js"', JSON.stringify(a01CoreUrl));
 if (a01ThreeSource.includes('"./three.core.min.js"')) throw new Error("Не удалось связать встроенное ядро Three.js");
 const a01ThreeUrl = URL.createObjectURL(new Blob([a01ThreeSource], {type:"text/javascript"}));
@@ -7101,8 +7129,8 @@ window.addEventListener('beforeunload',()=>{resizeObserver.disconnect();controls
  const fromFile=location.protocol==='file:';
  loading.classList.remove('hidden');
  loading.textContent=(fromFile
-  ? 'Открой комплект через START-A01-OFFLINE.bat. Браузер блокирует загрузку ES-модулей Three.js при прямом открытии HTML через file://.'
-  : 'Не удалось загрузить локальный Three.js r185. Проверь, что рядом с HTML есть vendor/three/build/three.module.js, vendor/three/build/three.core.js и vendor/three/examples/jsm/controls/OrbitControls.js. Запусти START-A01-OFFLINE.bat для проверки комплекта.')
+  ? 'Не удалось запустить встроенный Three.js r185 в этом браузере.'
+  : 'Встроенный Three.js r185 и OrbitControls не загрузились. Проверь поддержку WebGL и запусти файл в актуальной версии Chrome или Edge.')
   + '\n\nПодробности: '+detail;
  loading.style.padding='24px';
  loading.style.textAlign='left';
