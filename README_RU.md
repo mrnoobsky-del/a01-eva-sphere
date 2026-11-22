@@ -201,9 +201,12 @@ v3.7.0 сохраняет v3.6.0 с AIR-01 и добавляет пункт «К
 v0.3.0 — документационный исследовательский выпуск. Он определяет, как Сфера должна уменьшать предотвратимую нагрузку и обеспечивать восстановление; реальные системы здания не подключены, а комфорт в течение 13 часов не доказан.
 
 
-## A-01 X — Sensory Bridge: зрение от первого лица и сенсорное слияние
+## A-01 X — Sensory Bridge: Living Perception Loop v0.2
 
-- [Архитектура сенсорного моста](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
-- [JSON Schema пакета наблюдений](schemas/a01-x-sensory-observation.schema.json) · [Пример](schemas/a01-x-sensory-observation.example.json)
+- [Выпуск v0.2 (RU)](releases/a01-x-sensory-bridge-v0.2/README_RU.md) · [EN](releases/a01-x-sensory-bridge-v0.2/README.md) · [简体中文](releases/a01-x-sensory-bridge-v0.2/README_ZH.md)
+- [Архитектура Living Perception Loop](architecture/A01-X-LIVING-PERCEPTION-LOOP-v0.2.md)
+- [JSON Schema наблюдений](schemas/a01-x-sensory-observation-v0.2.schema.json) · [пример](schemas/a01-x-sensory-observation-v0.2.example.json)
+- [JSON Schema журнала событий](schemas/a01-x-perception-event-v0.2.schema.json) · [пример цепочки](schemas/a01-x-perception-event-v0.2.example.json)
+- [Предыдущая архитектура v0.1](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
-Это архитектура будущего подключения, не уже работающий робот. Опубликованной сборки Android-01 v0.3.5 и действующего сенсорного endpoint в текущем публичном репозитории нет.
+v0.2 уточняет привязку сенсоров к телу и помещениям, типы данных, синхронизацию времени, разрешения на медиа и журнал «наблюдение → загадка → рекомендация → разрешение → действие → проверка». Это документационный выпуск: реальный Android-01 и сенсорный endpoint не подключены.
