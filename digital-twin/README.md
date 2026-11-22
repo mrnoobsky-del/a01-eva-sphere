@@ -2,18 +2,18 @@
 
 This directory contains the evolving A-01 digital workspace and its software prototypes. A digital model is not evidence that physical systems have been built, commissioned or validated. Each release identifies its scope, verification status and limitations.
 
-## Primary build — A-01 v4.0.0
+## Primary build — A-01 v4.0.1
 
-- [Open the primary A-01 v4.0.0 HTML build](eva-sphere-a01-v400-primary-architecture-baseline.html)
-- [Russian documentation](README_RU_v400.md) · [English documentation](README_v400.md)
-- [Changelog](CHANGELOG_v400.md) · [Architecture note](../architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md)
-- [Release notes](../releases/v4.0.0/RELEASE-NOTES_RU.md)
+- [Open the primary A-01 v4.0.1 HTML build](eva-sphere-a01-v401-primary-architecture-baseline.html)
+- [Russian documentation](README_RU_v401.md) · [English documentation](README_v401.md)
+- [Changelog](CHANGELOG_v401.md) · [Architecture note](../architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md)
+- [Release notes](../releases/v4.0.1/RELEASE-NOTES_RU.md)
 
-v4.0.0 is the primary repository build. It preserves the integrated v3.1.6 workspace and rebuilds the 60 radial modules, entrance openings, inset vestibules, swing doors and first-person circulation camera. It is a conceptual model, not a physical-building design.
+v4.0.1 is the primary repository build. It preserves the integrated v3.1.6 workspace and rebuilds the 60 radial modules, entrance openings, inset vestibules, swing doors and first-person circulation camera. It is a conceptual model, not a physical-building design.
 
 **Verification:** 298 HTML IDs with no duplicates, seven inline JavaScript blocks with no syntax errors, and a valid JSON import map. Run the following from the repository root to repeat static checks:
 
-    python tools/validate_a01_v400.py
+    python tools/validate_a01_v401.py
 
 Browser/WebGL visual acceptance and engineering validation have not been completed.
 
