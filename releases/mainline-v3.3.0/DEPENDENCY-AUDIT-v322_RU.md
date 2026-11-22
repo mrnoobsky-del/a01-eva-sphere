@@ -28,12 +28,12 @@ These are mandatory for the primary 3D scene. The current v3.2.2 file is therefo
 
 ### Additional relative JavaScript files
 
-The HTML references these optional Living World scripts:
+The HTML references three optional Living World scripts:
 - `./modules/living-world/companion-motion.js`
 - `./modules/living-world/companion-ai.js`
 - `./modules/living-world/companions.js`
 
-Each script tag has an `onerror` handler that removes the failed script element, so failure is currently non-fatal by markup design. The two supplied ZIPs do not contain this modules directory. For a faithful self-contained release, decide whether these modules are required features and either embed them in the bundle or document/test their graceful absence. Do not silently drop them if the current companion behaviour depends on them.
+These files are absent from the audited ZIPs and are not present in the repository baseline. Each script tag uses `onerror="this.remove()"`, which makes the missing layer explicitly optional in the current source. The offline builder removes these file-based requests when the modules are unavailable and records the missing optional modules in the build manifest. If the user expects these companion behaviours in the core offline build, their actual source files must be supplied and bundled; they must not be replaced with fabricated no-op implementations.
 
 ### Network service call
 
@@ -42,14 +42,20 @@ One explicit `fetch()` endpoint was found:
 
 This endpoint is used for the remote Eva chat. It must remain behind the Online Adapter and be unavailable in Offline mode with a clear UI state. It must not prevent the 3D core from starting.
 
+### Documentation and registry pages
+
+The source HTML already embeds its integrated documentation/registry pages inside a base64 `pageData` object and their CSS inside `pageCss`. The `routeFromUrl()` / `showIntegrated()` logic converts the legacy documentation and registry file names into an internal `srcdoc` view. These are logical navigation routes, not required local HTML-file fetches. They do not block the Single HTML profile and must be preserved by the build.
+
+The earlier assumption that these pages were absent from the one-file HTML was incorrect; this section corrects that finding.
+
 ### External links, not core dependencies
 
-The document contains links/metadata referencing:
+The HTML includes outbound links/metadata referencing:
 - `https://vibeshorts.ru/evasphere/`
 - `https://yoomoney.ru/to/410015357551847`
 - `https://schema.org` in structured metadata
 
-These are not required runtime modules in this inspection, but navigation to external websites naturally requires connectivity.
+These are not required runtime modules in this inspection. Navigation to external sites naturally requires connectivity, but must not be triggered during offline startup.
 
 ### Local persistence observations
 
