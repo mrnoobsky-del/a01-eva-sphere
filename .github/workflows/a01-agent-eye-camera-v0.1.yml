@@ -1,0 +1,35 @@
+name: A-01 AgentEyeCamera v0.1 checks
+
+on:
+  push:
+    paths:
+      - "digital-twin/modules/living-world/agent-eye-camera.js"
+      - "digital-twin/modules/living-world/agent-eye-camera-preview.html"
+      - "digital-twin/modules/living-world/tests/**"
+      - ".github/workflows/a01-agent-eye-camera-v0.1.yml"
+  pull_request:
+    paths:
+      - "digital-twin/modules/living-world/agent-eye-camera.js"
+      - "digital-twin/modules/living-world/agent-eye-camera-preview.html"
+      - "digital-twin/modules/living-world/tests/**"
+      - ".github/workflows/a01-agent-eye-camera-v0.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  static-and-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check camera adapter syntax
+        run: node --check digital-twin/modules/living-world/agent-eye-camera.js
+      - name: Check preview module syntax
+        run: |
+          node -e "const fs=require('fs'); const s=fs.readFileSync('digital-twin/modules/living-world/agent-eye-camera-preview.html','utf8'); const m=s.match(/<script type=\"module\">([\\s\\S]*?)<\\/script>/); if(!m) process.exit(1); fs.writeFileSync('/tmp/a01-eye-preview.mjs',m[1]);"
+          node --check /tmp/a01-eye-preview.mjs
+      - name: Run adapter unit tests
+        run: node --test digital-twin/modules/living-world/tests/agent-eye-camera.test.cjs

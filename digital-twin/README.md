@@ -21,3 +21,11 @@ The Living World module is developed on a separate feature branch. It is not yet
 - A-01 v2.1.0 — [HTML prototype](eva-sphere-a01-v210-human-navigation-safety.html) · [Documentation](README_RU_v210.md)
 
 All digital-twin files remain experimental software and conceptual representations. Geometry uses model units unless explicitly calibrated; it is not construction documentation. Live WebGL, mobile, physical-device and engineering verification must be stated separately for each release.
+
+## First-person vision adapter — AgentEyeCamera v0.1
+
+- [Russian integration notes](modules/living-world/AGENT-EYE-CAMERA-README_RU.md)
+- [Synthetic humanoid camera-rig preview](modules/living-world/agent-eye-camera-preview.html)
+- [Head-ready integration contract](modules/living-world/agent-eye-camera-integration.html)
+
+This optional adapter creates an independent head-mounted Three.js camera and local canvas stream. The available Living World branch does not yet expose a verified Android-01 humanoid head rig; the preview uses a synthetic fixture. It is an adapter and test harness, not a claim of a live Android-01 connection.

@@ -1,0 +1,47 @@
+<!--
+  A-01 AgentEyeCamera v0.1 integration contract.
+  Load agent-eye-camera.js before the humanoid runtime emits a01-agent:head-ready.
+  The runtime must pass its actual THREE.Object3D/Bone head node; do not guess a property name.
+-->
+<script src="./modules/living-world/agent-eye-camera.js" defer></script>
+
+<!--
+  In the Android-01 rig initialization code, after the real head Object3D exists,
+  dispatch this event. Replace androidHeadObject3D with the variable owned by
+  the real rig implementation. This is an interface example, not an existing API.
+
+  window.dispatchEvent(new CustomEvent("a01-agent:head-ready", {
+    detail: {
+      agentId: "android-01",
+      headObject: androidHeadObject3D,
+      api: window.EVA_SPHERE,
+      eyeCameraOptions: {
+        width: 640,
+        height: 360,
+        fps: 6,
+        fov: 78,
+        mountPosition: [0, 0, -0.08],
+        mountQuaternion: [0, 0, 0, 1],
+        frameId: "eye_camera_optical",
+        sourceId: "android-01-eye-camera",
+        provenance: "simulated"
+      }
+    }
+  }));
+
+  Start only from an explicit operator action and a separately issued local permission:
+
+  window.A01_AGENT_EYE_CAMERA.start({
+    authorization: {
+      authorizationId: "issued-by-session-authorizer",
+      grantedBy: "operator",
+      grantedAt: "2026-11-22T03:50:00Z",
+      expiresAt: "2026-11-22T04:00:00Z",
+      scope: ["local_eye_stream"]
+    },
+    videoElement: document.querySelector("#eyePreview")
+  });
+
+  This local stream does not upload or transmit frames. External transmission
+  requires a separate permission and a separately implemented secure gateway.
+-->
