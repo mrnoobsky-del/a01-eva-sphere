@@ -100,3 +100,11 @@ Each release must identify what changed, what was tested, what was not tested, k
 - [Release overview — RU](a01-x-sensory-bridge-v0.2/README_RU.md) · [EN](a01-x-sensory-bridge-v0.2/README.md) · [简体中文](a01-x-sensory-bridge-v0.2/README_ZH.md)
 - [Architecture](../architecture/A01-X-LIVING-PERCEPTION-LOOP-v0.2.md) · [Observation schema](../schemas/a01-x-sensory-observation-v0.2.schema.json) · [Perception event schema](../schemas/a01-x-perception-event-v0.2.schema.json)
 - Status: documentation and integration-contract release. No physical Android-01, sensor hardware or live endpoint is connected. Synthetic examples are labelled as simulation.
+
+
+## A-01 X v0.3.8 — Agent Runtime / Mission Manager
+
+- [Release overview (RU)](a01-x-v0.3.8/README_RU.md) · [EN](a01-x-v0.3.8/README.md) · [简体中文](a01-x-v0.3.8/README_ZH.md)
+- [Architecture](../architecture/A01-X-AGENT-RUNTIME-v0.1.md) · [Mission schema](../schemas/a01-agent-mission-v0.1.schema.json) · [Example plan](../schemas/a01-agent-mission-v0.1.example.json)
+- [Antigravity-inspired design guide](../docs/AGENT-RUNTIME-ANTIGRAVITY-INSPIRED_RU.md) · [API/MCP examples](../docs/AGENT-API-EXAMPLES.md)
+- Status: software prototype for the digital Android-01 only. The complete 41-file runnable package was attached separately in the conversation. Browser/WebGL/GPU acceptance remains pending.
