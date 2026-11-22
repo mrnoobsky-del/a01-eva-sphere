@@ -25,6 +25,14 @@ v3.1.8 保留 v3.1.6 网站场景，并修正服务物流、MEP/HVAC、中庭、
 
 点击“Изучить объект”后，模型进入全屏视图，摄像机聚焦对象，常规界面隐藏，信息卡片保留在模型上方。关闭卡片或按 Escape 即恢复原界面和上下文面板状态。自动检查通过；完整 WebGL 视觉验收仍待完成。uCoz 网站未更改。
 
+## 已准备版本 A-01 v3.2.0 — 本地 3D 引擎
+
+- [离线启动说明（俄文）](releases/mainline-v3.2.0-offline-engine/README_RU.md)
+- [uCoz 部署说明（俄文）](releases/mainline-v3.2.0-offline-engine/DEPLOYMENT_UCOZ_RU.md)
+- [更新日志](releases/mainline-v3.2.0-offline-engine/CHANGELOG.md)
+
+Three.js r185 和 OrbitControls 已改为相对本地路径。ZIP 包含 PowerShell 初始安装脚本，首次启动时从 GitHub Raw 一次性获取官方引擎文件并组装核心文件；完成后，3D 场景使用本地文件，不再依赖 CDN 或网络。ZIP 尚未预置完整引擎文件。提供 localhost 启动器以支持浏览器 ES 模块。Eva 聊天仍需要网络。浏览器/WebGL 视觉验收和 Windows PowerShell 启动测试尚未完成；uCoz 网站未更新。
+
 **能源 · 智能 · 生命**
 
 A-01 是一个长期愿景的公开项目记录：探索以人为中心的韧性生活环境，将建筑、能源系统、数字基础设施、知识保存和 AI 辅助服务结合起来。
