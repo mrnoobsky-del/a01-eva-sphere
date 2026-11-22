@@ -30,3 +30,14 @@ v0.1 defined the sensory channels and overall bridge architecture. v0.2 specifie
 No physical camera, microphone, IMU, Android-01 sensor, actuator or building-management system is connected by this release. Examples are synthetic and explicitly marked as simulation. Implementation requires the exact Android-01 runtime, hardware interfaces and a separate safety test plan.
 
 The architecture preserves local safety control and human approval. AI observations are not raw sensor measurements, and recommendations are not actuator commands.
+
+## Validate the schemas and examples
+
+From the repository root:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python tools/validate-sensory-bridge-v0.2.py
+```
+
+The validator uses JSON Schema Draft 2020-12 and checks both examples, observation-to-source/frame references, media expiry, audio permission, and event sequence consistency. GitHub Actions runs the same validation when release files change.
