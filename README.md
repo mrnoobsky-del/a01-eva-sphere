@@ -50,15 +50,15 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 
 ## Current primary digital-twin build
 
-- **A-01 v4.0.1 — Primary Architecture Baseline:** [Open primary HTML](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
+- **A-01 v4.0.0 — Primary Architecture Baseline:** [Open primary HTML](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Russian documentation](digital-twin/README_RU_v400.md) · [English documentation](digital-twin/README_v400.md) · [Changelog](digital-twin/CHANGELOG_v400.md)
-- [Russian architecture note](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](releases/v4.0.1/RELEASE-NOTES_RU.md)
+- [Russian architecture note](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](releases/v4.0.0/RELEASE-NOTES_RU.md)
 
-v4.0.1 preserves the integrated v3.1.6 workspace line while rebuilding the architecture of the radial modules, door openings, vestibules and human circulation path. The model has five levels and 60 radial modules. This is the primary build in the GitHub main branch; it does not mean that the physical Sphere has been built or commissioned.
+v4.0.0 preserves the integrated v3.1.6 workspace line while rebuilding the architecture of the radial modules, door openings, vestibules and human circulation path. The model has five levels and 60 radial modules. This is the primary build in the GitHub main branch; it does not mean that the physical Sphere has been built or commissioned.
 
-As of 22 November 2026, the public [evasphere.usite.pro](https://evasphere.usite.pro/) page still reports v3.1.6 metadata. GitHub publication does not automatically update uCoz. Static checks for v4.0.1 passed; browser/WebGL acceptance and engineering verification remain outstanding.
+As of 22 November 2026, the public [evasphere.usite.pro](https://evasphere.usite.pro/) page still reports v3.1.6 metadata. GitHub publication does not automatically update uCoz. Static checks for v4.0.0 passed; browser/WebGL acceptance and engineering verification remain outstanding.
 
-Preserved earlier lines: [v3.8.0 — standalone Axiom-inspired blockout](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html), [v3.7.0 — Human Comfort Engineering](digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html), [v3.1.2 — serviceable LED sky](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html), and the [v2.1.0 stable archive](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html). These snapshots are preserved and are not overwritten by v4.0.1.
+Preserved earlier lines: [v3.8.0 — standalone Axiom-inspired blockout](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html), [v3.7.0 — Human Comfort Engineering](digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html), [v3.1.2 — serviceable LED sky](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html), and the [v2.1.0 stable archive](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html). These snapshots are preserved and are not overwritten by v4.0.0.
 
 
 
@@ -95,13 +95,13 @@ Eva Sphere workspace: https://evasphere.usite.pro/
 
 The repository is a public development record. Project status may change; check the dated release notes before relying on any implementation detail.
 
-## Primary digital twin build — A-01 v4.0.1
+## Primary digital twin build — A-01 v4.0.0
 
-- **Open the primary HTML build:** [A-01 v4.0.1](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
+- **Open the primary HTML build:** [A-01 v4.0.0](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Russian documentation](digital-twin/README_RU_v400.md) · [English documentation](digital-twin/README_v400.md) · [Changelog](digital-twin/CHANGELOG_v400.md)
-- [Architecture note](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](releases/v4.0.1/RELEASE-NOTES_RU.md)
+- [Architecture note](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](releases/v4.0.0/RELEASE-NOTES_RU.md)
 
-v4.0.1 is the repository's primary integrated digital-twin build. Earlier v3.x and v2.x snapshots remain preserved as historical or companion versions. The build has passed static source checks; browser/WebGL visual acceptance and engineering validation remain open. The live uCoz page still reports v3.1.6 as of 22 November 2026, and GitHub does not deploy to uCoz automatically.
+v4.0.0 is the repository's primary integrated digital-twin build. Earlier v3.x and v2.x snapshots remain preserved as historical or companion versions. The build has passed static source checks; browser/WebGL visual acceptance and engineering validation remain open. The live uCoz page still reports v3.1.6 as of 22 November 2026, and GitHub does not deploy to uCoz automatically.
 
 ## Integrated digital twin A-01 v3.5.0 — atrium acoustics and viewing galleries
 
