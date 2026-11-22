@@ -1,0 +1,22 @@
+{
+  "product": "A-01 Offline Edition",
+  "version": "3.3.0",
+  "profile": "single-html",
+  "source": "v3.2.2 baseline",
+  "three": "0.185.0",
+  "orbitControls": "0.185.0",
+  "engineBundleBytes": 2129274,
+  "htmlBytes": 3717766,
+  "embeddedKnowledgePages": true,
+  "optionalModulesMissing": [
+    "companion-motion.js",
+    "companion-ai.js",
+    "companions.js"
+  ],
+  "networkOptional": [
+    "Eva chat through Cloudflare Worker",
+    "external web and payment links"
+  ],
+  "requiredRuntimeNetworkDependencies": 0,
+  "verification": "Static assembly checks only; browser file:// startup with internet disconnected is NOT TESTED."
+}
