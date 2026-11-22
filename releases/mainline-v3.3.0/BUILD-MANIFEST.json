@@ -31,8 +31,13 @@
     "importMapPresent": false,
     "threeCdnReferencePresent": false,
     "duplicateDomIds": 0,
-    "uniqueDomIds": 319
+    "uniqueDomIds": 319,
+    "engineEvaluation": "PASS in isolated V8 runtime",
+    "threeRevision": "185",
+    "exportedWebGLRenderer": true,
+    "exportedOrbitControls": true
   },
   "browserAcceptance": "NOT TESTED",
-  "deployment": "Not deployed to uCoz"
+  "deployment": "Not deployed to uCoz",
+  "browserWebGLRendering": "NOT TESTED"
 }
