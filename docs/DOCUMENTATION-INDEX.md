@@ -1,3 +1,12 @@
+# A-01 v3.3.0 Offline Edition
+
+- [Architecture RU](../digital-twin/README_RU_v330_offline.md) · [EN](../digital-twin/README_v330_offline.md) · [简体中文](../digital-twin/README_ZH_v330_offline.md)
+- [Release plan (RU)](../releases/mainline-v3.3.0/README_RU.md)
+- [Offline acceptance matrix (RU)](../releases/mainline-v3.3.0/ACCEPTANCE-MATRIX_RU.md)
+- [Changelog](../digital-twin/CHANGELOG_v330_offline.md)
+
+**Status:** architecture specification only; no fully offline executable artifact has passed browser acceptance yet.
+
 # Documentation index
 
 - [A-01 v3.1.9 — immersive object study (RU)](../digital-twin/README_RU_v319.md) · [EN](../digital-twin/README_v319.md) · [简体中文](../digital-twin/README_ZH_v319.md)
