@@ -1,5 +1,9 @@
 # Documentation index
 
+- [A-01 v3.1.8 — main website spatial coordination (RU)](../digital-twin/README_RU_v318.md) · [EN](../digital-twin/README_v318.md) · [简体中文](../digital-twin/README_ZH_v318.md)
+- [v3.1.8 spatial coordination and clash audit (RU)](../releases/mainline-v3.1.8/SPATIAL-COORDINATION-AND-CLASH-AUDIT_RU.md)
+- [v3.1.8 release overview (RU)](../releases/mainline-v3.1.8/README_RU.md)
+- [v3.1.8 changelog](../digital-twin/CHANGELOG_v318.md)
 - [A-01 v3.1.7 — Main website line (RU)](../digital-twin/README_RU_v317.md) · [EN](../digital-twin/README_v317.md) · [简体中文](../digital-twin/README_ZH_v317.md)
 - [v3.1.7 integration report (RU)](../releases/mainline-v3.1.7/INTEGRATION-REPORT_RU.md)
 - [v3.1.7 release overview (RU)](../releases/mainline-v3.1.7/README_RU.md)
