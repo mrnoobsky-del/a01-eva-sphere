@@ -7,6 +7,8 @@
 - [A-01 Performance — 60 FPS without visual quality loss (EN)](../performance/README.md)
 - [A-01 Performance — 60 FPS без потери качества (RU)](../performance/README_RU.md)
 - [Performance benchmark report template](../performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
+- [P0 static source review — A-01 v4.0.0](../performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md)
+- [Browser baseline recorder](../performance/baseline-recorder.js)
 - [A-01 v3.0.0 — Parametric Modular Shell](../digital-twin/README_RU_v300.md)
 - [Release history](../releases/README.md)
 - [A-01 Sphere Standard v0.1](../standards/A01-SPHERE-STANDARD-v0.1.md)
