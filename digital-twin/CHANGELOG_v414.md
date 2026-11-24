@@ -1,7 +1,7 @@
 # A-01 v4.1.4 — Changelog
 
 **Date:** 24 November 2026  
-**Release type:** clean-interface and Lottie preview
+**Release type:** current primary clean-interface and Lottie release
 
 ## Added
 - Lazy-loaded Lottie Web 5.13.0 with inline animation data and SVG renderer.
@@ -23,4 +23,7 @@
 - Core 3D scene and interaction systems.
 
 ## Verification
-Static source checks passed for the intended interface and code markers. Browser/Lottie runtime testing is pending. No 60 FPS claim is made.
+Static source checks passed for the intended interface and code markers. The v4.1.3 3D scene previously loaded in the user's browser; direct v4.1.4 Lottie runtime testing is pending. No 60 FPS claim is made.
+
+## Release status
+v4.1.4 is designated as the current primary integrated digital-twin build in the GitHub `main` branch. v4.1.3 remains preserved as the previous primary snapshot.

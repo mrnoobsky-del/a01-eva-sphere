@@ -2,35 +2,26 @@
 
 This directory contains the evolving A-01 digital workspace and its software prototypes. A digital model is not evidence that physical systems have been built, commissioned or validated.
 
-## Three self-canonical originals — A-01 v4.1.3
+## Current primary build — A-01 v4.1.4
 
-Each HTML file has its own self-referencing canonical URL, matching Open Graph URL and Schema.org URL. Each is indexable (`index,follow`) and its Share button points to its own platform URL.
+A-01 v4.1.4 is the current primary integrated digital-twin build in GitHub `main`.
 
-- [Wix original HTML](eva-sphere-a01-v413-wix-original.html) — `https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v413-clean-feature-batch-init-preview.html`
-- [VibeShorts original HTML](eva-sphere-a01-v413-vibeshorts-original.html) — `https://vibeshorts.ru/evasphere/`
-- [EvaSphere original HTML](eva-sphere-a01-v413-evasphere-original.html) — `https://evasphere.usite.pro/`
-
-These are three separately addressable originals, not one cross-domain canonical mirror. Keep the matching file on its matching platform.
-
-## A-01 v4.1.4 — clean-interface preview
-
-- [Wix preview HTML](eva-sphere-a01-v414-wix-preview.html)
-- [VibeShorts original HTML](eva-sphere-a01-v414-vibeshorts-original.html)
-- [EvaSphere original HTML](eva-sphere-a01-v414-evasphere-original.html)
+- [Wix HTML build](eva-sphere-a01-v414-wix-preview.html) — `https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v414-lottie-welcome-clean-preview.html`
+- [VibeShorts canonical original](eva-sphere-a01-v414-vibeshorts-original.html) — `https://vibeshorts.ru/evasphere/`
+- [EvaSphere canonical original](eva-sphere-a01-v414-evasphere-original.html) — `https://evasphere.usite.pro/`
 - [Russian documentation](README_RU_v414.md) · [Changelog](CHANGELOG_v414.md) · [Release notes](../releases/v4.1.4/RELEASE-NOTES_RU.md)
 
-This preview restores the first-visit welcome, adds one lazy-loaded Lottie orbital animation for loading and welcome, and removes the public FPS/10-second benchmark overlay and rotation-test controls. Native adaptive quality remains. User acceptance is pending; v4.1.3 stays preserved.
+The release restores the A-01 first-visit welcome, introduces a lightweight lazy-loaded Lottie orbital animation for model loading and welcome, and removes the public FPS/10-second diagnostic overlay and rotation-test controls. Native adaptive pixel-ratio quality, geometry batching, feature picking and the 3D scene are retained.
 
-## Current primary build — A-01 v4.1.3
+**Verification:** source and platform metadata checks passed. The user previously confirmed the v4.1.3 scene loaded in a browser on 24 November 2026. Direct browser confirmation of the new v4.1.4 Lottie animation, repeatable FPS benchmarking, cross-device WebGL acceptance and engineering verification remain open. No 60 FPS result is claimed.
 
-- [Open the current primary A-01 v4.1.3 HTML build](eva-sphere-a01-v413-primary-digital-twin.html)
-- [Russian v4.1.3 documentation](README_RU_v413.md) · [Changelog](CHANGELOG_v413.md)
-- [Release notes](../releases/v4.1.3/RELEASE-NOTES_RU.md)
-- [Live Wix preview](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v413-clean-feature-batch-init-preview.html)
+## Preserved previous release — A-01 v4.1.3
 
-v4.1.3 is the current primary integrated digital-twin build in the GitHub `main` branch. It carries forward the v4.0.9 static geometry batching and feature-picking work, uses a native adaptive pixel-ratio controller, removes the external adaptive-quality package dependency and fixes feature-batch initialization order.
-
-**Browser status:** the user confirmed that the 3D scene loaded in a browser on 24 November 2026. A repeatable FPS benchmark, cross-device/WebGL acceptance and engineering validation have not been completed. No 60 FPS result is claimed.
+- [Open the v4.1.3 primary HTML snapshot](eva-sphere-a01-v413-primary-digital-twin.html)
+- [Previous Wix original](eva-sphere-a01-v413-wix-original.html)
+- [Previous VibeShorts original](eva-sphere-a01-v413-vibeshorts-original.html)
+- [Previous EvaSphere original](eva-sphere-a01-v413-evasphere-original.html)
+- [Russian documentation](README_RU_v413.md) · [Changelog](CHANGELOG_v413.md) · [Release notes](../releases/v4.1.3/RELEASE-NOTES_RU.md)
 
 ## Preserved architecture foundation — A-01 v4.0.0
 
@@ -39,16 +30,6 @@ v4.1.3 is the current primary integrated digital-twin build in the GitHub `main`
 - [Changelog](CHANGELOG_v400.md) · [Architecture note](../architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md)
 - [Historical release notes](../releases/v4.0.0/RELEASE-NOTES_RU.md)
 
-v4.0.0 remains the preserved architectural reference for the radial modules, entrance openings, vestibules and first-person circulation path. It is no longer the current primary integrated build.
+v4.0.0 remains the preserved architectural reference for radial modules, entrance openings, vestibules and the human circulation path. Earlier companion studies remain available in the historical archive.
 
-## Preserved previous and companion builds
-
-- [A-01 v3.8.0 — Axiom-inspired interior blockout](eva-sphere-a01-v380-axiom-inspired-interior-blockout.html) · [RU](README_RU_v380.md) · [EN](README_v380.md) · [Changelog](CHANGELOG_v380.md). Standalone companion study.
-- [A-01 v3.7.0 — Human Comfort Engineering](eva-sphere-a01-v370-human-comfort-engineering.html) · [RU](README_RU_v370.md) · [EN](README_v370.md) · [Changelog](CHANGELOG_v370.md).
-- [A-01 v3.6.0 — AIR-01 life support](eva-sphere-a01-v360-air-01-life-support.html) · [RU](README_RU_v360.md).
-- [A-01 v3.1.2 — serviceable LED sky and intro sequence](eva-sphere-a01-v312-modular-shell-serviceable-led.html) · [RU](README_RU_v312.md) · [Changelog](CHANGELOG_v312.md).
-- [A-01 v2.1.0 — preserved stable archive](eva-sphere-a01-v210-human-navigation-safety.html) · [RU](README_RU_v210.md).
-
-Older builds remain available for comparison and historical review.
-
-**Deployment:** GitHub changes do not automatically deploy to Wix or uCoz. The Wix preview is published separately.
+**Deployment:** GitHub changes do not automatically deploy to Wix or uCoz. Each platform's own HTML file must be uploaded to its matching destination.

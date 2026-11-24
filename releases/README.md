@@ -20,20 +20,26 @@
 
 # Releases
 
-## A-01 v4.1.4 — Clean-interface and Lottie preview
+## A-01 v4.1.4 — Current Primary Digital Twin
+
+- [Wix HTML build](../digital-twin/eva-sphere-a01-v414-wix-preview.html)
+- [VibeShorts canonical original](../digital-twin/eva-sphere-a01-v414-vibeshorts-original.html)
+- [EvaSphere canonical original](../digital-twin/eva-sphere-a01-v414-evasphere-original.html)
+- [Documentation](../digital-twin/README_RU_v414.md) · [Changelog](../digital-twin/CHANGELOG_v414.md) · [Release notes](v4.1.4/RELEASE-NOTES_RU.md)
+- Status: current primary integrated digital-twin build on GitHub `main`. Static source and metadata checks passed. Direct browser confirmation of the new Lottie animation remains open; no 60 FPS result is claimed.
 
 - [Wix preview](../digital-twin/eva-sphere-a01-v414-wix-preview.html)
 - [VibeShorts original](../digital-twin/eva-sphere-a01-v414-vibeshorts-original.html)
 - [EvaSphere original](../digital-twin/eva-sphere-a01-v414-evasphere-original.html)
 - [Documentation](../digital-twin/README_RU_v414.md) · [Changelog](../digital-twin/CHANGELOG_v414.md) · [Release notes](v4.1.4/RELEASE-NOTES_RU.md)
-- Status: preview; static checks confirm welcome and Lottie integration markers, removal of the diagnostic FPS panel and rotation-test controls, and preservation of native adaptive quality. Browser verification is pending.
+- Status: current primary integrated digital-twin build in GitHub `main`. Source checks confirm the restored welcome, lazy-loaded Lottie integration, removal of the diagnostic FPS panel and rotation-test controls, and preservation of native adaptive quality. Direct browser testing of Lottie is still pending.
 
-## A-01 v4.1.3 — Current Primary Digital Twin
+## A-01 v4.1.3 — Preserved Previous Primary Build
 
 - [Open current primary HTML build](../digital-twin/eva-sphere-a01-v413-primary-digital-twin.html)
 - [Russian documentation](../digital-twin/README_RU_v413.md) · [Changelog](../digital-twin/CHANGELOG_v413.md) · [Release notes](v4.1.3/RELEASE-NOTES_RU.md)
 - [Live Wix preview](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v413-clean-feature-batch-init-preview.html)
-- Status: current primary integrated digital-twin build on GitHub `main`. The user confirmed that the scene loaded in a browser on 24 November 2026. Repeatable FPS benchmarking, cross-device WebGL acceptance and engineering verification remain open. No 60 FPS result is claimed.
+- Status: preserved previous integrated build, superseded by v4.1.4 as the current primary. The user confirmed that the v4.1.3 scene loaded in a browser on 24 November 2026.
 
 ## A-01 v4.0.0 — Preserved Architecture Baseline (historical foundation)
 
