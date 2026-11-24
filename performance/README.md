@@ -135,6 +135,9 @@ The first practical step is to run the unchanged v4.0.0 primary build in a real 
 
 ## Related documents
 
+- [P0 — static source review of v4.0.0 (Russian)](P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md)
+- [Browser baseline recorder](baseline-recorder.js)
+
 - [A-01 v4.0.0 build documentation](../digital-twin/README_v400.md)
 - [Русская версия плана](README_RU.md)
 - [Benchmark report template](BENCHMARK-REPORT-TEMPLATE_RU.md)
