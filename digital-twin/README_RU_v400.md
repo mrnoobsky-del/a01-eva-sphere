@@ -9,6 +9,7 @@
 
 - [A-01 Performance — 60 FPS без потери качества](../performance/README_RU.md)
 - [Шаблон отчёта о тестировании](../performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
+- [Аудит исходного кода P0](../performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Рекордер baseline](../performance/baseline-recorder.js)
 
 - [Основной HTML цифрового двойника A-01 v4.0.0](eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [История изменений](CHANGELOG_v400.md)
