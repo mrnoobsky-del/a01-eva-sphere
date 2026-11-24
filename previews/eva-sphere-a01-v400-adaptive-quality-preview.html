@@ -1970,11 +1970,20 @@ const THREE = await import('three');
 const { OrbitControls } = await import('three/addons/controls/OrbitControls.js');
 const { mergeGeometries } = await import('three/addons/utils/BufferGeometryUtils.js');
 let adaptiveQualityFactory = null;
+let adaptiveQualityLoadError = null;
 try {
- const qualityModule = await import('https://esm.sh/@zkmake/three-quality@0.1.2');
+ const qualityModule = await import('https://cdn.jsdelivr.net/npm/@zkmake/three-quality@0.1.2/+esm');
  adaptiveQualityFactory = qualityModule.adaptQuality;
-} catch (qualityImportError) {
- console.warn('A-01 adaptive quality package could not be loaded; default rendering will continue.',qualityImportError);
+ if(typeof adaptiveQualityFactory!=='function')throw new Error('adaptQuality export is missing');
+} catch (jsdelivrError) {
+ try {
+  const qualityModule = await import('https://esm.sh/@zkmake/three-quality@0.1.2?bundle');
+  adaptiveQualityFactory = qualityModule.adaptQuality;
+  if(typeof adaptiveQualityFactory!=='function')throw new Error('adaptQuality export is missing');
+ } catch (esmError) {
+  adaptiveQualityLoadError=esmError||jsdelivrError;
+  console.error('A-01 adaptive quality package could not be loaded.',jsdelivrError,esmError);
+ }
 }
 
 const $ = id => document.getElementById(id);
@@ -2011,7 +2020,21 @@ const pixelRatioLimit = isMobilePerformance ? (lowPowerPerformance ? 1.0 : 1.12)
 const renderer = new THREE.WebGLRenderer({antialias:!isMobilePerformance&&!lowPowerPerformance,alpha:true,powerPreference:isMobilePerformance?'low-power':'high-performance'});
 renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, pixelRatioLimit));
 let adaptiveQuality = null;
-if (typeof adaptiveQualityFactory === 'function') {
+const qualityText=document.getElementById('a01AdaptiveQualityText');
+const qualityDetail=document.getElementById('a01AdaptiveQualityDetail');
+const qualityHud=document.getElementById('a01AdaptiveQualityHud');
+const renderQualityState=state=>{
+ if(!state)return;
+ const phaseText={warming:'АНАЛИЗ',adapting:'ПОДБОР',steady:'АВТО', 'cpu-bound':'ОГРАНИЧЕНИЕ CPU',pinned:'ЗАКРЕПЛЕНО'};
+ if(qualityText)qualityText.textContent='КАЧЕСТВО · '+(phaseText[state.phase]||String(state.phase).toUpperCase());
+ if(qualityDetail)qualityDetail.textContent='DPR '+Number(state.dpr||1).toFixed(2)+(state.p90Ms===null?' · ПОВЕРНИТЕ КАМЕРУ ДЛЯ ТЕСТА':' · p90 '+Number(state.p90Ms).toFixed(1)+' мс');
+ if(qualityHud)qualityHud.dataset.phase=state.phase||'warming';
+};
+if(adaptiveQualityLoadError){
+ if(qualityText)qualityText.textContent='АВТОКАЧЕСТВО · МОДУЛЬ НЕ ЗАГРУЖЕН';
+ if(qualityDetail)qualityDetail.textContent='Проверьте подключение к CDN';
+ if(qualityHud)qualityHud.dataset.phase='error';
+}else if(typeof adaptiveQualityFactory === 'function'){
  try {
   adaptiveQuality = adaptiveQualityFactory(renderer,{
    targetFps:60,
@@ -2029,17 +2052,13 @@ if (typeof adaptiveQualityFactory === 'function') {
     }
    }]
   });
-  const qualityText=document.getElementById('a01AdaptiveQualityText');
-  const qualityDetail=document.getElementById('a01AdaptiveQualityDetail');
-  const qualityHud=document.getElementById('a01AdaptiveQualityHud');
-  const phaseText={warming:'АНАЛИЗ',adapting:'ПОДБОР',steady:'АВТО', 'cpu-bound':'ОГРАНИЧЕНИЕ CPU',pinned:'ЗАКРЕПЛЕНО'};
-  adaptiveQuality.onChange(state=>{
-   if(qualityText)qualityText.textContent='КАЧЕСТВО · '+(phaseText[state.phase]||state.phase.toUpperCase());
-   if(qualityDetail)qualityDetail.textContent='DPR '+state.dpr.toFixed(2)+(state.p90Ms===null?'':' · p90 '+state.p90Ms.toFixed(1)+' мс');
-   if(qualityHud)qualityHud.dataset.phase=state.phase;
-  });
+  adaptiveQuality.onChange(renderQualityState);
+  renderQualityState(adaptiveQuality.state);
  } catch(qualitySetupError) {
-  console.warn('A-01 adaptive quality initialization failed; default rendering will continue.',qualitySetupError);
+  console.error('A-01 adaptive quality initialization failed.',qualitySetupError);
+  if(qualityText)qualityText.textContent='АВТОКАЧЕСТВО · ОШИБКА';
+  if(qualityDetail)qualityDetail.textContent='См. консоль браузера';
+  if(qualityHud)qualityHud.dataset.phase='error';
  }
 }
 renderer.outputColorSpace = THREE.SRGBColorSpace;
