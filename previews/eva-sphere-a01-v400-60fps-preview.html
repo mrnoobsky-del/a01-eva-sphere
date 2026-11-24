@@ -1953,6 +1953,7 @@ body.service-demo-on .sky-service-status span{font-size:16px;line-height:1.45;ma
 try {
 const THREE = await import('three');
 const { OrbitControls } = await import('three/addons/controls/OrbitControls.js');
+const { mergeGeometries } = await import('three/addons/utils/BufferGeometryUtils.js');
 const $ = id => document.getElementById(id);
 const stage = $('stage');
 const scene = new THREE.Scene();
@@ -3071,6 +3072,7 @@ exteriorWindows.instanceMatrix.needsUpdate=true;exteriorGroup.add(exteriorWindow
 const exteriorDome=addMesh(exteriorGroup,new THREE.SphereGeometry(DOME_BASE_RADIUS,128,64,0,Math.PI*2,0,Math.PI/2),exteriorGlassMat,[0,.58,0]);
 exteriorDome.scale.set(DOME_SCALE_XZ,DOME_SCALE_Y,DOME_SCALE_XZ);
 {const exteriorLattice=new THREE.Group();exteriorLattice.position.set(0,.58,0);exteriorLattice.scale.set(DOME_SCALE_XZ,DOME_SCALE_Y,DOME_SCALE_XZ);exteriorGroup.add(exteriorLattice);addDomeLattice(exteriorLattice,0,Math.PI*2,120,34);}
+const exteriorRibGeometries=[];
 for(let i=0;i<16;i++){
  const phi=i/16*Math.PI*2;
  const points=[];
@@ -3078,7 +3080,14 @@ for(let i=0;i<16;i++){
   const theta=(Math.PI/2)*(j/64),rr=DOME_BASE_RADIUS*Math.sin(theta);
   points.push(new THREE.Vector3(rr*Math.cos(phi)*DOME_SCALE_XZ,.58+DOME_BASE_RADIUS*Math.cos(theta)*DOME_SCALE_Y,rr*Math.sin(phi)*DOME_SCALE_XZ));
  }
- addMesh(exteriorGroup,new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points),112,.032,7,false),exteriorRibMat);
+ exteriorRibGeometries.push(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points),112,.032,7,false));
+}
+const exteriorRibsMerged=mergeGeometries(exteriorRibGeometries,false);
+if(exteriorRibsMerged){
+ for(const geometry of exteriorRibGeometries)geometry.dispose();
+ addMesh(exteriorGroup,exteriorRibsMerged,exteriorRibMat).name='Объединённые радиальные рёбра наружного купола';
+}else{
+ for(const geometry of exteriorRibGeometries)addMesh(exteriorGroup,geometry,exteriorRibMat);
 }
 for(const theta of [.24,.48,.72,.96,1.19,1.40]){
  const rr=DOME_BASE_RADIUS*Math.sin(theta)*DOME_SCALE_XZ;
@@ -3099,7 +3108,22 @@ for(let i=0;i<32;i++){const phi=i/32*Math.PI*2;for(const theta of [.24,.42,.60,.
 domeNodes.instanceMatrix.needsUpdate=true;exteriorGroup.add(domeNodes);
 // Eight additional slender radial braces visually divide the glass into engineered panels.
 const domeBraceMat=new THREE.MeshStandardMaterial({color:0x8ca8b0,roughness:.3,metalness:.76,transparent:true,opacity:.72,envMap:exteriorSkyTexture,envMapIntensity:.8});
-for(let i=0;i<8;i++){const phi=(i+.5)/8*Math.PI*2;const pts=[];for(let j=0;j<=42;j++){const theta=(Math.PI/2)*(j/42),rr=DOME_BASE_RADIUS*Math.sin(theta);pts.push(new THREE.Vector3(rr*Math.cos(phi)*DOME_SCALE_XZ,.58+DOME_BASE_RADIUS*Math.cos(theta)*DOME_SCALE_Y,rr*Math.sin(phi)*DOME_SCALE_XZ));}addMesh(exteriorGroup,new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),84,.012,5,false),domeBraceMat);}
+const domeBraceGeometries=[];
+for(let i=0;i<8;i++){
+ const phi=(i+.5)/8*Math.PI*2,pts=[];
+ for(let j=0;j<=42;j++){
+  const theta=(Math.PI/2)*(j/42),rr=DOME_BASE_RADIUS*Math.sin(theta);
+  pts.push(new THREE.Vector3(rr*Math.cos(phi)*DOME_SCALE_XZ,.58+DOME_BASE_RADIUS*Math.cos(theta)*DOME_SCALE_Y,rr*Math.sin(phi)*DOME_SCALE_XZ));
+ }
+ domeBraceGeometries.push(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),84,.012,5,false));
+}
+const domeBracesMerged=mergeGeometries(domeBraceGeometries,false);
+if(domeBracesMerged){
+ for(const geometry of domeBraceGeometries)geometry.dispose();
+ addMesh(exteriorGroup,domeBracesMerged,domeBraceMat).name='Объединённые дополнительные связи купола';
+}else{
+ for(const geometry of domeBraceGeometries)addMesh(exteriorGroup,geometry,domeBraceMat);
+}
 
 // Quiet landscape framing the building: low meadow, access loop, tree belts and distant Altai-like ridges.
 const exteriorGroundMat=new THREE.MeshStandardMaterial({color:0xffffff,map:exteriorGroundTexture,roughness:.98,metalness:0,vertexColors:true});
@@ -4475,17 +4499,28 @@ function addDomeLattice(parent,phiStart,phiLength,meridians,parallels,radiusFact
  const mullion=themeBind(new THREE.MeshStandardMaterial({color:0xf4f6f5,roughness:.42,metalness:.18}),'#f7f8f6',0xaab8bf);
  const full=Math.abs(phiLength-Math.PI*2)<1e-3;
  const pt=(phi,th)=>new THREE.Vector3(-R*Math.cos(phi)*Math.sin(th),R*Math.cos(th),R*Math.sin(phi)*Math.sin(th));
+ const geometries=[];
  const count=full?meridians:meridians+1;
  for(let i=0;i<count;i++){
   const phi=phiStart+i/meridians*phiLength,pts=[];
   for(let j=0;j<=26;j++)pts.push(pt(phi,j/26*Math.PI/2));
-  group.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),26,0.016,5,false),mullion));
+  geometries.push(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),26,0.016,5,false));
  }
  for(let k=1;k<=parallels;k++){
   const th=k/parallels*Math.PI/2,pts=[],seg=full?96:56;
   for(let j=0;j<=seg;j++)pts.push(pt(phiStart+j/seg*phiLength,th));
   const curve=new THREE.CatmullRomCurve3(pts,full&&false);
-  group.add(new THREE.Mesh(new THREE.TubeGeometry(curve,seg,.015,5,false),mullion));
+  geometries.push(new THREE.TubeGeometry(curve,seg,.015,5,false));
+ }
+ const merged=mergeGeometries(geometries,false);
+ if(merged){
+  merged.computeBoundingSphere();
+  for(const geometry of geometries)geometry.dispose();
+  const latticeMesh=new THREE.Mesh(merged,mullion);
+  latticeMesh.name='Объединённая геометрия решётки купола';
+  group.add(latticeMesh);
+ }else{
+  for(const geometry of geometries)group.add(new THREE.Mesh(geometry,mullion));
  }
  (window.__domeLatticeGroups=window.__domeLatticeGroups||[]).push(group);
  return group;
