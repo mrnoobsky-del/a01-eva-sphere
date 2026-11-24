@@ -50,7 +50,7 @@ A-01 развивается как концепция и проект цифро
 - `media/` — визуальные материалы и сведения об авторстве.
 - `releases/` — файлы версий проекта.
 
-## Текущая основная версия цифрового двойника
+## Основная версия и следующий preview
 
 **Направление производительности:** [A-01 Performance — 60 FPS без потери качества](performance/README_RU.md) · [Аудит исходного кода P0](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Рекордер baseline](performance/baseline-recorder.js) · [Шаблон отчёта](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
 

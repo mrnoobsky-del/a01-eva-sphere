@@ -50,7 +50,7 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 - `media/` — visual material and credits.
 - `releases/` — versioned project files.
 
-## Current primary digital-twin build
+## Current primary build and next preview
 
 **Performance programme:** [A-01 Performance — 60 FPS without visual quality loss](performance/README.md) · [P0 source review](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Browser baseline recorder](performance/baseline-recorder.js) · [Benchmark report template](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
 

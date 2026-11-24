@@ -6684,7 +6684,7 @@ const frame=document.getElementById('integratedFrame');
 <script id="a01-v414-lottie-runtime">
 (()=> {
  'use strict';
- const PLAYER_URL='https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.13.0/lottie_light.min.js';
+ const PLAYER_URLS=['https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.13.0/lottie_light.min.js','https://cdn.jsdelivr.net/npm/lottie-web@5.13.0/build/player/lottie_light.min.js'];
  let playerPromise=null;
  let loadingAnimation=null;
  let welcomeAnimation=null;
@@ -6694,13 +6694,17 @@ const frame=document.getElementById('integratedFrame');
   if(window.lottie&&typeof window.lottie.loadAnimation==='function')return Promise.resolve(window.lottie);
   if(playerPromise)return playerPromise;
   playerPromise=new Promise(resolve=>{
-   const script=document.createElement('script');
-   script.src=PLAYER_URL;
-   script.async=true;
-   script.crossOrigin='anonymous';
-   script.onload=()=>resolve(window.lottie&&typeof window.lottie.loadAnimation==='function'?window.lottie:null);
-   script.onerror=()=>resolve(null);
-   document.head.appendChild(script);
+   const loadFrom=index=>{
+    if(index>=PLAYER_URLS.length){resolve(null);return;}
+    const script=document.createElement('script');
+    script.src=PLAYER_URLS[index];
+    script.async=true;
+    script.crossOrigin='anonymous';
+    script.onload=()=>resolve(window.lottie&&typeof window.lottie.loadAnimation==='function'?window.lottie:null);
+    script.onerror=()=>{script.remove();loadFrom(index+1);};
+    document.head.appendChild(script);
+   };
+   loadFrom(0);
   });
   return playerPromise;
  }
@@ -6713,7 +6717,7 @@ const frame=document.getElementById('integratedFrame');
    ks:{o:{a:0,k:100},r:{a:0,k:angle},p:{a:0,k:[120,120,0]},a:{a:0,k:[0,0,0]},s:{a:0,k:[100,100,100]}},
    ao:0,
    shapes:[{
-    ty:'gr',nm:'Orbital path '+ind,np:3,cix:2,ix:1,hd:false,
+    ty:'gr',nm:'Orbital path '+ind,np:2,cix:2,ix:1,hd:false,
     it:[
      {ty:'el',d:1,s:{a:0,k:[rx,ry]},p:{a:0,k:[0,0]},nm:'Ellipse '+ind,hd:false},
      {ty:'st',c:{a:0,k:[.66,.84,.91,1]},o:{a:0,k:opacity},w:{a:0,k:stroke},lc:2,lj:2,ml:4,bm:0,nm:'Orbit stroke',hd:false},
@@ -6868,7 +6872,6 @@ const frame=document.getElementById('integratedFrame');
  let hash=2166136261;
  for(let i=0;i<accountScope.length;i++){hash^=accountScope.charCodeAt(i);hash=Math.imul(hash,16777619);}
  const scope=(hash>>>0).toString(36);
- const seenKey='evaSphereIntroSeenV3_'+scope;
  const disabledKey='evaSphereIntroDisabledV2_'+scope;
  let timers=[];
  let started=false;
