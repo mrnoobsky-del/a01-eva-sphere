@@ -11,7 +11,9 @@ A-01 — открытая история развития долгосрочно
 </p>
 
 **Сайт проекта:** https://vibeshorts.ru/evasphere/  
+**Опубликованный сайт A-01 (Wix):** https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/  
 **Рабочее пространство Сферы Евы:** https://evasphere.usite.pro/  
+**Исходный код и документация:** https://github.com/mrnoobsky-del/a01-eva-sphere  
 **Поддержать проект:** [Добровольная поддержка](https://yoomoney.ru/to/410015357551847)
 
 **Языки:** [English](README.md) · [Русский](README_RU.md) · [简体中文](README_ZH.md)
