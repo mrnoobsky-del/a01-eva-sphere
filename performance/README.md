@@ -133,6 +133,12 @@ LOD, distant-detail simplification and adaptive quality modes are acceptable whe
 
 The first practical step is to run the unchanged v4.0.0 primary build in a real browser, capture the baseline, and record the exact device and conditions. Claims that 60 FPS has been achieved would be premature before that.
 
+## Test HTML build
+
+- [A-01 v4.0.0 — 60 FPS target preview](../previews/eva-sphere-a01-v400-60fps-preview.html)
+
+This is a separate copy of the primary scene with a 60 FPS target render interval. The primary v4.0.0 build is unchanged. An internet connection is required to load Three.js 0.185.0 from jsDelivr.
+
 ## Related documents
 
 - [P0 — static source review of v4.0.0 (Russian)](P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md)
