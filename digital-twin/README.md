@@ -12,6 +12,15 @@ Each HTML file has its own self-referencing canonical URL, matching Open Graph U
 
 These are three separately addressable originals, not one cross-domain canonical mirror. Keep the matching file on its matching platform.
 
+## A-01 v4.1.4 — clean-interface preview
+
+- [Wix preview HTML](eva-sphere-a01-v414-wix-preview.html)
+- [VibeShorts original HTML](eva-sphere-a01-v414-vibeshorts-original.html)
+- [EvaSphere original HTML](eva-sphere-a01-v414-evasphere-original.html)
+- [Russian documentation](README_RU_v414.md) · [Changelog](CHANGELOG_v414.md) · [Release notes](../releases/v4.1.4/RELEASE-NOTES_RU.md)
+
+This preview restores the first-visit welcome, adds one lazy-loaded Lottie orbital animation for loading and welcome, and removes the public FPS/10-second benchmark overlay and rotation-test controls. Native adaptive quality remains. User acceptance is pending; v4.1.3 stays preserved.
+
 ## Current primary build — A-01 v4.1.3
 
 - [Open the current primary A-01 v4.1.3 HTML build](eva-sphere-a01-v413-primary-digital-twin.html)

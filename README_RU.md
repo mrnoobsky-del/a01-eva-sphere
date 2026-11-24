@@ -54,7 +54,9 @@ A-01 развивается как концепция и проект цифро
 
 **Направление производительности:** [A-01 Performance — 60 FPS без потери качества](performance/README_RU.md) · [Аудит исходного кода P0](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Рекордер baseline](performance/baseline-recorder.js) · [Шаблон отчёта](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
 
-- **A-01 v4.1.3 — текущая основная сборка цифрового двойника:** [Открыть основной HTML](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html)
+- **A-01 v4.1.4 — preview с чистым интерфейсом:** [Wix preview](digital-twin/eva-sphere-a01-v414-wix-preview.html) · [VibeShorts original](digital-twin/eva-sphere-a01-v414-vibeshorts-original.html) · [EvaSphere original](digital-twin/eva-sphere-a01-v414-evasphere-original.html)
+- [Документация v4.1.4](digital-twin/README_RU_v414.md) · [История изменений](digital-twin/CHANGELOG_v414.md) · [Заметки к выпуску](releases/v4.1.4/RELEASE-NOTES_RU.md)
+- **Сохранённая предыдущая основная версия:** [A-01 v4.1.3](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html)
 - [Документация v4.1.3](digital-twin/README_RU_v413.md) · [История изменений](digital-twin/CHANGELOG_v413.md) · [Заметки к выпуску](releases/v4.1.3/RELEASE-NOTES_RU.md)
 - **Три канонических оригинала v4.1.3:**
   - [Wix — скачать HTML](digital-twin/eva-sphere-a01-v413-wix-original.html)
@@ -64,7 +66,7 @@ A-01 развивается как концепция и проект цифро
 - [Документация RU](digital-twin/README_RU_v400.md) · [EN](digital-twin/README_v400.md) · [История изменений](digital-twin/CHANGELOG_v400.md)
 - [Архитектурная записка](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Заметки к выпуску](releases/v4.0.0/RELEASE-NOTES_RU.md)
 
-v4.0.0 остаётся сохранённой архитектурной базой радиальных модулей, входных проёмов, тамбуров и маршрута движения человека. Текущая основная интегрированная сборка цифрового двойника в ветке GitHub main — A-01 v4.1.3. Ни одна программная версия не означает, что физическая Сфера уже построена или введена в эксплуатацию.
+v4.0.0 остаётся сохранённой архитектурной базой радиальных модулей, входных проёмов, тамбуров и маршрута движения человека. A-01 v4.1.4 опубликована как preview интерфейса и анимаций; она станет основной только после пользовательской приёмки. v4.1.3 сохранена как предыдущая основная версия. Ни одна программная версия не означает, что физическая Сфера уже построена или введена в эксплуатацию.
 
 На 22 ноября 2026 года публичная страница [evasphere.usite.pro](https://evasphere.usite.pro/) всё ещё сообщает метаданные v3.1.6. Публикация в GitHub не обновляет uCoz автоматически. Пользователь подтвердил, что сцена v4.1.3 загрузилась в браузере 24 ноября 2026 года. Повторяемый FPS-бенчмарк, проверка WebGL на разных устройствах и инженерная верификация ещё не выполнены.
 

@@ -20,6 +20,14 @@
 
 # Releases
 
+## A-01 v4.1.4 — Clean-interface and Lottie preview
+
+- [Wix preview](../digital-twin/eva-sphere-a01-v414-wix-preview.html)
+- [VibeShorts original](../digital-twin/eva-sphere-a01-v414-vibeshorts-original.html)
+- [EvaSphere original](../digital-twin/eva-sphere-a01-v414-evasphere-original.html)
+- [Documentation](../digital-twin/README_RU_v414.md) · [Changelog](../digital-twin/CHANGELOG_v414.md) · [Release notes](v4.1.4/RELEASE-NOTES_RU.md)
+- Status: preview; static checks confirm welcome and Lottie integration markers, removal of the diagnostic FPS panel and rotation-test controls, and preservation of native adaptive quality. Browser verification is pending.
+
 ## A-01 v4.1.3 — Current Primary Digital Twin
 
 - [Open current primary HTML build](../digital-twin/eva-sphere-a01-v413-primary-digital-twin.html)
