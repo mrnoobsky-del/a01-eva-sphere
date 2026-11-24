@@ -52,6 +52,8 @@ A-01 развивается как концепция и проект цифро
 
 ## Текущая основная версия цифрового двойника
 
+**Направление производительности:** [A-01 Performance — 60 FPS без потери качества](performance/README_RU.md) · [Шаблон отчёта о тестировании](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
+
 - **A-01 v4.0.0 — Primary Architecture Baseline:** [Открыть основной HTML](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Документация RU](digital-twin/README_RU_v400.md) · [EN](digital-twin/README_v400.md) · [История изменений](digital-twin/CHANGELOG_v400.md)
 - [Архитектурная записка](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Заметки к выпуску](releases/v4.0.0/RELEASE-NOTES_RU.md)
