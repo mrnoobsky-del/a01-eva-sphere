@@ -52,7 +52,7 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 
 ## Current primary digital-twin build
 
-**Performance programme:** [A-01 Performance — 60 FPS without visual quality loss](performance/README.md) · [Benchmark report template](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
+**Performance programme:** [A-01 Performance — 60 FPS without visual quality loss](performance/README.md) · [P0 source review](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Browser baseline recorder](performance/baseline-recorder.js) · [Benchmark report template](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
 
 - **A-01 v4.0.0 — Primary Architecture Baseline:** [Open primary HTML](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Russian documentation](digital-twin/README_RU_v400.md) · [English documentation](digital-twin/README_v400.md) · [Changelog](digital-twin/CHANGELOG_v400.md)
