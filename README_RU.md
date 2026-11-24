@@ -54,23 +54,13 @@ A-01 развивается как концепция и проект цифро
 
 **Направление производительности:** [A-01 Performance — 60 FPS без потери качества](performance/README_RU.md) · [Аудит исходного кода P0](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Рекордер baseline](performance/baseline-recorder.js) · [Шаблон отчёта](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
 
-- **A-01 v4.1.4 — текущая основная сборка цифрового двойника:** [Wix](digital-twin/eva-sphere-a01-v414-wix-preview.html) · [VibeShorts](digital-twin/eva-sphere-a01-v414-vibeshorts-original.html) · [EvaSphere](digital-twin/eva-sphere-a01-v414-evasphere-original.html)
-- [Документация v4.1.4](digital-twin/README_RU_v414.md) · [История изменений](digital-twin/CHANGELOG_v414.md) · [Заметки к выпуску](releases/v4.1.4/RELEASE-NOTES_RU.md)
-- **Сохранённая предыдущая версия:** [A-01 v4.1.3](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html)
-- [Документация v4.1.3](digital-twin/README_RU_v413.md) · [История изменений](digital-twin/CHANGELOG_v413.md) · [Заметки к выпуску](releases/v4.1.3/RELEASE-NOTES_RU.md)
-- **Сохранённые канонические оригиналы предыдущей версии v4.1.3:**
-  - [Wix — скачать HTML](digital-twin/eva-sphere-a01-v413-wix-original.html)
-  - [VibeShorts — скачать HTML](digital-twin/eva-sphere-a01-v413-vibeshorts-original.html)
-  - [EvaSphere — скачать HTML](digital-twin/eva-sphere-a01-v413-evasphere-original.html)
-- **Сохранённая архитектурная база:** [A-01 v4.0.0 — Primary Architecture Baseline](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
-- [Документация RU](digital-twin/README_RU_v400.md) · [EN](digital-twin/README_v400.md) · [История изменений](digital-twin/CHANGELOG_v400.md)
-- [Архитектурная записка](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Заметки к выпуску](releases/v4.0.0/RELEASE-NOTES_RU.md)
+- **A-01 v4.9.0 — текущая основная сборка:** [Wix preview](digital-twin/eva-sphere-a01-v490-wix-preview.html) · [VibeShorts original](digital-twin/eva-sphere-a01-v490-vibeshorts-original.html) · [EvaSphere original](digital-twin/eva-sphere-a01-v490-evasphere-original.html)
+- [Документация v4.9.0](digital-twin/README_RU_v490.md) · [История изменений](digital-twin/CHANGELOG_v490.md) · [Заметки к выпуску](releases/v4.9.0/RELEASE-NOTES_RU.md)
+- **Сохранённый предыдущий выпуск:** [A-01 v4.1.4](digital-twin/eva-sphere-a01-v414-wix-preview.html) · [Документация](digital-twin/README_RU_v414.md) · [История изменений](digital-twin/CHANGELOG_v414.md)
+- **Сохранённая предыдущая сцена, загрузка которой подтверждалась:** [A-01 v4.1.3](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html) · [Документация](digital-twin/README_RU_v413.md) · [История изменений](digital-twin/CHANGELOG_v413.md)
+- **Сохранённая архитектурная база:** [A-01 v4.0.0](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html) · [Документация](digital-twin/README_RU_v400.md) · [История изменений](digital-twin/CHANGELOG_v400.md)
 
-v4.0.0 остаётся сохранённой архитектурной базой радиальных модулей, входных проёмов, тамбуров и маршрута движения человека. A-01 v4.1.4 назначена текущей основной интегрированной сборкой цифрового двойника в ветке GitHub main. Пользователь ранее подтвердил загрузку 3D-сцены v4.1.3; воспроизведение Lottie в v4.1.4 ещё требует отдельной проверки в браузере. v4.1.3 сохранена как предыдущая версия. Ни одна программная версия не означает, что физическая Сфера уже построена или введена в эксплуатацию.
-
-На 22 ноября 2026 года публичная страница [evasphere.usite.pro](https://evasphere.usite.pro/) всё ещё сообщает метаданные v3.1.6. Публикация в GitHub не обновляет uCoz автоматически. Пользователь подтвердил, что сцена v4.1.3 загрузилась в браузере 24 ноября 2026 года. Повторяемый FPS-бенчмарк, проверка WebGL на разных устройствах и инженерная верификация ещё не выполнены.
-
-Сохранённые предыдущие линии: [v3.8.0 — отдельный Axiom-inspired блок-аут](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html), [v3.7.0 — человеческий комфорт](digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html), [v3.1.2 — сервисный LED-небосвод](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html), [стабильный архив v2.1.0](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html). Эти файлы не перезаписываются выпуском v4.0.0.
+v4.9.0 развивает интерфейс и сцену v4.1.4, не перезаписывая предыдущие снимки. Статические проверки JavaScript/JSON/HTML и канонических метаданных пройдены. Проверка Lottie, восстановления WebGL и самой 3D-сцены в браузерах и на устройствах ещё ожидается; ограничитель 60 Гц не доказывает достижение 60 FPS. Физическая Сфера остаётся концепцией. Публикация в GitHub не обновляет uCoz или VibeShorts автоматически.
 
 
 

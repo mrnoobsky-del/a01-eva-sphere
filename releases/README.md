@@ -20,19 +20,23 @@
 
 # Releases
 
-## A-01 v4.1.4 — Current Primary Digital Twin
+## A-01 v4.9.0 — Current Primary Digital Twin
+
+- [Wix HTML build](../digital-twin/eva-sphere-a01-v490-wix-preview.html)
+- [VibeShorts canonical original](../digital-twin/eva-sphere-a01-v490-vibeshorts-original.html)
+- [EvaSphere canonical original](../digital-twin/eva-sphere-a01-v490-evasphere-original.html)
+- [Documentation](../digital-twin/README_RU_v490.md) · [Changelog](../digital-twin/CHANGELOG_v490.md) · [Release notes](v4.9.0/RELEASE-NOTES_RU.md)
+- Status: current primary integrated release in GitHub `main`. Static syntax, duplicate-ID and SEO metadata checks passed; browser/device acceptance and FPS benchmarking remain pending.
+
+## A-01 v4.1.4 — Preserved Previous Release
 
 - [Wix HTML build](../digital-twin/eva-sphere-a01-v414-wix-preview.html)
 - [VibeShorts canonical original](../digital-twin/eva-sphere-a01-v414-vibeshorts-original.html)
 - [EvaSphere canonical original](../digital-twin/eva-sphere-a01-v414-evasphere-original.html)
 - [Documentation](../digital-twin/README_RU_v414.md) · [Changelog](../digital-twin/CHANGELOG_v414.md) · [Release notes](v4.1.4/RELEASE-NOTES_RU.md)
-- Status: current primary integrated digital-twin build on GitHub `main`. Static source and metadata checks passed. Direct browser confirmation of the new Lottie animation remains open; no 60 FPS result is claimed.
+- Status: preserved previous Lottie/welcome release, superseded by v4.9.0.
 
-- [Wix preview](../digital-twin/eva-sphere-a01-v414-wix-preview.html)
-- [VibeShorts original](../digital-twin/eva-sphere-a01-v414-vibeshorts-original.html)
-- [EvaSphere original](../digital-twin/eva-sphere-a01-v414-evasphere-original.html)
-- [Documentation](../digital-twin/README_RU_v414.md) · [Changelog](../digital-twin/CHANGELOG_v414.md) · [Release notes](v4.1.4/RELEASE-NOTES_RU.md)
-- Status: current primary integrated digital-twin build in GitHub `main`. Source checks confirm the restored welcome, lazy-loaded Lottie integration, removal of the diagnostic FPS panel and rotation-test controls, and preservation of native adaptive quality. Direct browser testing of Lottie is still pending.
+
 
 ## A-01 v4.1.3 — Preserved Previous Primary Build
 

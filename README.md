@@ -54,29 +54,15 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 
 **Performance programme:** [A-01 Performance — 60 FPS without visual quality loss](performance/README.md) · [P0 source review](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Browser baseline recorder](performance/baseline-recorder.js) · [Benchmark report template](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
 
-- **A-01 v4.1.4 — Current Primary Digital Twin:** [Wix build](digital-twin/eva-sphere-a01-v414-wix-preview.html) · [VibeShorts original](digital-twin/eva-sphere-a01-v414-vibeshorts-original.html) · [EvaSphere original](digital-twin/eva-sphere-a01-v414-evasphere-original.html)
-- [v4.1.4 documentation](digital-twin/README_RU_v414.md) · [Changelog](digital-twin/CHANGELOG_v414.md) · [Release notes](releases/v4.1.4/RELEASE-NOTES_RU.md)
-- **Preserved previous release:** [A-01 v4.1.3](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html)
-- [Russian v4.1.3 documentation](digital-twin/README_RU_v413.md) · [Changelog](digital-twin/CHANGELOG_v413.md) · [Release notes](releases/v4.1.3/RELEASE-NOTES_RU.md)
-- **Preserved self-canonical originals from the previous v4.1.3 release:**
-  - [Wix HTML](digital-twin/eva-sphere-a01-v413-wix-original.html)
-  - [VibeShorts HTML](digital-twin/eva-sphere-a01-v413-vibeshorts-original.html)
-  - [EvaSphere HTML](digital-twin/eva-sphere-a01-v413-evasphere-original.html)
-- **Preserved architecture foundation:** [A-01 v4.0.0 — Primary Architecture Baseline](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
-- [Russian documentation](digital-twin/README_RU_v400.md) · [English documentation](digital-twin/README_v400.md) · [Changelog](digital-twin/CHANGELOG_v400.md)
-- [Russian architecture note](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](releases/v4.0.0/RELEASE-NOTES_RU.md)
+- **A-01 v4.9.0 — Current Primary Digital Twin:** [Wix preview](digital-twin/eva-sphere-a01-v490-wix-preview.html) · [VibeShorts original](digital-twin/eva-sphere-a01-v490-vibeshorts-original.html) · [EvaSphere original](digital-twin/eva-sphere-a01-v490-evasphere-original.html)
+- [v4.9.0 documentation](digital-twin/README_RU_v490.md) · [Changelog](digital-twin/CHANGELOG_v490.md) · [Release notes](releases/v4.9.0/RELEASE-NOTES_RU.md)
+- **Preserved previous release:** [A-01 v4.1.4](digital-twin/eva-sphere-a01-v414-wix-preview.html) · [Documentation](digital-twin/README_RU_v414.md) · [Changelog](digital-twin/CHANGELOG_v414.md)
+- **Preserved previous scene snapshot:** [A-01 v4.1.3](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html) · [Documentation](digital-twin/README_RU_v413.md) · [Changelog](digital-twin/CHANGELOG_v413.md)
+- **Preserved architecture foundation:** [A-01 v4.0.0](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html) · [Documentation](digital-twin/README_RU_v400.md) · [Changelog](digital-twin/CHANGELOG_v400.md)
 
-v4.0.0 remains the preserved architectural foundation for the radial modules, entrance openings, vestibules and human circulation path. A-01 v4.1.4 is the current primary integrated digital-twin build in the GitHub main branch. The 3D scene previously loaded successfully in the user's browser on 24 November 2026; the v4.1.4 Lottie runtime still needs direct browser confirmation. Repeatable FPS benchmarking, cross-device/WebGL acceptance and engineering verification remain open. No 60 FPS result is claimed. Neither software version means that the physical Sphere has been built or commissioned.
-
-As of 22 November 2026, the public [evasphere.usite.pro](https://evasphere.usite.pro/) page still reports v3.1.6 metadata. GitHub publication does not automatically update uCoz. The user confirmed that the v4.1.3 scene loaded in a browser on 24 November 2026. A repeatable FPS benchmark, multi-device WebGL acceptance and engineering verification remain outstanding.
-
-Preserved earlier lines: [v3.8.0 — standalone Axiom-inspired blockout](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html), [v3.7.0 — Human Comfort Engineering](digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html), [v3.1.2 — serviceable LED sky](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html), and the [v2.1.0 stable archive](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html). These snapshots are preserved and are not overwritten by v4.0.0.
+v4.9.0 extends the v4.1.4 interface and scene without overwriting prior snapshots. Static JavaScript/JSON/HTML and canonical metadata checks passed. Browser/device acceptance of the new Lottie lifecycle, WebGL recovery and 3D scene is still pending; the 60 Hz frame cap is not proof of 60 FPS. The physical Sphere remains a concept and is not represented as built or commissioned. GitHub publication does not automatically deploy to uCoz or VibeShorts.
 
 
-
-The repository preserves **A-01 v2.1.0** as the stable digital-twin baseline. The integrated experimental line has advanced to **A-01 v3.1.2**, combining the 144-candidate modular shell, waste-service concepts, underground B1 data-centre concept, serviceable interior LED sky and corrected first-arrival sequence. The separate **A-01 v2.0.13** archive in releases/v2.0.13/ is an integrated /evasphere/ site-workspace snapshot and belongs to a different version track.
-
-The v2.0.13 archive passed static HTML and JavaScript checks, but live browser/WebGL verification, production Worker verification and deployment to the public website have not been confirmed. See the release notes for scope and limitations.
 
 ## Founder
 
@@ -107,7 +93,7 @@ Eva Sphere workspace: https://evasphere.usite.pro/
 
 The repository is a public development record. Project status may change; check the dated release notes before relying on any implementation detail.
 
-## Primary digital twin build — A-01 v4.0.0
+## Preserved architecture foundation — A-01 v4.0.0
 
 - **Open the primary HTML build:** [A-01 v4.0.0](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Russian documentation](digital-twin/README_RU_v400.md) · [English documentation](digital-twin/README_v400.md) · [Changelog](digital-twin/CHANGELOG_v400.md)
