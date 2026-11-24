@@ -11,7 +11,9 @@ A-01 is an open project record for a long-term vision: a resilient, human-centre
 </p>
 
 **Project website:** https://vibeshorts.ru/evasphere/  
+**Published A-01 site (Wix):** https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/  
 **Eva Sphere workspace:** https://evasphere.usite.pro/  
+**Source code and project documentation:** https://github.com/mrnoobsky-del/a01-eva-sphere  
 **Support the project:** [Voluntary contribution](https://yoomoney.ru/to/410015357551847)
 
 **Languages:** [English](README.md) · [Русский](README_RU.md) · [简体中文](README_ZH.md)
