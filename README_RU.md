@@ -54,14 +54,15 @@ A-01 развивается как концепция и проект цифро
 
 **Направление производительности:** [A-01 Performance — 60 FPS без потери качества](performance/README_RU.md) · [Аудит исходного кода P0](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Рекордер baseline](performance/baseline-recorder.js) · [Шаблон отчёта](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
 
-- **A-01 v4.9.0 — текущая основная сборка:** [Wix preview](digital-twin/eva-sphere-a01-v490-wix-preview.html) · [VibeShorts original](digital-twin/eva-sphere-a01-v490-vibeshorts-original.html) · [EvaSphere original](digital-twin/eva-sphere-a01-v490-evasphere-original.html)
+- **A-01 v4.9.0 — текущая основная версия ветки main:** [Wix preview](digital-twin/eva-sphere-a01-v490-wix-preview.html) · [VibeShorts original](digital-twin/eva-sphere-a01-v490-vibeshorts-original.html) · [EvaSphere original](digital-twin/eva-sphere-a01-v490-evasphere-original.html)
+- **A-01 v4.9.1 — кандидат патч-релиза:** [Wix preview](digital-twin/eva-sphere-a01-v491-wix-preview.html) · [VibeShorts original](digital-twin/eva-sphere-a01-v491-vibeshorts-original.html) · [EvaSphere original](digital-twin/eva-sphere-a01-v491-evasphere-original.html)
+- [Документация v4.9.1](digital-twin/README_RU_v491.md) · [История изменений](digital-twin/CHANGELOG_v491.md) · [Заметки к выпуску](releases/v4.9.1/RELEASE-NOTES_RU.md)
 - [Документация v4.9.0](digital-twin/README_RU_v490.md) · [История изменений](digital-twin/CHANGELOG_v490.md) · [Заметки к выпуску](releases/v4.9.0/RELEASE-NOTES_RU.md)
 - **Сохранённый предыдущий выпуск:** [A-01 v4.1.4](digital-twin/eva-sphere-a01-v414-wix-preview.html) · [Документация](digital-twin/README_RU_v414.md) · [История изменений](digital-twin/CHANGELOG_v414.md)
 - **Сохранённая предыдущая сцена, загрузка которой подтверждалась:** [A-01 v4.1.3](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html) · [Документация](digital-twin/README_RU_v413.md) · [История изменений](digital-twin/CHANGELOG_v413.md)
 - **Сохранённая архитектурная база:** [A-01 v4.0.0](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html) · [Документация](digital-twin/README_RU_v400.md) · [История изменений](digital-twin/CHANGELOG_v400.md)
 
-v4.9.0 развивает интерфейс и сцену v4.1.4, не перезаписывая предыдущие снимки. Статические проверки JavaScript/JSON/HTML и канонических метаданных пройдены. Проверка Lottie, восстановления WebGL и самой 3D-сцены в браузерах и на устройствах ещё ожидается; ограничитель 60 Гц не доказывает достижение 60 FPS. Физическая Сфера остаётся концепцией. Публикация в GitHub не обновляет uCoz или VibeShorts автоматически.
-
+v4.9.1 сохраняет v4.9.0 и добавляет явный touch-тап по объектам, защиту от выбора после drag, общее pressed-состояние интерфейса и Lottie-отклик на действия. Исходники трёх вариантов собраны в отдельной ветке; реальная браузерная приёмка ещё требуется. Текущая основная версия main остаётся v4.9.0 до отдельного слияния патч-релиза. Лимит 60 Гц не является измерением 60 FPS. Физическая Сфера остаётся концепцией.
 
 
 ## Интегрированный цифровой двойник A-01 v3.5.0 — акустика и обзор
