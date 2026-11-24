@@ -7,7 +7,9 @@ A-01 是一个长期愿景的公开项目记录：探索以人为中心的韧性
 > A-01 并不表示这座实体设施已经建成。它记录的是研究、设计探索和逐步实现这一愿景的工作。
 
 **项目主页：** https://vibeshorts.ru/evasphere/  
-**Eva Sphere 工作空间：** https://evasphere.usite.pro/
+**A-01 Wix 在线网站：** https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/  
+**Eva Sphere 工作空间：** https://evasphere.usite.pro/  
+**项目源代码与文档：** https://github.com/mrnoobsky-del/a01-eva-sphere
 
 **语言：** [English](README.md) · [Русский](README_RU.md) · [简体中文](README_ZH.md)
 
