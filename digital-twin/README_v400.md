@@ -7,6 +7,9 @@
 
 ## Open the build
 
+- [A-01 Performance — 60 FPS without visual quality loss](../performance/README.md)
+- [Benchmark report template](../performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
+
 - [A-01 v4.0.0 primary HTML](eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Changelog](CHANGELOG_v400.md)
 - [Russian architecture note](../architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md)
