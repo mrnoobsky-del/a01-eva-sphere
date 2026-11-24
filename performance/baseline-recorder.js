@@ -127,12 +127,13 @@
     };
 
     renderer.render = function instrumentedRender(...args) {
+      const start = performance.now();
       const result = originalRender.apply(this, args);
       const end = performance.now();
       if (running) {
         if (lastRenderEnd !== null) intervals.push(end - lastRenderEnd);
         lastRenderEnd = end;
-        renderSubmitMs.push(end - (end - 0));
+        renderSubmitMs.push(end - start);
         const info = renderer.info || {};
         drawCalls.push(info.render?.calls ?? 0);
         triangles.push(info.render?.triangles ?? 0);
