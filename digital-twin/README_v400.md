@@ -9,6 +9,7 @@
 
 - [A-01 Performance — 60 FPS without visual quality loss](../performance/README.md)
 - [Benchmark report template](../performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
+- [P0 source review](../performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Browser baseline recorder](../performance/baseline-recorder.js)
 
 - [A-01 v4.0.0 primary HTML](eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Changelog](CHANGELOG_v400.md)
