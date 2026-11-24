@@ -7,6 +7,9 @@
 
 ## Открыть сборку
 
+- [A-01 Performance — 60 FPS без потери качества](../performance/README_RU.md)
+- [Шаблон отчёта о тестировании](../performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
+
 - [Основной HTML цифрового двойника A-01 v4.0.0](eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [История изменений](CHANGELOG_v400.md)
 - [Архитектурная записка v4.0.0](../architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md)
