@@ -56,6 +56,10 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 
 - **A-01 v4.1.3 — Current Primary Digital Twin:** [Open current primary HTML](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html)
 - [Russian v4.1.3 documentation](digital-twin/README_RU_v413.md) · [Changelog](digital-twin/CHANGELOG_v413.md) · [Release notes](releases/v4.1.3/RELEASE-NOTES_RU.md)
+- **Three self-canonical v4.1.3 originals:**
+  - [Wix HTML](digital-twin/eva-sphere-a01-v413-wix-original.html)
+  - [VibeShorts HTML](digital-twin/eva-sphere-a01-v413-vibeshorts-original.html)
+  - [EvaSphere HTML](digital-twin/eva-sphere-a01-v413-evasphere-original.html)
 - **Preserved architecture foundation:** [A-01 v4.0.0 — Primary Architecture Baseline](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Russian documentation](digital-twin/README_RU_v400.md) · [English documentation](digital-twin/README_v400.md) · [Changelog](digital-twin/CHANGELOG_v400.md)
 - [Russian architecture note](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](releases/v4.0.0/RELEASE-NOTES_RU.md)

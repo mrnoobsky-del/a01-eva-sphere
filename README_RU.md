@@ -56,6 +56,10 @@ A-01 развивается как концепция и проект цифро
 
 - **A-01 v4.1.3 — текущая основная сборка цифрового двойника:** [Открыть основной HTML](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html)
 - [Документация v4.1.3](digital-twin/README_RU_v413.md) · [История изменений](digital-twin/CHANGELOG_v413.md) · [Заметки к выпуску](releases/v4.1.3/RELEASE-NOTES_RU.md)
+- **Три канонических оригинала v4.1.3:**
+  - [Wix — скачать HTML](digital-twin/eva-sphere-a01-v413-wix-original.html)
+  - [VibeShorts — скачать HTML](digital-twin/eva-sphere-a01-v413-vibeshorts-original.html)
+  - [EvaSphere — скачать HTML](digital-twin/eva-sphere-a01-v413-evasphere-original.html)
 - **Сохранённая архитектурная база:** [A-01 v4.0.0 — Primary Architecture Baseline](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Документация RU](digital-twin/README_RU_v400.md) · [EN](digital-twin/README_v400.md) · [История изменений](digital-twin/CHANGELOG_v400.md)
 - [Архитектурная записка](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Заметки к выпуску](releases/v4.0.0/RELEASE-NOTES_RU.md)

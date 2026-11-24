@@ -2,6 +2,16 @@
 
 This directory contains the evolving A-01 digital workspace and its software prototypes. A digital model is not evidence that physical systems have been built, commissioned or validated.
 
+## Three self-canonical originals — A-01 v4.1.3
+
+Each HTML file has its own self-referencing canonical URL, matching Open Graph URL and Schema.org URL. Each is indexable (`index,follow`) and its Share button points to its own platform URL.
+
+- [Wix original HTML](eva-sphere-a01-v413-wix-original.html) — `https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v413-clean-feature-batch-init-preview.html`
+- [VibeShorts original HTML](eva-sphere-a01-v413-vibeshorts-original.html) — `https://vibeshorts.ru/evasphere/`
+- [EvaSphere original HTML](eva-sphere-a01-v413-evasphere-original.html) — `https://evasphere.usite.pro/`
+
+These are three separately addressable originals, not one cross-domain canonical mirror. Keep the matching file on its matching platform.
+
 ## Current primary build — A-01 v4.1.3
 
 - [Open the current primary A-01 v4.1.3 HTML build](eva-sphere-a01-v413-primary-digital-twin.html)
