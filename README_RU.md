@@ -54,13 +54,15 @@ A-01 развивается как концепция и проект цифро
 
 **Направление производительности:** [A-01 Performance — 60 FPS без потери качества](performance/README_RU.md) · [Аудит исходного кода P0](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Рекордер baseline](performance/baseline-recorder.js) · [Шаблон отчёта](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
 
-- **A-01 v4.0.0 — Primary Architecture Baseline:** [Открыть основной HTML](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
+- **A-01 v4.1.3 — текущая основная сборка цифрового двойника:** [Открыть основной HTML](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html)
+- [Документация v4.1.3](digital-twin/README_RU_v413.md) · [История изменений](digital-twin/CHANGELOG_v413.md) · [Заметки к выпуску](releases/v4.1.3/RELEASE-NOTES_RU.md)
+- **Сохранённая архитектурная база:** [A-01 v4.0.0 — Primary Architecture Baseline](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Документация RU](digital-twin/README_RU_v400.md) · [EN](digital-twin/README_v400.md) · [История изменений](digital-twin/CHANGELOG_v400.md)
 - [Архитектурная записка](architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Заметки к выпуску](releases/v4.0.0/RELEASE-NOTES_RU.md)
 
-v4.0.0 сохраняет интегрированное рабочее пространство линии v3.1.6 и меняет архитектурный базис внутренних долек, дверных проёмов, тамбуров и человеческого маршрута. В модели пять уровней и 60 радиальных модулей. Это основная версия репозитория GitHub main; она не означает, что физическая Сфера построена или введена в эксплуатацию.
+v4.0.0 остаётся сохранённой архитектурной базой радиальных модулей, входных проёмов, тамбуров и маршрута движения человека. Текущая основная интегрированная сборка цифрового двойника в ветке GitHub main — A-01 v4.1.3. Ни одна программная версия не означает, что физическая Сфера уже построена или введена в эксплуатацию.
 
-На 22 ноября 2026 года публичная страница [evasphere.usite.pro](https://evasphere.usite.pro/) всё ещё сообщает метаданные v3.1.6. Публикация в GitHub не обновляет uCoz автоматически. Статические проверки v4.0.0 пройдены; браузерная/WebGL-приёмка и инженерная верификация остаются незавершёнными.
+На 22 ноября 2026 года публичная страница [evasphere.usite.pro](https://evasphere.usite.pro/) всё ещё сообщает метаданные v3.1.6. Публикация в GitHub не обновляет uCoz автоматически. Пользователь подтвердил, что сцена v4.1.3 загрузилась в браузере 24 ноября 2026 года. Повторяемый FPS-бенчмарк, проверка WebGL на разных устройствах и инженерная верификация ещё не выполнены.
 
 Сохранённые предыдущие линии: [v3.8.0 — отдельный Axiom-inspired блок-аут](digital-twin/eva-sphere-a01-v380-axiom-inspired-interior-blockout.html), [v3.7.0 — человеческий комфорт](digital-twin/eva-sphere-a01-v370-human-comfort-engineering.html), [v3.1.2 — сервисный LED-небосвод](digital-twin/eva-sphere-a01-v312-modular-shell-serviceable-led.html), [стабильный архив v2.1.0](digital-twin/eva-sphere-a01-v210-human-navigation-safety.html). Эти файлы не перезаписываются выпуском v4.0.0.
 

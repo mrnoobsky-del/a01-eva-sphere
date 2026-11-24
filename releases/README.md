@@ -20,12 +20,19 @@
 
 # Releases
 
-## A-01 v4.0.0 — Primary Architecture Baseline (primary repository release)
+## A-01 v4.1.3 — Current Primary Digital Twin
+
+- [Open current primary HTML build](../digital-twin/eva-sphere-a01-v413-primary-digital-twin.html)
+- [Russian documentation](../digital-twin/README_RU_v413.md) · [Changelog](../digital-twin/CHANGELOG_v413.md) · [Release notes](v4.1.3/RELEASE-NOTES_RU.md)
+- [Live Wix preview](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v413-clean-feature-batch-init-preview.html)
+- Status: current primary integrated digital-twin build on GitHub `main`. The user confirmed that the scene loaded in a browser on 24 November 2026. Repeatable FPS benchmarking, cross-device WebGL acceptance and engineering verification remain open. No 60 FPS result is claimed.
+
+## A-01 v4.0.0 — Preserved Architecture Baseline (historical foundation)
 
 - [Open primary HTML build](../digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html)
 - [Russian documentation](../digital-twin/README_RU_v400.md) · [English documentation](../digital-twin/README_v400.md) · [Changelog](../digital-twin/CHANGELOG_v400.md)
 - [Architecture note](../architecture/A01-V400-PRIMARY-ARCHITECTURE-BASELINE_RU.md) · [Release notes](v4.0.0/RELEASE-NOTES_RU.md)
-- Status: primary architecture baseline on GitHub main. Static source checks passed (298 IDs, no duplicates; seven inline JavaScript blocks; valid import map). Browser/WebGL visual acceptance and engineering validation remain outstanding. The public uCoz page still reports v3.1.6; GitHub does not deploy to uCoz automatically.
+- Status: preserved architectural foundation, superseded as the current primary integrated build by v4.1.3. The original v4.0.0 static-check record remains attached to that historical snapshot.
 
 
 
