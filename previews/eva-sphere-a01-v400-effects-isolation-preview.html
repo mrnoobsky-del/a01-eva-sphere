@@ -5872,9 +5872,10 @@ const frame=document.getElementById('integratedFrame');
 </aside>
 <script id="a01-fx-diagnostic-runtime">
 (()=>{
+ const boot=()=>{
  const panel=document.getElementById('a01-fx-diagnostic');
  const api=window.EVA_SPHERE;
- if(!panel||!api)return;
+ if(!panel||!api)return false;
  const veil=document.getElementById('ambientEnvironmentVeil');
  const controls={
   fog:document.getElementById('a01-fx-fog'),
@@ -5938,6 +5939,9 @@ const frame=document.getElementById('integratedFrame');
   panel.classList.toggle('is-collapsed');
   document.getElementById('a01-fx-collapse').textContent=panel.classList.contains('is-collapsed')?'+':'−';
  });
+ return true;
+ };
+ if(!boot())window.addEventListener('eva-a01:scene-ready',boot,{once:true});
 })();
 </script>
 
