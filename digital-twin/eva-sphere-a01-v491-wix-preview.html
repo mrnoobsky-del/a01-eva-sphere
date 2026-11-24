@@ -7039,6 +7039,7 @@ const frame=document.getElementById('integratedFrame');
   if(target)target.classList.add('a01-ui-press-target');
  },true);
  document.addEventListener('click',event=>{
+  if(!event.isTrusted)return;
   const target=interactiveTarget(event);
   if(!target)return;
   target.classList.add('a01-ui-press-target');
@@ -7048,6 +7049,10 @@ const frame=document.getElementById('integratedFrame');
   }
   playTapFeedback(x,y,'ui');
  },true);
+
+ document.addEventListener('visibilitychange',()=>{
+  if(document.hidden)Array.from(tapFeedbackNodes.values()).forEach(dispose=>dispose());
+ });
 
 })();
 </script>
