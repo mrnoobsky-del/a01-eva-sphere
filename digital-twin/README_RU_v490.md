@@ -13,6 +13,14 @@
 - [Release notes](../releases/v4.9.0/RELEASE-NOTES_RU.md)
 - [Runtime/performance notes](../performance/V490-RUNTIME-HARDENING_RU.md)
 
+## Производственная кооперация A-01
+
+- [Публичная страница на Wix](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/production-cooperation.html)
+- [Полная инженерная записка и реестр поставщиков](../docs/A01-SUPPLY-01-biysk-production-cooperation-v0.1.md)
+- [Исходный HTML страницы](production-cooperation.html)
+
+Документационный модуль v0.1. Он не меняет версию 3D-двойника и не означает, что предприятия уже прошли квалификацию.
+
 ## Lottie: три целевых сценария
 
 1. **Загрузка 3D-модели.** Компактная орбитальная анимация видна только пока открыт экран подготовки.
