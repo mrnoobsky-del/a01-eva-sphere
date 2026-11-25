@@ -18,7 +18,11 @@ def validate_public_media_url(value: str) -> str:
         raise UnsafeSourceError("Для ссылок разрешён только HTTPS.")
     if not parsed.hostname or parsed.username or parsed.password:
         raise UnsafeSourceError("Некорректный адрес источника.")
-    if parsed.port not in (None, 443):
+    try:
+        port = parsed.port
+    except ValueError as exc:
+        raise UnsafeSourceError("Некорректный порт источника.") from exc
+    if port not in (None, 443):
         raise UnsafeSourceError("Нестандартные порты запрещены.")
     host = parsed.hostname.lower().rstrip(".")
     if not any(host == allowed or host.endswith("." + allowed) for allowed in ALLOWED_HOSTS):

@@ -171,3 +171,18 @@ def delete_source(source_id: str) -> dict[str, Any] | None:
         db.execute("DELETE FROM library_fts WHERE source_id=?", (source_id,))
         db.execute("DELETE FROM sources WHERE id=?", (source_id,))
         return item
+
+
+def requeue_interrupted_sources() -> list[str]:
+    """Reset interrupted work so the single local worker can resume it after restart."""
+    active = ("queued", "processing", "downloading", "transcribing", "analyzing")
+    placeholders = ",".join("?" for _ in active)
+    with connect() as db:
+        rows = db.execute(f"SELECT id FROM sources WHERE status IN ({placeholders}) ORDER BY created_at", active).fetchall()
+        ids = [row["id"] for row in rows]
+        if ids:
+            db.execute(
+                f"UPDATE sources SET status='queued',stage='queued',progress=0,error='',updated_at=? WHERE status IN ({placeholders})",
+                (now_iso(), *active),
+            )
+        return ids

@@ -17,7 +17,7 @@ from pydantic import BaseModel, Field
 
 from . import config
 from .analysis import answer_question, format_time
-from .db import create_source, delete_source, get_segments, get_source, init_db, list_sources, row_to_dict, update_source
+from .db import create_source, delete_source, get_segments, get_source, init_db, list_sources, requeue_interrupted_sources, update_source
 from .media import process_source
 from .security import UnsafeSourceError, safe_error, validate_public_media_url
 
@@ -34,7 +34,7 @@ def _worker_loop() -> None:
             continue
         try:
             source = get_source(source_id)
-            if source and source.get("status") not in {"cancelled", "deleted"}:
+            if source and source.get("status") in {"queued", "processing", "downloading", "transcribing", "analyzing"}:
                 def progress(stage: str, percent: int, message: str) -> None:
                     update_source(source_id, stage=stage, progress=percent)
                 update_source(source_id, status="processing", stage="preparing", progress=3)
@@ -49,6 +49,8 @@ async def lifespan(app: FastAPI):
     config.ensure_directories()
     init_db()
     STOP_EVENT.clear()
+    for source_id in requeue_interrupted_sources():
+        WORK_QUEUE.put(source_id)
     WORKER = threading.Thread(target=_worker_loop, name="evascribe-worker", daemon=True)
     WORKER.start()
     yield

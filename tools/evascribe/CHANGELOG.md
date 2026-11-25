@@ -7,4 +7,6 @@
 - Prefer available VTT captions; fall back to faster-whisper transcription.
 - SQLite library, FTS5 search, transcript timestamps and exports.
 - Local-only FastAPI app with responsive research workspace.
+- Resume interrupted queue items on application restart.
+- Harden URL port and private-DNS validation.
 - Optional OpenAI-compatible endpoint for transcript Q&A.

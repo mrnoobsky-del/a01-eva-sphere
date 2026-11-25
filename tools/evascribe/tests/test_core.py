@@ -3,6 +3,7 @@ from __future__ import annotations
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from app.analysis import extractive_overview, format_time
 from app.media import _parse_vtt
@@ -48,6 +49,16 @@ class CoreTests(unittest.TestCase):
     def test_non_allowlisted_domain_rejected(self):
         with self.assertRaises(UnsafeSourceError):
             validate_public_media_url("https://example.com/video")
+
+    def test_private_dns_address_rejected(self):
+        fake_result = [(None, None, None, None, ("127.0.0.1", 443))]
+        with patch("app.security.socket.getaddrinfo", return_value=fake_result):
+            with self.assertRaises(UnsafeSourceError):
+                validate_public_media_url("https://youtube.com/watch?v=example")
+
+    def test_invalid_port_rejected(self):
+        with self.assertRaises(UnsafeSourceError):
+            validate_public_media_url("https://youtube.com:invalid/watch?v=example")
 
 
 if __name__ == "__main__":
