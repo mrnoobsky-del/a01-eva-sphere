@@ -57,7 +57,7 @@ h1{font-size:20px;margin:5px 0 4px;letter-spacing:-.03em} .sub{font-size:12px;co
 </div>
 <div class="hud bottomright">
   <span class="pill">CC0 GLB</span><span class="pill">Three.js</span>
-  <div>Внешние модели подгружаются по закреплённым URL. Собственная долька и стыковочные элементы — условная геометрия A-01. Управление камерой: мышь / касание.</div>
+  <div>Внешние модели подгружаются по закреплённым URL. Собственная долька и стыковочные элементы — условная геометрия A-01. Небольшой грузовой подъёмник показан только как справочная механика, не как платформа для целой дольки. Управление камерой: мышь / касание.</div>
 </div>
 <script type="module">
 import * as THREE from 'three';
@@ -199,7 +199,7 @@ function updateScene(){const s=sample(names[scenario],time);const t=ease(s.outer
 pod.position.set(s.px,1.05+(scenario==='lift'?s.lift*1.8:0),0);
 trolley.position.set(s.px,s.lift*1.8,0);trolley.visible=s.cart>.05;
 truckRoot.position.set(s.tx,0,0);carrierFallback.position.copy(truckRoot.position);carrierFallback.visible=!truckLoaded;
-pod.children.forEach(c=>{if(c.userData.leg){c.position.y= s.legs>.5?.9: .5}});
+pod.children.forEach(c=>{if(c.userData.leg){c.position.y= s.legs>.5?-.3: .5}});
 if(forkliftGroup){forkliftGroup.position.x=-2+Math.sin(time*Math.PI*2)*1.5}
 if(liftMixer){const active=s.lift>.5;if(active&&!liftActive&&liftOpen){liftOpen.reset();liftOpen.setLoop(THREE.LoopOnce,1);liftOpen.clampWhenFinished=true;liftOpen.play()}if(!active&&liftActive&&liftClose){liftClose.reset();liftClose.setLoop(THREE.LoopOnce,1);liftClose.clampWhenFinished=true;liftClose.play()}liftActive=active;}
 const st=stageAt(time);document.getElementById('stageTitle').textContent=st.title;document.getElementById('stageDesc').textContent=st.desc;document.getElementById('stepCount').textContent='Этап '+(st.i+1)+' / '+stages[scenario].length;document.getElementById('progress').value=Math.round(time*1000);
