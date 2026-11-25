@@ -74,6 +74,16 @@ The concept studies selected unoccupied technical modules moving through a floor
 
 A-01 studies three separate products: a mobile energy service van, a passenger electric vehicle and a dedicated mobile energy-storage unit. The Sphere's vestibule is not described as a chamber that can contain any explosion; the vestibule, battery compartment and outdoor dock are separate design subsystems. Local demand, equipment, permits and economics remain unverified.
 
+## MODNET — portable modules and dock-slot exchange
+
+- [Open the MODNET overview on Wix](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/modular-dock-exchange-network.html)
+- [A01-MODNET-01 — modular dock and exchange network](docs/A01-MODNET-01-modular-dock-exchange-network-v0.1.md)
+- [Module passport template](templates/module-passport-template-v0.1.csv)
+- [Dock-slot register template](templates/dock-slot-register-template-v0.1.csv)
+- [Overview HTML source](digital-twin/modular-dock-exchange-network.html)
+
+MODNET separates four assets: the module, the dock slot, the transport carrier and the digital network. A customer may own a module and book a compatible slot for a short period; after safe removal, another compatible module may occupy it. Road movement is treated as cargo/swap-body transport, not as carrying people inside an operating module. Dimensions, approvals, rates and the legal model remain unapproved.
+
 ## Current primary digital-twin build
 
 **Performance programme:** [A-01 Performance — 60 FPS without visual quality loss](performance/README.md) · [P0 source review](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Browser baseline recorder](performance/baseline-recorder.js) · [Benchmark report template](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
