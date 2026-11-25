@@ -1,5 +1,14 @@
 # Documentation index
 
+## Modular Dock & Exchange Network (MODNET)
+
+- [A01-MODNET-01 — portable modules, dock-slot rental and exchange](A01-MODNET-01-modular-dock-exchange-network-v0.1.md)
+- [Module passport template](../templates/module-passport-template-v0.1.csv)
+- [Dock-slot register template](../templates/dock-slot-register-template-v0.1.csv)
+- [Public MODNET overview](../digital-twin/modular-dock-exchange-network.html)
+
+
+
 - [Project charter](PROJECT-CHARTER.md)
 - [Status and evidence](STATUS-AND-EVIDENCE.md)
 - [Architecture notes](../architecture/README.md)
