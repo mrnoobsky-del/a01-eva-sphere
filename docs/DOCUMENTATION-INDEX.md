@@ -1,5 +1,13 @@
 # Documentation index
 
+## A-01 Space Market — покупка и аренда пространств
+
+- [A01-SPACE-MARKET-01 — каталог, права и модель использования (RU)](A01-SPACE-MARKET-01-living-space-sales-and-rentals-v0.1_RU.md)
+- [Интерфейс каталога](../digital-twin/a01-space-market.js)
+- [Стили интерфейса](../digital-twin/a01-space-market.css)
+
+
+
 ## Media intelligence / EvaScribe
 
 - [EvaScribe local MVP 0.1.0 — install and usage](../tools/evascribe/README_RU.md)
