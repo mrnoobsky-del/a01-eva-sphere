@@ -47,6 +47,16 @@ Other registries worth retaining:
 
 External GLB files are loaded through pinned source URLs. Their binaries are not copied into this repository. The project stores the scene integration code and a record of the model's source and licence. If a source URL changes or fails, the viewer must continue using its procedural fallback geometry until the model register is corrected.
 
+
+## Дополнительные кандидаты для следующей итерации
+
+Эти модели найдены после сборки текущего демонстратора; они пока не подключены к сцене:
+
+- [Flatbed semitrailer — открытый полуприцеп](https://3dassets.dev/assets/long-haul-trucking-and-truck-stop-flatbed-trailer-98aa4380): CC0 1.0, GLB, 13.75 м длиной, около 2.45 м шириной, с анимацией вращения колёс. Это более подходящая визуальная основа для сменной дольки на открытой платформе, чем закрытый коробчатый полуприцеп. Для следующей версии нужно собрать его с отдельным тягачом и показать точки крепления модуля.
+- [Free roller conveyor — роликовый конвейер](https://3dassets.dev/assets/factory-conveyor-network-factory-conveyor-network-roll-c4c9fdf9): CC0 1.0, GLB, 2 м длиной и 1.2 м шириной. Модель статическая, без готового клипа; вращение роликов при необходимости задаётся кодом. Можно использовать как референс секции направляющей дорожки, но не как доказательство грузоподъёмности под дольку.
+
+**Задача следующего обновления сцены:** заменить образ закрытого полуприцепа на отдельный тягач + открытый carrier deck, показать транспортную раму и точки удержания дольки, а внутри тамбура — несколько модульных роликовых/направляющих секций. До проверки точной геометрии и интерфейсов это остаётся визуальным макетом.
+
 ## Proposed scene architecture
 
 Keep the scene modular so the actual A-01 digital twin can later host it as a separate logistics mode:
