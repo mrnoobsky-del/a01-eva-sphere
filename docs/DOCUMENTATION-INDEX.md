@@ -1,5 +1,11 @@
 # Documentation index
 
+## Public overview and MODNET demo
+
+- [A01-PUBLIC-LANDING-01 — public overview and interactive demo (RU)](A01-PUBLIC-LANDING-01-value-story-and-modnet-demo-v0.1_RU.md)
+- [Public A-01 landing](../digital-twin/a01-public-landing.html)
+- [Mobile MODNET demo](../digital-twin/a01-mobile-demo.html)
+
 ## Modular Dock & Exchange Network (MODNET)
 
 - [A01-MODNET-01 — portable modules, dock-slot rental and exchange](A01-MODNET-01-modular-dock-exchange-network-v0.1.md)
