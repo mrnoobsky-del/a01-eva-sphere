@@ -50,6 +50,13 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 - `media/` — visual material and credits.
 - `releases/` — versioned project files.
 
+## Production cooperation — Biysk and regional suppliers
+
+- [Production cooperation page](digital-twin/production-cooperation.html)
+- [A01-SUPPLY-01 research and supplier qualification register (RU)](docs/A01-SUPPLY-01-biysk-production-cooperation-v0.1.md)
+
+A-01 is planned around external manufacturing partners rather than an owned factory. Biysk manufacturers may cover selected composite, metalworking, concrete, fire-protection and heat-engineering packages; unconfirmed capabilities are sourced regionally or federally. Public product descriptions do not prove available capacity, price, lead time or qualification.
+
 ## Current primary digital-twin build
 
 **Performance programme:** [A-01 Performance — 60 FPS without visual quality loss](performance/README.md) · [P0 source review](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Browser baseline recorder](performance/baseline-recorder.js) · [Benchmark report template](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
