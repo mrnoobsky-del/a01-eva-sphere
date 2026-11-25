@@ -3,6 +3,8 @@
 ## Modular Dock & Exchange Network (MODNET)
 
 - [A01-MODNET-01 — portable modules, dock-slot rental and exchange](A01-MODNET-01-modular-dock-exchange-network-v0.1.md)
+- [A01-MODNET-3D-01 — 3D scenarios and model library (RU)](A01-MODNET-3D-01-scenarios-and-model-library-v0.1_RU.md)
+- [Interactive MODNET 3D simulation](../digital-twin/modnet-exchange-simulation.html)
 - [A01-MODNET-VISUAL-01 — animated concept storyboards](MODNET-VISUAL-STORYBOARDS-01.md)
 - [Module passport template](../templates/module-passport-template-v0.1.csv)
 - [Dock-slot register template](../templates/dock-slot-register-template-v0.1.csv)
