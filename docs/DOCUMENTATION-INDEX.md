@@ -1,5 +1,9 @@
 # Documentation index
 
+## Media intelligence / EvaScribe
+
+- [A01-MEDIA-01 — EvaScribe: media library, transcription and video research (RU)](A01-MEDIA-01-evascribe-media-intelligence-v0.1_RU.md)
+
 ## Public overview and MODNET demo
 
 - [A01-PUBLIC-LANDING-01 — public overview and interactive demo (RU)](A01-PUBLIC-LANDING-01-value-story-and-modnet-demo-v0.1_RU.md)
