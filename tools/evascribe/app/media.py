@@ -77,7 +77,7 @@ def _parse_vtt(path: Path) -> list[dict[str, Any]]:
     return unique
 
 
-def _download_url(source_id: str, url: str, progress: Callable[[str, int, str], None]) -> tuple[Path, dict[str, Any], list[dict[str, Any]]]:
+def _download_url(source_id: str, url: str, progress: Callable[[str, int, str], None], preferred_language: str | None = None) -> tuple[Path, dict[str, Any], list[dict[str, Any]]]:
     try:
         import yt_dlp
     except ImportError as exc:
@@ -127,6 +127,9 @@ def _download_url(source_id: str, url: str, progress: Callable[[str, int, str], 
         meta = {"title": info.get("title") or "Видео без названия", "creator": info.get("uploader") or info.get("channel"), "duration": info.get("duration"), "thumbnail": info.get("thumbnail")}
         ydl.download([url])
     subtitle_files = sorted(folder.glob("source*.vtt"))
+    language_preference = (preferred_language or "auto").lower()
+    first_language = language_preference if language_preference in {"ru", "en"} else "ru"
+    subtitle_files.sort(key=lambda item: (0 if f".{first_language}." in item.name.lower() else 1, item.name))
     captions: list[dict[str, Any]] = []
     for subtitle in subtitle_files:
         captions = _parse_vtt(subtitle)
@@ -188,7 +191,7 @@ def process_source(source: dict[str, Any], progress: Callable[[str, int, str], N
         duration = source.get("duration")
         if source.get("source_url"):
             update_source(source_id, status="downloading", stage="downloading", progress=5, error="")
-            path, meta, captions = _download_url(source_id, source["source_url"], progress)
+            path, meta, captions = _download_url(source_id, source["source_url"], progress, source.get("language"))
             suffix = path.suffix.lower()
             audio_types = {".webm": "audio/webm", ".m4a": "audio/mp4", ".mp3": "audio/mpeg", ".opus": "audio/ogg", ".ogg": "audio/ogg", ".wav": "audio/wav", ".aac": "audio/aac", ".flac": "audio/flac"}
             media_type = audio_types.get(suffix) or ("text/plain" if captions and not path.is_file() else mimetypes.guess_type(path.name)[0] or "application/octet-stream")

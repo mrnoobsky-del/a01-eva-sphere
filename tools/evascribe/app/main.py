@@ -11,7 +11,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any
 
-from fastapi import FastAPI, File, Header, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, Header, HTTPException, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse, Response, StreamingResponse
 from pydantic import BaseModel, Field
 
@@ -140,7 +140,7 @@ def library(q: str = "", limit: int = 100):
 
 
 @app.post("/api/sources/upload")
-async def upload_source(file: UploadFile = File(...), language: str = config.DEFAULT_LANGUAGE):
+async def upload_source(file: UploadFile = File(...), language: str = Form(default=config.DEFAULT_LANGUAGE, max_length=12)):
     original_name = Path(file.filename or "material").name
     extension = Path(original_name).suffix.lower()
     if extension not in config.ALLOWED_EXTENSIONS:
