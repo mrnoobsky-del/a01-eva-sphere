@@ -2,6 +2,9 @@
 
 ## Media intelligence / EvaScribe
 
+- [EvaScribe local MVP 0.1.0 — install and usage](../tools/evascribe/README_RU.md)
+- [EvaScribe application source](../tools/evascribe/app/main.py)
+
 - [A01-MEDIA-01 — EvaScribe: media library, transcription and video research (RU)](A01-MEDIA-01-evascribe-media-intelligence-v0.1_RU.md)
 
 ## Public overview and MODNET demo

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7f4">
+  <meta name="description" content="EvaScribe — локальная библиотека видео, расшифровок и исследовательских заметок.">
+  <title>EvaScribe — медиа и знания</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand-row">
+      <div class="brand-mark"><span></span></div>
+      <div class="brand-copy"><strong>EvaScribe</strong><small>MEDIA INTELLIGENCE</small></div>
+      <button class="icon-btn mobile-only" id="closeSidebar" aria-label="Закрыть меню">×</button>
+    </div>
+
+    <button class="new-source-btn" id="newSourceBtn"><span class="plus">＋</span> Добавить материал</button>
+
+    <div class="nav-group">
+      <div class="nav-label">РАБОЧЕЕ ПРОСТРАНСТВО</div>
+      <button class="nav-item active" data-view="library"><span class="nav-icon">▤</span> Медиатека <span class="nav-count" id="libraryCount">0</span></button>
+      <button class="nav-item" data-view="recent"><span class="nav-icon">◷</span> Недавние</button>
+      <button class="nav-item" data-view="search"><span class="nav-icon">⌕</span> Поиск по архиву</button>
+      <button class="nav-item" data-view="queue"><span class="nav-icon">◌</span> Очередь <span class="queue-dot" id="queueDot"></span></button>
+    </div>
+
+    <div class="sidebar-section-head"><span>КОЛЛЕКЦИИ</span><button class="tiny-add" title="Коллекции появятся в следующей версии">＋</button></div>
+    <div class="collection-list">
+      <div class="collection-item"><span class="collection-color green"></span> Сфера Евы A-01</div>
+      <div class="collection-item"><span class="collection-color violet"></span> VibeShorts</div>
+      <div class="collection-item"><span class="collection-color amber"></span> Личные исследования</div>
+    </div>
+
+    <div class="sidebar-spacer"></div>
+    <div class="local-card">
+      <div class="local-card-icon">⌂</div>
+      <div><strong>Локальная библиотека</strong><small>Файлы хранятся на этом ПК</small></div>
+      <span class="safe-dot"></span>
+    </div>
+    <div class="sidebar-footer"><span class="status-dot"></span><span id="engineLabel">Проверка движков…</span><button class="settings-link" id="settingsBtn" title="Сведения о системе">⚙</button></div>
+  </aside>
+
+  <main class="main-area">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn mobile-only" id="openSidebar" aria-label="Открыть меню">☰</button>
+        <div class="breadcrumb"><span>Рабочее пространство</span><b>/</b><strong id="breadcrumbCurrent">Медиатека</strong></div>
+      </div>
+      <div class="topbar-actions">
+        <span class="local-pill"><i></i> Локально</span>
+        <button class="icon-btn theme-toggle" id="themeToggle" aria-label="Переключить тему">◐</button>
+        <button class="avatar" title="Локальный профиль">E</button>
+      </div>
+    </header>
+
+    <section class="workspace-head">
+      <div>
+        <div class="eyebrow">ВАША ИССЛЕДОВАТЕЛЬСКАЯ ПАМЯТЬ</div>
+        <h1 id="pageTitle">Медиатека</h1>
+        <p id="pageSubtitle">Видео, аудио и расшифровки — в одном пространстве.</p>
+      </div>
+      <div class="head-actions"><button class="secondary-btn" id="refreshBtn">↻ Обновить</button><button class="primary-btn" id="headAddBtn">＋ Новый материал</button></div>
+    </section>
+
+    <section class="metrics-row">
+      <div class="metric-card"><div class="metric-icon mint">▤</div><div><span>В библиотеке</span><strong id="metricSources">0 <small>материалов</small></strong></div></div>
+      <div class="metric-card"><div class="metric-icon blue">◷</div><div><span>Расшифровано</span><strong id="metricReady">0 <small>материалов</small></strong></div></div>
+      <div class="metric-card"><div class="metric-icon lilac">⌕</div><div><span>В обработке</span><strong id="metricProcessing">0 <small>задач</small></strong></div></div>
+      <div class="metric-note"><span class="sparkle">✳</span><div><strong>От источника — к знанию</strong><small>Каждый вывод можно связать с таймкодом оригинала.</small></div></div>
+    </section>
+
+    <section class="import-panel" id="importPanel">
+      <div class="import-panel-copy"><div class="import-icon">↥</div><div><h2>Добавьте новый материал</h2><p>Загрузите аудио или видеофайл либо вставьте ссылку на поддерживаемый источник.</p></div></div>
+      <div class="import-controls">
+        <form id="urlForm" class="url-form"><span class="link-symbol">↗</span><input id="sourceUrl" type="url" placeholder="Вставьте ссылку на YouTube…" autocomplete="url"><select id="languageSelect" aria-label="Язык распознавания"><option value="auto">Авто</option><option value="ru">Русский</option><option value="en">English</option></select><button type="submit" class="primary-btn">Добавить ссылку</button></form>
+        <div class="import-divider"><span></span> или <span></span></div>
+        <label class="upload-drop" id="uploadDrop"><input type="file" id="fileInput" accept="video/*,audio/*,.mp4,.mkv,.mov,.webm,.avi,.m4v,.mp3,.wav,.m4a,.aac,.flac,.ogg,.opus" hidden><span class="upload-symbol">＋</span><span><strong>Выбрать файл</strong><small>MP4, MKV, MOV, WebM, MP3, WAV и другие · до 2 ГБ</small></span><span class="browse-label">Обзор файлов</span></label>
+      </div>
+      <div class="import-footnote"><span class="lock-symbol">⌑</span> Файлы остаются на этом компьютере. Ссылки обрабатываются только из разрешённого списка доменов.</div>
+    </section>
+
+    <section class="content-toolbar">
+      <div class="content-title"><h2 id="listTitle">Все материалы</h2><span class="counter" id="listCount">0</span></div>
+      <div class="list-tools"><div class="search-box"><span>⌕</span><input id="librarySearch" type="search" placeholder="Найти материал…"><kbd>⌘ K</kbd></div><select id="sortSelect" class="sort-select"><option value="newest">Сначала новые</option><option value="oldest">Сначала старые</option><option value="title">По названию</option></select></div>
+    </section>
+
+    <section id="libraryList" class="library-list"><div class="loading-state"><span class="spinner"></span><span>Загружаю локальную библиотеку…</span></div></section>
+    <div class="empty-state hidden" id="emptyState"><div class="empty-illustration"><span>▤</span><i>✳</i></div><h3>Здесь пока пусто</h3><p>Добавьте первый материал — EvaScribe создаст расшифровку и сохранит его в вашей библиотеке.</p><button class="primary-btn" id="emptyAddBtn">＋ Добавить материал</button></div>
+    <footer class="main-footer"><span>EvaScribe <b>0.1.0</b></span><span>Локальная исследовательская среда · Предварительная версия</span><a href="https://github.com/mrnoobsky-del/a01-eva-sphere" target="_blank" rel="noopener">Документация A-01 ↗</a></footer>
+  </main>
+</div>
+
+<div class="drawer-backdrop hidden" id="drawerBackdrop"></div>
+<aside class="detail-drawer hidden" id="detailDrawer" aria-label="Карточка материала">
+  <div class="drawer-top"><button class="icon-btn" id="closeDetail">×</button><div class="drawer-actions"><button class="icon-btn" id="exportBtn" title="Экспорт">⇩</button><button class="icon-btn danger-icon" id="deleteBtn" title="Удалить материал">⌫</button></div></div>
+  <div class="drawer-content" id="drawerContent"></div>
+</aside>
+
+<div class="modal-backdrop hidden" id="systemModal"><div class="modal"><div class="modal-head"><div><span class="eyebrow">СИСТЕМА</span><h2>Состояние EvaScribe</h2></div><button class="icon-btn" id="closeSystem">×</button></div><div id="systemDetails" class="system-details"></div><p class="modal-note">Обработка аудио/видео выполняется локально. Для ссылок используется yt-dlp. Модель Whisper загружается при первой задаче.</p></div></div>
+<div class="toast" id="toast"></div>
+<script src="/static/app.js" defer></script>
+</body>
+</html>
