@@ -65,6 +65,15 @@ A-01 is planned around external manufacturing partners rather than an owned fact
 
 The concept studies selected unoccupied technical modules moving through a floor-level vestibule to an exterior charging dock, then returning for controlled bidirectional energy exchange with the A-01 microgrid. It does not make every module mobile and does not replace stationary supply or central reserve. Mechanical design, mass, battery capacity, power, fire strategy and structural interfaces remain uncalculated.
 
+## Mobile energy network and battery-dock safety
+
+- [Open the Wix overview](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/mobile-energy-network.html)
+- [A01-MOBILITY-01 — mobile energy vehicle and service network](docs/A01-MOBILITY-01-mobile-energy-service-network-v0.1.md)
+- [A01-FIRE-ESS-01 — battery module, vestibule and dock fire strategy](docs/A01-FIRE-ESS-01-battery-dock-fire-safety-v0.1.md)
+- [Public fire-concept page](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/battery-dock-fire-safety.html)
+
+A-01 studies three separate products: a mobile energy service van, a passenger electric vehicle and a dedicated mobile energy-storage unit. The Sphere's vestibule is not described as a chamber that can contain any explosion; the vestibule, battery compartment and outdoor dock are separate design subsystems. Local demand, equipment, permits and economics remain unverified.
+
 ## Current primary digital-twin build
 
 **Performance programme:** [A-01 Performance — 60 FPS without visual quality loss](performance/README.md) · [P0 source review](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Browser baseline recorder](performance/baseline-recorder.js) · [Benchmark report template](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
