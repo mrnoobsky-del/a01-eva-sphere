@@ -26,6 +26,7 @@ The three reference profiles are coordination baselines only. Areas, equipment q
 - [A01-MOD-W01-LAYOUT-STUDY-01 — two layout zoning alternatives (RU)](A01-MOD-W01-LAYOUT-STUDY-v0.1_RU.md)
 
 - [A01-MOD-W01-GEOMETRY-COORDINATION-01 — привязка к геометрии v4.9.0 (RU)](A01-MOD-W01-GEOMETRY-COORDINATION-v0.1_RU.md)
+- [A01-W01-OPEN-SOURCE-TOOLCHAIN-RESEARCH-01 — готовые GitHub-инструменты для W-01 (RU)](A01-W01-OPEN-SOURCE-TOOLCHAIN-RESEARCH-v0.1_RU.md)
 - [W-01 geometry overlay — L00 / D04 (SVG)](A01-MOD-W01-GEOMETRY-COORDINATION-v0.1_RU.svg)
 - [A01-MOD-W01-FIXTURE-SCHEDULE-01 — fixture and equipment schedule template (CSV)](A01-MOD-W01-FIXTURE-SCHEDULE-v0.1_RU.csv)
 
