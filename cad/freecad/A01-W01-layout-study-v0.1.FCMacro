@@ -1,0 +1,347 @@
+# A-01 / W-01 — parametric FreeCAD layout study
+# Revision 0.1 | 26 Nov 2026
+# This is a coordination mock-up, NOT a construction or code-compliant design.
+
+import os
+import math
+import hashlib
+import urllib.request
+import FreeCAD as App
+import FreeCADGui as Gui
+import Part
+from FreeCAD import Vector
+
+try:
+    from PySide import QtWidgets
+except Exception:
+    from PySide2 import QtWidgets
+
+# Geometry read from the A-01 v4.9.0 scene. The physical scale is unknown.
+R_IN_U = 5.08
+R_OUT_U = 6.98
+HALF_ANGLE_DEG = 10.9893
+DOOR_WIDTH_U = 0.84
+PORTAL_DEPTH_U = 0.82
+GALLERY_RADIUS_U = 4.55
+GALLERY_END_ANGLE_DEG = 81.2535
+SECTOR_AREA_U2 = 4.395
+
+# The default 1000 mm/u is only a scale hypothesis, not an approved calibration.
+scale_mm_per_u, accepted = QtWidgets.QInputDialog.getDouble(
+    None,
+    "A-01 / W-01 — масштаб макета",
+    "Миллиметров на одну единицу 3D-сцены.\n"
+    "1000 — временная гипотеза, не обмер. Введите подтверждённый масштаб,\n"
+    "если он у вас уже есть:",
+    1000.0,
+    1.0,
+    100000.0,
+    1
+)
+if not accepted:
+    raise RuntimeError("Создание макета отменено: масштаб не задан.")
+
+S = float(scale_mm_per_u)
+R_IN = R_IN_U * S
+R_OUT = R_OUT_U * S
+A = math.radians(HALF_ANGLE_DEG)
+DOOR_W = DOOR_WIDTH_U * S
+PORTAL_D = PORTAL_DEPTH_U * S
+
+# Illustrative space-planning envelopes only. These are NOT Russian code dimensions.
+ACCESSIBLE_ENVELOPE = (1800.0, 1800.0)
+STANDARD_CUBICLE = (900.0, 1500.0)
+BASIN_ZONE = (1200.0, 600.0)
+SERVICE_ZONE = (600.0, 600.0)
+PROGRAM_AREA_M2 = sum(w * d for w, d in [ACCESSIBLE_ENVELOPE, STANDARD_CUBICLE, BASIN_ZONE, SERVICE_ZONE]) / 1e6
+SECTOR_AREA_M2 = SECTOR_AREA_U2 * (S / 1000.0) ** 2
+
+# FreeCAD-library assets. The FreeCAD-library repository README states CC-BY 3.0.
+ASSETS = [
+    {
+        "name": "WallHungToilet.step",
+        "url": "https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/master/Architectural%20Parts/Hydro%20equipment/WallHungToilet.step",
+        "git_blob_sha": "0d08ce001a7744d81f89605abe3fd915353fe765",
+        "author": "Mauro Bellone",
+        "commit": "d56931e775525ff018600ee4737983d4fd01e0d4",
+        "kind": "toilet",
+    },
+    {
+        "name": "washbasin-48x43cm.brep",
+        "url": "https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/master/Architectural%20Parts/Hydro%20equipment/washbasin%2048x43cm.brep",
+        "git_blob_sha": "32bbd354bc91c41c399f71801001508f09bbc2eb",
+        "author": "WladIMirG",
+        "commit": "6f071a4bab37fff7784092548e6dbff21499b751",
+        "kind": "basin",
+    },
+    {
+        "name": "floor-drain-8cm.brep",
+        "url": "https://raw.githubusercontent.com/FreeCAD/FreeCAD-library/master/Architectural%20Parts/Hydro%20equipment/8cm%20floor%20drain.brep",
+        "git_blob_sha": "80dbfc4f2cacc76cd72651d8c4ab1f7e7d6d65bd",
+        "author": "WladIMirG",
+        "commit": "6f071a4bab37fff7784092548e6dbff21499b751",
+        "kind": "drain",
+    },
+]
+
+ASSET_DIR = os.path.join(os.path.expanduser("~"), "A01_W01_FreeCAD_assets")
+if not os.path.isdir(ASSET_DIR):
+    os.makedirs(ASSET_DIR)
+
+
+def git_blob_sha1(data):
+    header = ("blob %d\0" % len(data)).encode("ascii")
+    return hashlib.sha1(header + data).hexdigest()
+
+
+def obtain_asset(asset):
+    path = os.path.join(ASSET_DIR, asset["name"])
+    if os.path.isfile(path):
+        with open(path, "rb") as f:
+            data = f.read()
+        if git_blob_sha1(data) == asset["git_blob_sha"]:
+            return path
+    request = urllib.request.Request(asset["url"], headers={"User-Agent": "A01-W01-FreeCAD-Study/0.1"})
+    with urllib.request.urlopen(request, timeout=25) as response:
+        data = response.read()
+    actual = git_blob_sha1(data)
+    if actual != asset["git_blob_sha"]:
+        raise ValueError("Git blob SHA mismatch for " + asset["name"])
+    with open(path, "wb") as f:
+        f.write(data)
+    return path
+
+
+def read_shape(asset):
+    path = obtain_asset(asset)
+    shape = Part.Shape()
+    shape.read(path)
+    if shape.isNull():
+        raise ValueError("Imported shape is empty: " + asset["name"])
+    bb = shape.BoundBox
+    # Keep the sink BREP vertical origin (about 611.5 mm in the source file);
+    # this is a model-file placement offset, not an approved installation height.
+    z_target = bb.ZMin if asset["kind"] == "basin" else 0.0
+    shape.translate(Vector(-bb.XMin, -bb.YMin, z_target - bb.ZMin))
+    return shape
+
+
+def sector_point(radius, angle_deg, z=0.0):
+    t = math.radians(angle_deg)
+    return Vector(radius * math.sin(t), radius * math.cos(t), z)
+
+
+def make_sector_wire(z=0.0, samples=48):
+    pts = []
+    for i in range(samples + 1):
+        ang = -HALF_ANGLE_DEG + (2.0 * HALF_ANGLE_DEG * i / samples)
+        pts.append(sector_point(R_OUT, ang, z))
+    for i in range(samples + 1):
+        ang = HALF_ANGLE_DEG - (2.0 * HALF_ANGLE_DEG * i / samples)
+        pts.append(sector_point(R_IN, ang, z))
+    pts.append(pts[0])
+    return Part.makePolygon(pts)
+
+
+def rectangle_wire(x, y, width, depth, z=0.0):
+    points = [
+        Vector(x, y, z),
+        Vector(x + width, y, z),
+        Vector(x + width, y + depth, z),
+        Vector(x, y + depth, z),
+        Vector(x, y, z),
+    ]
+    return Part.makePolygon(points)
+
+
+def point_inside_sector(x, y):
+    radius = math.sqrt(x * x + y * y)
+    angle = math.degrees(math.atan2(x, y))
+    return (R_IN - 1e-6) <= radius <= (R_OUT + 1e-6) and abs(angle) <= HALF_ANGLE_DEG + 1e-6
+
+
+def rectangle_inside_sector(x, y, width, depth):
+    corners = [(x, y), (x + width, y), (x + width, y + depth), (x, y + depth)]
+    return all(point_inside_sector(px, py) for px, py in corners)
+
+
+def add_feature(doc, group, name, label, shape, color=(0.75, 0.82, 0.82), transparency=0, line=(0.12, 0.18, 0.20)):
+    obj = doc.addObject("Part::Feature", name)
+    obj.Label = label
+    obj.Shape = shape
+    group.addObject(obj)
+    obj.ViewObject.ShapeColor = color
+    obj.ViewObject.LineColor = line
+    obj.ViewObject.Transparency = transparency
+    obj.ViewObject.DisplayMode = "Flat Lines"
+    return obj
+
+
+def add_imported_or_proxy(doc, group, asset, x, y, label, proxy_dims):
+    try:
+        shape = read_shape(asset)
+        shape.translate(Vector(x, y, 0))
+        obj = add_feature(doc, group, "Asset_" + asset["kind"], label + " — CAD-модель / " + asset["author"], shape,
+                          color=(0.80, 0.84, 0.78), line=(0.12, 0.18, 0.12))
+        obj.addProperty("App::PropertyString", "SourceURL", "Provenance")
+        obj.SourceURL = asset["url"]
+        obj.addProperty("App::PropertyString", "Attribution", "Provenance")
+        obj.Attribution = asset["author"] + "; FreeCAD-library CC-BY 3.0; commit " + asset["commit"]
+        obj.addProperty("App::PropertyString", "GeometryStatus", "Provenance")
+        obj.GeometryStatus = "External CAD geometry; dimensions/fit still require review"
+        return obj
+    except Exception as exc:
+        w, d, h = proxy_dims
+        if asset["kind"] == "drain":
+            shape = Part.makeCylinder(w / 2.0, h)
+        else:
+            shape = Part.makeBox(w, d, h)
+        shape.translate(Vector(x, y, 0))
+        obj = add_feature(doc, group, "Proxy_" + asset["kind"], label + " — УПРОЩЁННЫЙ ПРОКСИ (скачивание CAD не удалось)", shape,
+                          color=(0.95, 0.65, 0.25), line=(0.35, 0.18, 0.05))
+        obj.addProperty("App::PropertyString", "ImportError", "Provenance")
+        obj.ImportError = str(exc)
+        return obj
+
+
+doc = App.newDocument("A01_W01_D04_Layout_Study")
+sector_group = doc.addObject("App::DocumentObjectGroup", "W01_D04_Geometry")
+sector_group.Label = "W-01 · D04 · оболочка и вариант A"
+
+# Existing scene geometry: the exact sector footprint in the selected scale hypothesis.
+sector_wire = make_sector_wire(z=0.0)
+sector_face = Part.Face(sector_wire)
+add_feature(doc, sector_group, "D04_Floor", "D04 · контур пола сектора (геометрия v4.9.0)", sector_face,
+            color=(0.67, 0.75, 0.76), transparency=82, line=(0.12, 0.22, 0.24))
+add_feature(doc, sector_group, "D04_Perimeter", "D04 · граница сектора", sector_wire,
+            color=(0.75, 0.80, 0.80), line=(0.10, 0.16, 0.18))
+
+# Inner portal marker. Its source width is still scene-unit geometry, not a measured door size.
+portal_y = R_IN
+portal_wire = Part.makePolygon([
+    Vector(-DOOR_W / 2.0, portal_y, 8),
+    Vector(DOOR_W / 2.0, portal_y, 8),
+])
+add_feature(doc, sector_group, "D04_Portal", "Внутренний портал · номинал 0,84 u (масштабируемая геометрия)", portal_wire,
+            color=(0.90, 0.66, 0.22), line=(0.90, 0.46, 0.08))
+portal_depth_wire = rectangle_wire(-DOOR_W / 2.0, R_IN, DOOR_W, PORTAL_D, 12)
+add_feature(doc, sector_group, "D04_Portal_Depth", "Портальная глубина · 0,82 u (геометрический конверт)",
+            portal_depth_wire, color=(0.85, 0.60, 0.20), transparency=65, line=(0.90, 0.50, 0.12))
+
+# Functional access route: shown conceptually as a thin series of line segments.
+gallery_end = sector_point(GALLERY_RADIUS_U * S, GALLERY_END_ANGLE_DEG - 90.0)
+portal_center = Vector(0, R_IN, 10)
+route_shape = Part.makePolygon([Vector(gallery_end.x, gallery_end.y, 10), portal_center])
+add_feature(doc, sector_group, "Gallery_To_D04_Route", "Неподтверждённая связь галереи с порталом · требуется проверка доступности",
+            route_shape, color=(0.85, 0.72, 0.38), line=(0.90, 0.58, 0.12))
+
+# Option A: one accessible sanitary room envelope with a WC, basin and floor drain.
+# Envelope dimensions are study assumptions; no normative compliance is implied.
+access_wire = rectangle_wire(-ACCESSIBLE_ENVELOPE[0] / 2.0, R_IN + 5,
+                              ACCESSIBLE_ENVELOPE[0], ACCESSIBLE_ENVELOPE[1], 15)
+add_feature(doc, sector_group, "Accessible_Room_Envelope", "Z04 · габаритный конверт 1800 × 1800 мм (гипотеза для fit-test)",
+            access_wire, color=(0.20, 0.75, 0.65), transparency=35, line=(0.05, 0.48, 0.40))
+
+assets_by_kind = {a["kind"]: a for a in ASSETS}
+# Candidate positions inside the envelope. These are editable study coordinates, not design coordinates.
+add_imported_or_proxy(doc, sector_group, assets_by_kind["toilet"], -650, R_IN + 1120,
+                      "WC-01 · подвесной унитаз", (360, 350, 380))
+add_imported_or_proxy(doc, sector_group, assets_by_kind["basin"], 400, R_IN + 1100,
+                      "BAS-01 · умывальник", (480, 430, 356))
+add_imported_or_proxy(doc, sector_group, assets_by_kind["drain"], 0, R_IN + 1660,
+                      "DR-01 · напольный трап", (80, 80, 5))
+
+# Conceptual assistance point and grab-rail placeholders, separated from certified product selection.
+call_marker = Part.makeCylinder(28, 18, Vector(650, R_IN + 850, 900))
+add_feature(doc, sector_group, "Assistance_Call_Proxy", "ASSIST-CALL · условный маркер, не выбранное изделие",
+            call_marker, color=(0.90, 0.34, 0.24))
+rail_1 = Part.makeCylinder(18, 600, Vector(-770, R_IN + 1260, 720), Vector(1, 0, 0))
+rail_2 = Part.makeCylinder(18, 600, Vector(-770, R_IN + 1260, 920), Vector(1, 0, 0))
+add_feature(doc, sector_group, "Grab_Rails_Proxy", "Поручни · условные объёмы, конструкция/крепление не рассчитаны",
+            rail_1.fuse(rail_2), color=(0.72, 0.78, 0.88))
+
+# Option B: the complete functional programme shown separately as non-fitted area blocks.
+# The blocks sit to the right of D04 in model space so the user can select/show/hide them.
+option_b = doc.addObject("App::DocumentObjectGroup", "W01_Option_B_Program_Check")
+option_b.Label = "Вариант B · полный набор зон для проверки площади (не размещён в D04)"
+blocks = [
+    ("Z04", ACCESSIBLE_ENVELOPE, "Z04 · универсальная комната · 1800 × 1800 мм"),
+    ("Z03", STANDARD_CUBICLE, "Z03 · стандартная кабина · 900 × 1500 мм"),
+    ("Z02", BASIN_ZONE, "Z02 · общая зона умывальников · 1200 × 600 мм"),
+    ("Z05_06", SERVICE_ZONE, "Z05/Z06 · уборочная/техническая зона · 600 × 600 мм"),
+]
+base_x = R_OUT + 1000
+base_y = R_IN + 100
+cursor_x = base_x
+for code, dims, label in blocks:
+    w, d = dims
+    wire = rectangle_wire(cursor_x, base_y, w, d, 15)
+    add_feature(doc, option_b, "Program_" + code, label, wire,
+                color=(0.86, 0.35, 0.30), line=(0.65, 0.12, 0.10))
+    cursor_x += w + 200
+option_b.ViewObject.Visibility = False
+
+# Separate unresolved service-access route marker.
+service_group = doc.addObject("App::DocumentObjectGroup", "W01_Service_Access_Open_Items")
+service_group.Label = "W-01 · незакрытые связи эксплуатации"
+service_line = Part.makePolygon([
+    Vector(R_OUT + 100, R_IN + 350, 20),
+    Vector(R_OUT + 100, R_IN + 1200, 20),
+])
+add_feature(doc, service_group, "Service_Access_TBD", "Сервисный подход Z05/Z06 · трасса не определена",
+            service_line, color=(0.85, 0.46, 0.24), line=(0.85, 0.32, 0.12))
+
+# Attach key model metadata to the document.
+meta = doc.addObject("App::FeaturePython", "W01_Study_Metadata")
+meta.Label = "Параметры макета и статус"
+meta.addProperty("App::PropertyFloat", "MillimetresPerSceneUnit", "Calibration")
+meta.MillimetresPerSceneUnit = S
+meta.addProperty("App::PropertyString", "CalibrationStatus", "Calibration")
+meta.CalibrationStatus = "PROVISIONAL — user-entered scale hypothesis; no measured control dimension supplied"
+meta.addProperty("App::PropertyFloat", "SectorAreaM2", "Derived geometry")
+meta.SectorAreaM2 = SECTOR_AREA_M2
+meta.addProperty("App::PropertyFloat", "IllustrativeProgramAreaM2", "Study assumptions")
+meta.IllustrativeProgramAreaM2 = PROGRAM_AREA_M2
+meta.addProperty("App::PropertyFloat", "ScaleNeededForAreaOnlyParity", "Study assumptions")
+meta.ScaleNeededForAreaOnlyParity = 1000.0 * math.sqrt(PROGRAM_AREA_M2 / SECTOR_AREA_U2)
+meta.addProperty("App::PropertyBool", "Z04EnvelopeInsideD04", "Geometry check")
+meta.Z04EnvelopeInsideD04 = rectangle_inside_sector(-ACCESSIBLE_ENVELOPE[0] / 2.0, R_IN + 5,
+                                                       ACCESSIBLE_ENVELOPE[0], ACCESSIBLE_ENVELOPE[1])
+meta.addProperty("App::PropertyBool", "FullProgramFitsByArea", "Geometry check")
+meta.FullProgramFitsByArea = PROGRAM_AREA_M2 <= SECTOR_AREA_M2
+meta.addProperty("App::PropertyString", "DesignStatus", "Status")
+meta.DesignStatus = "M0 / proposed / not calculated / not code checked"
+
+# Visual setup.
+doc.recompute()
+Gui.activeDocument().activeView().viewTop()
+Gui.activeDocument().activeView().fitAll()
+try:
+    Gui.activeDocument().activeView().setAnimationEnabled(False)
+except Exception:
+    pass
+
+App.Console.PrintMessage("\nA-01 / W-01 mock-up created.\n")
+App.Console.PrintMessage("Scale used: %.3f mm per scene unit (PROVISIONAL).\n" % S)
+App.Console.PrintMessage("D04 floor area from scene geometry: %.3f m2 at this scale.\n" % SECTOR_AREA_M2)
+App.Console.PrintMessage("Single Z04 envelope 1800 x 1800 inside D04 boundary: %s (polygon-corner check only).\n" % str(meta.Z04EnvelopeInsideD04))
+App.Console.PrintMessage("Illustrative full-program block sum: %.3f m2 (assumption, not code dimension).\n" % PROGRAM_AREA_M2)
+App.Console.PrintMessage("Area-only delta: %.3f m2. This excludes walls, door swings and circulation.\n" % (PROGRAM_AREA_M2 - SECTOR_AREA_M2))
+App.Console.PrintMessage("Scale for equal raw areas would be about %.1f mm/u; this does NOT prove the plan fits.\n" % (1000.0 * math.sqrt(PROGRAM_AREA_M2 / SECTOR_AREA_U2)))
+App.Console.PrintMessage("Portal source fields (0.84 u width and about 5.3462 deg half-angle) do not yet reconcile; check source geometry.\n")
+App.Console.PrintMessage("Option A = one accessible-room study. Option B is hidden in the model tree.\n")
+App.Console.PrintMessage("External CAD assets are downloaded to: %s\n" % ASSET_DIR)
+App.Console.PrintMessage("This file is a coordination mock-up, not a construction or accessibility approval.\n\n")
+
+# Optional save dialog.
+file_path, _ = QtWidgets.QFileDialog.getSaveFileName(
+    None,
+    "Сохранить макет W-01",
+    os.path.join(os.path.expanduser("~"), "A01-W01-D04-layout-study.FCStd"),
+    "FreeCAD document (*.FCStd)"
+)
+if file_path:
+    if not file_path.lower().endswith(".fcstd"):
+        file_path += ".FCStd"
+    doc.saveAs(file_path)
+    App.Console.PrintMessage("Saved: %s\n" % file_path)
