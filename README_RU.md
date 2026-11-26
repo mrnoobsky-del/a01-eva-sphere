@@ -28,6 +28,8 @@ A-01 — открытая история развития долгосрочно
 - [Стартовый реестр нагрузок S-01 / W-01 / R-01](docs/A01-MOD-LOAD-REGISTER-v0.1_RU.csv)
 - [Детальная инженерная карточка W-01 — санитарный модуль](docs/A01-MOD-W01-SANITARY-ENGINEERING-v0.1_RU.md)
 - [Ведомость сантехнических приборов и оборудования W-01](docs/A01-MOD-W01-FIXTURE-SCHEDULE-v0.1_RU.csv)
+- [Первый параметрический макет W-01 / D04 (FreeCAD, DXF, SVG)](docs/A01-MOD-W01-FREECAD-MOCKUP-v0.1_RU.md)
+- [FreeCAD macro — W-01 / D04](cad/freecad/A01-W01-layout-study-v0.1.FCMacro)
 - [Матрица инженерных систем и интерфейсов](docs/A01-MASTER-SYSTEMS-INTERFACE-MATRIX-v0.1_RU.csv)
 - [Реестр открытых решений и рисков](docs/A01-MASTER-DECISIONS-RISKS-v0.1_RU.csv)
 - [Полный индекс документации](docs/DOCUMENTATION-INDEX.md)
