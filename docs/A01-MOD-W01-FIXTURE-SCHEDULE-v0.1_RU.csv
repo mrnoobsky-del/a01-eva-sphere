@@ -1,0 +1,25 @@
+fixture_id,spatial_id,zone_id,fixture_type,description,quantity,quantity_unit,cold_water,hot_water,design_flow_L_s,design_pressure,drainage_connection,drainage_flow_L_s,electrical_input_kw,supply_voltage,accessibility_requirement,manufacturer_model,maintenance_access,asset_id,evidence_state,source_or_assumption,notes
+W01-FIX-001,A01-L00-D04,W01-Z03,WC,Standard WC pan and flushing device,,,,,,,,,,,,,,unknown,Fixture count and model not selected
+W01-FIX-002,A01-L00-D04,W01-Z04,WC-ACC,Accessible WC pan and flushing device,,,,,,,,,,,,,,unknown,Configuration and count to be confirmed by accessibility study
+W01-FIX-003,A01-L00-D04,W01-Z02,BASIN,Washbasin,,,,,,,,,,,,,,unknown,Count and type to be confirmed
+W01-FIX-004,A01-L00-D04,W01-Z02,TAP,Washbasin tap / mixer,,,,,,,,,,,,,,unknown,Sensor or manual operation not selected
+W01-FIX-005,A01-L00-D04,W01-Z02,SOAP,Soap dispenser,,,,,,,,,,,,,,unknown,Consumable and service plan required
+W01-FIX-006,A01-L00-D04,W01-Z02,HAND-DRY,Hand dryer,,,,,,,,,,,,,,unknown,Compare dryer and paper options; acoustic and electrical impact
+W01-FIX-007,A01-L00-D04,W01-Z02,PAPER,Paper towel dispenser and bin,,,,,,,,,,,,,,unknown,Alternative to hand dryer; operating cost and waste
+W01-FIX-008,A01-L00-D04,W01-Z04,GRAB-RAIL,Accessible grab rails and supports,,,,,,,,,,,,,,unknown,Fixing substrate and load verification required
+W01-FIX-009,A01-L00-D04,W01-Z04,ASSIST-CALL,Accessible assistance call device,,,,,,,,,,,,,,unknown,End-to-end monitored response required; not cloud-only
+W01-FIX-010,A01-L00-D04,W01-Z04,ALARM-RESET,Assistance call reset / acknowledgement,,,,,,,,,,,,,,unknown,Reset location and staff procedure to be designed
+W01-FIX-011,A01-L00-D04,W01-Z05,JANITOR-SINK,Cleaning sink / mop sink,,,,,,,,,,,,,,unknown,Include only if confirmed in operator brief
+W01-FIX-012,A01-L00-D04,W01-Z05,CHEM-STORAGE,Lockable cleaning chemical storage,,,,,,,,,,,,,,unknown,Separate from public supplies and potable-water components
+W01-FIX-013,A01-L00-D04,W01-Z03,FLOOR-DRAIN,Floor drain and trap,,,,,,,,,,,,,,unknown,Only where purpose, trap and evaporation control are defined
+W01-FIX-014,A01-L00-D04,W01-Z06,CLEANOUT,Drain cleanout / rodding access,,,,,,,,,,,,,,unknown,Locations follow final pipe routing
+W01-FIX-015,A01-L00-D04,W01-Z06,ISOLATION-VALVE,Local cold-water branch isolation,,,,,,,,,,,,,,unknown,Accessible, labelled and maintainable
+W01-FIX-016,A01-L00-D04,W01-Z06,ISOLATION-VALVE,Local hot-water branch isolation,,,,,,,,,,,,,,unknown,Only if hot-water branch is provided
+W01-FIX-017,A01-L00-D04,W01-Z06,METER,Cold-water submeter / pulse output,,,,,,,,,,,,,,unknown,Metering boundary to be agreed with EMS
+W01-FIX-018,A01-L00-D04,W01-Z06,METER,Hot-water meter / thermal meter where justified,,,,,,,,,,,,,,unknown,Select measurement method after central/local DHW decision
+W01-FIX-019,A01-L00-D04,W01-Z06,LEAK-SENSOR,Leak detection sensor,,,,,,,,,,,,,,unknown,Locations and shutoff logic from risk assessment
+W01-FIX-020,A01-L00-D04,W01-Z06,EXTRACT,Sanitary exhaust terminal / branch,,,,,,,,,,,,,,unknown,Central or local fan architecture not selected
+W01-FIX-021,A01-L00-D04,W01-Z06,FAN,Sanitary exhaust fan,,,,,,,,,,,,,,unknown,Only if local fan is selected; otherwise count at central plant
+W01-FIX-022,A01-L00-D04,W01-Z06,DAMPER,Fire/smoke damper or other required device,,,,,,,,,,,,,,unknown,Type and fire rating follow approved fire/HVAC design
+W01-FIX-023,A01-L00-D04,W01-Z06,LIGHTING,General and mirror lighting,,,,,,,,,,,,,,unknown,Illuminance and emergency lighting design TBD
+W01-FIX-024,A01-L00-D04,W01-Z06,SENSOR,Occupancy / environmental sensor,,,,,,,,,,,,,,unknown,Only if justified by controls and privacy brief
