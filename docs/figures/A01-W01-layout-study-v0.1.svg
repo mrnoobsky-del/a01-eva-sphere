@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1040" viewBox="0 0 1440 1040">
+<defs>
+ <style>
+ text{font-family:Inter,Arial,sans-serif;fill:#eaf1f0}.title{font-size:27px;font-weight:700}.subtitle{font-size:13px;fill:#a8b8b6}.head{font-size:17px;font-weight:700}.body{font-size:13px}.small{font-size:11px;fill:#b7c5c2}.micro{font-size:10px;fill:#9aaba8}.warn{fill:#f2c16a}.mint{fill:#80d6c4}.red{fill:#f08c7c}
+ </style>
+ <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6" fill="none" stroke="#80d6c4" stroke-width="1.4"/></marker>
+</defs>
+<rect width="1440" height="1040" fill="#0b1417"/>
+<text x="48" y="54" class="title">A-01 · W-01 / D04 — первый размерный макет</text>
+<text x="48" y="82" class="subtitle">Контур из цифрового двойника v4.9.0 · FreeCAD-макрос строит редактируемую модель</text>
+<rect x="1082" y="35" width="310" height="42" rx="8" fill="#3b2e1b" stroke="#c18d3f"/>
+<text x="1237" y="61" text-anchor="middle" class="body warn" font-weight="700">МАСШТАБ НЕ ОТКАЛИБРОВАН</text>
+<line x1="48" y1="105" x2="1392" y2="105" stroke="#34464a"/>
+<rect x="38" y="128" width="790" height="790" rx="14" fill="#111f23" stroke="#34464a"/>
+<text x="65" y="164" class="head">D04 · план сверху</text>
+<text x="65" y="186" class="small">Геометрия сектора: R 5,08–6,98 u · угол 21,9786°</text>
+<path d="M 137.28,302.00 L 146.32,302.00 L 155.37,302.00 L 164.43,302.00 L 173.50,302.00 L 182.58,302.00 L 191.66,302.00 L 200.76,302.00 L 209.87,302.00 L 218.98,302.00 L 228.10,302.00 L 237.23,302.00 L 246.36,302.00 L 255.50,302.00 L 264.65,302.00 L 273.80,302.00 L 282.96,302.00 L 292.13,302.00 L 301.30,302.00 L 310.47,302.00 L 319.65,302.00 L 328.83,302.00 L 338.02,302.00 L 347.20,302.00 L 356.40,302.00 L 365.59,302.00 L 374.79,302.00 L 383.99,302.00 L 393.19,302.00 L 402.39,302.00 L 411.59,302.00 L 420.80,302.00 L 430.00,302.00 L 439.20,302.00 L 448.41,302.00 L 457.61,302.00 L 466.81,302.00 L 476.01,302.00 L 485.21,302.00 L 494.41,302.00 L 503.60,302.00 L 512.80,302.00 L 521.98,302.00 L 531.17,302.00 L 540.35,302.00 L 549.53,302.00 L 558.70,302.00 L 567.87,302.00 L 577.04,302.00 L 586.20,302.00 L 595.35,302.00 L 604.50,302.00 L 613.64,302.00 L 622.77,302.00 L 631.90,302.00 L 641.02,302.00 L 650.13,302.00 L 659.24,302.00 L 668.34,302.00 L 677.42,302.00 L 686.50,302.00 L 695.57,302.00 L 704.63,302.00 L 713.68,302.00 L 722.72,302.00 L 643.04,720.00 L 636.46,720.00 L 629.88,720.00 L 623.28,720.00 L 616.68,720.00 L 610.07,720.00 L 603.46,720.00 L 596.84,720.00 L 590.21,720.00 L 583.58,720.00 L 576.94,720.00 L 570.30,720.00 L 563.65,720.00 L 557.00,720.00 L 550.34,720.00 L 543.68,720.00 L 537.01,720.00 L 530.34,720.00 L 523.67,720.00 L 516.99,720.00 L 510.31,720.00 L 503.63,720.00 L 496.95,720.00 L 490.26,720.00 L 483.57,720.00 L 476.88,720.00 L 470.18,720.00 L 463.49,720.00 L 456.79,720.00 L 450.09,720.00 L 443.40,720.00 L 436.70,720.00 L 430.00,720.00 L 423.30,720.00 L 416.60,720.00 L 409.91,720.00 L 403.21,720.00 L 396.51,720.00 L 389.82,720.00 L 383.12,720.00 L 376.43,720.00 L 369.74,720.00 L 363.05,720.00 L 356.37,720.00 L 349.69,720.00 L 343.01,720.00 L 336.33,720.00 L 329.66,720.00 L 322.99,720.00 L 316.32,720.00 L 309.66,720.00 L 303.00,720.00 L 296.35,720.00 L 289.70,720.00 L 283.06,720.00 L 276.42,720.00 L 269.79,720.00 L 263.16,720.00 L 256.54,720.00 L 249.93,720.00 L 243.32,720.00 L 236.72,720.00 L 230.12,720.00 L 223.54,720.00 L 216.96,720.00 Z" fill="#24383a" stroke="#9bb2af" stroke-width="2.5"/>
+<path d="M430.00,720.00 L430.00,302.00" stroke="#708583" stroke-width="1.4" stroke-dasharray="5 5"/>
+<rect x="232.00" y="322.90" width="396.00" height="396.00" fill="#1d4f4a" stroke="#80d6c4" stroke-width="2" opacity="0.55" stroke-dasharray="8 5"/>
+<text x="390" y="525" text-anchor="middle" class="body mint" font-weight="700">Z04 · envelope 1800 × 1800 мм*</text>
+<rect x="287.00" y="396.60" width="79.20" height="77.00" fill="#a3b2a5" stroke="#e5efe5" stroke-width="2" opacity="0.95"/>
+<text x="327" y="439" text-anchor="middle" class="micro" fill="#15201d">WC-01</text>
+<rect x="518.00" y="383.40" width="105.60" height="94.60" fill="#b19a77" stroke="#edcb92" stroke-width="2" opacity="0.96"/>
+<text x="571" y="443" text-anchor="middle" class="micro" fill="#1a1711">BAS-01</text>
+<circle cx="430.00" cy="354.80" r="9" fill="#75a3d6" stroke="#cfe1f5" stroke-width="2"/>
+<text x="452" y="359" class="micro">DR-01</text>
+<rect x="337.60" y="539.60" width="184.80" height="180.40" fill="none" stroke="#f2c16a" stroke-width="2" opacity="0.9" stroke-dasharray="5 4"/>
+<line x1="337.60" y1="720.00" x2="522.40" y2="720.00" stroke="#f2c16a" stroke-width="7" stroke-linecap="round"/>
+<text x="390" y="748.00" text-anchor="middle" class="small warn">Портал · 840 мм* · глубина 820 мм*</text>
+<path d="M277.78,836.60 L430.00,720.00" fill="none" stroke="#efac62" stroke-width="2.4" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<text x="86" y="250" class="small warn">Пунктир — связь галереи с порталом</text>
+<text x="86" y="267" class="micro">маршрут/ширина/уклоны не подтверждены</text>
+<text x="85" y="850" class="small">Глубина сектора: 1,90 u</text>
+<text x="85" y="869" class="micro">При гипотезе S=1000 мм/u — 1900 мм</text>
+<line x1="94" y1="891" x2="238" y2="891" stroke="#d6e5e2" stroke-width="3"/><line x1="94" y1="884" x2="94" y2="898" stroke="#d6e5e2"/><line x1="238" y1="884" x2="238" y2="898" stroke="#d6e5e2"/><text x="166" y="912" text-anchor="middle" class="micro">600 мм (шкала-пример)</text>
+<rect x="850" y="128" width="552" height="790" rx="14" fill="#111f23" stroke="#34464a"/>
+<text x="880" y="164" class="head">Проверка программы помещения</text>
+<text x="880" y="188" class="small">Площади функциональных блоков — гипотезы для fit-test, не нормативные минимумы</text>
+<text x="880" y="238" class="body">Площадь D04 при 1000 мм/u</text>
+<rect x="880" y="252" width="465" height="20" rx="5" fill="#26383b"/>
+<rect x="880" y="252" width="398" height="20" rx="5" fill="#579f94"/>
+<text x="1345" y="268" text-anchor="end" class="small">4,395 м²</text>
+<text x="880" y="309" class="body">Полная программа W-01 — сумма условных блоков</text>
+<rect x="880" y="323" width="465" height="20" rx="5" fill="#26383b"/>
+<rect x="880" y="323" width="465" height="20" rx="5" fill="#a34e47"/>
+<text x="1345" y="339" text-anchor="end" class="small">5,670 м²</text>
+<text x="880" y="382" class="body red" font-weight="700">Разница: +1,275 м² — уже до стен и проходов</text>
+<line x1="880" y1="407" x2="1368" y2="407" stroke="#34464a"/>
+<text x="882" y="450" class="body mint" font-weight="700">Z04</text>
+<text x="960" y="450" class="body">Доступное помещение</text>
+<text x="960" y="470" class="small">1800 × 1800 мм</text>
+<text x="1348" y="460" text-anchor="end" class="body">3,24 м²</text>
+<text x="882" y="526" class="body mint" font-weight="700">Z03</text>
+<text x="960" y="526" class="body">Одна стандартная кабина</text>
+<text x="960" y="546" class="small">900 × 1500 мм</text>
+<text x="1348" y="536" text-anchor="end" class="body">1,35 м²</text>
+<text x="882" y="602" class="body mint" font-weight="700">Z02</text>
+<text x="960" y="602" class="body">Зона умывальников</text>
+<text x="960" y="622" class="small">1200 × 600 мм</text>
+<text x="1348" y="612" text-anchor="end" class="body">0,72 м²</text>
+<text x="882" y="678" class="body mint" font-weight="700">Z05/Z06</text>
+<text x="960" y="678" class="body">Уборочная + техзона</text>
+<text x="960" y="698" class="small">600 × 600 мм</text>
+<text x="1348" y="688" text-anchor="end" class="body">0,36 м²</text>
+<line x1="880" y1="770" x2="1368" y2="770" stroke="#34464a"/>
+<text x="880" y="803" class="small">Вариант A в секторе D04:</text>
+<text x="880" y="825" class="body mint">одно универсальное помещение + умывальник</text>
+<text x="880" y="851" class="small">Вариант B:</text>
+<text x="880" y="873" class="body red">полная программа не помещается при этой</text>
+<text x="880" y="894" class="body red">масштабной гипотезе даже по сумме площадей</text>
+<line x1="48" y1="940" x2="1392" y2="940" stroke="#34464a"/>
+<text x="48" y="970" class="small">* 1000 мм/u временно для визуальной проверки. В исходной привязке номинал 0,84 u и угловой полуразмах 5,3462° пока не согласованы. STEP/БРЭП-модели — геометрические образцы.</text>
+<text x="48" y="994" class="micro">Не рабочая документация · не проверено по СП 59/СП 30 · двери, эвакуация, маневрирование, перегородки и инженерные трассы не рассчитаны.</text>
+</svg>
