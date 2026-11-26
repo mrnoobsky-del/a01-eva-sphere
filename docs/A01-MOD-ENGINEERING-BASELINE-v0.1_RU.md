@@ -113,6 +113,8 @@ Desk and equipment schedule; number of staff and visitor profile; working hours;
 
 ## 5. Reference card W-01 — wet sanitary module
 
+**Detailed development:** see [A01-MOD-W01-SANITARY-ENGINEERING-01](A01-MOD-W01-SANITARY-ENGINEERING-v0.1_RU.md) and [W-01 fixture schedule](A01-MOD-W01-FIXTURE-SCHEDULE-v0.1_RU.csv).
+
 **Profile ID:** A01-MOD-W-001  
 **Spatial anchor:** A01-L00-D04 — Public sanitary rooms  
 **Related W-family variant:** A01-L00-D06 — Showers and changing rooms (separate equipment and demand schedule).  
