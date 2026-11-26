@@ -20,6 +20,15 @@ The three reference profiles are coordination baselines only. Areas, equipment q
 
 ---
 
+## W-01 — sanitary module engineering
+
+- [A01-MOD-W01-SANITARY-ENGINEERING-01 — detailed sanitary module engineering brief (RU)](A01-MOD-W01-SANITARY-ENGINEERING-v0.1_RU.md)
+- [A01-MOD-W01-FIXTURE-SCHEDULE-01 — fixture and equipment schedule template (CSV)](A01-MOD-W01-FIXTURE-SCHEDULE-v0.1_RU.csv)
+
+W-01 remains M0 / proposed / not calculated. Fixture quantities, flows, pressures, pipe sizes, ventilation rates, electrical ratings and fire requirements are not assigned until the room plan, occupancy, utility conditions and applicable code matrix are approved.
+
+---
+
 # Documentation index
 
 ## A-01 Space Market — покупка и аренда пространств
