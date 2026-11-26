@@ -24,6 +24,9 @@ The three reference profiles are coordination baselines only. Areas, equipment q
 
 - [A01-MOD-W01-SANITARY-ENGINEERING-01 — detailed sanitary module engineering brief (RU)](A01-MOD-W01-SANITARY-ENGINEERING-v0.1_RU.md)
 - [A01-MOD-W01-LAYOUT-STUDY-01 — two layout zoning alternatives (RU)](A01-MOD-W01-LAYOUT-STUDY-v0.1_RU.md)
+
+- [A01-MOD-W01-GEOMETRY-COORDINATION-01 — привязка к геометрии v4.9.0 (RU)](A01-MOD-W01-GEOMETRY-COORDINATION-v0.1_RU.md)
+- [W-01 geometry overlay — L00 / D04 (SVG)](A01-MOD-W01-GEOMETRY-COORDINATION-v0.1_RU.svg)
 - [A01-MOD-W01-FIXTURE-SCHEDULE-01 — fixture and equipment schedule template (CSV)](A01-MOD-W01-FIXTURE-SCHEDULE-v0.1_RU.csv)
 
 W-01 remains M0 / proposed / not calculated. Fixture quantities, flows, pressures, pipe sizes, ventilation rates, electrical ratings and fire requirements are not assigned until the room plan, occupancy, utility conditions and applicable code matrix are approved.
