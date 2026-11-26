@@ -29,6 +29,7 @@ The three reference profiles are coordination baselines only. Areas, equipment q
 - [A01-W01-OPEN-SOURCE-TOOLCHAIN-RESEARCH-01 — готовые GitHub-инструменты для W-01 (RU)](A01-W01-OPEN-SOURCE-TOOLCHAIN-RESEARCH-v0.1_RU.md)
 - [A01-MOD-W01-FREECAD-MOCKUP-01 — параметрический макет D04 (RU)](A01-MOD-W01-FREECAD-MOCKUP-v0.1_RU.md)
 - [FreeCAD macro — W-01 / D04](../cad/freecad/A01-W01-layout-study-v0.1.FCMacro)
+- [D04 dimension-study plan — DXF](../cad/freecad/A01-W01-layout-study-v0.1.dxf)
 - [D04 layout study sheet — SVG](figures/A01-W01-layout-study-v0.1.svg)
 - [W-01 geometry overlay — L00 / D04 (SVG)](A01-MOD-W01-GEOMETRY-COORDINATION-v0.1_RU.svg)
 - [A01-MOD-W01-FIXTURE-SCHEDULE-01 — fixture and equipment schedule template (CSV)](A01-MOD-W01-FIXTURE-SCHEDULE-v0.1_RU.csv)
