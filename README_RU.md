@@ -26,6 +26,8 @@ A-01 — открытая история развития долгосрочно
 - [Матрица 60 пространств и систем](docs/A01-MASTER-SPACES-SYSTEMS-MATRIX-v0.1_RU.csv)
 - [Инженерная база эталонных модулей S-01 / W-01 / R-01](docs/A01-MOD-ENGINEERING-BASELINE-v0.1_RU.md)
 - [Стартовый реестр нагрузок S-01 / W-01 / R-01](docs/A01-MOD-LOAD-REGISTER-v0.1_RU.csv)
+- [Детальная инженерная карточка W-01 — санитарный модуль](docs/A01-MOD-W01-SANITARY-ENGINEERING-v0.1_RU.md)
+- [Ведомость сантехнических приборов и оборудования W-01](docs/A01-MOD-W01-FIXTURE-SCHEDULE-v0.1_RU.csv)
 - [Матрица инженерных систем и интерфейсов](docs/A01-MASTER-SYSTEMS-INTERFACE-MATRIX-v0.1_RU.csv)
 - [Реестр открытых решений и рисков](docs/A01-MASTER-DECISIONS-RISKS-v0.1_RU.csv)
 - [Полный индекс документации](docs/DOCUMENTATION-INDEX.md)
