@@ -10,6 +10,16 @@
 
 ---
 
+## Reference module engineering — S-01 / W-01 / R-01
+
+- [A01-MOD-ENGINEERING-BASELINE-01 — инженерная база трёх эталонных модулей (RU)](A01-MOD-ENGINEERING-BASELINE-v0.1_RU.md)
+- [A01-MOD-LOAD-REGISTER-01 — стартовый реестр нагрузок S-01 / W-01 / R-01 (CSV)](A01-MOD-LOAD-REGISTER-v0.1_RU.csv)
+- [Матрица 60 пространств с кандидатными профилями, портами и шаблонами Load ID](A01-MASTER-SPACES-SYSTEMS-MATRIX-v0.1_RU.csv)
+
+The three reference profiles are coordination baselines only. Areas, equipment quantities, power, thermal demand, water flow, criticality and autonomy remain uncalculated until source plans and equipment schedules are available.
+
+---
+
 # Documentation index
 
 ## A-01 Space Market — покупка и аренда пространств
