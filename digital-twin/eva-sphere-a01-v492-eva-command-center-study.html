@@ -26,6 +26,7 @@ button,a{-webkit-tap-highlight-color:transparent}
 .nav{display:flex;align-items:center;gap:6px;padding:6px 9px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;background:#f5f7f6;border-bottom:1px solid var(--line)}
 .nav::-webkit-scrollbar{display:none}
 .nav button{flex:0 0 auto;min-height:35px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#435157;font:inherit;font-size:10px;white-space:nowrap;cursor:pointer}
+.nav .nav-link{flex:0 0 auto;display:inline-flex;align-items:center;min-height:35px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:#e8efea;color:#405c4e;font-size:10px;text-decoration:none;white-space:nowrap}
 .nav button[aria-pressed="true"]{background:#152126;border-color:#152126;color:#fff}
 .view{position:relative;min-width:0;min-height:0;background:#111c25;overflow:hidden}
 .frame{display:block;width:100%;height:100%;border:0;background:#eef1ef}
@@ -84,6 +85,7 @@ button,a{-webkit-tap-highlight-color:transparent}
  <button type="button" data-section="docs" aria-pressed="false">Документы</button>
  <button type="button" data-section="registry" aria-pressed="false">Реестр</button>
  <button type="button" data-section="engineering" aria-pressed="false">Инженерия</button>
+ <a class="nav-link" href="https://cdn.jsdelivr.net/gh/mrnoobsky-del/a01-eva-sphere@main/digital-twin/a01-olfactory-atlas.html" target="_blank" rel="noopener">Ароматы ↗</a>
 </nav>
 <main class="view">
  <div class="status">Адаптивное качество · v4.9.2</div>
