@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use A-01 project documentation or prototypes, cite the repository and the specific release or document revision."
+title: "A-01 — The Sphere of Eva"
+type: software
+authors:
+  - family-names: Ponomarev
+    given-names: Alexander
+    affiliation: "Independent project"
+repository-code: "https://github.com/mrnoobsky-del/a01-eva-sphere"
+url: "https://vibeshorts.ru/evasphere/"
+abstract: "Open project record for a human-centred architectural concept and digital twin combining modular architecture, energy and building systems, accessibility, sensory design, documentation and AI-assisted services. The physical complex is a concept and is not represented as built or commissioned."
+keywords:
+  - digital twin
+  - architecture
+  - modular design
+  - building systems
+  - sensory design
+  - olfactory design
+  - accessibility
+license: CC-BY-4.0
