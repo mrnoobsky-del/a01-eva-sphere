@@ -119,9 +119,11 @@ The reference cassette remains a concept. Its construction details and verificat
 - [A01-OLF-02 — Aroma Atlas: карта настроения и olfactory profiles (RU)](A01-OLF-02-AROMA-ATLAS-MOOD-PROFILES-v0.1_RU.md)
 - [A01-OLF-03 — Эксплуатационные и инженерные требования (RU)](A01-OLF-03-OLFACTORY-SYSTEM-REQUIREMENTS-v0.1_RU.md)
 - [A01-OLF-04 — Реестр запаховых режимов по помещениям (CSV)](A01-OLF-04-SPACE-ZONE-REGISTER-v0.1_RU.csv)
+- [A01-OLF-05 — привязка 60 пространств к Aroma Atlas (RU)](A01-OLF-05-SPATIAL-CROSSWALK-v0.1_RU.md)
 - [Zone JSON Schema](../schemas/a01-olfactory-zone-v0.1.schema.json) · [Example registry](../schemas/a01-olfactory-zone-registry-v0.1.example.json)
+- [60-space crosswalk JSON](../data/a01-olfactory-spatial-crosswalk-v0.1.json) · [Crosswalk JSON Schema](../schemas/a01-olfactory-spatial-crosswalk-v0.1.schema.json)
 - [Interactive A-01 Aroma Atlas prototype](../digital-twin/a01-olfactory-atlas.html)
-- [Source validation](../tools/validate-olfactory-atlas.py)
+- [Source validation](../tools/validate-olfactory-atlas.py) · [Crosswalk validation](../tools/validate-olfactory-crosswalk.py)
 
 **Baseline:** no intentionally added fragrance in shared spaces. The Atlas is an informational design prototype; no scent hardware, HVAC system or personal health data is connected.
 
