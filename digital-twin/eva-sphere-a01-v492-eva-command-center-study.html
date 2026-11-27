@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f3f5f4">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Мобильное рабочее пространство и замер производительности Сферы Евы A-01 v4.9.2.">
+<meta name="eva-sphere-version" content="4.9.1">
+<meta name="eva-a01-build" content="4.9.1-mobile-study-benchmark">
+<title>Сфера Евы A-01 · мобильное изучение v4.9.2</title>
+<style>
+:root{color-scheme:light;--bg:#eef1ef;--surface:#fff;--ink:#172126;--muted:#66747a;--line:rgba(22,36,42,.13);--deep:#172126;--shadow:0 8px 28px rgba(15,31,37,.12)}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);font:14px/1.4 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,a{-webkit-tap-highlight-color:transparent}
+.shell{height:100%;height:100svh;display:grid;grid-template-rows:49px auto minmax(0,1fr) auto;overflow:hidden}
+.header{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:49px;padding:6px 12px;background:rgba(250,252,251,.97);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;min-width:0}
+.mark{width:33px;height:33px;border:1px solid #26383e;border-radius:50%;display:grid;place-items:center;font-size:19px;flex:0 0 auto}
+.brand-copy{min-width:0}
+.brand-copy strong{display:block;font-size:10px;letter-spacing:.13em;white-space:nowrap}
+.brand-copy span{display:block;font-size:9px;color:var(--muted);white-space:nowrap}
+.header-actions{display:flex;align-items:center;gap:7px}
+.header-link,.plain-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:7px 10px;font:inherit;font-size:10px;text-decoration:none;white-space:nowrap;cursor:pointer}
+.nav{display:flex;align-items:center;gap:6px;padding:6px 9px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;background:#f5f7f6;border-bottom:1px solid var(--line)}
+.nav::-webkit-scrollbar{display:none}
+.nav button{flex:0 0 auto;min-height:35px;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#435157;font:inherit;font-size:10px;white-space:nowrap;cursor:pointer}
+.nav button[aria-pressed="true"]{background:#152126;border-color:#152126;color:#fff}
+.view{position:relative;min-width:0;min-height:0;background:#111c25;overflow:hidden}
+.frame{display:block;width:100%;height:100%;border:0;background:#eef1ef}
+.fallback{position:absolute;z-index:3;inset:12px auto auto 12px;max-width:min(430px,calc(100% - 24px));padding:9px 12px;border:1px solid #ffffff33;border-radius:12px;background:#101a22ef;color:#fff;font-size:11px;box-shadow:var(--shadow)}
+.fallback a{color:#dcece7}
+.status{position:absolute;right:10px;top:10px;z-index:2;padding:6px 9px;border:1px solid #ffffff30;border-radius:999px;background:#101a22cc;color:#e8f0ed;font-size:9px;pointer-events:none}
+.dock{display:flex;justify-content:center;align-items:center;gap:7px;min-height:53px;padding:6px 8px max(6px,env(safe-area-inset-bottom));background:rgba(250,252,251,.98);border-top:1px solid var(--line)}
+.dock button{min-height:38px;min-width:0;flex:1;padding:7px 9px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);font:inherit;font-size:10px;cursor:pointer;white-space:nowrap}
+.dock button.primary{background:#172126;border-color:#172126;color:#fff}
+.bench-layer{position:fixed;inset:0;z-index:100;display:none;place-items:end center;padding:14px;background:rgba(4,10,13,.48);backdrop-filter:blur(4px)}
+.bench-layer.open{display:grid}
+.bench-panel{width:min(760px,100%);max-height:min(84svh,760px);overflow:auto;border:1px solid var(--line);border-radius:20px;background:#fbfcfb;color:var(--ink);box-shadow:0 24px 90px #0005;padding:17px}
+.bench-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
+.bench-head strong{font-size:14px}
+.bench-status{padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#f0f3f2;font-size:11px;color:#435157}
+.bench-result{white-space:pre-wrap;overflow-wrap:anywhere;font:10px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;padding:12px;background:#111b20;color:#e8f1ed;border-radius:12px;max-height:44svh;overflow:auto}
+.bench-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.bench-actions button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:10px;padding:8px 11px;font:inherit;font-size:10px;cursor:pointer}
+.bench-actions .primary{background:#172126;color:#fff;border-color:#172126}
+.bench-note{margin:10px 0 0;color:#68767b;font-size:10px;line-height:1.5}
+@media(min-width:781px){
+ .shell{grid-template-rows:44px minmax(0,1fr)}
+ .header{padding:5px 18px}
+ .nav,.dock{display:none}
+ .bench-layer{place-items:center}
+}
+@media(max-width:520px){
+ .header{min-height:46px;padding:5px 8px}
+ .mark{width:30px;height:30px}
+ .brand-copy strong{font-size:9px}
+ .brand-copy span{font-size:8px}
+ .header-link{padding:6px 8px;font-size:9px}
+ .nav{gap:5px;padding:5px 6px}
+ .nav button{min-height:34px;padding:7px 9px;font-size:9px}
+ .dock{min-height:50px;gap:5px;padding-left:5px;padding-right:5px}
+ .dock button{padding:7px 5px;font-size:9px}
+ .bench-layer{padding:7px}
+ .bench-panel{padding:13px;border-radius:17px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="header">
+ <div class="brand"><div class="mark" aria-hidden="true">✧</div><div class="brand-copy"><strong>СФЕРА ЕВЫ · A-01</strong><span>Мобильное изучение · v4.9.2</span></div></div>
+ <div class="header-actions"><a class="header-link" href="https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v491-mobile-runtime-preview.html" target="_blank" rel="noopener">Полная версия ↗</a></div>
+</header>
+<nav class="nav" aria-label="Быстрая навигация по Сфере">
+ <button type="button" data-section="overview" aria-pressed="true">Обзор</button>
+ <button type="button" data-section="levels" aria-pressed="false">Уровни</button>
+ <button type="button" data-section="places" aria-pressed="false">Пространства</button>
+ <button type="button" data-section="climate" aria-pressed="false">Климат</button>
+ <button type="button" data-section="energy" aria-pressed="false">Энергия</button>
+ <button type="button" data-section="calc" aria-pressed="false">Расчёты</button>
+ <button type="button" data-section="docs" aria-pressed="false">Документы</button>
+ <button type="button" data-section="registry" aria-pressed="false">Реестр</button>
+ <button type="button" data-section="engineering" aria-pressed="false">Инженерия</button>
+</nav>
+<main class="view">
+ <div class="status">Адаптивное качество · v4.9.2</div>
+ <div class="fallback" id="fallback" hidden>3D-модель ещё загружается. <a href="https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v491-mobile-runtime-preview.html" target="_blank" rel="noopener">Открыть отдельно ↗</a></div>
+ <iframe class="frame" id="a01Frame" title="Интерактивный цифровой двойник Сферы Евы A-01 v4.9.2" src="https://cdn.jsdelivr.net/gh/mrnoobsky-del/a01-eva-sphere@preview/v492-eva-command-center/digital-twin/eva-sphere-a01-v492-eva-command-center-preview.html" loading="eager" allow="fullscreen; clipboard-read; clipboard-write" referrerpolicy="same-origin"></iframe>
+</main>
+<footer class="dock">
+ <button type="button" id="searchBtn">Поиск</button>
+ <button type="button" id="walkBtn">Прогулка</button>
+ <button type="button" id="evaBtn" class="primary">Ева</button>
+ <button type="button" id="benchBtn">Замер 60 с</button>
+ <button type="button" class="primary" id="fullBtn">На весь экран</button>
+</footer>
+</div>
+<div class="bench-layer" id="benchLayer" aria-hidden="true">
+ <section class="bench-panel" role="dialog" aria-modal="true" aria-labelledby="benchTitle">
+  <div class="bench-head"><strong id="benchTitle">Проверка плавности A-01</strong><button class="plain-btn" type="button" id="benchClose">Закрыть ×</button></div>
+  <div class="bench-status" id="benchStatus">Нажми «Замер 60 с». Сцена прогреется 15 секунд, затем будет измеряться ещё 60 секунд при плавном вращении камеры.</div>
+  <pre class="bench-result" id="benchResult" hidden></pre>
+  <div class="bench-actions">
+   <button class="primary" type="button" id="benchCopy" hidden>Скопировать JSON</button>
+   <button type="button" id="benchStop" hidden>Остановить замер</button>
+  </div>
+  <p class="bench-note">Измеряются интервалы между фактическими вызовами renderer.render(), CPU-время отправки команд рендереру, draw calls и треугольники. Это не прямое измерение исполнения GPU. Для приёмки повтори три одинаковых прогона на одном устройстве.</p>
+ </section>
+</div>
+<script>
+(function(){
+ "use strict";
+ const frame=document.getElementById("a01Frame");
+ const fallback=document.getElementById("fallback");
+ const sectionButtons=Array.from(document.querySelectorAll("[data-section]"));
+ const benchLayer=document.getElementById("benchLayer");
+ const benchStatus=document.getElementById("benchStatus");
+ const benchResult=document.getElementById("benchResult");
+ const benchCopy=document.getElementById("benchCopy");
+ const benchStop=document.getElementById("benchStop");
+ const benchBtn=document.getElementById("benchBtn");
+ let frameReady=false;
+ let activeRun=null;
+ let lastReport=null;
+ const mobileStyle=[
+  "@media(max-width:780px){",
+  "html,body{width:100%!important;height:100%!important;min-height:100%!important;overflow:hidden!important}",
+  "body .app,body .app.nav-expanded,body .app.nav-collapsed{width:100%!important;max-width:none!important;min-height:100svh!important;height:100svh!important;margin:0!important;padding:0!important;overflow:hidden!important}",
+  "body .top,body .intro,body .footer,body .nav-rail,body .nav-scrim,body .drawer-scrim{display:none!important}",
+  "body .workspace{display:block!important;width:100%!important;height:100svh!important;min-height:0!important;overflow:hidden!important}",
+  "body .workspace-main{display:block!important;width:100%!important;max-width:none!important;height:100svh!important;min-height:0!important;margin:0!important;padding:0!important}",
+  "body #stage.stage{width:100%!important;height:100svh!important;min-height:360px!important;max-height:none!important;margin:0!important;border:0!important;border-radius:0!important}",
+  "body .stage-top{top:8px!important;left:8px!important;right:8px!important}",
+  "body .stage-title b{font-size:8px!important}",
+  "body .stage-title span{font-size:7px!important;max-width:44vw!important}",
+  "body .stage-top-right{gap:4px!important}",
+  "body .smart-sky-toggle{display:none!important}",
+  "body .stage-bottom{left:7px!important;right:7px!important;bottom:max(7px,env(safe-area-inset-bottom))!important;grid-template-columns:minmax(0,1fr) auto!important;gap:4px!important}",
+  "body .stage-bottom .hint{display:none!important}",
+  "body .stage-actions{grid-column:1!important;grid-row:1!important;justify-self:center!important;gap:2px!important;padding:3px!important;max-width:100%!important}",
+  "body .stage-actions .btn{min-height:34px!important;padding:7px 8px!important;font-size:9px!important}",
+  "body .dock-secondary span:last-child{display:none!important}",
+  "body .stage-bottom .tools-toggle{grid-column:2!important;grid-row:1!important;justify-self:end!important;font-size:8px!important;padding:7px 8px!important}",
+  "body .walk-controls{right:7px!important;bottom:65px!important}",
+  "body .walk-pad{grid-template-columns:repeat(3,40px)!important;grid-template-rows:repeat(2,37px)!important}",
+  "body #a01AdaptiveQualityHud{left:8px!important;bottom:58px!important;transform:scale(.88)!important;transform-origin:left bottom!important}",
+  "body .side{position:fixed!important;top:auto!important;right:0!important;bottom:0!important;left:0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:78svh!important;overflow:auto!important;border-radius:21px 21px 0 0!important;transform:translateY(105%)!important;opacity:1!important;visibility:hidden!important;pointer-events:none!important;z-index:90!important}",
+  "body .side.open{transform:translateY(0)!important;visibility:visible!important;pointer-events:auto!important}",
+  "body .drawer-head{position:sticky!important;top:0!important}",
+  "body .side .card{padding:12px!important}",
+  "}",
+  "@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}"
+ ].join("");
+ function childWindow(){try{return frame.contentWindow}catch(e){return null}}
+ function childDocument(){try{return frame.contentDocument||frame.contentWindow.document}catch(e){return null}}
+ function ensureMobileLayout(){
+  const doc=childDocument();
+  if(!doc||!doc.head)return false;
+  if(!doc.getElementById("a01MobileStudyOverrides")){
+   const style=doc.createElement("style");
+   style.id="a01MobileStudyOverrides";
+   style.textContent=mobileStyle;
+   doc.head.appendChild(style);
+  }
+  frameReady=!!childWindow()?.EVA_SPHERE;
+  if(frameReady)fallback.hidden=true;
+  return frameReady;
+ }
+ function callChild(id){
+  ensureMobileLayout();
+  const doc=childDocument();
+  const el=doc&&doc.getElementById(id);
+  if(el){el.click();return true}
+  fallback.hidden=false;
+  return false;
+ }
+ function openSection(section){
+  ensureMobileLayout();
+  const doc=childDocument();
+  const target=doc&&doc.querySelector('[data-nav="'+section+'"]');
+  if(target){target.click()}
+  else{fallback.hidden=false}
+  sectionButtons.forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.section===section)));
+ }
+ function percentile(values,p){
+  if(!values.length)return null;
+  const sorted=values.slice().sort((a,b)=>a-b);
+  const index=Math.min(sorted.length-1,Math.max(0,Math.ceil(sorted.length*p)-1));
+  return Number(sorted[index].toFixed(2));
+ }
+ function openBench(){
+  benchLayer.classList.add("open");
+  benchLayer.setAttribute("aria-hidden","false");
+ }
+ function closeBench(){
+  if(activeRun)return;
+  benchLayer.classList.remove("open");
+  benchLayer.setAttribute("aria-hidden","true");
+ }
+ function finishBenchmark(reason){
+  if(!activeRun)return;
+  const run=activeRun;
+  activeRun=null;
+  clearInterval(run.timer);
+  document.removeEventListener("visibilitychange",run.visibilityHandler);
+  if(run.renderer.render===run.wrappedRender)run.renderer.render=run.originalRender;
+  run.controls.autoRotate=run.oldAutoRotate;
+  run.controls.autoRotateSpeed=run.oldAutoRotateSpeed;
+  run.camera.position.copy(run.cameraPosition);
+  run.controls.target.copy(run.target);
+  run.controls.update();
+  run.controls.dispatchEvent({type:"change"});
+  benchBtn.textContent="Замер 60 с";
+  benchStop.hidden=true;
+  if(reason!=="complete"){
+   benchStatus.textContent=reason==="hidden"?"Прогон прерван: вкладка была скрыта. Запусти повторно в активной вкладке.":"Прогон остановлен пользователем.";
+   return;
+  }
+  const intervals=run.samples.map(x=>x.interval);
+  const renderCosts=run.samples.map(x=>x.renderCpuMs);
+  const meanInterval=intervals.length?intervals.reduce((a,b)=>a+b,0)/intervals.length:null;
+  const last=run.samples.length?run.samples[run.samples.length-1]:null;
+  const api=run.api;
+  const child=childWindow();
+  const report={
+   build:"A-01 v4.9.2 mobile runtime preview",
+   runDurationSeconds:60,
+   warmupSeconds:15,
+   device:{
+    userAgent:navigator.userAgent,
+    cores:navigator.hardwareConcurrency||null,
+    memoryGB:navigator.deviceMemory||null,
+    viewport:child?child.innerWidth+"x"+child.innerHeight:null,
+    devicePixelRatio:child?child.devicePixelRatio:null
+   },
+   renderer:{
+    pixelRatio:api.renderer.getPixelRatio(),
+    averageFps:meanInterval?Number((1000/meanInterval).toFixed(2)):null,
+    frameIntervalMs:{p50:percentile(intervals,.50),p95:percentile(intervals,.95),p99:percentile(intervals,.99)},
+    framesOver16_67ms:intervals.filter(x=>x>16.67).length,
+    framesOver33_3ms:intervals.filter(x=>x>33.3).length,
+    cpuSubmitMs:{p50:percentile(renderCosts,.50),p95:percentile(renderCosts,.95),p99:percentile(renderCosts,.99)},
+    drawCalls:last?last.calls:null,
+    triangles:last?last.triangles:null,
+    measuredFrames:run.samples.length
+   },
+   completion:"complete",
+   caveat:"CPU submission time is not GPU execution time. Frame interval is measured at renderer.render() calls, not display presentation."
+  };
+  lastReport=report;
+  benchResult.textContent=JSON.stringify(report,null,2);
+  benchResult.hidden=false;
+  benchCopy.hidden=false;
+  benchStatus.textContent="Измерение завершено. Скопируй JSON и сохрани его; для приёмки повтори ещё два прогона в тех же условиях.";
+ }
+ function startBenchmark(){
+  openBench();
+  ensureMobileLayout();
+  const child=childWindow();
+  const api=child&&child.EVA_SPHERE;
+  if(!api||!api.renderer||!api.controls){
+   benchStatus.textContent="3D-сцена ещё не готова. Подожди появления модели и нажми кнопку снова.";
+   return;
+  }
+  const state=api.getState?api.getState():{};
+  if(state.walkMode){
+   benchStatus.textContent="Перед измерением выйди из режима прогулки и вернись в общий обзор. Затем запусти замер.";
+   return;
+  }
+  if(activeRun)return;
+  const renderer=api.renderer;
+  const controls=api.controls;
+  const camera=api.camera;
+  const originalRender=renderer.render;
+  const run={
+   api,renderer,controls,camera,
+   originalRender,
+   oldAutoRotate:controls.autoRotate,
+   oldAutoRotateSpeed:controls.autoRotateSpeed,
+   cameraPosition:camera.position.clone(),
+   target:controls.target.clone(),
+   start:performance.now(),
+   warmupEnd:performance.now()+15000,
+   end:performance.now()+75000,
+   lastFrame:null,
+   samples:[],
+   timer:null,
+   wrappedRender:null,
+   visibilityHandler:null
+  };
+  run.wrappedRender=function(){
+   const started=performance.now();
+   const result=originalRender.apply(this,arguments);
+   const ended=performance.now();
+   if(ended>=run.warmupEnd){
+    if(run.lastFrame!==null){
+     const info=renderer.info&&renderer.info.render?renderer.info.render:{};
+     run.samples.push({interval:ended-run.lastFrame,renderCpuMs:ended-started,calls:info.calls||0,triangles:info.triangles||0});
+    }
+    run.lastFrame=ended;
+   }
+   return result;
+  };
+  run.visibilityHandler=function(){if(document.hidden)finishBenchmark("hidden");};
+  activeRun=run;
+  lastReport=null;
+  benchResult.hidden=true;
+  benchCopy.hidden=true;
+  benchBtn.textContent="Замер идёт…";
+  benchStop.hidden=false;
+  renderer.render=run.wrappedRender;
+  controls.autoRotate=true;
+  controls.autoRotateSpeed=.38;
+  controls.dispatchEvent({type:"change"});
+  document.addEventListener("visibilitychange",run.visibilityHandler);
+  benchStatus.textContent="Прогрев сцены · 15 секунд. Не переключай вкладку. Затем начнётся измерение.";
+  run.timer=setInterval(function(){
+   const now=performance.now();
+   if(now>=run.end){finishBenchmark("complete");return;}
+   const secondsLeft=Math.max(0,Math.ceil((run.end-now)/1000));
+   const measuring=now>=run.warmupEnd;
+   benchStatus.textContent=measuring?"Измерение · осталось "+(secondsLeft)+" секунд. Камера вращается автоматически.":"Прогрев сцены · осталось "+Math.max(0,Math.ceil((run.warmupEnd-now)/1000))+" секунд.";
+  },250);
+ }
+ frame.addEventListener("load",function(){
+  const started=performance.now();
+  const probe=setInterval(function(){
+   if(ensureMobileLayout()){clearInterval(probe);return;}
+   if(performance.now()-started>20000){clearInterval(probe);fallback.hidden=false;}
+  },250);
+ });
+ frame.addEventListener("error",function(){fallback.hidden=false;});
+ sectionButtons.forEach(button=>button.addEventListener("click",function(){openSection(button.dataset.section)}));
+ document.getElementById("searchBtn").addEventListener("click",function(){callChild("globalSearchBtn");});
+ document.getElementById("walkBtn").addEventListener("click",function(){callChild("walkBtn");});
+ document.getElementById("evaBtn").addEventListener("click",function(){callChild("evaOpenBtn");});
+ benchBtn.addEventListener("click",startBenchmark);
+ benchStop.addEventListener("click",function(){finishBenchmark("user");});
+ benchCopy.addEventListener("click",function(){
+  if(!lastReport)return;
+  const value=JSON.stringify(lastReport,null,2);
+  if(navigator.clipboard?.writeText)navigator.clipboard.writeText(value).then(()=>{benchStatus.textContent="JSON скопирован."}).catch(()=>{benchStatus.textContent="Копирование недоступно. Выдели JSON вручную."});
+ });
+ document.getElementById("benchClose").addEventListener("click",closeBench);
+ benchLayer.addEventListener("click",function(event){if(event.target===benchLayer)closeBench()});
+ document.getElementById("fullBtn").addEventListener("click",function(){
+  if(!document.fullscreenElement){const p=document.documentElement.requestFullscreen;if(p)p.call(document.documentElement).catch(function(){})}
+  else if(document.exitFullscreen){document.exitFullscreen()}
+ });
+})();
+</script>
+</body>
+</html>
