@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f6f5">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Мобильный режим изучения цифрового двойника Сферы Евы A-01 на основе v4.9.0.">
+<meta name="eva-sphere-version" content="4.9.0">
+<meta name="eva-a01-build" content="4.9.0-mobile-study-shell">
+<title>Сфера Евы A-01 · мобильное изучение v4.9.0</title>
+<style>
+:root{color-scheme:light;--bg:#eef1ef;--surface:#fff;--ink:#172126;--muted:#66747a;--line:rgba(22,36,42,.13);--accent:#dcece7;--shadow:0 8px 28px rgba(15,31,37,.08)}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden;background:var(--bg);color:var(--ink);font:14px/1.4 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,a{-webkit-tap-highlight-color:transparent}
+.shell{height:100%;height:100svh;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:0;overflow:hidden}
+.header{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:7px 14px;background:rgba(250,252,251,.96);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:9px;min-width:0}
+.mark{width:34px;height:34px;border:1px solid #26383e;border-radius:50%;display:grid;place-items:center;font-size:19px;flex:0 0 auto}
+.brand-copy{min-width:0}
+.brand-copy strong{display:block;font-size:11px;letter-spacing:.13em;white-space:nowrap}
+.brand-copy span{display:block;font-size:9px;color:var(--muted);white-space:nowrap}
+.header-actions{display:flex;align-items:center;gap:7px}
+.header-link,.plain-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:8px 11px;font:inherit;font-size:10px;text-decoration:none;white-space:nowrap;cursor:pointer}
+.header-link:hover,.plain-btn:hover{border-color:#80958e}
+.nav{display:flex;align-items:center;gap:6px;padding:7px 10px;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;background:#f5f7f6;border-bottom:1px solid var(--line)}
+.nav::-webkit-scrollbar{display:none}
+.nav button{flex:0 0 auto;min-height:36px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#435157;font:inherit;font-size:11px;white-space:nowrap;cursor:pointer}
+.nav button[aria-pressed="true"]{background:#152126;border-color:#152126;color:#fff}
+.view{position:relative;min-width:0;min-height:0;background:#111c25}
+.frame{display:block;width:100%;height:100%;border:0;background:#eef1ef}
+.fallback{position:absolute;z-index:3;inset:12px auto auto 12px;max-width:min(430px,calc(100% - 24px));padding:9px 12px;border:1px solid #ffffff33;border-radius:12px;background:#101a22ef;color:#fff;font-size:11px;box-shadow:var(--shadow)}
+.fallback a{color:#dcece7}
+.dock{display:flex;justify-content:center;align-items:center;gap:8px;min-height:54px;padding:7px 12px max(7px,env(safe-area-inset-bottom));background:rgba(250,252,251,.97);border-top:1px solid var(--line)}
+.dock button{min-height:38px;min-width:94px;padding:8px 13px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font:inherit;font-size:10px;cursor:pointer}
+.dock button.primary{background:#172126;border-color:#172126;color:#fff}
+.status{position:absolute;right:12px;top:12px;z-index:2;padding:6px 9px;border:1px solid #ffffff30;border-radius:999px;background:#101a22cc;color:#e8f0ed;font-size:9px;pointer-events:none}
+@media(min-width:900px){
+ .shell{max-width:1920px;margin:auto;height:100svh}
+ .header{padding-left:22px;padding-right:22px}
+ .nav{padding-left:18px;padding-right:18px}
+ .nav button{min-height:34px}
+ .dock{justify-content:flex-end;padding-right:18px}
+}
+@media(max-width:540px){
+ .header{min-height:48px;padding:6px 9px}
+ .mark{width:31px;height:31px}
+ .brand-copy strong{font-size:10px}
+ .brand-copy span{font-size:8px}
+ .header-link{padding:7px 9px;font-size:9px}
+ .nav{gap:5px;padding:6px 7px}
+ .nav button{min-height:35px;padding:7px 10px;font-size:10px}
+ .dock{min-height:51px;gap:6px;padding-left:6px;padding-right:6px}
+ .dock button{flex:1;min-width:0;padding:8px 7px;font-size:9px}
+ .status{right:7px;top:7px;font-size:8px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="header">
+ <div class="brand"><div class="mark" aria-hidden="true">✧</div><div class="brand-copy"><strong>СФЕРА ЕВЫ · A-01</strong><span>Мобильное изучение · v4.9.0</span></div></div>
+ <div class="header-actions">
+  <a class="header-link" href="https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v490-quality-experience-preview.html" target="_blank" rel="noopener">Полная версия ↗</a>
+ </div>
+</header>
+<nav class="nav" aria-label="Быстрая навигация по Сфере">
+ <button type="button" data-section="overview" aria-pressed="true">Обзор</button>
+ <button type="button" data-section="levels" aria-pressed="false">Уровни</button>
+ <button type="button" data-section="places" aria-pressed="false">Пространства</button>
+ <button type="button" data-section="climate" aria-pressed="false">Климат</button>
+ <button type="button" data-section="energy" aria-pressed="false">Энергия</button>
+ <button type="button" data-section="calc" aria-pressed="false">Расчёты</button>
+ <button type="button" data-section="docs" aria-pressed="false">Документы</button>
+ <button type="button" data-section="registry" aria-pressed="false">Реестр</button>
+ <button type="button" data-section="engineering" aria-pressed="false">Инженерия</button>
+</nav>
+<main class="view">
+ <div class="status">3D · адаптивное качество v4.9.0</div>
+ <div class="fallback" id="fallback" hidden>Встроенная модель не загрузилась. <a href="https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v490-quality-experience-preview.html" target="_blank" rel="noopener">Открыть отдельно ↗</a></div>
+ <iframe class="frame" id="a01Frame" title="Интерактивный цифровой двойник Сферы Евы A-01 v4.9.0" src="https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v490-quality-experience-preview.html" loading="eager" allow="fullscreen; clipboard-read; clipboard-write" referrerpolicy="same-origin"></iframe>
+</main>
+<footer class="dock">
+ <button type="button" id="menuBtn">Меню модели</button>
+ <button type="button" id="walkBtn">Войти внутрь</button>
+ <button type="button" class="primary" id="fullBtn">На весь экран</button>
+</footer>
+</div>
+<script>
+(function(){
+ "use strict";
+ const frame=document.getElementById("a01Frame");
+ const fallback=document.getElementById("fallback");
+ const sectionButtons=[...document.querySelectorAll("[data-section]")];
+ let frameReady=false;
+ const mobileStyle=[
+  "@media(max-width:780px){",
+  "html,body{width:100%!important;height:100%!important;min-height:100%!important;overflow:hidden!important}",
+  "body .app,body .app.nav-expanded,body .app.nav-collapsed{width:100%!important;max-width:none!important;min-height:100svh!important;height:100svh!important;margin:0!important;padding:0!important;overflow:hidden!important}",
+  "body .top,body .intro,body .footer,body .nav-rail,body .nav-scrim,body .drawer-scrim{display:none!important}",
+  "body .workspace{display:block!important;width:100%!important;height:100svh!important;min-height:0!important;overflow:hidden!important}",
+  "body .workspace-main{display:block!important;width:100%!important;max-width:none!important;height:100svh!important;min-height:0!important;margin:0!important;padding:0!important}",
+  "body #stage.stage{width:100%!important;height:100svh!important;min-height:360px!important;max-height:none!important;margin:0!important;border:0!important;border-radius:0!important}",
+  "body .stage-top{top:8px!important;left:8px!important;right:8px!important}",
+  "body .stage-title b{font-size:8px!important}",
+  "body .stage-title span{font-size:7px!important;max-width:44vw!important}",
+  "body .stage-top-right{gap:4px!important}",
+  "body .smart-sky-toggle{display:none!important}",
+  "body .stage-bottom{left:7px!important;right:7px!important;bottom:max(7px,env(safe-area-inset-bottom))!important;grid-template-columns:minmax(0,1fr) auto!important;gap:4px!important}",
+  "body .stage-bottom .hint{display:none!important}",
+  "body .stage-actions{grid-column:1!important;grid-row:1!important;justify-self:center!important;gap:2px!important;padding:3px!important;max-width:100%!important}",
+  "body .stage-actions .btn{min-height:34px!important;padding:7px 8px!important;font-size:9px!important}",
+  "body .dock-secondary span:last-child{display:none!important}",
+  "body .stage-bottom .tools-toggle{grid-column:2!important;grid-row:1!important;justify-self:end!important;font-size:8px!important;padding:7px 8px!important}",
+  "body .walk-controls{right:7px!important;bottom:65px!important}",
+  "body .walk-pad{grid-template-columns:repeat(3,40px)!important;grid-template-rows:repeat(2,37px)!important}",
+  "body .side{position:fixed!important;top:auto!important;right:0!important;bottom:0!important;left:0!important;width:100%!important;height:auto!important;min-height:0!important;max-height:78svh!important;overflow:auto!important;border-radius:21px 21px 0 0!important;transform:translateY(105%)!important;opacity:1!important;visibility:hidden!important;pointer-events:none!important;z-index:90!important}",
+  "body .side.open{transform:translateY(0)!important;visibility:visible!important;pointer-events:auto!important}",
+  "body .drawer-head{position:sticky!important;top:0!important}",
+  "body .side .card{padding:12px!important}",
+  "}",
+  "@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}"
+ ].join("");
+ function getFrameDocument(){
+  try{return frame.contentDocument||frame.contentWindow.document}catch(e){return null}
+ }
+ function injectMobileLayout(){
+  const doc=getFrameDocument();
+  if(!doc||!doc.head)return false;
+  let style=doc.getElementById("a01MobileStudyOverrides");
+  if(!style){
+   style=doc.createElement("style");
+   style.id="a01MobileStudyOverrides";
+   style.textContent=mobileStyle;
+   doc.head.appendChild(style);
+  }
+  frameReady=true;
+  fallback.hidden=true;
+  return true;
+ }
+ function callChild(id){
+  if(!frameReady)injectMobileLayout();
+  const doc=getFrameDocument();
+  const el=doc&&doc.getElementById(id);
+  if(el){el.click();return true}
+  fallback.hidden=false;
+  return false;
+ }
+ function openSection(section){
+  if(!frameReady)injectMobileLayout();
+  const doc=getFrameDocument();
+  const target=doc&&doc.querySelector('[data-nav="'+section+'"]');
+  if(target){target.click()}else{fallback.hidden=false}
+  sectionButtons.forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.section===section)));
+ }
+ frame.addEventListener("load",function(){injectMobileLayout();});
+ frame.addEventListener("error",function(){fallback.hidden=false;});
+ sectionButtons.forEach(button=>button.addEventListener("click",function(){openSection(button.dataset.section)}));
+ document.getElementById("menuBtn").addEventListener("click",function(){callChild("mobileMenuBtn");});
+ document.getElementById("walkBtn").addEventListener("click",function(){callChild("walkBtn");});
+ document.getElementById("fullBtn").addEventListener("click",function(){
+  if(!document.fullscreenElement){const p=document.documentElement.requestFullscreen;if(p)p.call(document.documentElement).catch(function(){})}
+  else if(document.exitFullscreen){document.exitFullscreen()}
+ });
+ setTimeout(function(){if(!frameReady){injectMobileLayout();if(!frameReady)fallback.hidden=false}},1800);
+})();
+</script>
+</body>
+</html>
