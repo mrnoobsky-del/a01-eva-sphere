@@ -39,7 +39,7 @@ assert next(row for row in rows if row["zone_id"] == "L02-OLF-STUDIO")["olfactor
 
 html = atlas_file.read_text(encoding="utf-8")
 assert '<html lang="ru">' in html
-for marker in ("NO ADDED SCENT", "Olfactory Studio", "visual", "sampleToggle", "не распыляется"):
+for marker in ("NO ADDED SCENT", "Olfactory Studio", "ATMOSPHERE PROFILE", "sampleToggle", "не распыляется"):
     assert marker.lower() in html.lower(), f"Missing UI marker: {marker}"
 scripts = re.findall(r"<script\b[^>]*>([\s\S]*?)</script>", html, flags=re.I)
 assert scripts, "No inline JavaScript found."
