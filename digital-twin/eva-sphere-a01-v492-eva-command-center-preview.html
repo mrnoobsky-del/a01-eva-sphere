@@ -7353,45 +7353,13 @@ html[data-theme="dark"] #stage #sphereIntroOverlay .sphere-intro-enter{color:#f5
  const dialog=document.querySelector('.object-detail-dialog');
  if(!dialog)return;
  const style=document.createElement('style');
- style.textContent=\`
-  .a01-olfactory-profile{margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:15px;background:var(--panel2);color:var(--text)}
-  .a01-olfactory-profile[hidden]{display:none!important}
-  .a01-olfactory-profile-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-  .a01-olfactory-profile-kicker{font-size:8px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
-  .a01-olfactory-profile-title{display:block;margin-top:5px;font-size:14px;line-height:1.3;font-weight:750;letter-spacing:-.02em}
-  .a01-olfactory-profile-mode{flex:0 0 auto;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:9px;font-weight:800;letter-spacing:.06em}
-  .a01-olfactory-profile-mode[data-mode="O1_NATURAL_AMBIENCE_ONLY"]{background:#e6f1e7;color:#315c3c;border-color:#c9dfcc}
-  html[data-theme="dark"] .a01-olfactory-profile-mode[data-mode="O1_NATURAL_AMBIENCE_ONLY"]{background:#243c2b;color:#c6edce;border-color:#3a6044}
-  .a01-olfactory-profile-copy{margin:10px 0 0;color:var(--text);font-size:11px;line-height:1.55}
-  .a01-olfactory-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
-  .a01-olfactory-profile-cell{min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:11px;background:var(--panel)}
-  .a01-olfactory-profile-cell b{display:block;font-size:8px;letter-spacing:.1em;color:var(--muted)}
-  .a01-olfactory-profile-cell p{margin:6px 0 0;font-size:10px;line-height:1.5;overflow-wrap:anywhere}
-  .a01-olfactory-profile-guidance{margin:10px 0 0;padding-left:10px;border-left:2px solid var(--accent);font-size:10px;line-height:1.5;color:var(--muted)}
-  .a01-olfactory-profile-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:7px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:8px;letter-spacing:.08em;color:var(--muted)}
-  .a01-olfactory-profile-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
-  .a01-olfactory-profile-links a{color:var(--text);font-size:10px;text-decoration:underline;text-underline-offset:3px}
-  @media(max-width:620px){.a01-olfactory-profile{padding:12px}.a01-olfactory-profile-grid{grid-template-columns:1fr}.a01-olfactory-profile-title{font-size:13px}}
- \`;
+ style.textContent=style.textContent=".a01-olfactory-profile{margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:15px;background:var(--panel2);color:var(--text)}\n.a01-olfactory-profile[hidden]{display:none!important}\n.a01-olfactory-profile-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}\n.a01-olfactory-profile-kicker{font-size:8px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}\n.a01-olfactory-profile-title{display:block;margin-top:5px;font-size:14px;line-height:1.3;font-weight:750;letter-spacing:-.02em}\n.a01-olfactory-profile-mode{flex:0 0 auto;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:9px;font-weight:800;letter-spacing:.06em}\n.a01-olfactory-profile-mode[data-mode=\"O1_NATURAL_AMBIENCE_ONLY\"]{background:#e6f1e7;color:#315c3c;border-color:#c9dfcc}\nhtml[data-theme=\"dark\"] .a01-olfactory-profile-mode[data-mode=\"O1_NATURAL_AMBIENCE_ONLY\"]{background:#243c2b;color:#c6edce;border-color:#3a6044}\n.a01-olfactory-profile-copy{margin:10px 0 0;color:var(--text);font-size:11px;line-height:1.55}\n.a01-olfactory-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}\n.a01-olfactory-profile-cell{min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:11px;background:var(--panel)}\n.a01-olfactory-profile-cell b{display:block;font-size:8px;letter-spacing:.1em;color:var(--muted)}\n.a01-olfactory-profile-cell p{margin:6px 0 0;font-size:10px;line-height:1.5;overflow-wrap:anywhere}\n.a01-olfactory-profile-guidance{margin:10px 0 0;padding-left:10px;border-left:2px solid var(--accent);font-size:10px;line-height:1.5;color:var(--muted)}\n.a01-olfactory-profile-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:7px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:8px;letter-spacing:.08em;color:var(--muted)}\n.a01-olfactory-profile-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}\n.a01-olfactory-profile-links a{color:var(--text);font-size:10px;text-decoration:underline;text-underline-offset:3px}\n@media(max-width:620px){.a01-olfactory-profile{padding:12px}.a01-olfactory-profile-grid{grid-template-columns:1fr}.a01-olfactory-profile-title{font-size:13px}}";
  document.head.appendChild(style);
  const panel=document.createElement('section');
  panel.className='a01-olfactory-profile';
  panel.hidden=true;
  panel.setAttribute('aria-live','polite');
- panel.innerHTML=\`
-  <div class="a01-olfactory-profile-head">
-   <div><div class="a01-olfactory-profile-kicker">A-01 · ATMOSPHERE PROFILE</div><strong class="a01-olfactory-profile-title" data-title>Профиль ароматической среды</strong></div>
-   <span class="a01-olfactory-profile-mode" data-mode-label>O0</span>
-  </div>
-  <p class="a01-olfactory-profile-copy" data-summary></p>
-  <div class="a01-olfactory-profile-grid">
-   <div class="a01-olfactory-profile-cell"><b>ДОПУСКАЕТСЯ</b><p data-allowed></p></div>
-   <div class="a01-olfactory-profile-cell"><b>НЕ ПРИМЕНЯЕТСЯ</b><p data-prohibited></p></div>
-  </div>
-  <p class="a01-olfactory-profile-guidance" data-guidance></p>
-  <div class="a01-olfactory-profile-foot"><span data-space-id></span><span>PROPOSED · КОНЦЕПЦИЯ</span></div>
-  <div class="a01-olfactory-profile-links"><a data-doc-link target="_blank" rel="noopener">Правила и сопоставление ↗</a><a data-atlas-link target="_blank" rel="noopener">Открыть Aroma Atlas ↗</a></div>
- \`;
+ panel.innerHTML=panel.innerHTML="<div class=\"a01-olfactory-profile-head\"> <div><div class=\"a01-olfactory-profile-kicker\">A-01 · ATMOSPHERE PROFILE</div><strong class=\"a01-olfactory-profile-title\" data-title>Профиль ароматической среды</strong></div> <span class=\"a01-olfactory-profile-mode\" data-mode-label>O0</span></div><p class=\"a01-olfactory-profile-copy\" data-summary></p><div class=\"a01-olfactory-profile-grid\"> <div class=\"a01-olfactory-profile-cell\"><b>ДОПУСКАЕТСЯ</b><p data-allowed></p></div> <div class=\"a01-olfactory-profile-cell\"><b>НЕ ПРИМЕНЯЕТСЯ</b><p data-prohibited></p></div></div><p class=\"a01-olfactory-profile-guidance\" data-guidance></p><div class=\"a01-olfactory-profile-foot\"><span data-space-id></span><span>PROPOSED · КОНЦЕПЦИЯ</span></div><div class=\"a01-olfactory-profile-links\"><a data-doc-link target=\"_blank\" rel=\"noopener\">Правила и сопоставление ↗</a><a data-atlas-link target=\"_blank\" rel=\"noopener\">Открыть Aroma Atlas ↗</a></div>";
  const connectionSection=document.getElementById('objectDetailConnections')?.closest('.object-detail-section');
  if(connectionSection)connectionSection.after(panel);else dialog.appendChild(panel);
  panel.querySelector('[data-doc-link]').href=DOC_URL;
