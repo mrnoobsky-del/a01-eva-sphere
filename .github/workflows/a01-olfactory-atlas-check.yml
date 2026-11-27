@@ -4,6 +4,9 @@ on:
     branches: [main]
     paths:
       - 'docs/A01-OLF-*'
+      - 'docs/A01-MASTER-SPACES-SYSTEMS-MATRIX-v0.1_RU.csv'
+      - 'data/a01-olfactory-*'
+      - 'tools/validate-olfactory-crosswalk.py'
       - 'schemas/a01-olfactory-*'
       - 'digital-twin/a01-olfactory-atlas.html'
       - 'tools/validate-olfactory-atlas.py'
@@ -26,6 +29,8 @@ jobs:
           node-version: 22
       - name: Validate zone register and JSON records
         run: python3 tools/validate-olfactory-atlas.py
+      - name: Validate 60-space Aroma Atlas crosswalk
+        run: python3 tools/validate-olfactory-crosswalk.py
       - name: Validate Aroma Atlas JavaScript
         run: |
           for f in /tmp/a01-olfactory-atlas-*.js; do node --check "$f"; done
