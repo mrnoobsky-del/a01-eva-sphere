@@ -307,10 +307,12 @@ v0.2 уточняет привязку сенсоров к телу и поме�
 - [A01-OLF-02 — карта настроения и olfactory profiles](docs/A01-OLF-02-AROMA-ATLAS-MOOD-PROFILES-v0.1_RU.md)
 - [A01-OLF-03 — эксплуатационные и инженерные требования](docs/A01-OLF-03-OLFACTORY-SYSTEM-REQUIREMENTS-v0.1_RU.md)
 - [A01-OLF-04 — реестр запаховых режимов по помещениям](docs/A01-OLF-04-SPACE-ZONE-REGISTER-v0.1_RU.csv)
-- [JSON Schema зоны](schemas/a01-olfactory-zone-v0.1.schema.json) · [пример реестра](schemas/a01-olfactory-zone-registry-v0.1.example.json)
+- [A01-OLF-05 — привязка 60 пространств к Aroma Atlas](docs/A01-OLF-05-SPATIAL-CROSSWALK-v0.1_RU.md)
+- [JSON Schema зон](schemas/a01-olfactory-zone-v0.1.schema.json) · [пример реестра](schemas/a01-olfactory-zone-registry-v0.1.example.json)
+- [JSON-реестр привязки 60 пространств](data/a01-olfactory-spatial-crosswalk-v0.1.json) · [Schema привязки](schemas/a01-olfactory-spatial-crosswalk-v0.1.schema.json)
 - [Интерактивный A-01 Aroma Atlas](digital-twin/a01-olfactory-atlas.html)
 
-Базовый режим общих пространств — отсутствие намеренно добавленной отдушки. Aroma Atlas — информационный прототип; физические ароматизаторы, HVAC и данные о здоровье не подключены.
+Базовый режим общих пространств — отсутствие намеренно добавленной отдушки. Для 60 пространств цифрового двойника подготовлена предварительная привязка: 54 нейтральных профиля O0 и 6 профилей O1 только для естественной среды растений или реального приготовления пищи/напитков. Карточка в 3D — информационная: физические ароматизаторы, HVAC, BMS и данные о здоровье не подключены.
 
 ## Публичный репозиторий и цитирование проекта
 
