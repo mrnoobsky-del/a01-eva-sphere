@@ -112,3 +112,16 @@ The reference cassette remains a concept. Its construction details and verificat
 - [v3.7.0 documentation (简体中文)](../digital-twin/README_ZH_v370.md)
 - [v3.7.0 changelog](../digital-twin/CHANGELOG_v370.md)
 - [Human Comfort & Sanitary Engineering note](../architecture/A01-HUMAN-COMFORT-ENGINEERING-v0.1.md)
+
+## A-01 Olfactory Environment / Aroma Atlas
+
+- [A01-OLF-01 — Ароматическая среда и olfactory design (RU)](A01-OLF-01-OLFACTORY-ENVIRONMENT-v0.1_RU.md) · [English brief](A01-OLF-01-OLFACTORY-ENVIRONMENT-v0.1.md)
+- [A01-OLF-02 — Aroma Atlas: карта настроения и olfactory profiles (RU)](A01-OLF-02-AROMA-ATLAS-MOOD-PROFILES-v0.1_RU.md)
+- [A01-OLF-03 — Эксплуатационные и инженерные требования (RU)](A01-OLF-03-OLFACTORY-SYSTEM-REQUIREMENTS-v0.1_RU.md)
+- [A01-OLF-04 — Реестр запаховых режимов по помещениям (CSV)](A01-OLF-04-SPACE-ZONE-REGISTER-v0.1_RU.csv)
+- [Zone JSON Schema](../schemas/a01-olfactory-zone-v0.1.schema.json) · [Example registry](../schemas/a01-olfactory-zone-registry-v0.1.example.json)
+- [Interactive A-01 Aroma Atlas prototype](../digital-twin/a01-olfactory-atlas.html)
+- [Source validation](../tools/validate-olfactory-atlas.py)
+
+**Baseline:** no intentionally added fragrance in shared spaces. The Atlas is an informational design prototype; no scent hardware, HVAC system or personal health data is connected.
+
