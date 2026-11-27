@@ -38,6 +38,8 @@ A-01 — открытая история развития долгосрочно
 
 ## Бренд, культура и пользовательский опыт
 
+- [Брендбук Сферы Евы v1.0](brand/A01-BRAND-BOOK_RU.md)
+- [Как присоединиться к проекту](CONTRIBUTING_RU.md)
 - [A-01 — бренд и культура жизни в Сфере Евы](brand/A01-BRAND-AND-LIVING-CULTURE_RU.md)
 - [Сценарии повседневной жизни и контент-плейбук](brand/A01-CONTENT-AND-DAILY-EXPERIENCE-PLAYBOOK_RU.md)
 
