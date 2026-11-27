@@ -44,8 +44,6 @@ W-01 remains M0 / proposed / not calculated. Fixture quantities, flows, pressure
 
 - [Брендбук Сферы Евы v1.0](../brand/A01-BRAND-BOOK_RU.md)
 - [Как присоединиться к проекту A-01](../CONTRIBUTING_RU.md)
-- [Бренд и культура жизни в Сфере Евы](../brand/A01-BRAND-AND-LIVING-CULTURE_RU.md)
-- [Сценарии повседневной жизни и контент-плейбук](../brand/A01-CONTENT-AND-DAILY-EXPERIENCE-PLAYBOOK_RU.md)
 
 ## A-01 Space Market — покупка и аренда пространств
 
