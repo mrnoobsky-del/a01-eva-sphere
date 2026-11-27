@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#eef1ef">
+<meta name="description" content="A-01 Aroma Atlas — интерактивная карта настроения и запаховой среды Сферы Евы. Безопасный базовый принцип: никакой добавленной отдушки в общих пространствах.">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="A-01 Aroma Atlas — атмосфера Сферы Евы">
+<meta property="og:description" content="Атмосфера пространства через настроение, свет, звук, материалы и осознанный выбор запаха. Без добавленной отдушки по умолчанию.">
+<title>A-01 Aroma Atlas — карта атмосферы Сферы Евы</title>
+<style>
+:root{color-scheme:light;--bg:#eef1ef;--paper:#fbfcfb;--ink:#172327;--muted:#647378;--line:rgba(24,42,48,.13);--accent:#687d71;--soft:#e4ece6;--radius:22px}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}
+button,select{font:inherit}
+.shell{max-width:1180px;margin:0 auto;padding:22px clamp(14px,3vw,34px) 44px}
+.header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 24px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.mark{width:42px;height:42px;display:grid;place-items:center;border:1px solid #6b8078;border-radius:50%;font-size:22px;color:#526c60}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.16em;font-weight:700}
+.brand strong{display:block;font-size:14px;letter-spacing:.03em}
+.version{border:1px solid var(--line);padding:7px 11px;border-radius:999px;color:var(--muted);font-size:10px;white-space:nowrap}
+.hero{padding:38px 0 24px}
+.kicker{color:#688073;font-size:10px;letter-spacing:.18em;font-weight:750}
+h1{max-width:800px;margin:10px 0 12px;font-size:clamp(32px,5vw,58px);line-height:1.02;letter-spacing:-.055em;font-weight:640}
+.hero p{max-width:730px;margin:0;color:var(--muted);font-size:16px;line-height:1.7}
+.grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:16px;align-items:start}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 10px 35px rgba(22,42,48,.045);padding:clamp(16px,2vw,24px)}
+.card h2{margin:0 0 7px;font-size:19px;letter-spacing:-.03em}
+.card-intro{margin:0 0 18px;color:var(--muted);font-size:12px}
+.field{display:grid;gap:7px;margin:0 0 18px}
+label,.field-label{font-size:10px;font-weight:750;letter-spacing:.12em;color:var(--muted)}
+select{width:100%;min-height:46px;padding:10px 13px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);outline:none}
+select:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid rgba(78,127,99,.35);outline-offset:2px}
+.moods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:8px}
+.mood{min-height:62px;padding:9px 10px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);text-align:left;font-size:11px;cursor:pointer;touch-action:manipulation}
+.mood span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+.mood[aria-pressed="true"]{border-color:#6e887b;background:#edf3ef;box-shadow:inset 0 0 0 1px #6e887b}
+.modebox{display:grid;gap:8px;margin-top:18px;padding:14px;border-radius:15px;background:#f0f4f1;border:1px solid rgba(64,93,76,.16)}
+.mode-title{font-size:10px;font-weight:750;letter-spacing:.12em;color:#5d7467}
+.mode-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mode-row strong{font-size:13px}
+.mode-row small{color:var(--muted);font-size:10px}
+.toggle{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:11px}
+.toggle input{width:18px;height:18px;accent-color:#547467}
+.family-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:10px}
+.family{padding:9px 10px;border:1px solid var(--line);border-radius:11px;background:#fff;text-align:left;font-size:11px;cursor:pointer}
+.family[aria-pressed="true"]{border-color:#748b80;background:#eef4f0}
+.note{font-size:10px;color:var(--muted);line-height:1.55}
+.output{position:sticky;top:16px;overflow:hidden;padding:0}
+.aura{min-height:255px;padding:24px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#d8e5dd,#eef0e7 55%,#e4e9ed);transition:background .25s}
+.aura-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.aura-label{font-size:9px;letter-spacing:.15em;font-weight:750;color:#50675b}
+.aura-code{font-size:9px;color:#52645c;padding:5px 8px;border:1px solid #53685c44;border-radius:999px}
+.orb{width:116px;height:116px;margin:14px auto;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff9 0 7%,#dcebe1 25%,#a8bdb0 65%,#6f897a 100%);box-shadow:0 18px 45px #61786b33,inset -10px -16px 25px #516e5b33,inset 8px 8px 22px #fff9}
+.aura h2{text-align:center;margin:0;font-size:26px;letter-spacing:-.04em;font-weight:620}
+.aura p{text-align:center;margin:5px auto 0;max-width:300px;font-size:11px;color:#4f6158}
+.output-body{padding:22px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 17px}
+.pill{padding:6px 9px;border:1px solid var(--line);border-radius:999px;color:#53635b;font-size:9px;background:#f7f9f7}
+.output-body h3{margin:16px 0 6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.output-body p{margin:0;font-size:13px;line-height:1.65}
+.policy{padding:12px 13px;border-left:3px solid #658171;background:#f0f4f1;border-radius:0 10px 10px 0;color:#3e5549;font-size:11px;line-height:1.55}
+.reset{margin-top:14px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:9px 13px;font-size:11px;cursor:pointer}
+.sections{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.mini{background:rgba(255,255,255,.68);border:1px solid var(--line);border-radius:16px;padding:15px}
+.mini strong{display:block;font-size:12px;margin-bottom:5px}
+.mini p{margin:0;color:var(--muted);font-size:10px;line-height:1.55}
+.footer{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:18px;color:var(--muted);font-size:10px}
+.footer a{text-decoration:none}
+@media(max-width:820px){.grid{grid-template-columns:1fr}.output{position:static}.sections{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.shell{padding:12px 12px 32px}.header{padding-bottom:14px}.hero{padding:28px 0 18px}.hero p{font-size:14px}.moods{grid-template-columns:repeat(2,minmax(0,1fr))}.aura{min-height:230px}.orb{width:96px;height:96px}.sections{grid-template-columns:1fr}.footer{align-items:flex-start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="shell">
+<header class="header">
+ <div class="brand"><div class="mark" aria-hidden="true">✧</div><div><small>A-01 · THE SPHERE OF EVA</small><strong>AROMA ATLAS / КАРТА АТМОСФЕРЫ</strong></div></div>
+ <span class="version">Исследовательский прототип · 0.1</span>
+</header>
+<section class="hero">
+ <div class="kicker">ОЛЬФАКТОРНЫЙ ДИЗАЙН · МУЛЬТИСЕНСОРНАЯ СРЕДА</div>
+ <h1>Атмосфера начинается с ощущения.</h1>
+ <p>Выбери пространство и настроение. A-01 предложит не обязательно запах: иногда лучший профиль — свет, звук, материалы и чистый нейтральный воздух. В общих пространствах отсутствие добавленной отдушки является базовым правилом.</p>
+</section>
+<section class="grid" aria-label="Конструктор атмосферы">
+ <div class="card">
+  <h2>Собрать профиль пространства</h2>
+  <p class="card-intro">Сначала место, затем ощущение. Ограничения помещения всегда важнее выбранного mood.</p>
+  <div class="field">
+   <label for="zone">ПРОСТРАНСТВО A-01</label>
+   <select id="zone">
+    <option value="L00">L00 · Пространство заботы и восстановления</option>
+    <option value="L01">L01 · Атриум и общественные галереи</option>
+    <option value="GARDEN">L01 · Зимний сад</option>
+    <option value="FOOD">L02 · Кафе и питание</option>
+    <option value="WORKSHOP">L02 · Мастерские и сервис</option>
+    <option value="STUDIO">L02 · Olfactory Studio (опционально)</option>
+    <option value="L03">L03 · Жилые пространства</option>
+    <option value="L04">L04 · Управление и интеллект</option>
+    <option value="B1">B1 · Технические помещения</option>
+   </select>
+  </div>
+  <div class="field">
+   <div class="field-label">КАКОЕ ОЩУЩЕНИЕ НУЖНО?</div>
+   <div class="moods" id="moods">
+    <button class="mood" type="button" data-mood="calm" aria-pressed="true">Тишина и восстановление<span>CALM / REST</span></button>
+    <button class="mood" type="button" data-mood="focus" aria-pressed="false">Ясность и фокус<span>CLARITY / FOCUS</span></button>
+    <button class="mood" type="button" data-mood="welcome" aria-pressed="false">Открытость и тепло<span>WELCOME / WARMTH</span></button>
+    <button class="mood" type="button" data-mood="nature" aria-pressed="false">Природа и обновление<span>NATURE / RENEWAL</span></button>
+    <button class="mood" type="button" data-mood="creative" aria-pressed="false">Энергия и творчество<span>ENERGY / CREATE</span></button>
+    <button class="mood" type="button" data-mood="social" aria-pressed="false">Общение и еда<span>SOCIAL / FOOD</span></button>
+   </div>
+  </div>
+  <div class="modebox">
+   <div class="mode-title">ВЫБОР ЗАПАХОВОГО РЕЖИМА</div>
+   <div class="mode-row"><strong id="modeLabel">O0 · Без добавленного аромата</strong><small id="modeCode">DEFAULT</small></div>
+   <label class="toggle"><input id="sampleToggle" type="checkbox" disabled> Личный образец в Olfactory Studio</label>
+   <div id="familyWrap" hidden>
+    <div class="field-label">ОПИСАНИЕ ОБРАЗЦА</div>
+    <div class="family-list">
+     <button type="button" class="family" data-family="WOOD_DRY" aria-pressed="true">Сухая древесина</button>
+     <button type="button" class="family" data-family="GREEN_LEAF" aria-pressed="false">Зелёный лист</button>
+     <button type="button" class="family" data-family="CITRUS_PEEL" aria-pressed="false">Цитрусовая кожура</button>
+     <button type="button" class="family" data-family="TEA_HERBAL" aria-pressed="false">Чай и травы</button>
+    </div>
+    <p class="note">Это словесные категории для личного неаэрозольного образца, а не готовые составы или разрешение на диффузию в помещение.</p>
+   </div>
+  </div>
+ </div>
+ <aside class="card output" aria-live="polite">
+  <div class="aura" id="aura">
+   <div class="aura-top"><span class="aura-label">A-01 · ATMOSPHERE PROFILE</span><span class="aura-code" id="auraCode">O0 / NEUTRAL</span></div>
+   <div class="orb" id="orb" aria-hidden="true"></div>
+   <div><h2 id="resultTitle">Тишина и восстановление</h2><p id="resultSubtitle">Нейтральный воздух · мягкий свет · спокойная акустика</p></div>
+  </div>
+  <div class="output-body">
+   <div class="pills" id="tags"><span class="pill">NO ADDED SCENT</span><span class="pill">LOW STIMULATION</span><span class="pill">ACCESSIBLE BY DEFAULT</span></div>
+   <h3>Профиль пространства</h3><p id="designText">Мягкая световая среда, контролируемый уровень шума, приватность и тактильно спокойные материалы. Аромат не добавляется.</p>
+   <h3>Запаховой статус</h3><div class="policy" id="policy">O0 · Без намеренно добавленного аромата. Это режим по умолчанию для общих помещений.</div>
+   <h3>Почему так</h3><p id="reason">Запахи воспринимаются индивидуально; общий маршрут не должен навязывать запах посетителям и жильцам.</p>
+   <button class="reset" type="button" id="reset">Вернуть нейтральный режим</button>
+  </div>
+ </aside>
+</section>
+<section class="sections" aria-label="Правила A-01">
+ <article class="mini"><strong>01 · Сначала источник</strong><p>Неприятный запах — повод проверить вентиляцию, слив, отходы, влажность или оборудование. Не маскируем неисправность ароматом.</p></article>
+ <article class="mini"><strong>02 · Свободный выбор</strong><p>Личное знакомство с образцом возможно только добровольно и в отдельно обозначенной комнате, вне обязательного маршрута.</p></article>
+ <article class="mini"><strong>03 · Общий воздух нейтрален</strong><p>Никакой фоновой ароматизации атриума, лифтов, коридоров и общей HVAC-системы.</p></article>
+</section>
+<footer class="footer"><span>A-01 Aroma Atlas · визуальный UX-прототип · физические системы не подключены.</span><span><a href="https://github.com/mrnoobsky-del/a01-eva-sphere">GitHub проекта</a> · <a href="../docs/DOCUMENTATION-INDEX.md">Индекс документации</a></span></footer>
+</main>
+<script>
+(function(){
+ const zones={
+  L00:{mode:"O0",label:"O0 · Без добавленного аромата",name:"L00 · Забота и восстановление",design:"Тихая акустика, мягкий равномерный свет, комфортная температура, приватность и нейтральные материалы. Аромат не добавляется.",reason:"Зона заботы и отдыха должна быть доступной для людей с разными сенсорными предпочтениями. Отдушка не является обязательной частью комфорта.",tags:["NO ADDED SCENT","CARE / RECOVERY","ACCESSIBLE BY DEFAULT"],color:"linear-gradient(145deg,#e8e8df,#d6e0d8 55%,#e6e9e8)"},
+  L01:{mode:"O0",label:"O0 · Без добавленного аромата",name:"L01 · Атриум",design:"Пространство раскрывается через свет, объём, визуальную навигацию, акустику и естественную смену дневного освещения.",reason:"Атриум и галереи являются общим маршрутом. Запах здесь не должен навязываться.",tags:["NEUTRAL AIR","PUBLIC ROUTE","NO DIFFUSER"],color:"linear-gradient(145deg,#e6e9e6,#d8e4e0 58%,#dfe5eb)"},
+  GARDEN:{mode:"O1",label:"O1 · Только естественная среда",name:"L01 · Зимний сад",design:"Живые растения, дневной свет и сезонность. Виды подбираются специалистом с учётом пыльцы, аллергенности, интенсивности запаха и обслуживания. Без искусственного диффузора.",reason:"Атмосфера формируется реальными растениями. Натуральное происхождение не означает отсутствие индивидуальной чувствительности.",tags:["NATURAL AMBIENCE","PLANT REVIEW","NO DIFFUSER"],color:"linear-gradient(145deg,#e3eadc,#cbdccd 55%,#e9ede3)"},
+  FOOD:{mode:"O1",label:"O1 · Только естественные запахи еды",name:"L02 · Кафе и питание",design:"Запах появляется от настоящего приготовления и подачи пищи. Кухня получает локальную вытяжку; перенос в атриум и жилые зоны устраняется планировкой и расчётом HVAC.",reason:"Искусственная ароматизация еды не нужна. Управляем источник, а не маскируем воздух парфюмом.",tags:["REAL FOOD ONLY","LOCAL EXHAUST","NO ARTIFICIAL SCENT"],color:"linear-gradient(145deg,#f1e6d4,#e9d7bf 52%,#eee7db)"},
+  WORKSHOP:{mode:"O0",label:"O0 · Без добавленного аромата",name:"L02 · Мастерские",design:"Локальный захват пыли, аэрозолей и запаховых источников, подходящие средства и регламент обслуживания. Ароматизатор не применяется.",reason:"Запахи материалов и оборудования требуют выявления источника и защиты персонала, а не маскировки.",tags:["SOURCE CONTROL","WORKPLACE AIR","NO MASKING"],color:"linear-gradient(145deg,#e7e5df,#d8ddd8 55%,#e5e7e3)"},
+  STUDIO:{mode:"O2",label:"O2 · Личный образец по желанию",name:"L02 · Olfactory Studio",design:"Отдельная добровольная комната вне обязательного маршрута. Начальный формат — личный бумажный образец у самого участника, без распыления в воздух помещения.",reason:"Участник может отказаться или выйти. Любая будущая воздушная диффузия требует самостоятельной инженерной и safety-проверки.",tags:["OPT-IN ONLY","PAPER SAMPLE","SEPARATE ROOM"],color:"linear-gradient(145deg,#e6e0e8,#d8d8e6 55%,#eadfe1)"},
+  L03:{mode:"O0",label:"O0 · Без ароматизации здания",name:"L03 · Жилое пространство",design:"Здание не задаёт запах внутри жилой единицы. Личные предпочтения остаются частным выбором и не должны переноситься в коридоры или соседние помещения.",reason:"Частная свобода не должна создавать принудительную ароматическую среду для соседей.",tags:["PRIVATE CHOICE","SHARED AIR NEUTRAL","NO CENTRAL SCENT"],color:"linear-gradient(145deg,#e9e5e2,#e1dcd4 55%,#e6e8e9)"},
+  L04:{mode:"O0",label:"O0 · Без добавленного аромата",name:"L04 · Управление и интеллект",design:"Эргономика, свет, акустика и чистый воздух. Необычный запах рассматривается как событие обслуживания или безопасности.",reason:"Запах не нужен для диспетчерской и вычислительной инфраструктуры.",tags:["OPERATIONS","NEUTRAL AIR","FAULT INVESTIGATION"],color:"linear-gradient(145deg,#e3e7e9,#d6dfe3 55%,#e9ebec)"},
+  B1:{mode:"O0",label:"O0 · Без добавленного аромата",name:"B1 · Технический контур",design:"Контроль источников запаха от топлива, отходов, стоков, материалов и оборудования. Локальные технические решения определяются инженерным проектом.",reason:"Любой необычный запах может быть ранним признаком неисправности. Маскирование недопустимо.",tags:["SOURCE DETECTION","ENGINEERING","NO MASKING"],color:"linear-gradient(145deg,#e1e5e5,#cfd9dc 55%,#e5e7e8)"}
+ };
+ const moods={
+  calm:{title:"Тишина и восстановление",subtitle:"Мягкий свет · спокойная акустика · приватность",color:["#e5e7df","#d8e3dc","#e6e8e6"],tags:["CALM","LOW STIMULATION","SOFT LIGHT"],design:"Снижаем зрительную и акустическую нагрузку: мягкий свет, спокойные материалы, понятная навигация и место для уединения."},
+  focus:{title:"Ясность и фокус",subtitle:"Равномерный свет · низкий шум · порядок",color:["#e5e8e8","#d8e3e5","#e5e7ed"],tags:["CLARITY","LOW GLARE","ACOUSTIC CONTROL"],design:"Равномерное освещение, отсутствие бликов, контролируемый шум и визуально ясные рабочие поверхности."},
+  welcome:{title:"Открытость и тепло",subtitle:"Человеческий масштаб · мягкие фактуры",color:["#eee2d4","#e7d9cf","#e9e6df"],tags:["WELCOME","WARM MATERIALS","CLEAR WAYFINDING"],design:"Гостеприимство формируется видимым маршрутом, удобными местами ожидания, тактильно тёплыми материалами и понятной информацией."},
+  nature:{title:"Природа и обновление",subtitle:"Живые растения · дневной свет · сезонность",color:["#e1eadb","#cedfce","#e7ece1"],tags:["BIOPHILIC","DAYLIGHT","NATURAL SEASON"],design:"Работаем с естественным светом, растениями, видами и сезонным характером пространства. Учитываем пыльцу и индивидуальные реакции."},
+  creative:{title:"Энергия и творчество",subtitle:"Гибкий свет · зоны совместной работы",color:["#e9e2e0","#ded9e8","#e6e5ec"],tags:["CREATIVE","FLEXIBLE LIGHT","COLLABORATION"],design:"Предлагаем гибкий сценарий света, мобильные рабочие поверхности и возможность менять формат общения и движения."},
+  social:{title:"Общение и еда",subtitle:"Реальная еда · акустические зоны",color:["#efe4d6","#e8d7c3","#ece5dc"],tags:["SOCIAL","REAL FOOD","ACOUSTIC ZONING"],design:"Общение поддерживают удобные посадочные места, понятное меню, акустическое зонирование и естественная атмосфера приготовления пищи."}
+ };
+ let mood="calm",zone="L00",family="WOOD_DRY";
+ const $=id=>document.getElementById(id);
+ function render(){
+  const z=zones[zone],m=moods[mood],studio=zone==="STUDIO",sample=studio&&$("sampleToggle").checked;
+  $("modeLabel").textContent=sample?"O2 · Личный образец по желанию":z.label;
+  $("modeCode").textContent=sample?family:"DEFAULT";
+  $("sampleToggle").disabled=!studio;
+  $("familyWrap").hidden=!(studio&&sample);
+  $("auraCode").textContent=sample?"O2 / SAMPLE":z.mode+" / "+(z.mode==="O1"?"NATURAL":"NEUTRAL");
+  $("resultTitle").textContent=m.title;
+  $("resultSubtitle").textContent=m.subtitle;
+  $("aura").style.background="linear-gradient(145deg,"+m.color[0]+","+m.color[1]+" 55%,"+m.color[2]+")";
+  $("orb").style.background="radial-gradient(circle at 35% 28%,#fff9 0 7%,"+m.color[0]+" 25%,"+m.color[1]+" 65%,"+m.color[2]+" 100%)";
+  $("tags").innerHTML=[...m.tags,...z.tags].slice(0,7).map(x=>'<span class="pill">'+x+'</span>').join("");
+  $("designText").textContent=sample?"Личный бумажный образец «"+family+"» можно изучить у себя в руках. Это не распыление и не добавление запаха в комнату.":z.design+" Настроение: "+m.design;
+  $("policy").textContent=sample?"O2 · только добровольный личный образец. Отказ и выход доступны в любой момент. В помещение аромат специально не распыляется.":z.label+". Общая HVAC-система не используется для подачи ароматов.";
+  $("reason").textContent=sample?"Образец предлагается только по инициативе человека. Состав и документы продукта должны быть открыты до теста.":z.reason+" Mood-тег описывает дизайнерское намерение, а не лечебный или гарантированный психологический эффект.";
+ }
+ $("zone").addEventListener("change",e=>{zone=e.target.value;if(zone!=="STUDIO")$("sampleToggle").checked=false;render();});
+ document.querySelectorAll("[data-mood]").forEach(button=>button.addEventListener("click",()=>{mood=button.dataset.mood;document.querySelectorAll("[data-mood]").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));render();}));
+ $("sampleToggle").addEventListener("change",render);
+ document.querySelectorAll("[data-family]").forEach(button=>button.addEventListener("click",()=>{family=button.dataset.family;document.querySelectorAll("[data-family]").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));render();}));
+ $("reset").addEventListener("click",()=>{$("sampleToggle").checked=false;render();});
+ render();
+})();
+</script>
+</body>
+</html>
