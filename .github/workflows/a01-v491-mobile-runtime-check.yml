@@ -28,16 +28,16 @@ jobs:
           import re
           path = Path('digital-twin/eva-sphere-a01-v491-mobile-runtime-preview.html')
           html = path.read_text(encoding='utf-8')
-          scripts = re.findall(r'<script\\b([^>]*)>([\\s\\S]*?)</script>', html, re.I)
-          module = next((code for attrs, code in scripts if re.search(r'type=["\\']module["\\']', attrs, re.I)), None)
+          scripts = re.findall(r"""<script\b([^>]*)>([\s\S]*?)</script>""", html, re.I)
+          module = next((code for attrs, code in scripts if re.search(r"""type=["']module["']""", attrs, re.I)), None)
           if module is None:
               raise SystemExit('Three.js module was not found')
           Path('/tmp/a01-v491-runtime.mjs').write_text(module, encoding='utf-8')
           for index, (attrs, code) in enumerate(scripts):
-              if re.search(r'type=["\\'](?:module|importmap|application/ld\\+json)["\\']', attrs, re.I):
+              if re.search(r"""type=["'](?:module|importmap|application/ld\+json)["']""", attrs, re.I):
                   continue
               Path(f'/tmp/a01-v491-inline-{index}.js').write_text(code, encoding='utf-8')
-          ids = re.findall(r'\\bid=["\\']([^"\\']+)["\\']', html)
+          ids = re.findall(r"""\bid=["']([^"']+)["']""", html)
           duplicates = sorted({value for value in ids if ids.count(value) > 1})
           if duplicates:
               raise SystemExit('Duplicate HTML IDs: ' + ', '.join(duplicates[:30]))
@@ -58,12 +58,26 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           import re
-          html = Path('digital-twin/eva-sphere-a01-v491-mobile-study-preview.html').read_text(encoding='utf-8')
-          ids = re.findall(r'\\bid=["\\']([^"\\']+)["\\']', html)
+          path = Path('digital-twin/eva-sphere-a01-v491-mobile-study-preview.html')
+          html = path.read_text(encoding='utf-8')
+          ids = re.findall(r"""\bid=["']([^"']+)["']""", html)
           if len(ids) != len(set(ids)):
               raise SystemExit('Duplicate IDs in mobile study shell')
+          scripts = re.findall(r"""<script\b[^>]*>([\s\S]*?)</script>""", html, re.I)
+          for index, code in enumerate(scripts):
+              Path(f'/tmp/a01-v491-study-{index}.js').write_text(code, encoding='utf-8')
           for marker in ['data-section="levels"', 'data-section="climate"', 'Замер 60 с', 'frameIntervalMs', 'renderer.render']:
               if marker not in html:
                   raise SystemExit('Missing mobile shell feature: ' + marker)
           print(f'Mobile shell IDs: {len(ids)} unique')
           PY
+          for file in /tmp/a01-v491-study-*.js; do node --check "$file"; done
+      - name: Upload preview HTML files for Wix deployment
+        uses: actions/upload-artifact@v4
+        with:
+          name: a01-v491-mobile-preview-files
+          path: |
+            digital-twin/eva-sphere-a01-v491-mobile-runtime-preview.html
+            digital-twin/eva-sphere-a01-v491-mobile-study-preview.html
+          if-no-files-found: error
+          retention-days: 7
