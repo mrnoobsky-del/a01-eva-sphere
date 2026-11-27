@@ -300,3 +300,19 @@ v0.3.0 — документационный исследовательский �
 - [Предыдущая архитектура v0.1](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
 v0.2 уточняет привязку сенсоров к телу и помещениям, типы данных, синхронизацию времени, разрешения на медиа и журнал «наблюдение → загадка → рекомендация → разрешение → действие → проверка». Это документационный выпуск: реальный Android-01 и сенсорный endpoint не подключены.
+
+## Ароматическая среда и A-01 Aroma Atlas
+
+- [A01-OLF-01 — стратегия ароматической среды (RU)](docs/A01-OLF-01-OLFACTORY-ENVIRONMENT-v0.1_RU.md) · [English brief](docs/A01-OLF-01-OLFACTORY-ENVIRONMENT-v0.1.md)
+- [A01-OLF-02 — карта настроения и olfactory profiles](docs/A01-OLF-02-AROMA-ATLAS-MOOD-PROFILES-v0.1_RU.md)
+- [A01-OLF-03 — эксплуатационные и инженерные требования](docs/A01-OLF-03-OLFACTORY-SYSTEM-REQUIREMENTS-v0.1_RU.md)
+- [A01-OLF-04 — реестр запаховых режимов по помещениям](docs/A01-OLF-04-SPACE-ZONE-REGISTER-v0.1_RU.csv)
+- [JSON Schema зоны](schemas/a01-olfactory-zone-v0.1.schema.json) · [пример реестра](schemas/a01-olfactory-zone-registry-v0.1.example.json)
+- [Интерактивный A-01 Aroma Atlas](digital-twin/a01-olfactory-atlas.html)
+
+Базовый режим общих пространств — отсутствие намеренно добавленной отдушки. Aroma Atlas — информационный прототип; физические ароматизаторы, HVAC и данные о здоровье не подключены.
+
+## Публичный репозиторий и цитирование проекта
+
+Канонический публичный репозиторий исходников: [mrnoobsky-del/a01-eva-sphere](https://github.com/mrnoobsky-del/a01-eva-sphere). См. [проверку публичной доступности и обнаружимости](docs/A01-PUBLIC-REPOSITORY-DISCOVERABILITY_RU.md) и [CITATION.cff](CITATION.cff).
+
