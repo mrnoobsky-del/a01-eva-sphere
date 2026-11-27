@@ -40,6 +40,10 @@ W-01 remains M0 / proposed / not calculated. Fixture quantities, flows, pressure
 
 # Documentation index
 
+## Интерактивность и производительность 3D-сцены
+
+- [A01-3D-INTERACTION-120HZ-01 — стандарт 120 Hz и режима исследования объектов](../performance/A01-3D-INTERACTION-120HZ-01_RU.md)
+
 ## Бренд и участие в проекте
 
 - [Брендбук Сферы Евы v1.0](../brand/A01-BRAND-BOOK_RU.md)
