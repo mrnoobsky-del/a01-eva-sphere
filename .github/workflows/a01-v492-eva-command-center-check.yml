@@ -1,0 +1,74 @@
+name: A-01 v4.9.2 Eva command center checks
+on:
+  push:
+    branches:
+      - preview/v492-eva-command-center
+    paths:
+      - 'digital-twin/eva-sphere-a01-v492-eva-command-center-*.html'
+      - 'performance/V492-EVA-COMMAND-CENTER_RU.md'
+      - '.github/workflows/a01-v492-eva-command-center-check.yml'
+  pull_request:
+    paths:
+      - 'digital-twin/eva-sphere-a01-v492-eva-command-center-*.html'
+      - 'performance/V492-EVA-COMMAND-CENTER_RU.md'
+      - '.github/workflows/a01-v492-eva-command-center-check.yml'
+  workflow_dispatch:
+jobs:
+  static-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate runtime and inline scripts
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('digital-twin/eva-sphere-a01-v492-eva-command-center-preview.html')
+          html=p.read_text(encoding='utf-8')
+          scripts=re.findall(r"""<script\b([^>]*)>([\s\S]*?)</script>""",html,re.I)
+          module=next((code for attrs,code in scripts if re.search(r"""type=["']module["']""",attrs,re.I)),None)
+          if module is None: raise SystemExit('Three.js module missing')
+          Path('/tmp/a01-v492.mjs').write_text(module,encoding='utf-8')
+          for i,(attrs,code) in enumerate(scripts):
+              if re.search(r"""type=["'](?:module|importmap|application/ld\+json)["']""",attrs,re.I): continue
+              Path(f'/tmp/a01-v492-{i}.js').write_text(code,encoding='utf-8')
+          ids=re.findall(r"""\bid=["']([^"']+)["']""",html)
+          duplicates=sorted({x for x in ids if ids.count(x)>1})
+          if duplicates: raise SystemExit('Duplicate IDs: '+', '.join(duplicates[:25]))
+          for marker in ['runEvaSceneCommand','parseEvaSceneCommand','window.EVA_A01_SCENE_BRIDGE',
+                         'DOLEK_LOD_REFRESH_MS = isMobilePerformance ? 125 : 75',
+                         'WALK_GAZE_REFRESH_MS = isMobilePerformance ? 220 : 125',
+                         'data-eva-level="4"','font-size:16px','visualViewport']:
+              if marker not in html: raise SystemExit('Missing feature: '+marker)
+          print(f'Runtime validated: {len(ids)} HTML IDs, {len(scripts)} script blocks')
+          PY
+          node --check /tmp/a01-v492.mjs
+          for f in /tmp/a01-v492-*.js; do node --check "$f"; done
+      - name: Validate study shell
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          html=Path('digital-twin/eva-sphere-a01-v492-eva-command-center-study.html').read_text(encoding='utf-8')
+          ids=re.findall(r"""\bid=["']([^"']+)["']""",html)
+          if len(ids)!=len(set(ids)): raise SystemExit('Duplicate IDs in study shell')
+          for marker in ['cdn.jsdelivr.net/gh/mrnoobsky-del/a01-eva-sphere@preview/v492-eva-command-center/digital-twin/eva-sphere-a01-v492-eva-command-center-preview.html',
+                         'id="evaBtn"','callChild("evaOpenBtn")','Замер 60 с']:
+              if marker not in html: raise SystemExit('Missing shell feature: '+marker)
+          scripts=re.findall(r"""<script\b[^>]*>([\s\S]*?)</script>""",html,re.I)
+          for i,code in enumerate(scripts): Path(f'/tmp/a01-v492-shell-{i}.js').write_text(code,encoding='utf-8')
+          print(f'Study shell validated: {len(ids)} unique HTML IDs')
+          PY
+          for f in /tmp/a01-v492-shell-*.js; do node --check "$f"; done
+      - name: Upload preview pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: a01-v492-eva-command-center-preview
+          path: |
+            digital-twin/eva-sphere-a01-v492-eva-command-center-preview.html
+            digital-twin/eva-sphere-a01-v492-eva-command-center-study.html
+          if-no-files-found: error
+          retention-days: 7
