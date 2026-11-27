@@ -1,0 +1,705 @@
+{
+  "schema_version": "0.1",
+  "title": "A-01 Olfactory Spatial Crosswalk",
+  "status": "concept",
+  "source_matrix": "docs/A01-MASTER-SPACES-SYSTEMS-MATRIX-v0.1_RU.csv",
+  "source_zone_register": "docs/A01-OLF-04-SPACE-ZONE-REGISTER-v0.1_RU.csv",
+  "hardware_connected": false,
+  "policy": "Informational design mapping only. It does not control, command, or authorize scent devices, HVAC, BMS, or any physical system.",
+  "mode_counts": {
+    "O0_NO_ADDED_SCENT": 54,
+    "O1_NATURAL_AMBIENCE_ONLY": 6
+  },
+  "profiles": [
+    {
+      "profile_id": "PUBLIC_NEUTRAL",
+      "label_ru": "Общественная зона без добавленной отдушки",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Специально добавленные ароматические источники не применяются; обычные запахи реальной повседневной деятельности не являются ароматизацией.",
+      "prohibited_source": "Диффузоры, аэрозоли, ароматические маркетинговые устройства и средства маскировки запахов.",
+      "ui_guidance": "Атмосферу формируют навигация, свет, материалы и акустика; отдельный запах не задаётся."
+    },
+    {
+      "profile_id": "HYGIENE_NEUTRAL",
+      "label_ru": "Гигиена и санитария — нейтральная среда",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Нейтральные, по возможности fragrance-free средства уборки и обслуживания; штатная вентиляция.",
+      "prohibited_source": "Освежители воздуха, ароматизированные чистящие средства и аэрозольная маскировка.",
+      "ui_guidance": "При запахе сначала проверяют слив, влажность, уборку и вытяжку; запах не маскируют."
+    },
+    {
+      "profile_id": "CARE_NEUTRAL",
+      "label_ru": "Забота и поддержка — нейтральная среда",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Отсутствие намеренно добавленной отдушки; нейтральные материалы и обслуживание.",
+      "prohibited_source": "Диффузоры, парфюмерные композиции и ароматические спреи в помещениях поддержки.",
+      "ui_guidance": "Приоритет — сенсорная предсказуемость и возможность комфортного пребывания разных посетителей."
+    },
+    {
+      "profile_id": "REST_NEUTRAL",
+      "label_ru": "Отдых и тишина — нейтральная среда",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Нейтральный воздух, естественные свойства выбранных материалов.",
+      "prohibited_source": "Сенсорный маркетинг, благовония, диффузоры, ароматические свечи и спреи.",
+      "ui_guidance": "Ощущение спокойствия создают акустика, освещение, температура, текстуры и приватность."
+    },
+    {
+      "profile_id": "SERVICE_NEUTRAL",
+      "label_ru": "Сервисные зоны — нейтральная среда",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Нейтральные эксплуатационные материалы и утверждённые процедуры уборки.",
+      "prohibited_source": "Маскировка запахов ароматизаторами и неучтённые химические источники.",
+      "ui_guidance": "Необычный запах рассматривается как сигнал проверки процесса или оборудования."
+    },
+    {
+      "profile_id": "GREEN_NATURAL",
+      "label_ru": "Зелёная зона — только естественная среда",
+      "mode": "O1_NATURAL_AMBIENCE_ONLY",
+      "allowed_source": "Естественная сезонная среда и живые растения после оценки видов, пыльцы, аллергенности и интенсивности запаха.",
+      "prohibited_source": "Диффузоры, эфирные масла, концентраты, ароматические спреи и намеренное усиление запаха.",
+      "ui_guidance": "Растения подбираются прежде всего по безопасности и уходу; природный аромат не является обязательным элементом."
+    },
+    {
+      "profile_id": "FOOD_NATURAL",
+      "label_ru": "Питание — только запах реального приготовления",
+      "mode": "O1_NATURAL_AMBIENCE_ONLY",
+      "allowed_source": "Запахи фактического приготовления пищи, кофе и напитков в пределах функции помещения.",
+      "prohibited_source": "Искусственные пищевые ароматы, диффузоры, ароматические маркетинговые устройства и маскирующие спреи.",
+      "ui_guidance": "Локальный захват и удаление выбросов; запах приготовления не должен неконтролируемо распространяться по общим маршрутам."
+    },
+    {
+      "profile_id": "RETAIL_NEUTRAL",
+      "label_ru": "Торговля — без ароматического маркетинга",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Естественные запахи реальных товаров в обычном режиме использования.",
+      "prohibited_source": "Scent marketing, ароматизация торговых галерей и общих проходов, диффузоры.",
+      "ui_guidance": "Впечатление от места формируют ассортимент, визуальная навигация, свет и материалы."
+    },
+    {
+      "profile_id": "WORKSHOP_NEUTRAL",
+      "label_ru": "Мастерские и лаборатории — контроль источника",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Только неизбежные запахи разрешённых рабочих процессов при предусмотренном локальном удалении.",
+      "prohibited_source": "Ароматизация, маскировка технических, химических, горелых или иных аномальных запахов.",
+      "ui_guidance": "Технологический источник анализируют и удаляют; запах не используется для сокрытия неисправности."
+    },
+    {
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "label_ru": "Жильё — без общей ароматизации",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Личный выбор жильца только внутри частного жилого блока при условии предотвращения переноса в общие зоны и соседние помещения.",
+      "prohibited_source": "Общедомовая подача ароматов, диффузия в коридоры и межквартирный перенос.",
+      "ui_guidance": "Частная свобода не должна создавать ароматическую нагрузку для соседей и общих маршрутов."
+    },
+    {
+      "profile_id": "CONTROL_NEUTRAL",
+      "label_ru": "Управление и инфраструктура — нейтральная среда",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Нейтральные материалы и штатная эксплуатация без ароматических устройств.",
+      "prohibited_source": "Любые ароматизаторы и средства маскировки запахов.",
+      "ui_guidance": "Неожиданный запах — повод проверить оборудование, электрику, перегрев, химические вещества, стоки или вентиляцию."
+    },
+    {
+      "profile_id": "OFFICE_NEUTRAL",
+      "label_ru": "Рабочие пространства — нейтральная среда",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Нейтральный воздух и естественные запахи повседневной деятельности.",
+      "prohibited_source": "Диффузоры, парфюмерное оформление общих рабочих зон и аэрозольная ароматизация.",
+      "ui_guidance": "Комфорт создают свет, акустика, качество воздуха и регулируемость рабочего места."
+    },
+    {
+      "profile_id": "LEARNING_NEUTRAL",
+      "label_ru": "Обучение — нейтральная сенсорная среда",
+      "mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "Нейтральная среда и обычные материалы учебного процесса.",
+      "prohibited_source": "Ароматические сценарии по умолчанию, диффузоры и спреи.",
+      "ui_guidance": "Сосредоточенность поддерживается светом, акустикой и организацией пространства, а не добавленным запахом."
+    }
+  ],
+  "spaces": [
+    {
+      "spatial_id": "A01-L00-D01",
+      "level": "L00",
+      "module_name": "Стойка приветствия",
+      "profile_id": "PUBLIC_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Общая зона: нейтральная среда без заданного аромата."
+    },
+    {
+      "spatial_id": "A01-L00-D02",
+      "level": "L00",
+      "module_name": "Станция вкусов",
+      "profile_id": "PUBLIC_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Общая зона: нейтральная среда без заданного аромата."
+    },
+    {
+      "spatial_id": "A01-L00-D03",
+      "level": "L00",
+      "module_name": "Общий стол",
+      "profile_id": "PUBLIC_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Общая зона: нейтральная среда без заданного аромата."
+    },
+    {
+      "spatial_id": "A01-L00-D04",
+      "level": "L00",
+      "module_name": "Свободные санитарные комнаты",
+      "profile_id": "HYGIENE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Санитарная функция: приоритет нейтральным средствам уборки и устранению источника запаха.",
+      "reference_zone_id": "L00-SANITARY"
+    },
+    {
+      "spatial_id": "A01-L00-D05",
+      "level": "L00",
+      "module_name": "Семейная и заботливая комната",
+      "profile_id": "CARE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Помещение поддержки: не добавлять запах, учитывать разные уровни сенсорной чувствительности.",
+      "reference_zone_id": "L00-CARE"
+    },
+    {
+      "spatial_id": "A01-L00-D06",
+      "level": "L00",
+      "module_name": "Душевые и раздевальные",
+      "profile_id": "HYGIENE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Санитарная функция: приоритет нейтральным средствам уборки и устранению источника запаха.",
+      "reference_zone_id": "L00-SANITARY"
+    },
+    {
+      "spatial_id": "A01-L00-D07",
+      "level": "L00",
+      "module_name": "Тихая гостиная",
+      "profile_id": "REST_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Зона отдыха: спокойствие создают свет, акустика и материалы, а не парфюмерия.",
+      "reference_zone_id": "L00-REST"
+    },
+    {
+      "spatial_id": "A01-L00-D08",
+      "level": "L00",
+      "module_name": "Зал бесплатного отдыха",
+      "profile_id": "REST_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Зона отдыха: спокойствие создают свет, акустика и материалы, а не парфюмерия.",
+      "reference_zone_id": "L00-REST"
+    },
+    {
+      "spatial_id": "A01-L00-D09",
+      "level": "L00",
+      "module_name": "Комнаты тишины",
+      "profile_id": "REST_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Зона отдыха: спокойствие создают свет, акустика и материалы, а не парфюмерия.",
+      "reference_zone_id": "L00-REST"
+    },
+    {
+      "spatial_id": "A01-L00-D10",
+      "level": "L00",
+      "module_name": "Гардероб заботы и шкафчики",
+      "profile_id": "PUBLIC_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Общая зона: нейтральная среда без заданного аромата."
+    },
+    {
+      "spatial_id": "A01-L00-D11",
+      "level": "L00",
+      "module_name": "Пункт первой помощи",
+      "profile_id": "CARE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Помещение поддержки: не добавлять запах, учитывать разные уровни сенсорной чувствительности.",
+      "reference_zone_id": "L00-CARE"
+    },
+    {
+      "spatial_id": "A01-L00-D12",
+      "level": "L00",
+      "module_name": "Сервисная и санитарная команда",
+      "profile_id": "SERVICE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Сервисная функция: не маскировать запахи процессов или оборудования."
+    },
+    {
+      "spatial_id": "A01-L01-D01",
+      "level": "L01",
+      "module_name": "Зимний сад",
+      "profile_id": "GREEN_NATURAL",
+      "olfactory_mode": "O1_NATURAL_AMBIENCE_ONLY",
+      "mapping_status": "proposed",
+      "rationale": "Применяется естественная среда растений/сезона; выбор видов требует отдельной проверки.",
+      "reference_zone_id": "L01-GARDEN"
+    },
+    {
+      "spatial_id": "A01-L01-D02",
+      "level": "L01",
+      "module_name": "Тихая гостиная",
+      "profile_id": "REST_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Зона отдыха: спокойствие создают свет, акустика и материалы, а не парфюмерия.",
+      "reference_zone_id": "L00-REST"
+    },
+    {
+      "spatial_id": "A01-L01-D03",
+      "level": "L01",
+      "module_name": "Бутик 01",
+      "profile_id": "RETAIL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Торговая функция не является основанием для ароматического маркетинга.",
+      "reference_zone_id": "L02-RETAIL"
+    },
+    {
+      "spatial_id": "A01-L01-D04",
+      "level": "L01",
+      "module_name": "Кафе 01",
+      "profile_id": "FOOD_NATURAL",
+      "olfactory_mode": "O1_NATURAL_AMBIENCE_ONLY",
+      "mapping_status": "proposed",
+      "rationale": "Допустимы только естественные запахи реального приготовления; без искусственных пищевых ароматов.",
+      "reference_zone_id": "L02-FOOD"
+    },
+    {
+      "spatial_id": "A01-L01-D05",
+      "level": "L01",
+      "module_name": "Магазин 02",
+      "profile_id": "RETAIL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Торговая функция не является основанием для ароматического маркетинга.",
+      "reference_zone_id": "L02-RETAIL"
+    },
+    {
+      "spatial_id": "A01-L01-D06",
+      "level": "L01",
+      "module_name": "Сервисная точка 01",
+      "profile_id": "SERVICE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Сервисная функция: не маскировать запахи процессов или оборудования."
+    },
+    {
+      "spatial_id": "A01-L01-D07",
+      "level": "L01",
+      "module_name": "Магазин 03",
+      "profile_id": "RETAIL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Торговая функция не является основанием для ароматического маркетинга.",
+      "reference_zone_id": "L02-RETAIL"
+    },
+    {
+      "spatial_id": "A01-L01-D08",
+      "level": "L01",
+      "module_name": "Кофейня 01",
+      "profile_id": "FOOD_NATURAL",
+      "olfactory_mode": "O1_NATURAL_AMBIENCE_ONLY",
+      "mapping_status": "proposed",
+      "rationale": "Допустимы только естественные запахи реального приготовления; без искусственных пищевых ароматов.",
+      "reference_zone_id": "L02-FOOD"
+    },
+    {
+      "spatial_id": "A01-L01-D09",
+      "level": "L01",
+      "module_name": "Пункт выдачи",
+      "profile_id": "SERVICE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Сервисная функция: не маскировать запахи процессов или оборудования."
+    },
+    {
+      "spatial_id": "A01-L01-D10",
+      "level": "L01",
+      "module_name": "Бутик 02",
+      "profile_id": "RETAIL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Торговая функция не является основанием для ароматического маркетинга.",
+      "reference_zone_id": "L02-RETAIL"
+    },
+    {
+      "spatial_id": "A01-L01-D11",
+      "level": "L01",
+      "module_name": "Галерея локальных брендов",
+      "profile_id": "RETAIL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Торговая функция не является основанием для ароматического маркетинга.",
+      "reference_zone_id": "L02-RETAIL"
+    },
+    {
+      "spatial_id": "A01-L01-D12",
+      "level": "L01",
+      "module_name": "Семейная гостиная",
+      "profile_id": "CARE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Помещение поддержки: не добавлять запах, учитывать разные уровни сенсорной чувствительности.",
+      "reference_zone_id": "L00-CARE"
+    },
+    {
+      "spatial_id": "A01-L02-D01",
+      "level": "L02",
+      "module_name": "Торговая галерея",
+      "profile_id": "RETAIL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Торговая функция не является основанием для ароматического маркетинга.",
+      "reference_zone_id": "L02-RETAIL"
+    },
+    {
+      "spatial_id": "A01-L02-D02",
+      "level": "L02",
+      "module_name": "Кафе и кухня",
+      "profile_id": "FOOD_NATURAL",
+      "olfactory_mode": "O1_NATURAL_AMBIENCE_ONLY",
+      "mapping_status": "proposed",
+      "rationale": "Допустимы только естественные запахи реального приготовления; без искусственных пищевых ароматов.",
+      "reference_zone_id": "L02-FOOD"
+    },
+    {
+      "spatial_id": "A01-L02-D03",
+      "level": "L02",
+      "module_name": "Мастерская 01",
+      "profile_id": "WORKSHOP_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Техническая/лабораторная функция: источник процесса локально контролируется, а не маскируется.",
+      "reference_zone_id": "L02-WORKSHOP"
+    },
+    {
+      "spatial_id": "A01-L02-D04",
+      "level": "L02",
+      "module_name": "Энергетический узел",
+      "profile_id": "CONTROL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Контролируемая зона: необычный запах трактуется как сигнал проверки.",
+      "reference_zone_id": "L04-CONTROL"
+    },
+    {
+      "spatial_id": "A01-L02-D05",
+      "level": "L02",
+      "module_name": "Бутик 03",
+      "profile_id": "RETAIL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Торговая функция не является основанием для ароматического маркетинга.",
+      "reference_zone_id": "L02-RETAIL"
+    },
+    {
+      "spatial_id": "A01-L02-D06",
+      "level": "L02",
+      "module_name": "Мини-маркет",
+      "profile_id": "RETAIL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Торговая функция не является основанием для ароматического маркетинга.",
+      "reference_zone_id": "L02-RETAIL"
+    },
+    {
+      "spatial_id": "A01-L02-D07",
+      "level": "L02",
+      "module_name": "Мастерская 02",
+      "profile_id": "WORKSHOP_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Техническая/лабораторная функция: источник процесса локально контролируется, а не маскируется.",
+      "reference_zone_id": "L02-WORKSHOP"
+    },
+    {
+      "spatial_id": "A01-L02-D08",
+      "level": "L02",
+      "module_name": "Сервисный салон",
+      "profile_id": "SERVICE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Сервисная функция: не маскировать запахи процессов или оборудования."
+    },
+    {
+      "spatial_id": "A01-L02-D09",
+      "level": "L02",
+      "module_name": "Кофейня 02",
+      "profile_id": "FOOD_NATURAL",
+      "olfactory_mode": "O1_NATURAL_AMBIENCE_ONLY",
+      "mapping_status": "proposed",
+      "rationale": "Допустимы только естественные запахи реального приготовления; без искусственных пищевых ароматов.",
+      "reference_zone_id": "L02-FOOD"
+    },
+    {
+      "spatial_id": "A01-L02-D10",
+      "level": "L02",
+      "module_name": "Магазин 04",
+      "profile_id": "RETAIL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Торговая функция не является основанием для ароматического маркетинга.",
+      "reference_zone_id": "L02-RETAIL"
+    },
+    {
+      "spatial_id": "A01-L02-D11",
+      "level": "L02",
+      "module_name": "Студия ремонта",
+      "profile_id": "WORKSHOP_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Техническая/лабораторная функция: источник процесса локально контролируется, а не маскируется.",
+      "reference_zone_id": "L02-WORKSHOP"
+    },
+    {
+      "spatial_id": "A01-L02-D12",
+      "level": "L02",
+      "module_name": "Пункт доставки",
+      "profile_id": "SERVICE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Сервисная функция: не маскировать запахи процессов или оборудования."
+    },
+    {
+      "spatial_id": "A01-L03-D01",
+      "level": "L03",
+      "module_name": "Апартаменты 01",
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Частное пространство: личный выбор только внутри жилого блока; перенос в общие зоны исключается.",
+      "reference_zone_id": "L03-RESIDENTIAL"
+    },
+    {
+      "spatial_id": "A01-L03-D02",
+      "level": "L03",
+      "module_name": "Гостевые апартаменты 01",
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Частное пространство: личный выбор только внутри жилого блока; перенос в общие зоны исключается.",
+      "reference_zone_id": "L03-RESIDENTIAL"
+    },
+    {
+      "spatial_id": "A01-L03-D03",
+      "level": "L03",
+      "module_name": "Апартаменты 02",
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Частное пространство: личный выбор только внутри жилого блока; перенос в общие зоны исключается.",
+      "reference_zone_id": "L03-RESIDENTIAL"
+    },
+    {
+      "spatial_id": "A01-L03-D04",
+      "level": "L03",
+      "module_name": "Апартаменты 03",
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Частное пространство: личный выбор только внутри жилого блока; перенос в общие зоны исключается.",
+      "reference_zone_id": "L03-RESIDENTIAL"
+    },
+    {
+      "spatial_id": "A01-L03-D05",
+      "level": "L03",
+      "module_name": "Зелёная терраса",
+      "profile_id": "GREEN_NATURAL",
+      "olfactory_mode": "O1_NATURAL_AMBIENCE_ONLY",
+      "mapping_status": "proposed",
+      "rationale": "Применяется естественная среда растений/сезона; выбор видов требует отдельной проверки.",
+      "reference_zone_id": "L03-TERRACE"
+    },
+    {
+      "spatial_id": "A01-L03-D06",
+      "level": "L03",
+      "module_name": "Апартаменты 04",
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Частное пространство: личный выбор только внутри жилого блока; перенос в общие зоны исключается.",
+      "reference_zone_id": "L03-RESIDENTIAL"
+    },
+    {
+      "spatial_id": "A01-L03-D07",
+      "level": "L03",
+      "module_name": "Гостевые апартаменты 02",
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Частное пространство: личный выбор только внутри жилого блока; перенос в общие зоны исключается.",
+      "reference_zone_id": "L03-RESIDENTIAL"
+    },
+    {
+      "spatial_id": "A01-L03-D08",
+      "level": "L03",
+      "module_name": "Апартаменты 05",
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Частное пространство: личный выбор только внутри жилого блока; перенос в общие зоны исключается.",
+      "reference_zone_id": "L03-RESIDENTIAL"
+    },
+    {
+      "spatial_id": "A01-L03-D09",
+      "level": "L03",
+      "module_name": "Апартаменты 06",
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Частное пространство: личный выбор только внутри жилого блока; перенос в общие зоны исключается.",
+      "reference_zone_id": "L03-RESIDENTIAL"
+    },
+    {
+      "spatial_id": "A01-L03-D10",
+      "level": "L03",
+      "module_name": "Гостевые апартаменты 03",
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Частное пространство: личный выбор только внутри жилого блока; перенос в общие зоны исключается.",
+      "reference_zone_id": "L03-RESIDENTIAL"
+    },
+    {
+      "spatial_id": "A01-L03-D11",
+      "level": "L03",
+      "module_name": "Общая гостиная",
+      "profile_id": "REST_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Зона отдыха: спокойствие создают свет, акустика и материалы, а не парфюмерия.",
+      "reference_zone_id": "L00-REST"
+    },
+    {
+      "spatial_id": "A01-L03-D12",
+      "level": "L03",
+      "module_name": "Апартаменты 07",
+      "profile_id": "RESIDENTIAL_PRIVATE",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Частное пространство: личный выбор только внутри жилого блока; перенос в общие зоны исключается.",
+      "reference_zone_id": "L03-RESIDENTIAL"
+    },
+    {
+      "spatial_id": "A01-L04-D01",
+      "level": "L04",
+      "module_name": "Башня управления",
+      "profile_id": "CONTROL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Контролируемая зона: необычный запах трактуется как сигнал проверки.",
+      "reference_zone_id": "L04-CONTROL"
+    },
+    {
+      "spatial_id": "A01-L04-D02",
+      "level": "L04",
+      "module_name": "Центр Евы",
+      "profile_id": "CONTROL_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Контролируемая зона: необычный запах трактуется как сигнал проверки.",
+      "reference_zone_id": "L04-CONTROL"
+    },
+    {
+      "spatial_id": "A01-L04-D03",
+      "level": "L04",
+      "module_name": "Обзорная площадка",
+      "profile_id": "PUBLIC_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Общая зона: нейтральная среда без заданного аромата."
+    },
+    {
+      "spatial_id": "A01-L04-D04",
+      "level": "L04",
+      "module_name": "Офисный блок 01",
+      "profile_id": "OFFICE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Рабочее пространство: нейтральная сенсорная среда без общей ароматизации."
+    },
+    {
+      "spatial_id": "A01-L04-D05",
+      "level": "L04",
+      "module_name": "Лаборатория 01",
+      "profile_id": "WORKSHOP_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Техническая/лабораторная функция: источник процесса локально контролируется, а не маскируется.",
+      "reference_zone_id": "L02-WORKSHOP"
+    },
+    {
+      "spatial_id": "A01-L04-D06",
+      "level": "L04",
+      "module_name": "Офисный блок 02",
+      "profile_id": "OFFICE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Рабочее пространство: нейтральная сенсорная среда без общей ароматизации."
+    },
+    {
+      "spatial_id": "A01-L04-D07",
+      "level": "L04",
+      "module_name": "Учебная студия",
+      "profile_id": "LEARNING_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Учебная функция: нейтральная среда и возможность сосредоточиться."
+    },
+    {
+      "spatial_id": "A01-L04-D08",
+      "level": "L04",
+      "module_name": "Офисный блок 03",
+      "profile_id": "OFFICE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Рабочее пространство: нейтральная сенсорная среда без общей ароматизации."
+    },
+    {
+      "spatial_id": "A01-L04-D09",
+      "level": "L04",
+      "module_name": "Технологическая мастерская",
+      "profile_id": "WORKSHOP_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Техническая/лабораторная функция: источник процесса локально контролируется, а не маскируется.",
+      "reference_zone_id": "L02-WORKSHOP"
+    },
+    {
+      "spatial_id": "A01-L04-D10",
+      "level": "L04",
+      "module_name": "Коворкинг",
+      "profile_id": "OFFICE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Рабочее пространство: нейтральная сенсорная среда без общей ароматизации."
+    },
+    {
+      "spatial_id": "A01-L04-D11",
+      "level": "L04",
+      "module_name": "Офисный блок 04",
+      "profile_id": "OFFICE_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Рабочее пространство: нейтральная сенсорная среда без общей ароматизации."
+    },
+    {
+      "spatial_id": "A01-L04-D12",
+      "level": "L04",
+      "module_name": "Лаборатория 02",
+      "profile_id": "WORKSHOP_NEUTRAL",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "mapping_status": "proposed",
+      "rationale": "Техническая/лабораторная функция: источник процесса локально контролируется, а не маскируется.",
+      "reference_zone_id": "L02-WORKSHOP"
+    }
+  ]
+}
