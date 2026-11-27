@@ -1,0 +1,48 @@
+{
+  "project": "A-01 Sphere of Eva",
+  "revision": "0.1",
+  "status": "concept",
+  "default_mode": "O0_NO_ADDED_SCENT",
+  "no_common_hvac_scenting": true,
+  "zones": [
+    {
+      "zone_id": "L00-COMMON",
+      "level": "L00",
+      "zone_name": "Пространство заботы и восстановления",
+      "olfactory_mode": "O0_NO_ADDED_SCENT",
+      "allowed_source": "none",
+      "prohibited_source": "all artificial fragrance and scented cleaning",
+      "public_access": "yes",
+      "route_bypass_required": "no",
+      "owner_role": "operations-and-care",
+      "notes": "Fragrance-free maintenance and laundry; neutral air is the goal",
+      "status": "concept"
+    },
+    {
+      "zone_id": "L01-GARDEN",
+      "level": "L01",
+      "zone_name": "Зимний сад",
+      "olfactory_mode": "O1_NATURAL_AMBIENCE_ONLY",
+      "allowed_source": "live plants selected by horticulturist",
+      "prohibited_source": "artificial diffusers and concentrated oils",
+      "public_access": "yes",
+      "route_bypass_required": "no",
+      "owner_role": "landscape-operations",
+      "notes": "Plant list requires allergen and scent review",
+      "status": "concept"
+    },
+    {
+      "zone_id": "L02-OLF-STUDIO",
+      "level": "L02",
+      "zone_name": "Olfactory Studio",
+      "olfactory_mode": "O2_PERSONAL_NEAR_FIELD_SAMPLE",
+      "allowed_source": "voluntary non-aerosol paper sample",
+      "prohibited_source": "room diffusion until separate approval",
+      "public_access": "optional",
+      "route_bypass_required": "yes",
+      "owner_role": "accessibility-and-operations",
+      "notes": "Optional room off public route; no central HVAC scenting",
+      "status": "concept"
+    }
+  ]
+}
