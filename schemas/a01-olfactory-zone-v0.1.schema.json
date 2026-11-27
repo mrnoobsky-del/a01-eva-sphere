@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrnoobsky-del/a01-eva-sphere/blob/main/schemas/a01-olfactory-zone-v0.1.schema.json",
+  "title": "A-01 Olfactory Zone",
+  "description": "Conceptual, machine-readable record for olfactory policy in an A-01 space. It does not command scenting hardware.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "zone_id",
+    "level",
+    "zone_name",
+    "olfactory_mode",
+    "allowed_source",
+    "prohibited_source",
+    "public_access",
+    "route_bypass_required",
+    "owner_role",
+    "notes",
+    "status"
+  ],
+  "properties": {
+    "zone_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9-]{3,40}$"
+    },
+    "level": {
+      "type": "string",
+      "pattern": "^(L00|L01|L02|L03|L04|B1)$"
+    },
+    "zone_name": {
+      "type": "string",
+      "minLength": 2
+    },
+    "olfactory_mode": {
+      "enum": [
+        "O0_NO_ADDED_SCENT",
+        "O1_NATURAL_AMBIENCE_ONLY",
+        "O2_PERSONAL_NEAR_FIELD_SAMPLE",
+        "O3_ISOLATED_RESEARCH_SESSION",
+        "X_PROHIBITED"
+      ]
+    },
+    "allowed_source": {
+      "type": "string"
+    },
+    "prohibited_source": {
+      "type": "string"
+    },
+    "public_access": {
+      "enum": [
+        "yes",
+        "no",
+        "optional",
+        "restricted"
+      ]
+    },
+    "route_bypass_required": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "owner_role": {
+      "type": "string",
+      "minLength": 2
+    },
+    "notes": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "concept",
+        "design",
+        "review",
+        "approved",
+        "commissioned",
+        "retired"
+      ]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "uniqueItems": true
+    },
+    "product_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    }
+  }
+}
