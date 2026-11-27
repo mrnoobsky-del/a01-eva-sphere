@@ -83,7 +83,7 @@ button,a{-webkit-tap-highlight-color:transparent}
  <iframe class="frame" id="a01Frame" title="Интерактивный цифровой двойник Сферы Евы A-01 v4.9.0" src="https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v490-quality-experience-preview.html" loading="eager" allow="fullscreen; clipboard-read; clipboard-write" referrerpolicy="same-origin"></iframe>
 </main>
 <footer class="dock">
- <button type="button" id="menuBtn">Меню модели</button>
+ <button type="button" id="menuBtn">Поиск</button>
  <button type="button" id="walkBtn">Войти внутрь</button>
  <button type="button" class="primary" id="fullBtn">На весь экран</button>
 </footer>
@@ -158,7 +158,7 @@ button,a{-webkit-tap-highlight-color:transparent}
  frame.addEventListener("load",function(){injectMobileLayout();});
  frame.addEventListener("error",function(){fallback.hidden=false;});
  sectionButtons.forEach(button=>button.addEventListener("click",function(){openSection(button.dataset.section)}));
- document.getElementById("menuBtn").addEventListener("click",function(){callChild("mobileMenuBtn");});
+ document.getElementById("menuBtn").addEventListener("click",function(){callChild("globalSearchBtn");});
  document.getElementById("walkBtn").addEventListener("click",function(){callChild("walkBtn");});
  document.getElementById("fullBtn").addEventListener("click",function(){
   if(!document.fullscreenElement){const p=document.documentElement.requestFullscreen;if(p)p.call(document.documentElement).catch(function(){})}
