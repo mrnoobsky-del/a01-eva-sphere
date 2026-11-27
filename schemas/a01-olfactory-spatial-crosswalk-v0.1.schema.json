@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrnoobsky-del/a01-eva-sphere/blob/main/schemas/a01-olfactory-spatial-crosswalk-v0.1.schema.json",
+  "title": "A-01 Olfactory Spatial Crosswalk",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "title",
+    "status",
+    "source_matrix",
+    "source_zone_register",
+    "hardware_connected",
+    "policy",
+    "mode_counts",
+    "profiles",
+    "spaces"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "0.1"
+    },
+    "title": {
+      "const": "A-01 Olfactory Spatial Crosswalk"
+    },
+    "status": {
+      "const": "concept"
+    },
+    "source_matrix": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_zone_register": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hardware_connected": {
+      "const": false
+    },
+    "policy": {
+      "type": "string",
+      "minLength": 20
+    },
+    "mode_counts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 13,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "profile_id",
+          "label_ru",
+          "mode",
+          "allowed_source",
+          "prohibited_source",
+          "ui_guidance"
+        ],
+        "properties": {
+          "profile_id": {
+            "type": "string",
+            "pattern": "^[A-Z0-9_]{3,40}$"
+          },
+          "label_ru": {
+            "type": "string",
+            "minLength": 2
+          },
+          "mode": {
+            "enum": [
+              "O0_NO_ADDED_SCENT",
+              "O1_NATURAL_AMBIENCE_ONLY"
+            ]
+          },
+          "allowed_source": {
+            "type": "string"
+          },
+          "prohibited_source": {
+            "type": "string"
+          },
+          "ui_guidance": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "spaces": {
+      "type": "array",
+      "minItems": 60,
+      "maxItems": 60,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "spatial_id",
+          "level",
+          "module_name",
+          "profile_id",
+          "olfactory_mode",
+          "mapping_status",
+          "rationale"
+        ],
+        "properties": {
+          "spatial_id": {
+            "type": "string",
+            "pattern": "^A01-L0[0-4]-D(0[1-9]|1[0-2])$"
+          },
+          "level": {
+            "enum": [
+              "L00",
+              "L01",
+              "L02",
+              "L03",
+              "L04"
+            ]
+          },
+          "module_name": {
+            "type": "string",
+            "minLength": 2
+          },
+          "profile_id": {
+            "type": "string",
+            "minLength": 2
+          },
+          "olfactory_mode": {
+            "enum": [
+              "O0_NO_ADDED_SCENT",
+              "O1_NATURAL_AMBIENCE_ONLY"
+            ]
+          },
+          "mapping_status": {
+            "const": "proposed"
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 5
+          },
+          "reference_zone_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
