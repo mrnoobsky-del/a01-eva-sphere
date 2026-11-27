@@ -1,0 +1,31 @@
+name: A-01 Olfactory Atlas checks
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/A01-OLF-*'
+      - 'schemas/a01-olfactory-*'
+      - 'digital-twin/a01-olfactory-atlas.html'
+      - 'tools/validate-olfactory-atlas.py'
+      - '.github/workflows/a01-olfactory-atlas-check.yml'
+  pull_request:
+    paths:
+      - 'docs/A01-OLF-*'
+      - 'schemas/a01-olfactory-*'
+      - 'digital-twin/a01-olfactory-atlas.html'
+      - 'tools/validate-olfactory-atlas.py'
+      - '.github/workflows/a01-olfactory-atlas-check.yml'
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate zone register and JSON records
+        run: python3 tools/validate-olfactory-atlas.py
+      - name: Validate Aroma Atlas JavaScript
+        run: |
+          for f in /tmp/a01-olfactory-atlas-*.js; do node --check "$f"; done
