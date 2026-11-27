@@ -41,7 +41,7 @@ jobs:
           for marker in ['runEvaSceneCommand','parseEvaSceneCommand','window.EVA_A01_SCENE_BRIDGE',
                          'DOLEK_LOD_REFRESH_MS = isMobilePerformance ? 125 : 75',
                          'WALK_GAZE_REFRESH_MS = isMobilePerformance ? 220 : 125',
-                         'data-eva-level="4"','font-size:16px','visualViewport']:
+                         'data-eva-level="4"','font-size:16px','visualViewport','a01-olfactory-spatial-profile-runtime','eva-a01:item-selected','DATA_URL=']:
               if marker not in html: raise SystemExit('Missing feature: '+marker)
           print(f'Runtime validated: {len(ids)} HTML IDs, {len(scripts)} script blocks')
           PY
