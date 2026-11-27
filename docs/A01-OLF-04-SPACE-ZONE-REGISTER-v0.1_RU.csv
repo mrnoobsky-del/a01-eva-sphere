@@ -1,0 +1,19 @@
+zone_id,level,zone_name,olfactory_mode,allowed_source,prohibited_source,public_access,route_bypass_required,owner_role,notes,status
+L00-COMMON,L00,Пространство заботы и восстановления,O0_NO_ADDED_SCENT,none,all artificial fragrance and scented cleaning,yes,no,operations-and-care,Fragrance-free maintenance and laundry; neutral air is the goal,concept
+L00-REST,L00,Комнаты отдыха и восстановления,O0_NO_ADDED_SCENT,none,all artificial fragrance and aerosol,yes,no,care-operations,Quiet sensory environment; no scent masking,concept
+L00-SANITARY,L00,Душевые и санитарные комнаты,O0_NO_ADDED_SCENT,none,air fresheners and scented detergents,yes,no,facility-operations,Remove source and maintain exhaust rather than perfume,concept
+L00-CARE,L00,Семейные комнаты и помещения поддержки,O0_NO_ADDED_SCENT,none,all artificial fragrance,yes,no,care-operations,No fragrance by default for sensitive visitors,concept
+L01-ENTRY,L01,Главный вход и тамбур,O0_NO_ADDED_SCENT,none,signature scent and diffusers,yes,no,facility-operations,Welcome through light materials and wayfinding,concept
+L01-ATRIUM,L01,Центральный атриум,O0_NO_ADDED_SCENT,none,ambient fragrance system,yes,no,facility-operations,No background perfume on required public route,concept
+L01-LIFT,L01,Лифты и лифтовые холлы,O0_NO_ADDED_SCENT,none,all fragrance devices,yes,no,facility-operations,Small enclosed shared spaces receive strict neutral policy,concept
+L01-GARDEN,L01,Зимний сад,O1_NATURAL_AMBIENCE_ONLY,live plants selected by horticulturist,artificial diffusers and concentrated oils,yes,no,landscape-operations,Plant list requires allergen and scent review,concept
+L02-FOOD,L02,Кафе и места приготовления пищи,O1_NATURAL_AMBIENCE_ONLY,actual food preparation only,artificial food scent and masking sprays,yes,no,hospitality-operations,Local source capture and no uncontrolled migration,concept
+L02-RETAIL,L02,Торговые помещения,O0_NO_ADDED_SCENT,none,ambient scent marketing devices,yes,no,retail-operations,Product sampling only in separately approved local process,concept
+L02-WORKSHOP,L02,Мастерские и сервисные помещения,O0_NO_ADDED_SCENT,none,air fresheners and masking products,restricted,no,technical-operations,Source capture and material control,concept
+L02-OLF-STUDIO,L02,Olfactory Studio,O2_PERSONAL_NEAR_FIELD_SAMPLE,voluntary non-aerosol paper sample,room diffusion until separate approval,optional,yes,accessibility-and-operations,Optional room off public route; no central HVAC scenting,concept
+L03-RESIDENTIAL,L03,Частные жилые помещения,O0_NO_BUILDING_SCENT,personal choice within private unit only,building-wide scent distribution,restricted,no,residential-operations,Prevent transfer into shared corridors and neighbouring units,concept
+L03-CORRIDOR,L03,Жилые коридоры и холлы,O0_NO_ADDED_SCENT,none,all artificial fragrance,yes,no,residential-operations,Fragrance-free cleaning and shared-air protection,concept
+L03-TERRACE,L03,Зелёная терраса,O1_NATURAL_AMBIENCE_ONLY,seasonal outdoor environment,artificial outdoor fragrance spray,yes,no,landscape-operations,Plant and pollen selection requires review,concept
+L04-CONTROL,L04,Диспетчерская и управление,O0_NO_ADDED_SCENT,none,all artificial fragrance,restricted,no,operations-and-cybersecurity,Unexpected smell is an incident indicator,concept
+L04-DATA,L04,Серверная и вычислительный узел,O0_NO_ADDED_SCENT,none,all fragrance devices and masking,restricted,no,ICT-and-facility-operations,No scent devices; investigate any abnormal odour,concept
+B1-TECH,B1,Технические помещения и логистика,O0_NO_ADDED_SCENT,none,all artificial fragrance,restricted,no,engineering-operations,Investigate source: fuel heat waste chemical or drainage,concept
