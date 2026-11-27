@@ -253,3 +253,18 @@ v0.3.0 is a documentation-only research specification. It defines how the Sphere
 - [Previous v0.1 architecture](architecture/A01-X-SENSORY-BRIDGE-v0.1.md)
 
 v0.2 defines typed sensor packets, body/room frame mapping, time synchronization, separate media permissions and a traceable observation-to-verification event trail. This is a documentation release; no physical Android-01 runtime or sensory endpoint is connected.
+
+## A-01 Olfactory Environment / Aroma Atlas
+
+- [A-01 Olfactory Environment — English design brief](docs/A01-OLF-01-OLFACTORY-ENVIRONMENT-v0.1.md)
+- [A-01 Olfactory Environment — Russian strategy](docs/A01-OLF-01-OLFACTORY-ENVIRONMENT-v0.1_RU.md)
+- [A-01 Aroma Atlas — mood and space profiles (RU)](docs/A01-OLF-02-AROMA-ATLAS-MOOD-PROFILES-v0.1_RU.md)
+- [Room-by-room scent policy register (CSV)](docs/A01-OLF-04-SPACE-ZONE-REGISTER-v0.1_RU.csv)
+- [Interactive Aroma Atlas prototype](digital-twin/a01-olfactory-atlas.html)
+
+A-01 uses a fragrance-free default in shared spaces. Mood-led exploration may change lighting, acoustics, material and planting recommendations; intentional scent is limited to an opt-in, isolated personal-sample concept. No scenting hardware is connected.
+
+## Public repository and project citation
+
+The canonical public source repository is [mrnoobsky-del/a01-eva-sphere](https://github.com/mrnoobsky-del/a01-eva-sphere). See [repository discoverability and indexing notes](docs/A01-PUBLIC-REPOSITORY-DISCOVERABILITY_RU.md) and [CITATION.cff](CITATION.cff).
+
