@@ -4530,7 +4530,7 @@ updateSphereMoodControl();drawProjectionSky(projectionSkyPhase,0);
 
 const originalFloorY=new Map([...floorGroups.entries()].map(([n,g])=>[n,g.position.y]));
 const labelByLevel={0:'00 / Пространство заботы',1:'01 / Атриум',2:'02 / Сервисы',3:'03 / Жильё',4:'04 / Управление'};
-function selectItem(id){const item=allFeatures.find(x=>x.id===id);if(!item)return;if(objectReadingId&&objectReadingId!==id)objectReadingId=null;selectedId=id;updatePanel();highlight();updateDolekLod(true);requestSceneRender();}
+function selectItem(id){const item=allFeatures.find(x=>x.id===id);if(!item)return;if(objectReadingId&&objectReadingId!==id)objectReadingId=null;selectedId=id;updatePanel();highlight();updateDolekLod(true);requestSceneRender();window.dispatchEvent(new CustomEvent('eva-a01:item-selected',{detail:{id:item.id,name:item.name,level:item.level,kind:item.kind}}));}
 function updateLevelOverview(level){
  const code=$('levelOverviewCode'),count=$('levelOverviewCount'),title=$('levelOverviewTitle'),desc=$('levelOverviewDesc'),list=$('levelOverviewList'),spaces=$('levelOverviewSpaces'),link=$('levelDocLink');
  if(level===null||level===undefined){code.textContent='ВСЯ СФЕРА · A-01';delete code.dataset.level;count.textContent='5 уровней';title.textContent='Пять уровней — одна среда';desc.textContent='Общественные пространства, сервисы, жильё, управление и инженерные системы объединены центральным атриумом.';list.innerHTML='<li>00 · Пространство заботы</li><li>01 · Атриум и общественные зоны</li><li>02 · Сервисы и торговля</li><li>03 · Жильё и зелёная терраса</li><li>04 · Управление и интеллект</li>';spaces.textContent='Центральный атриум · внутренние галереи · вертикальные связи';link.textContent='Открыть документацию комплекса ↗';return;}
@@ -7345,5 +7345,104 @@ html[data-theme="dark"] #stage #sphereIntroOverlay .sphere-intro-enter{color:#f5
 }
 @media(prefers-reduced-motion:reduce){#stage.walking .walk-hud-head,#stage.walking .walk-hud-extra{transition:none!important;animation:none!important}}
 </style>
+<script id="a01-olfactory-spatial-profile-runtime">
+(()=> {
+ const DATA_URL='https://cdn.jsdelivr.net/gh/mrnoobsky-del/a01-eva-sphere@main/data/a01-olfactory-spatial-crosswalk-v0.1.json';
+ const ATLAS_URL='https://cdn.jsdelivr.net/gh/mrnoobsky-del/a01-eva-sphere@main/digital-twin/a01-olfactory-atlas.html';
+ const DOC_URL='https://github.com/mrnoobsky-del/a01-eva-sphere/blob/main/docs/A01-OLF-05-SPATIAL-CROSSWALK-v0.1_RU.md';
+ const dialog=document.querySelector('.object-detail-dialog');
+ if(!dialog)return;
+ const style=document.createElement('style');
+ style.textContent=\`
+  .a01-olfactory-profile{margin-top:14px;padding:14px;border:1px solid var(--line);border-radius:15px;background:var(--panel2);color:var(--text)}
+  .a01-olfactory-profile[hidden]{display:none!important}
+  .a01-olfactory-profile-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+  .a01-olfactory-profile-kicker{font-size:8px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+  .a01-olfactory-profile-title{display:block;margin-top:5px;font-size:14px;line-height:1.3;font-weight:750;letter-spacing:-.02em}
+  .a01-olfactory-profile-mode{flex:0 0 auto;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:9px;font-weight:800;letter-spacing:.06em}
+  .a01-olfactory-profile-mode[data-mode="O1_NATURAL_AMBIENCE_ONLY"]{background:#e6f1e7;color:#315c3c;border-color:#c9dfcc}
+  html[data-theme="dark"] .a01-olfactory-profile-mode[data-mode="O1_NATURAL_AMBIENCE_ONLY"]{background:#243c2b;color:#c6edce;border-color:#3a6044}
+  .a01-olfactory-profile-copy{margin:10px 0 0;color:var(--text);font-size:11px;line-height:1.55}
+  .a01-olfactory-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
+  .a01-olfactory-profile-cell{min-width:0;padding:9px 10px;border:1px solid var(--line);border-radius:11px;background:var(--panel)}
+  .a01-olfactory-profile-cell b{display:block;font-size:8px;letter-spacing:.1em;color:var(--muted)}
+  .a01-olfactory-profile-cell p{margin:6px 0 0;font-size:10px;line-height:1.5;overflow-wrap:anywhere}
+  .a01-olfactory-profile-guidance{margin:10px 0 0;padding-left:10px;border-left:2px solid var(--accent);font-size:10px;line-height:1.5;color:var(--muted)}
+  .a01-olfactory-profile-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:7px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:8px;letter-spacing:.08em;color:var(--muted)}
+  .a01-olfactory-profile-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+  .a01-olfactory-profile-links a{color:var(--text);font-size:10px;text-decoration:underline;text-underline-offset:3px}
+  @media(max-width:620px){.a01-olfactory-profile{padding:12px}.a01-olfactory-profile-grid{grid-template-columns:1fr}.a01-olfactory-profile-title{font-size:13px}}
+ \`;
+ document.head.appendChild(style);
+ const panel=document.createElement('section');
+ panel.className='a01-olfactory-profile';
+ panel.hidden=true;
+ panel.setAttribute('aria-live','polite');
+ panel.innerHTML=\`
+  <div class="a01-olfactory-profile-head">
+   <div><div class="a01-olfactory-profile-kicker">A-01 · ATMOSPHERE PROFILE</div><strong class="a01-olfactory-profile-title" data-title>Профиль ароматической среды</strong></div>
+   <span class="a01-olfactory-profile-mode" data-mode-label>O0</span>
+  </div>
+  <p class="a01-olfactory-profile-copy" data-summary></p>
+  <div class="a01-olfactory-profile-grid">
+   <div class="a01-olfactory-profile-cell"><b>ДОПУСКАЕТСЯ</b><p data-allowed></p></div>
+   <div class="a01-olfactory-profile-cell"><b>НЕ ПРИМЕНЯЕТСЯ</b><p data-prohibited></p></div>
+  </div>
+  <p class="a01-olfactory-profile-guidance" data-guidance></p>
+  <div class="a01-olfactory-profile-foot"><span data-space-id></span><span>PROPOSED · КОНЦЕПЦИЯ</span></div>
+  <div class="a01-olfactory-profile-links"><a data-doc-link target="_blank" rel="noopener">Правила и сопоставление ↗</a><a data-atlas-link target="_blank" rel="noopener">Открыть Aroma Atlas ↗</a></div>
+ \`;
+ const connectionSection=document.getElementById('objectDetailConnections')?.closest('.object-detail-section');
+ if(connectionSection)connectionSection.after(panel);else dialog.appendChild(panel);
+ panel.querySelector('[data-doc-link]').href=DOC_URL;
+ panel.querySelector('[data-atlas-link]').href=ATLAS_URL;
+ let registryPromise=null,registry=null,lastId=null;
+ const text=(selector,value)=>{const el=panel.querySelector(selector);if(el)el.textContent=value??'';};
+ function loadRegistry(){
+  if(!registryPromise)registryPromise=fetch(DATA_URL,{mode:'cors',cache:'force-cache'}).then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json();}).then(data=>{registry=data;return data;});
+  return registryPromise;
+ }
+ function modeText(mode){return mode==='O1_NATURAL_AMBIENCE_ONLY'?'O1 · Только естественная среда':'O0 · Без добавленной отдушки';}
+ async function renderFor(id){
+  lastId=id;
+  if(!/^A01-L0[0-4]-D(0[1-9]|1[0-2])$/.test(String(id||''))){panel.hidden=true;return;}
+  panel.hidden=false;
+  text('[data-title]','Загружаем профиль помещения…');
+  text('[data-summary]','Информационная карточка. Физические системы не подключены.');
+  text('[data-space-id]',String(id));
+  try{
+   const data=await loadRegistry();
+   if(lastId!==id)return;
+   const item=data.spaces.find(row=>row.spatial_id===id);
+   if(!item){panel.hidden=true;return;}
+   const profile=data.profiles.find(row=>row.profile_id===item.profile_id);
+   if(!profile)throw new Error('Профиль не найден в реестре');
+   text('[data-title]',profile.label_ru);
+   text('[data-mode-label]',modeText(item.olfactory_mode));
+   const modeEl=panel.querySelector('[data-mode-label]');
+   if(modeEl)modeEl.dataset.mode=item.olfactory_mode;
+   text('[data-summary]',item.olfactory_mode==='O1_NATURAL_AMBIENCE_ONLY'
+    ?'В помещении не предусматривается искусственная ароматизация. Допустим только естественный источник, связанный с функцией этого места.'
+    :'Для этого помещения не задаётся обязательный запах. Нейтральная среда — базовое проектное решение.');
+   text('[data-allowed]',profile.allowed_source);
+   text('[data-prohibited]',profile.prohibited_source);
+   text('[data-guidance]',profile.ui_guidance);
+   text('[data-space-id]',item.spatial_id+' · '+item.module_name);
+  }catch(error){
+   if(lastId!==id)return;
+   text('[data-title]','Профиль временно недоступен');
+   text('[data-mode-label]','Информация не загружена');
+   text('[data-summary]','Не удалось получить реестр ароматической среды. Это не отправляет команды оборудованию и не меняет режимы здания.');
+   text('[data-allowed]','Нет данных');
+   text('[data-prohibited]','Автоматическая ароматизация не выполняется');
+   text('[data-guidance]','Открой документацию или повтори выбор помещения после восстановления соединения.');
+   text('[data-space-id]',String(id));
+   console.warn('A-01 Aroma profile could not be loaded:',error);
+  }
+ }
+ window.addEventListener('eva-a01:item-selected',event=>renderFor(event.detail?.id));
+ if(window.EVA_SPHERE?.getState?.().selectedId)renderFor(window.EVA_SPHERE.getState().selectedId);
+})();
+</script>
 </body>
 </html>
