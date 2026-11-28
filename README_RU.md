@@ -90,6 +90,7 @@ v4.9.4 сохраняет возможности v4.9.3 и добавляет л
 - [Исходный HTML в GitHub](digital-twin/a01-asset-lab.html)
 - [Инструкция и ограничения](digital-twin/README_ASSET_LAB_v01.md)
 - [Реестр Sketchfab-моделей и план интеграции](docs/A01-SKETCHFAB-ASSET-AND-IMPLEMENTATION-REGISTER-v0.1_RU.md)
+- [JSON Schema отчёта об ассете](schemas/a01-asset-report-v0.1.schema.json)
 
 Отдельная страница инспекции GLB/glTF. Файлы проверяются локально в браузере; основная сцена и её версии не изменяются.
 
