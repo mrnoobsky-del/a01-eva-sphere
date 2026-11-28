@@ -40,6 +40,14 @@ W-01 remains M0 / proposed / not calculated. Fixture quantities, flows, pressure
 
 # Documentation index
 
+## Energy, grid and wireless infrastructure
+
+- [A01-ENERGY-05 — Передача электроэнергии и гибкость энергосистемы (RU)](A01-ENERGY-05-grid-transmission-and-flexibility-v0.1_RU.md)
+- [A01-COMMS-01 — Архитектура беспроводной связи Сферы Евы (RU)](A01-COMMS-01-wireless-connectivity-v0.1_RU.md)
+- [A01-WPT-01 — Беспроводная передача энергии Сферы Евы (RU)](A01-WPT-01-wireless-power-transfer-v0.1_RU.md)
+- [A01-ENERGY-04 — Мобильные энергетические дольки и этажные доки (RU)](A01-ENERGY-04-mobile-energy-dolka-v0.1.md)
+
+
 ## Бренд и участие в проекте
 
 - [Брендбук Сферы Евы v1.0](../brand/A01-BRAND-BOOK_RU.md)
