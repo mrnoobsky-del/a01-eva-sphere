@@ -25,6 +25,18 @@ The resource model runs locally in the browser. No sensors, live telemetry, buil
 This parallel preview adds a procedural interior environment prefiltered once with PMREM, tunes environment response on existing PBR materials, and adds an opt-in Bloom pass. It preserves the existing scene and single requestAnimationFrame loop. SSR, SSAO, dynamic cube-camera reflections and extra dynamic shadows are deliberately excluded. Browser/device validation and frame-time measurements are still pending. The v4.9.4 primary build remains unchanged.
 
 
+
+## External GLB assets — isolated test v0.1 (not primary)
+
+- [A-01 Asset Test Scene v0.1](a01-asset-test-scene-v0.1.html)
+- [Audit pack index](a01-asset-reports/README_RU.md)
+- [Optimization manifest and SHA-256](a01-asset-reports/OPTIMIZATION-MANIFEST-v0.1_RU.md)
+- [Delivery Robot audit JSON](a01-asset-reports/delivery-robot-audit-v0.1.json)
+- [Axiom Starliner audit JSON](a01-asset-reports/axiom-starliner-audit-v0.1.json)
+
+The two user-supplied GLB files have been structurally inspected offline. Derived runtime copies preserve geometry and scene bounds; the robot retains its skin and animation channels. This is a separate asset test workspace. The primary v4.9.4 scene and v4.9.5 preview were not changed. Browser/WebGL rendering, mobile acceptance and frame-time profiling remain pending; no 120 FPS result is claimed.
+
+
 ## Preserved previous release — A-01 v4.1.4
 
 - [Wix HTML build](eva-sphere-a01-v414-wix-preview.html)
