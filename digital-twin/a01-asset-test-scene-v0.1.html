@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090a0c">
+<meta name="description" content="A-01 Asset Test Scene — отдельная тестовая сцена для оптимизированных GLB-моделей Сферы Евы.">
+<title>A-01 Asset Test Scene — Сфера Евы</title>
+<style>
+:root{color-scheme:dark;--bg:#090a0c;--panel:#111317;--panel2:#171b22;--line:#292f39;--muted:#929baa;--text:#f3f5f8;--soft:#cbd2dc;--accent:#e7edf7;--good:#9ed8b4;--warn:#e9c98a}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+body{background:radial-gradient(ellipse at 46% -18%,#202a38 0,transparent 48%),var(--bg)}
+a{color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.wrap{max-width:1480px;margin:auto;padding:24px 26px 46px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:34px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.mark{width:35px;height:35px;border:1px solid #6b7585;border-radius:50%;display:grid;place-items:center;font-size:10px;letter-spacing:-.08em}
+.brand strong{font-size:12px;letter-spacing:.14em}
+.links{display:flex;gap:20px;color:var(--muted);font-size:11px}
+.links a{text-decoration:none}
+.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#aeb8c7}
+.hero{max-width:750px;margin-bottom:26px}
+.hero h1{font-size:clamp(34px,5vw,58px);letter-spacing:-.06em;font-weight:550;line-height:1;margin:12px 0}
+.hero p{max-width:680px;color:var(--muted);font-size:14px;line-height:1.65;margin:0}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px;align-items:stretch}
+.stage,.panel{border:1px solid var(--line);background:rgba(17,19,23,.9);border-radius:18px;overflow:hidden}
+.stageHead{min-height:58px;padding:12px 15px;display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line)}
+.state{display:flex;align-items:center;gap:9px;font-size:11px;color:var(--soft)}
+.dot{width:7px;height:7px;border-radius:50%;background:#778292}
+.dot.good{background:#79c99a}
+.dot.warn{background:#d6b16e}
+.controls{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.btn{background:#1b2028;border:1px solid #3b4553;border-radius:9px;color:var(--text);padding:9px 11px;font-size:10px}
+.btn:hover{background:#262e3a;border-color:#667387}
+.btn.primary{background:#e8edf5;color:#11151b;border-color:#e8edf5;font-weight:650}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+.stageTabs{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--line);background:#12151a}
+.tab{border:1px solid #343c48;background:#191e26;color:#aeb8c7;border-radius:8px;padding:8px 12px;font-size:10px}
+.tab[aria-pressed="true"]{background:#e8edf5;color:#15191f;border-color:#e8edf5}
+.view{height:min(66vh,680px);min-height:420px;position:relative;background:radial-gradient(ellipse at 50% 43%,#26303d 0,#11161e 50%,#0b0e12 100%)}
+#viewport{position:absolute;inset:0}
+#viewport canvas{display:block;width:100%;height:100%}
+.empty{position:absolute;inset:0;display:grid;place-items:center;padding:22px;text-align:center;pointer-events:none}
+.emptyInner{max-width:390px}
+.emptyIcon{width:60px;height:60px;border:1px solid #596474;border-radius:18px;margin:0 auto 17px;display:grid;place-items:center;font-size:24px;color:#dbe3ef;background:#171e28}
+.empty h2{font-size:20px;font-weight:550;letter-spacing:-.035em;margin:0 0 8px}
+.empty p{font-size:11px;line-height:1.65;color:var(--muted);margin:0}
+.stageFoot{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:12px 15px;color:var(--muted);font-size:10px}
+.side{display:flex;flex-direction:column;gap:12px}
+.panel{padding:16px}
+.panel h2{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#b9c3d1;margin:0 0 14px}
+.modelTitle{font-size:14px;line-height:1.4;margin-bottom:5px}
+.muted{font-size:10px;line-height:1.6;color:var(--muted)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
+.stat{padding:10px;background:var(--panel2);border:1px solid #28303a;border-radius:10px}
+.stat b{display:block;font-size:19px;letter-spacing:-.04em;font-variant-numeric:tabular-nums;font-weight:570}
+.stat span{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;color:#b8c1ce;font-size:10px}
+.row input{accent-color:#e6edf7}
+.row select{background:#0b0e13;border:1px solid #353e4b;color:#e7edf7;padding:7px 8px;border-radius:8px;font-size:10px}
+.fileArea{margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+.fileArea .btn{width:100%;margin-top:7px}
+input[type=file]{display:none}
+.reportLinks{display:grid;gap:9px}
+.reportLinks a{font-size:10px;color:#dce4f0;text-decoration:none;border-bottom:1px solid #596474;padding-bottom:4px}
+.credit{font-size:10px;line-height:1.65;color:#9da7b5}
+.credit a{color:#dbe3ef}
+.notice{border:1px solid #443d2e;background:#19170f;border-radius:11px;padding:12px;font-size:10px;line-height:1.6;color:#d4c6a5}
+.footer{display:flex;justify-content:space-between;gap:14px;border-top:1px solid var(--line);margin-top:34px;padding-top:16px;color:#707a88;font-size:10px}
+@media(max-width:980px){.layout{grid-template-columns:minmax(0,1fr) 285px}.view{height:560px}}
+@media(max-width:740px){.wrap{padding:17px 13px 32px}.top{margin-bottom:27px}.links{gap:12px}.links a:first-child{display:none}.layout{grid-template-columns:1fr}.view{height:58vh;min-height:350px}.stageHead{align-items:flex-start;flex-direction:column}.controls{width:100%}.controls .btn{flex:1}.stageFoot{flex-direction:column}.side{display:grid;grid-template-columns:1fr 1fr}.side .panel:last-child,.side .notice{grid-column:1/-1}}
+@media(max-width:430px){.side{grid-template-columns:1fr}.side .panel:last-child,.side .notice{grid-column:auto}.hero p{font-size:13px}}
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <a class="brand" href="https://github.com/mrnoobsky-del/a01-eva-sphere"><span class="mark">A01</span><strong>СФЕРА ЕВЫ</strong></a>
+  <nav class="links">
+    <a href="https://vibeshorts.ru/evasphere/">Проект</a>
+    <a href="https://github.com/mrnoobsky-del/a01-eva-sphere">GitHub</a>
+    <a href="./a01-asset-lab.html">Asset Lab</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Digital twin · isolated asset acceptance</div>
+  <h1>Asset Test Scene.</h1>
+  <p>Отдельная сцена для проверки двух внешних GLB-ассетов. Оптимизированные копии загружаются отдельно от основной модели A‑01. Автовращение выключено; можно исследовать геометрию, масштаб, материалы и анимацию.</p>
+</section>
+
+<main class="layout">
+  <section class="stage">
+    <div class="stageHead">
+      <div class="state"><span class="dot" id="statusDot"></span><span id="statusText">Подготовка отдельной сцены</span></div>
+      <div class="controls">
+        <button class="btn" id="fitButton" disabled>Вписать модель</button>
+        <button class="btn" id="resetButton" disabled>Сброс камеры</button>
+        <button class="btn" id="clearButton" disabled>Очистить</button>
+      </div>
+    </div>
+    <div class="stageTabs">
+      <button class="tab" id="robotTab" aria-pressed="true">01 · Delivery Robot</button>
+      <button class="tab" id="axiomTab" aria-pressed="false">02 · Axiom Starliner</button>
+    </div>
+    <div class="view">
+      <div id="viewport"></div>
+      <div class="empty" id="emptyState">
+        <div class="emptyInner">
+          <div class="emptyIcon">A01</div>
+          <h2>Загрузка 3D-ассета</h2>
+          <p>Сцена загружает оптимизированную runtime-копию. При необходимости можно выбрать локальный GLB через панель справа. Для замены используйте тот же вариант модели.</p>
+        </div>
+      </div>
+    </div>
+    <div class="stageFoot">
+      <span id="fileMeta">Отдельный тестовый контекст · primary scene не затрагивается</span>
+      <span>ЛКМ / один палец — вращение · колесо / щипок — масштаб · ПКМ — панорама</span>
+    </div>
+  </section>
+
+  <aside class="side">
+    <section class="panel">
+      <h2>Сводка модели</h2>
+      <div class="modelTitle" id="modelTitle">Delivery Robot · Bento</div>
+      <div class="muted" id="dimensions">Размеры появятся после загрузки</div>
+      <div class="stats">
+        <div class="stat"><b id="triangles">—</b><span>Треугольники</span></div>
+        <div class="stat"><b id="vertices">—</b><span>Вершины</span></div>
+        <div class="stat"><b id="meshes">—</b><span>Mesh</span></div>
+        <div class="stat"><b id="materials">—</b><span>Материалы</span></div>
+        <div class="stat"><b id="textures">—</b><span>Текстуры</span></div>
+        <div class="stat"><b id="animations">—</b><span>Анимации</span></div>
+      </div>
+      <div class="fileArea">
+        <div class="muted" id="fileLabel">Runtime GLB · открытая модель</div>
+        <input id="robotFile" type="file" accept=".glb,model/gltf-binary">
+        <input id="axiomFile" type="file" accept=".glb,model/gltf-binary">
+        <button class="btn" id="chooseLocal">Выбрать локальный GLB</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Исследование</h2>
+      <div class="row"><label for="wireframe">Каркасная геометрия</label><input id="wireframe" type="checkbox"></div>
+      <div class="row"><label for="gridToggle">Сетка и уровень пола</label><input id="gridToggle" type="checkbox" checked></div>
+      <div class="row"><label for="animationToggle">Воспроизведение</label><input id="animationToggle" type="checkbox" disabled></div>
+      <div class="row"><label for="speedSelect">Скорость анимации</label><select id="speedSelect"><option value=".5">0,5×</option><option value="1" selected>1×</option><option value="1.5">1,5×</option><option value="2">2×</option></select></div>
+      <div class="row"><button class="btn" id="restartAnimation" disabled>С начала</button><span id="animationMeta" class="muted">Без анимации</span></div>
+      <div class="muted">Масштабируется только контейнер просмотра. Вершины, skin weights и исходные transform-данные GLB не переписываются.</div>
+    </section>
+
+    <section class="panel">
+      <h2>Происхождение и отчёты</h2>
+      <div class="credit" id="creditBlock">
+        <strong>Delivery robot — Bento</strong><br>
+        <a href="https://sketchfab.com/3d-models/delivery-robot-4dbac67355174751801fb1f6e8dc6230" target="_blank" rel="noopener">Исходная карточка Sketchfab</a><br>
+        CC BY 4.0 указана во встроенных metadata; проверьте текущие условия перед повторным распространением.
+      </div>
+      <div class="reportLinks" style="margin-top:14px">
+        <a id="reportLink" href="./a01-asset-reports/delivery-robot-audit-v0.1.json" target="_blank">Открыть JSON-отчёт</a>
+        <a href="./a01-asset-reports/OPTIMIZATION-MANIFEST-v0.1_RU.md" target="_blank">Методика и результаты оптимизации</a>
+      </div>
+    </section>
+
+    <div class="notice">Важно: проверка здесь не является подтверждением инженерной пригодности или окончательным юридическим аудитом. Ассеты не встроены в основную сцену A‑01. 120 FPS не заявляется — браузерные frame-time измерения ещё не выполнялись.</div>
+  </aside>
+</main>
+
+<footer class="footer">
+  <span>A‑01 · Asset Test Scene v0.1 · Separate experiment</span>
+  <span><a href="https://github.com/mrnoobsky-del/a01-eva-sphere">Repository</a> · <a href="./a01-asset-lab.html">Asset Lab</a></span>
+</footer>
+</div>
+
+<script type="module">
+import * as THREE from "three";
+import {GLTFLoader} from "three/addons/loaders/GLTFLoader.js";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+
+const ASSETS={
+  robot:{
+    title:"Delivery Robot · Bento",
+    url:"https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/a01-assets/delivery-robot-runtime-v0.1.glb",
+    file:"delivery-robot-runtime-v0.1.glb",
+    report:"https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/a01-asset-reports/delivery-robot-audit-v0.1.json",
+    author:'<strong>Delivery robot — Bento (@gostbento)</strong><br><a href="https://sketchfab.com/3d-models/delivery-robot-4dbac67355174751801fb1f6e8dc6230" target="_blank" rel="noopener">Исходная карточка Sketchfab</a><br>CC BY 4.0 указана во встроенных metadata. В описании есть просьба указать credit Eric; расхождение авторства не разрешено. Сверьте карточку и attribution перед повторным распространением.'
+  },
+  axiom:{
+    title:"Axiom The Bn L Starliner",
+    url:"https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/a01-assets/axiom-starliner-runtime-v0.1.glb",
+    file:"axiom-starliner-runtime-v0.1.glb",
+    report:"https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/a01-asset-reports/axiom-starliner-audit-v0.1.json",
+    author:'<strong>Axiom The Bn L Starliner — alfathwawaow</strong><br><a href="https://sketchfab.com/3d-models/axiom-the-bn-l-starliner-e354278ba8ed487bb4f0f576364d9950" target="_blank" rel="noopener">Исходная карточка Sketchfab</a><br>CC BY 4.0 указана во встроенных metadata; проверьте текущие условия перед повторным распространением.'
+  }
+};
+
+const $=id=>document.getElementById(id);
+let renderer,scene,camera,controls,grid,loader;
+let activeKey="robot",root=null,mixer=null,action=null,clips=[];
+let lastTime=0,raf=0,wireframe=false,showGrid=true;
+const viewport=$("viewport");
+
+function status(message,kind=""){
+  $("statusText").textContent=message;
+  $("statusDot").className="dot"+(kind?" "+kind:"");
+}
+function formatNumber(v){return new Intl.NumberFormat("ru-RU").format(v)}
+function requestRender(){
+  if(!renderer||raf)return;
+  raf=requestAnimationFrame(renderLoop);
+}
+function renderLoop(now){
+  raf=0;
+  let needs=false;
+  if(controls) needs=controls.update()||needs;
+  if(mixer&&action&&!action.paused){
+    const delta=lastTime?Math.min((now-lastTime)/1000,.05):0;
+    mixer.update(delta);needs=true;
+  }
+  lastTime=now;
+  if(needs||renderer) renderer.render(scene,camera);
+  if(mixer&&action&&!action.paused||needs&&controls) raf=requestAnimationFrame(renderLoop);
+}
+function disposeCurrent(){
+  if(mixer){mixer.stopAllAction();mixer.uncacheRoot(root);}
+  mixer=null;action=null;clips=[];
+  if(root){
+    scene.remove(root);
+    const geometries=new Set(),materials=new Set(),textures=new Set();
+    root.traverse(o=>{
+      if(o.geometry)geometries.add(o.geometry);
+      if(o.material){
+        for(const m of Array.isArray(o.material)?o.material:[o.material]){
+          if(!m)continue;
+          materials.add(m);
+          for(const v of Object.values(m))if(v&&v.isTexture)textures.add(v);
+        }
+      }
+    });
+    textures.forEach(t=>t.dispose());
+    materials.forEach(m=>m.dispose());
+    geometries.forEach(g=>g.dispose());
+  }
+  root=null;
+}
+function inspect(gltf,file){
+  const meshSet=new Set(),materialSet=new Set(),textureSet=new Set();
+  let vertices=0,triangles=0;
+  gltf.scene.traverse(o=>{
+    if(!o.isMesh)return;
+    meshSet.add(o);
+    const pos=o.geometry?.attributes?.position;
+    if(pos)vertices+=pos.count;
+    if(o.geometry?.index)triangles+=Math.floor(o.geometry.index.count/3);
+    else if(pos)triangles+=Math.floor(pos.count/3);
+    for(const mat of Array.isArray(o.material)?o.material:[o.material]){
+      if(!mat)continue;
+      materialSet.add(mat);
+      for(const v of Object.values(mat))if(v&&v.isTexture)textureSet.add(v);
+    }
+  });
+  const box=new THREE.Box3().setFromObject(gltf.scene);
+  const size=box.getSize(new THREE.Vector3());
+  return {vertices,triangles,meshes:meshSet.size,materials:materialSet.size,textures:textureSet.size,clips:gltf.animations.length,size};
+}
+function showStats(m,file){
+  $("modelTitle").textContent=ASSETS[activeKey].title;
+  $("dimensions").textContent=`Габариты в исходных единицах: ${m.size.x.toFixed(4)} × ${m.size.y.toFixed(4)} × ${m.size.z.toFixed(4)} · максимальная ось отображения нормализована до 3`;
+  $("triangles").textContent=formatNumber(m.triangles);
+  $("vertices").textContent=formatNumber(m.vertices);
+  $("meshes").textContent=formatNumber(m.meshes);
+  $("materials").textContent=formatNumber(m.materials);
+  $("textures").textContent=formatNumber(m.textures);
+  $("animations").textContent=formatNumber(m.clips);
+  $("fileLabel").textContent=`${file.name} · ${formatNumber(file.size)} байт`;
+  $("creditBlock").innerHTML=ASSETS[activeKey].author;
+  $("reportLink").href=ASSETS[activeKey].report;
+  $("fileMeta").textContent=`${file.name} · отдельный тестовый контекст · исходник не изменён`;
+  $("animationMeta").textContent=m.clips?`${m.clips} клип(а)`:"Без анимации";
+  $("animationToggle").disabled=!m.clips;
+  $("animationToggle").checked=false;
+  $("restartAnimation").disabled=!m.clips;
+  $("restartAnimation").textContent="С начала";
+}
+function fitModel(){
+  if(!root)return;
+  const box=new THREE.Box3().setFromObject(root);
+  const size=box.getSize(new THREE.Vector3());
+  const center=box.getCenter(new THREE.Vector3());
+  root.position.sub(center);
+  const scale=3/Math.max(size.x,size.y,size.z,.001);
+  root.scale.setScalar(scale);
+  const normalBox=new THREE.Box3().setFromObject(root);
+  root.position.y-=normalBox.min.y;
+  const finalBox=new THREE.Box3().setFromObject(root);
+  const finalSize=finalBox.getSize(new THREE.Vector3());
+  controls.target.set(0,finalSize.y*.48,0);
+  camera.position.set(4.4,3.1,5.5);
+  camera.near=.01;
+  camera.far=100;
+  camera.updateProjectionMatrix();
+  controls.minDistance=.25;
+  controls.maxDistance=24;
+  controls.update();
+  requestRender();
+}
+function setAnimation(enabled){
+  if(!action)return;
+  action.paused=!enabled;
+  $("animationToggle").checked=enabled;
+  if(enabled){lastTime=0;requestRender();}
+}
+function updateWireframe(){
+  if(!root)return;
+  root.traverse(o=>{
+    if(!o.isMesh)return;
+    for(const m of Array.isArray(o.material)?o.material:[o.material]){
+      if(m&&"wireframe" in m)m.wireframe=wireframe;
+    }
+  });
+  requestRender();
+}
+async function loadModel(key,localFile=null){
+  activeKey=key;
+  $("robotTab").setAttribute("aria-pressed",key==="robot"?"true":"false");
+  $("axiomTab").setAttribute("aria-pressed",key==="axiom"?"true":"false");
+  disposeCurrent();
+  $("emptyState").classList.remove("hidden");
+  $("emptyState").querySelector("h2").textContent="Загрузка GLB";
+  $("emptyState").querySelector("p").textContent="Файл проверяется и загружается в изолированную сцену.";
+  $("fitButton").disabled=true;$("resetButton").disabled=true;$("clearButton").disabled=true;
+  status("Загрузка "+ASSETS[key].file+"…");
+  try{
+    const source=localFile||ASSETS[key].url;
+    const buffer=localFile?await localFile.arrayBuffer():await (await fetch(source,{cache:"no-store"})).arrayBuffer();
+    if(!localFile && !buffer.byteLength)throw new Error("Пустой ответ сервера");
+    const fileInfo=localFile||{name:ASSETS[key].file,size:buffer.byteLength};
+    loader.parse(buffer,"",gltf=>{
+      try{
+        root=gltf.scene;
+        const metrics=inspect(gltf,fileInfo);
+        root.traverse(o=>{if(o.isMesh){o.castShadow=true;o.receiveShadow=true;}});
+        fitModel();
+        scene.add(root);
+        if(gltf.animations.length){
+          mixer=new THREE.AnimationMixer(root);
+          clips=gltf.animations;
+          action=mixer.clipAction(clips[0]);
+          action.reset();action.play();action.paused=true;
+        }
+        showStats(metrics,fileInfo);
+        $("emptyState").classList.add("hidden");
+        $("fitButton").disabled=false;$("resetButton").disabled=false;$("clearButton").disabled=false;
+        status("Модель загружена","good");
+        requestRender();
+      }catch(e){status("Ошибка подготовки модели","warn");$("emptyState").querySelector("h2").textContent="Не удалось подготовить сцену";$("emptyState").querySelector("p").textContent=e.message;}
+    },error=>{
+      status("Ошибка чтения GLB","warn");
+      $("emptyState").querySelector("h2").textContent="Не удалось открыть GLB";
+      $("emptyState").querySelector("p").textContent=error?.message||"Проверьте целостность файла.";
+    });
+  }catch(e){
+    status("Файл не загружен","warn");
+    $("emptyState").querySelector("h2").textContent="Не удалось загрузить модель";
+    $("emptyState").querySelector("p").textContent=e.message+" Выберите локальный оптимизированный GLB.";
+  }
+}
+function init(){
+  try{
+    renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,powerPreference:"high-performance"});
+  }catch(e){
+    status("WebGL недоступен","warn");
+    $("emptyState").querySelector("h2").textContent="WebGL недоступен";
+    $("emptyState").querySelector("p").textContent=e.message;
+    return;
+  }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,window.innerWidth<740?1.25:1.6));
+  renderer.setSize(viewport.clientWidth,viewport.clientHeight);
+  renderer.outputColorSpace=THREE.SRGBColorSpace;
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=1.05;
+  viewport.appendChild(renderer.domElement);
+
+  scene=new THREE.Scene();
+  scene.background=new THREE.Color(0x11161e);
+  camera=new THREE.PerspectiveCamera(42,viewport.clientWidth/viewport.clientHeight,.01,100);
+  camera.position.set(4.4,3.1,5.5);
+  controls=new OrbitControls(camera,renderer.domElement);
+  controls.enableDamping=true;
+  controls.dampingFactor=.075;
+  controls.autoRotate=false;
+  controls.addEventListener("change",requestRender);
+
+  scene.add(new THREE.HemisphereLight(0xe0e9f7,0x303642,1.65));
+  const key=new THREE.DirectionalLight(0xfff1dc,2.6);
+  key.position.set(4,7,5);scene.add(key);
+  const fill=new THREE.DirectionalLight(0x9ebeff,.85);
+  fill.position.set(-5,3,-4);scene.add(fill);
+
+  grid=new THREE.GridHelper(12,24,0x697588,0x394352);
+  grid.position.y=0;scene.add(grid);
+  const plane=new THREE.Mesh(new THREE.PlaneGeometry(200,200),new THREE.MeshStandardMaterial({color:0x0c1016,roughness:.95,metalness:0}));
+  plane.rotation.x=-Math.PI/2;plane.position.y=-.012;scene.add(plane);
+
+  loader=new GLTFLoader();
+  $("robotTab").addEventListener("click",()=>loadModel("robot"));
+  $("axiomTab").addEventListener("click",()=>loadModel("axiom"));
+  $("chooseLocal").addEventListener("click",()=>$(activeKey==="robot"?"robotFile":"axiomFile").click());
+  $("robotFile").addEventListener("change",e=>{if(e.target.files[0])loadModel("robot",e.target.files[0]);});
+  $("axiomFile").addEventListener("change",e=>{if(e.target.files[0])loadModel("axiom",e.target.files[0]);});
+  $("fitButton").addEventListener("click",fitModel);
+  $("resetButton").addEventListener("click",fitModel);
+  $("clearButton").addEventListener("click",()=>{
+    disposeCurrent();
+    $("emptyState").classList.remove("hidden");
+    $("emptyState").querySelector("h2").textContent="Модель очищена";
+    $("emptyState").querySelector("p").textContent="Выберите один из ассетов выше или загрузите локальный GLB.";
+    ["triangles","vertices","meshes","materials","textures","animations"].forEach(id=>$(id).textContent="—");
+    $("dimensions").textContent="Нет загруженной модели";
+    $("animationToggle").disabled=true;$("restartAnimation").disabled=true;
+    $("fitButton").disabled=true;$("resetButton").disabled=true;$("clearButton").disabled=true;
+    status("Ожидание GLB");
+    requestRender();
+  });
+  $("wireframe").addEventListener("change",e=>{wireframe=e.target.checked;updateWireframe();});
+  $("gridToggle").addEventListener("change",e=>{showGrid=e.target.checked;grid.visible=showGrid;requestRender();});
+  $("animationToggle").addEventListener("change",e=>setAnimation(e.target.checked));
+  $("restartAnimation").addEventListener("click",()=>{
+    if(!action)return;
+    action.reset();action.play();action.paused=false;
+    $("animationToggle").checked=true;lastTime=0;requestRender();
+  });
+  $("speedSelect").addEventListener("change",e=>{if(action)action.timeScale=Number(e.target.value);});
+  const resize=()=>{
+    const w=viewport.clientWidth,h=viewport.clientHeight;
+    if(!w||!h)return;
+    camera.aspect=w/h;camera.updateProjectionMatrix();
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,window.innerWidth<740?1.25:1.6));
+    renderer.setSize(w,h,false);requestRender();
+  };
+  new ResizeObserver(resize).observe(viewport);
+  window.addEventListener("visibilitychange",()=>{if(document.hidden&&action&&!action.paused)setAnimation(false);});
+  requestRender();
+  setStatus("Выберите модель и загрузите локальный GLB-файл для просмотра", "warn");
+}
+init();
+</script>
+</body>
+</html>
