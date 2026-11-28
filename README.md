@@ -91,6 +91,17 @@ A-01 studies three separate products: a mobile energy service van, a passenger e
 
 MODNET separates four assets: the module, the dock slot, the transport carrier and the digital network. A customer may own a module and book a compatible slot for a short period; after safe removal, another compatible module may occupy it. Road movement is treated as cargo/swap-body transport, not as carrying people inside an operating module. Dimensions, approvals, rates and the legal model remain unapproved.
 
+## EVA SnowFlow — winter road infrastructure
+
+- [Package overview and status (RU)](docs/A01-SNOW-00-EVA-SNOWFLOW-PACKAGE-v0.1_RU.md)
+- [Surface geometry and beveled profiles (RU)](docs/A01-SNOW-02-SURFACE-GEOMETRY-DRAINAGE-v0.1_RU.md)
+- [Thermal, hydronic and drainage basis (RU)](docs/A01-SNOW-03-THERMAL-HYDRAULIC-BASIS-v0.1_RU.md)
+- [Sensors, control and safety (RU)](docs/A01-SNOW-04-SENSORS-CONTROL-SAFETY-v0.1_RU.md)
+- [Open-source toolchain review (RU)](docs/A01-SNOW-05-OPEN-SOURCE-TOOLCHAIN-v0.1_RU.md)
+- [Validation and test plan (RU)](docs/A01-SNOW-06-VALIDATION-PLAN-v0.1_RU.md)
+
+SnowFlow is a pre-design concept. No physical pavement system is claimed to be built, calculated, commissioned or tested.
+
 ## Current primary digital-twin build
 
 **Performance programme:** [A-01 Performance — 60 FPS without visual quality loss](performance/README.md) · [P0 source review](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Browser baseline recorder](performance/baseline-recorder.js) · [Benchmark report template](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
