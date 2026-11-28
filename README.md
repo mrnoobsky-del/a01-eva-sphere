@@ -31,6 +31,13 @@ A-01 is a developing concept and digital-twin project. Some interface elements a
 | EVA CARE and AI services | Vision / development direction |
 | Autonomous infrastructure | Long-term concept; requires human governance |
 
+## Brand identity
+
+- [Eva Sphere Brand Book v1.1 (Russian)](brand/A01-BRAND-BOOK_RU.md)
+- [Previous Brand Book v1.0 archive](brand/archive/A01-BRAND-BOOK_RU_v1.0.md)
+
+The brand platform is centred on human time, freedom of choice and a clear distinction between concept, prototype and verified implementation.
+
 ## Principles
 
 - **Human-centred by design.** Technology should support people, dignity and access.
