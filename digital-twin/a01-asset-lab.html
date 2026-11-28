@@ -456,7 +456,7 @@ function buildFolderMap(files, modelFile) {
   });
   return activeFolderBasePath ? activeFolderBasePath + "/" : "";
 }
-async async function loadFile(file, folderFiles) {
+async function loadFile(file, folderFiles) {
   if (!file) return;
   const ext = file.name.toLowerCase().split(".").pop();
   if (ext !== "glb" && ext !== "gltf") {
