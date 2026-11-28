@@ -1,0 +1,42 @@
+{
+  "schema": "A01.AssetLab.Report.v0.1",
+  "createdAt": "2026-11-28T06:10:23Z",
+  "application": "A-01 Asset Lab v0.1",
+  "runtime": {
+    "three": "not used — offline GLB structural inspection",
+    "browser": "not used — offline inspection",
+    "devicePixelRatio": 1
+  },
+  "source": {
+    "file": {
+      "name": "axiom_the_bn_l_starliner.glb",
+      "bytes": 200268,
+      "type": "model/gltf-binary"
+    },
+    "triangles": 2768,
+    "vertices": 5164,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 0,
+    "textureDetails": [],
+    "animations": [],
+    "sourceDimensions": {
+      "x": 12.1805,
+      "y": 6.5844,
+      "z": 2.8828
+    }
+  },
+  "attribution": {
+    "title": "Axiom The Bn L Starliner",
+    "author": "alfathwawaow (as declared in embedded glTF metadata)",
+    "sourceUrl": "https://sketchfab.com/3d-models/axiom-the-bn-l-starliner-e354278ba8ed487bb4f0f576364d9950",
+    "license": "CC BY 4.0 stated in embedded glTF metadata; external license not independently verified in this report",
+    "changes": "Derived runtime copy: primitive index accessor converted from UNSIGNED_INT to UNSIGNED_SHORT. Geometry, vertex data and material parameters retained. Original source GLB retained unchanged."
+  },
+  "review": {
+    "browserLoaded": false,
+    "integratedIntoA01PrimaryScene": false,
+    "licenseVerifiedByTool": false,
+    "mobileAcceptance": "Not tested in a browser or on mobile. Offline GLB parsing only. devicePixelRatio=1 is a schema-valid placeholder, not a measured device value."
+  }
+}
