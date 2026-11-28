@@ -44,8 +44,10 @@
       <div class="stage-head">
         <div class="stage-title"><span class="status-dot" id="statusDot"></span><span id="statusText">Ожидание GLB-файла</span></div>
         <div class="actions">
-          <input id="fileInput" type="file" accept=".glb,model/gltf-binary" class="hidden">
+          <input id="fileInput" type="file" accept=".glb,.gltf,model/gltf-binary,model/gltf+json" class="hidden">
+          <input id="folderInput" type="file" webkitdirectory directory multiple class="hidden">
           <button class="btn primary" id="chooseFile">Загрузить GLB</button>
+          <button class="btn" id="chooseFolder">GLTF + папка</button>
           <button class="btn" id="resetView" disabled>Сбросить вид</button>
           <button class="btn" id="removeModel" disabled>Очистить</button>
         </div>
@@ -56,9 +58,9 @@
           <div class="empty-inner">
             <div class="drop-icon">＋</div>
             <h2>Добавьте модель</h2>
-            <p>Перетащите сюда файл GLB или выберите его на устройстве. Геометрия и материалы анализируются прямо в браузере.</p>
+            <p>Перетащите сюда GLB или выберите файл GLB / папку glTF с текстурами и BIN. Геометрия и материалы анализируются прямо в браузере.</p>
             <button class="btn primary" id="chooseFileEmpty">Выбрать файл</button>
-            <div class="drop-hint">Рекомендуется GLB с текстурами внутри · до 150 МБ</div>
+            <div class="drop-hint">GLB или распакованная папка glTF · суммарно до 150 МБ</div>
           </div>
         </div>
       </div>
@@ -154,6 +156,9 @@ const emptyState = $("emptyState");
 let renderer, scene, camera, controls, loader, root = null, mixer = null, activeAction = null, clips = [];
 let currentFile = null, metrics = null, frameReady = false;
 let materials = [];
+let folderAssetMap = new Map();
+let assetObjectUrls = [];
+let activeFolderBasePath = "";
 
 function setStatus(message, type) {
   $("statusText").textContent = message;
@@ -237,9 +242,19 @@ function initScene() {
   scene.userData.floor = floor;
   scene.userData.grid = grid;
 
-  loader = new GLTFLoader();
+  const assetManager = new THREE.LoadingManager();
+  assetManager.setURLModifier((url) => {
+    const clean = decodeURIComponent(url).split("?")[0].replace(/^\\.\\//, "");
+    const file = folderAssetMap.get(clean) || folderAssetMap.get(clean.split("/").pop());
+    return file ? URL.createObjectURL(file) : url;
+  });
+  loader = new GLTFLoader(assetManager);
   window.addEventListener("resize", onResize);
-  renderer.setAnimationLoop(render);
+  const clock = new THREE.Clock();
+  renderer.setAnimationLoop(() => {
+    const delta = Math.min(clock.getDelta(), 0.05);
+    render(delta);
+  });
   frameReady = true;
 }
 function render(delta) {
@@ -259,7 +274,13 @@ function onResize() {
   renderer.setSize(width, height);
 }
 function cleanupModel() {
-  if (!root) return;
+  if (!root) {
+    mixer = null;
+    activeAction = null;
+    clips = [];
+    materials = [];
+    return;
+  }
   scene.remove(root);
   root.traverse((node) => {
     if (!node.isMesh) return;
@@ -347,7 +368,6 @@ function analyzeModel(gltf, file) {
   };
 }
 function prepareModel(gltf) {
-  cleanupModel();
   root = gltf.scene;
   root.name = root.name || "A01_IMPORTED_GLB";
   const box = new THREE.Box3().setFromObject(root);
@@ -393,7 +413,7 @@ function prepareModel(gltf) {
   select.disabled = !clips.length;
   $("playAnimation").disabled = !clips.length;
   $("restartAnimation").disabled = !clips.length;
-  if (clips.length) playClip(0, true);
+  if (clips.length) playClip(0, $("playAnimation").checked);
 
   $("modelName").textContent = currentFile ? currentFile.name : "GLB-модель";
   $("modelDimensions").textContent = "Исходный размер: " + size.x.toFixed(3) + " × " + size.y.toFixed(3) + " × " + size.z.toFixed(3) + " условных единиц";
@@ -412,14 +432,32 @@ function playClip(index, shouldPlay) {
   activeAction.reset();
   if (shouldPlay) activeAction.play();
 }
-async function loadFile(file) {
+function clearAssetUrls() {
+  assetObjectUrls.forEach((url) => URL.revokeObjectURL(url));
+  assetObjectUrls = [];
+}
+function buildFolderMap(files, modelFile) {
+  folderAssetMap = new Map();
+  const firstFolder = (modelFile.webkitRelativePath || "").split("/")[0] || "";
+  const modelPath = (modelFile.webkitRelativePath || modelFile.name).replace(firstFolder + "/", "");
+  activeFolderBasePath = modelPath.split("/").slice(0, -1).join("/");
+  Array.from(files).forEach((item) => {
+    const relative = (item.webkitRelativePath || item.name).replace(firstFolder + "/", "");
+    folderAssetMap.set(relative, item);
+    folderAssetMap.set(item.name, item);
+  });
+  return activeFolderBasePath ? activeFolderBasePath + "/" : "";
+}
+async function loadFile(file, folderFiles) {
   if (!file) return;
-  if (!file.name.toLowerCase().endsWith(".glb")) {
-    setStatus("Нужен файл .glb", "warn");
+  const ext = file.name.toLowerCase().split(".").pop();
+  if (ext !== "glb" && ext !== "gltf") {
+    setStatus("Выберите .glb или .gltf", "warn");
     return;
   }
-  if (file.size > 150 * 1024 * 1024) {
-    setStatus("Файл больше 150 МБ", "warn");
+  const totalBytes = folderFiles ? Array.from(folderFiles).reduce((sum, item) => sum + item.size, 0) : file.size;
+  if (totalBytes > 150 * 1024 * 1024) {
+    setStatus("Набор файлов больше 150 МБ", "warn");
     return;
   }
   if (!frameReady || !loader) {
@@ -427,19 +465,27 @@ async function loadFile(file) {
     return;
   }
   setStatus("Чтение и анализ модели…", "warn");
-  $("fileMeta").textContent = file.name + " · " + formatBytes(file.size);
+  $("fileMeta").textContent = file.name + " · " + formatBytes(totalBytes);
   $("modelName").textContent = file.name;
+  clearAssetUrls();
+  folderAssetMap = new Map();
+  const basePath = folderFiles ? buildFolderMap(folderFiles, file) : "";
   try {
-    const buffer = await file.arrayBuffer();
-    const gltf = await new Promise((resolve, reject) => loader.parse(buffer, "", resolve, reject));
+    let source;
+    if (ext === "glb") source = await file.arrayBuffer();
+    else source = await file.text();
+    const gltf = await new Promise((resolve, reject) => loader.parse(source, basePath, resolve, reject));
+    cleanupModel();
     currentFile = file;
     metrics = analyzeModel(gltf, file);
     prepareModel(gltf);
+    clearAssetUrls();
     setStatus("Модель загружена", "good");
   } catch (error) {
     console.error(error);
-    setStatus("Ошибка чтения GLB", "warn");
-    $("modelDimensions").textContent = error && error.message ? error.message : "Формат или расширение glTF не поддержано";
+    clearAssetUrls();
+    setStatus("Ошибка чтения модели", "warn");
+    $("modelDimensions").textContent = error && error.message ? error.message : "Проверьте целостность GLB или наличие всех файлов glTF";
     $("fileMeta").textContent = "Не удалось загрузить " + file.name;
   }
 }
@@ -474,7 +520,16 @@ function exportReport() {
 }
 $("chooseFile").addEventListener("click", () => $("fileInput").click());
 $("chooseFileEmpty").addEventListener("click", () => $("fileInput").click());
+$("chooseFolder").addEventListener("click", () => $("folderInput").click());
 $("fileInput").addEventListener("change", (event) => loadFile(event.target.files[0]));
+$("folderInput").addEventListener("change", (event) => {
+  const files = Array.from(event.target.files || []);
+  const gltfFiles = files.filter((item) => item.name.toLowerCase().endsWith(".gltf"));
+  const glbFiles = files.filter((item) => item.name.toLowerCase().endsWith(".glb"));
+  const selected = glbFiles[0] || gltfFiles.find((item) => item.name.toLowerCase() === "scene.gltf") || gltfFiles[0];
+  if (selected) loadFile(selected, files);
+  else setStatus("В папке не найден GLB или glTF", "warn");
+});
 $("resetView").addEventListener("click", () => {
   if (!root) return;
   const box = new THREE.Box3().setFromObject(root);
@@ -486,6 +541,8 @@ $("resetView").addEventListener("click", () => {
 });
 $("removeModel").addEventListener("click", () => {
   cleanupModel();
+  clearAssetUrls();
+  folderAssetMap = new Map();
   currentFile = null;
   $("modelName").textContent = "Модель не выбрана";
   $("modelDimensions").textContent = "Габариты появятся после загрузки";
@@ -507,8 +564,10 @@ $("gridToggle").addEventListener("change", (event) => {
 });
 $("playAnimation").addEventListener("change", (event) => {
   if (!activeAction) return;
-  if (event.target.checked) activeAction.play();
-  else activeAction.paused = true;
+  if (event.target.checked) {
+    activeAction.paused = false;
+    activeAction.play();
+  } else activeAction.paused = true;
 });
 $("animationSelect").addEventListener("change", (event) => {
   playClip(Number(event.target.value), $("playAnimation").checked);
