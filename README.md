@@ -134,6 +134,15 @@ Ideas, corrections, research references and thoughtful discussion are welcome. B
 
 No contribution should include credentials, API keys, personal data, private messages or production secrets.
 
+## 3D Asset Lab and Partner Proposal
+
+- [A-01 Asset Lab — isolated GLB/glTF inspector](digital-twin/a01-asset-lab.html)
+- [Asset Lab v0.1 usage guide (RU)](digital-twin/README_ASSET_LAB_v01.md)
+- [A-01 Open Commons Sponsorship partner page](digital-twin/a01-open-commons-sponsorship.html)
+- [Sketchfab asset register and integration plan (RU)](docs/A01-SKETCHFAB-ASSET-AND-IMPLEMENTATION-REGISTER-v0.1_RU.md)
+
+The Asset Lab inspects user-selected models locally in the browser; it does not download Sketchfab assets or upload model files to A-01 servers.
+
 ## Licensing and A-01 Open Commons Sponsorship
 
 No general open-source license is granted in this initial publication. Unless a separate license is added, the source and documentation remain subject to the default copyright rules. You may view and discuss this repository on GitHub; do not assume permission to reuse, modify or redistribute its contents.
