@@ -3694,9 +3694,16 @@ function makeInteriorPbrEnvironment(){
  texture.dispose();pmrem.dispose();
  return target;
 }
-const interiorEnvironmentTarget=makeInteriorPbrEnvironment();
-scene.environment=interiorEnvironmentTarget.texture;
-scene.environmentIntensity=.92;
+let interiorEnvironmentTarget=null;
+try{
+ interiorEnvironmentTarget=makeInteriorPbrEnvironment();
+ scene.environment=interiorEnvironmentTarget.texture;
+ scene.environmentIntensity=.92;
+}catch(interiorEnvironmentError){
+ console.warn('A-01 PBR preview: interior PMREM unavailable; existing exterior environment used as fallback.',interiorEnvironmentError);
+ scene.environment=exteriorSkyTexture;
+ scene.environmentIntensity=.72;
+}
 Object.values(materials.body).forEach(material=>{material.envMapIntensity=.84;});
 materials.glass.envMapIntensity=1.12;
 materials.dome.envMapIntensity=.88;
@@ -4760,7 +4767,7 @@ function setExteriorMode(enabled){
   controls.minDistance=15;controls.maxDistance=112;controls.minPolarAngle=.04;controls.maxPolarAngle=Math.PI*.49;controls.autoRotate=false;
   cameraFlight={from:camera.position.clone(),to:new THREE.Vector3(30,20.5,37),fromTarget:controls.target.clone(),toTarget:new THREE.Vector3(0,4.7,0),start:performance.now(),duration:1050};
  }else{
-  scene.background=null;scene.environment=interiorEnvironmentTarget.texture;scene.environmentIntensity=.92;renderer.shadowMap.enabled=false;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=false;scene.fog=new THREE.FogExp2(uiTheme==='light'?0xe9eeec:0x050505,uiTheme==='light'?.010:.014);
+  scene.background=null;scene.environment=interiorEnvironmentTarget?.texture||exteriorSkyTexture;scene.environmentIntensity=interiorEnvironmentTarget?.texture?.isTexture?.()? .92 : .72;renderer.shadowMap.enabled=false;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=false;scene.fog=new THREE.FogExp2(uiTheme==='light'?0xe9eeec:0x050505,uiTheme==='light'?.010:.014);
   controls.minDistance=7.8;controls.maxDistance=52;controls.minPolarAngle=.16;controls.maxPolarAngle=Math.PI*.48;controls.autoRotate=false;
   cameraFlight={from:camera.position.clone(),to:new THREE.Vector3(22.5,17.5,27.8),fromTarget:controls.target.clone(),toTarget:new THREE.Vector3(0,5.05,0),start:performance.now(),duration:850};
  }
@@ -6493,7 +6500,7 @@ window.EVA_SPHERE={
  getState:()=>({walkMode,walkPlayerLevel,focusedLevel,selectedId,exteriorMode,skyMode:projectionSkyMode,skyPhase:projectionSkyPhase,atmosphereMood:sphereAtmosphereMood,energyMode,climateMode,lod:{...dolekLodCounts}})
 };
 window.dispatchEvent(new Event('eva-a01:scene-ready'));
-window.addEventListener('beforeunload',()=>{resizeObserver?.disconnect();if(!resizeObserver)window.removeEventListener('resize',resize);controls.dispose();a01PbrBloomPass?.dispose();a01PbrComposer?.dispose();interiorEnvironmentTarget.dispose();renderer.dispose();});
+window.addEventListener('beforeunload',()=>{resizeObserver?.disconnect();if(!resizeObserver)window.removeEventListener('resize',resize);controls.dispose();a01PbrBloomPass?.dispose();a01PbrComposer?.dispose();interiorEnvironmentTarget?.dispose();renderer.dispose();});
 } catch(error) {
  const loading=document.getElementById('loading'),errorBox=document.getElementById('a01RuntimeError');
  const title=document.getElementById('a01RuntimeErrorTitle'),message=document.getElementById('a01RuntimeErrorMessage'),retry=document.getElementById('a01RuntimeRetry');
