@@ -86,7 +86,8 @@ v4.9.4 сохраняет возможности v4.9.3 и добавляет л
 
 ### Лаборатория 3D-ассетов A-01
 
-- [Открыть A-01 Asset Lab](digital-twin/a01-asset-lab.html)
+- [Открыть Asset Lab на Wix](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/a01-asset-lab.html)
+- [Исходный HTML в GitHub](digital-twin/a01-asset-lab.html)
 - [Инструкция и ограничения](digital-twin/README_ASSET_LAB_v01.md)
 - [Реестр Sketchfab-моделей и план интеграции](docs/A01-SKETCHFAB-ASSET-AND-IMPLEMENTATION-REGISTER-v0.1_RU.md)
 
@@ -94,7 +95,8 @@ v4.9.4 сохраняет возможности v4.9.3 и добавляет л
 
 ## Публичное предложение партнёрам — A-01 Open Commons Sponsorship
 
-- [Открыть страницу предложения](digital-twin/a01-open-commons-sponsorship.html)
+- [Открыть публичную страницу на Wix](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/a01-open-commons-sponsorship.html)
+- [Исходный HTML в GitHub](digital-twin/a01-open-commons-sponsorship.html)
 - [Правовая и договорная записка](docs/A01-LIFETIME-SUPPORT-OPEN-RELEASE-PROPOSAL-v0.1_RU.md)
 - [Текущий статус прав и лицензирования](RIGHTS-STATUS_RU.md)
 
