@@ -62,8 +62,19 @@ button{font:inherit}
   <p class="sub">Кристалл-пирамида · внутренние отражения · выборочное золочение</p>
   <div class="section">
     <div class="label"><span>Угол ввода луча</span><b class="value" id="angleVal">0°</b></div>
-    <input id="angle" type="range" min="-25" max="25" step="1" value="0">
+    <input id="angle" type="range" min="-12" max="12" step="1" value="10">
     <div class="range-hint"><span>−25°</span><span>0°</span><span>+25°</span></div>
+  </div>
+  <div class="section">
+    <div class="label"><span>Длина волны источника</span><b class="value" id="waveVal">1.55 мкм</b></div>
+    <select id="wavelength" style="width:100%;padding:8px 10px;border-radius:9px;background:#13202a;color:#dfeef5;border:1px solid #2a3d4c;outline:none">
+      <option value="0.85">0.85 мкм · ближний ИК</option>
+      <option value="1.06">1.06 мкм · ближний ИК</option>
+      <option value="1.55" selected>1.55 мкм · телеком-диапазон</option>
+      <option value="2.00">2.00 мкм · ближний ИК</option>
+      <option value="2.50">2.50 мкм · граница диапазона</option>
+    </select>
+    <div class="range-hint"><span>Сценарий длины волны</span><span>n и R задаются отдельно</span></div>
   </div>
   <div class="section">
     <div class="label"><span>Показатель преломления n</span><b class="value" id="indexVal">2.40</b></div>
@@ -93,7 +104,7 @@ button{font:inherit}
     <button class="action primary" id="retrace">Перестроить луч</button>
     <button class="action" id="reset">Сбросить</button>
   </div>
-  <div class="note">Параметры n и отражения заданы как демонстрационные. Точные значения зависят от длины волны, материала, полировки и реального покрытия.</div>
+  <div class="note">Длина волны — сценарный параметр. n и отражение не пересчитываются автоматически: их нужно брать из паспорта конкретного кристалла и спектра покрытия.</div>
 </div>
 <div class="panel right">
   <h1>Результат трассировки</h1>
@@ -276,6 +287,7 @@ function addMarker(point,color,r=.045){
 function trace(){
  clearBeam();
  const nDiamond=Number(document.getElementById("index").value);
+ const wavelength=Number(document.getElementById("wavelength").value);
  const goldR=Number(document.getElementById("gold").value)/100;
  const surfaceR=Number(document.getElementById("surface").value)/100;
  const angle=Number(document.getElementById("angle").value)*Math.PI/180;
@@ -361,6 +373,7 @@ function trace(){
  document.getElementById("rayStatus").textContent=status;
  document.getElementById("angleVal").textContent=(Number(document.getElementById("angle").value)>0?"+":"")+document.getElementById("angle").value+"°";
  document.getElementById("indexVal").textContent=nDiamond.toFixed(2);
+ document.getElementById("waveVal").textContent=wavelength.toFixed(2)+" мкм";
  document.getElementById("goldVal").textContent=(goldR*100).toFixed(1)+"%";
  document.getElementById("surfaceVal").textContent=(surfaceR*100).toFixed(2)+"%";
  document.getElementById("facesCount").textContent=goldFaces.size+" грани";
@@ -389,9 +402,11 @@ document.querySelectorAll("[data-face]").forEach(btn=>btn.addEventListener("clic
  updateFaceMaterials();trace();
 }));
 ["angle","index","gold","surface"].forEach(id=>document.getElementById(id).addEventListener("input",trace));
+document.getElementById("wavelength").addEventListener("change",trace);
 document.getElementById("retrace").addEventListener("click",trace);
 document.getElementById("reset").addEventListener("click",()=>{
- document.getElementById("angle").value=0;document.getElementById("index").value=2.4;
+ document.getElementById("angle").value=10;document.getElementById("index").value=2.4;
+ document.getElementById("wavelength").value=1.55;
  document.getElementById("gold").value=98.5;document.getElementById("surface").value=99.7;
  goldFaces=new Set([0,2]);updateFaceMaterials();trace();showToast("Исходные параметры восстановлены");
 });
