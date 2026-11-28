@@ -16,6 +16,14 @@ The resource model runs locally in the browser. No sensors, live telemetry, buil
 
 **Verification:** static HTML structure, unique IDs and scenario formula control values are checked for this release. Browser/device acceptance of WebGL, touch input, visual layout and frame-time percentiles remains a separate task. No 120 FPS result is claimed. The physical Sphere remains a concept, not a commissioned building.
 
+## Experimental rendering preview — A-01 v4.9.5 (not primary)
+
+- [PBR and reflection preview HTML](eva-sphere-a01-v495-pbr-reflection-preview.html)
+- [Russian documentation](README_RU_v495.md) · [Changelog](CHANGELOG_v495.md) · [Release notes](../releases/v4.9.5/RELEASE-NOTES_RU.md)
+- [PBR / image-based lighting engineering note](../docs/A01-PBR-REFLECTION-RENDERING-v0.1_RU.md)
+
+This parallel preview adds a procedural interior environment prefiltered once with PMREM, tunes environment response on existing PBR materials, and adds an opt-in Bloom pass. It preserves the existing scene and single requestAnimationFrame loop. SSR, SSAO, dynamic cube-camera reflections and extra dynamic shadows are deliberately excluded. Browser/device validation and frame-time measurements are still pending. The v4.9.4 primary build remains unchanged.
+
 
 ## Preserved previous release — A-01 v4.1.4
 
