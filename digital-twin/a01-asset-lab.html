@@ -158,6 +158,7 @@ let currentFile = null, metrics = null, frameReady = false;
 let materials = [];
 let folderAssetMap = new Map();
 let assetObjectUrls = [];
+let fileUrlCache = new Map();
 let activeFolderBasePath = "";
 
 function setStatus(message, type) {
@@ -246,7 +247,13 @@ function initScene() {
   assetManager.setURLModifier((url) => {
     const clean = decodeURIComponent(url).split("?")[0].replace(/^\\.\\//, "");
     const file = folderAssetMap.get(clean) || folderAssetMap.get(clean.split("/").pop());
-    return file ? URL.createObjectURL(file) : url;
+    if (!file) return url;
+    if (!fileUrlCache.has(file)) {
+      const objectUrl = URL.createObjectURL(file);
+      fileUrlCache.set(file, objectUrl);
+      assetObjectUrls.push(objectUrl);
+    }
+    return fileUrlCache.get(file);
   });
   loader = new GLTFLoader(assetManager);
   window.addEventListener("resize", onResize);
@@ -435,6 +442,7 @@ function playClip(index, shouldPlay) {
 function clearAssetUrls() {
   assetObjectUrls.forEach((url) => URL.revokeObjectURL(url));
   assetObjectUrls = [];
+  fileUrlCache = new Map();
 }
 function buildFolderMap(files, modelFile) {
   folderAssetMap = new Map();
