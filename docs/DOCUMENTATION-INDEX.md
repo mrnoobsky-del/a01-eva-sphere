@@ -45,6 +45,13 @@ W-01 remains M0 / proposed / not calculated. Fixture quantities, flows, pressure
 - [Брендбук Сферы Евы v1.0](../brand/A01-BRAND-BOOK_RU.md)
 - [Как присоединиться к проекту A-01](../CONTRIBUTING_RU.md)
 
+## Открытый обмен, права и внешние 3D-ассеты
+
+- [Статус прав и использования материалов A-01](../RIGHTS-STATUS_RU.md)
+- [A-01 Open Commons Sponsorship — предложение о пожизненной поддержке и открытом релизе](A01-LIFETIME-SUPPORT-OPEN-RELEASE-PROPOSAL-v0.1_RU.md)
+- [Реестр 3D-ассетов Sketchfab и план интеграции](A01-SKETCHFAB-ASSET-AND-IMPLEMENTATION-REGISTER-v0.1_RU.md)
+
+
 ## A-01 Space Market — покупка и аренда пространств
 
 - [A01-SPACE-MARKET-01 — каталог, права и модель использования (RU)](A01-SPACE-MARKET-01-living-space-sales-and-rentals-v0.1_RU.md)
