@@ -50,6 +50,7 @@ W-01 remains M0 / proposed / not calculated. Fixture quantities, flows, pressure
 - [A-01 Asset Lab — локальная инспекция GLB/glTF](../digital-twin/a01-asset-lab.html)
 - [Руководство Asset Lab v0.1](../digital-twin/README_ASSET_LAB_v01.md)
 - [Реестр внешних 3D-моделей и интеграционный план](A01-SKETCHFAB-ASSET-AND-IMPLEMENTATION-REGISTER-v0.1_RU.md)
+- [JSON Schema отчёта A-01 Asset Lab v0.1](../schemas/a01-asset-report-v0.1.schema.json)
 
 ## Публичное предложение A-01 Open Commons Sponsorship
 
