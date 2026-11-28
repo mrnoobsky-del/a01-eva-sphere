@@ -134,9 +134,15 @@ Ideas, corrections, research references and thoughtful discussion are welcome. B
 
 No contribution should include credentials, API keys, personal data, private messages or production secrets.
 
-## Licensing
+## Licensing and A-01 Open Commons Sponsorship
 
-No open-source license is granted in this initial publication. Unless a separate license is added, the source and documentation remain subject to the default copyright rules. You may view and discuss this repository on GitHub; do not assume permission to reuse, modify or redistribute its contents.
+No general open-source license is granted in this initial publication. Unless a separate license is added, the source and documentation remain subject to the default copyright rules. You may view and discuss this repository on GitHub; do not assume permission to reuse, modify or redistribute its contents.
+
+A-01 is exploring a sponsorship model in which one anchor partner legally secures lifetime housing and full food provision for the founder. Once the obligations are contractually secured and third-party rights have been audited, a defined set of original A-01 materials could be released under standard public licenses for everyone. This is a proposal, not an active license or signed agreement.
+
+- [Current rights status (RU)](RIGHTS-STATUS_RU.md)
+- [A-01 Open Commons Sponsorship proposal (RU)](docs/A01-LIFETIME-SUPPORT-OPEN-RELEASE-PROPOSAL-v0.1_RU.md)
+- [Sketchfab asset and implementation register (RU)](docs/A01-SKETCHFAB-ASSET-AND-IMPLEMENTATION-REGISTER-v0.1_RU.md)
 
 ## Contact and updates
 
