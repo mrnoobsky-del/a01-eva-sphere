@@ -55,6 +55,18 @@ A-01 развивается как концепция и проект цифро
 - [Визуальные материалы бренда](brand/assets/README_RU.md)
 - [Как присоединиться к проекту](CONTRIBUTING_RU.md)
 
+## EVA SnowFlow — зимняя дорожная инфраструктура
+
+- [Единый комплект и статус](docs/A01-SNOW-00-EVA-SNOWFLOW-PACKAGE-v0.1_RU.md)
+- [Геометрия покрытия и скосы](docs/A01-SNOW-02-SURFACE-GEOMETRY-DRAINAGE-v0.1_RU.md)
+- [Тепло, гидравлика и водоотвод](docs/A01-SNOW-03-THERMAL-HYDRAULIC-BASIS-v0.1_RU.md)
+- [Датчики, автоматика и безопасность](docs/A01-SNOW-04-SENSORS-CONTROL-SAFETY-v0.1_RU.md)
+- [Исследование GitHub-решений](docs/A01-SNOW-05-OPEN-SOURCE-TOOLCHAIN-v0.1_RU.md)
+- [План испытаний и приёмки](docs/A01-SNOW-06-VALIDATION-PLAN-v0.1_RU.md)
+- [Индекс документации](docs/DOCUMENTATION-INDEX.md)
+
+SnowFlow — предпроектная концепция. Она не означает, что дорожное покрытие или система снеготаяния построены, рассчитаны или испытаны.
+
 ## Основная цифровая сборка
 
 - [A-01 v4.9.3 — режим исследования объектов и целевой 120 Hz](digital-twin/eva-sphere-a01-v493-120hz-unobstructed-study.html)
