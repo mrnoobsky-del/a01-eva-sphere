@@ -132,3 +132,19 @@ The reference cassette remains a concept. Its construction details and verificat
 
 **Baseline:** no intentionally added fragrance in shared spaces. The Atlas is an informational design prototype; no scent hardware, HVAC system or personal health data is connected.
 
+
+
+## EVA SnowFlow — зимняя дорожная инфраструктура
+
+- [A01-SNOW-00 — единый комплект EVA SnowFlow](A01-SNOW-00-EVA-SNOWFLOW-PACKAGE-v0.1_RU.md)
+- [A01-SNOW-01 — Design Basis и системная архитектура](A01-SNOW-01-DESIGN-BASIS-v0.1_RU.md)
+- [A01-SNOW-02 — геометрия покрытия, скосы и боковой сбор снега](A01-SNOW-02-SURFACE-GEOMETRY-DRAINAGE-v0.1_RU.md)
+- [A01-SNOW-03 — тепловой расчёт, гидравлика и водоотвод](A01-SNOW-03-THERMAL-HYDRAULIC-BASIS-v0.1_RU.md)
+- [A01-SNOW-04 — датчики, автоматика и безопасность](A01-SNOW-04-SENSORS-CONTROL-SAFETY-v0.1_RU.md)
+- [A01-SNOW-05 — аудит GitHub/open-source решений](A01-SNOW-05-OPEN-SOURCE-TOOLCHAIN-v0.1_RU.md)
+- [A01-SNOW-06 — моделирование, испытания и приёмка](A01-SNOW-06-VALIDATION-PLAN-v0.1_RU.md)
+- [Реестр требований SnowFlow (CSV)](A01-SNOW-REQUIREMENTS-v0.1_RU.csv)
+- [Реестр рисков SnowFlow (CSV)](A01-SNOW-RISK-REGISTER-v0.1_RU.csv)
+- [Концептуальная схема SnowFlow (SVG)](figures/A01-SNOWFLOW-CONCEPT-v0.1.svg)
+
+Комплект описывает концепцию и план инженерной проверки. Расчётные параметры, физический макет и эксплуатационная безопасность не подтверждены.
