@@ -142,6 +142,7 @@ No contribution should include credentials, API keys, personal data, private mes
 - [Open Commons Sponsorship page on Wix](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/a01-open-commons-sponsorship.html)
 - [Partner page source](digital-twin/a01-open-commons-sponsorship.html)
 - [Sketchfab asset register and integration plan (RU)](docs/A01-SKETCHFAB-ASSET-AND-IMPLEMENTATION-REGISTER-v0.1_RU.md)
+- [A-01 Asset Report JSON Schema](schemas/a01-asset-report-v0.1.schema.json)
 
 The Asset Lab inspects user-selected models locally in the browser; it does not download Sketchfab assets or upload model files to A-01 servers.
 
