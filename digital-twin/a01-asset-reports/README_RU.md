@@ -4,9 +4,11 @@
 
 ## Runtime-модели
 
-- [Delivery Robot runtime GLB](../a01-assets/delivery-robot-runtime-v0.1.glb)
-- [Axiom Starliner runtime GLB](../a01-assets/axiom-starliner-runtime-v0.1.glb)
-- [Отдельная тестовая сцена](../a01-asset-test-scene-v0.1.html)
+Производные GLB-копии входят в отдельный архив `a01-asset-test-scene-release-v0.1.zip`, переданный вместе с этим отчётом. Бинарные файлы не размещены в публичном GitHub/Wix каталоге: карточку лицензии Starliner ещё требуется сверить с источником, а атрибуция Bento содержит неразрешённое примечание о credit Eric. После проверки прав ассеты можно отдельно разместить в репозитории или CDN.
+
+- Файл: `delivery-robot-runtime-v0.1.glb`
+- Файл: `axiom-starliner-runtime-v0.1.glb`
+- [Отдельная тестовая сцена](../a01-asset-test-scene-v0.1.html) — выбирайте соответствующий GLB локально.
 
 ## Отчёты
 
