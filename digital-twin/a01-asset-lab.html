@@ -154,7 +154,7 @@ const viewport = $("viewport");
 const dropZone = $("dropZone");
 const emptyState = $("emptyState");
 let renderer, scene, camera, controls, loader, root = null, mixer = null, activeAction = null, clips = [];
-let currentFile = null, metrics = null, frameReady = false;
+let currentFile = null, currentAssetBytes = 0, metrics = null, frameReady = false;
 let materials = [];
 let folderAssetMap = new Map();
 let assetObjectUrls = [];
@@ -424,7 +424,7 @@ function prepareModel(gltf) {
 
   $("modelName").textContent = currentFile ? currentFile.name : "GLB-модель";
   $("modelDimensions").textContent = "Исходный размер: " + size.x.toFixed(3) + " × " + size.y.toFixed(3) + " × " + size.z.toFixed(3) + " условных единиц";
-  $("fileMeta").textContent = currentFile ? currentFile.name + " · " + formatBytes(currentFile.size) : "Модель загружена";
+  $("fileMeta").textContent = currentFile ? currentFile.name + " · " + formatBytes(currentAssetBytes || currentFile.size) : "Модель загружена";
   emptyState.classList.add("hidden");
   $("resetView").disabled = false;
   $("removeModel").disabled = false;
@@ -485,7 +485,9 @@ async function loadFile(file, folderFiles) {
     const gltf = await new Promise((resolve, reject) => loader.parse(source, basePath, resolve, reject));
     cleanupModel();
     currentFile = file;
+    currentAssetBytes = totalBytes;
     metrics = analyzeModel(gltf, file);
+    metrics.file.bytes = totalBytes;
     prepareModel(gltf);
     clearAssetUrls();
     setStatus("Модель загружена", "good");
@@ -555,6 +557,7 @@ $("removeModel").addEventListener("click", () => {
   $("modelName").textContent = "Модель не выбрана";
   $("modelDimensions").textContent = "Габариты появятся после загрузки";
   $("fileMeta").textContent = "Нет загруженного файла";
+  currentAssetBytes = 0;
   setStatus("Ожидание GLB-файла");
 });
 $("wireframe").addEventListener("change", (event) => {
