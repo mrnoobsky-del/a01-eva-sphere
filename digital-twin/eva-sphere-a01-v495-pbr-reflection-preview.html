@@ -4767,7 +4767,7 @@ function setExteriorMode(enabled){
   controls.minDistance=15;controls.maxDistance=112;controls.minPolarAngle=.04;controls.maxPolarAngle=Math.PI*.49;controls.autoRotate=false;
   cameraFlight={from:camera.position.clone(),to:new THREE.Vector3(30,20.5,37),fromTarget:controls.target.clone(),toTarget:new THREE.Vector3(0,4.7,0),start:performance.now(),duration:1050};
  }else{
-  scene.background=null;scene.environment=interiorEnvironmentTarget?.texture||exteriorSkyTexture;scene.environmentIntensity=interiorEnvironmentTarget?.texture?.isTexture?.()? .92 : .72;renderer.shadowMap.enabled=false;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=false;scene.fog=new THREE.FogExp2(uiTheme==='light'?0xe9eeec:0x050505,uiTheme==='light'?.010:.014);
+  scene.background=null;scene.environment=interiorEnvironmentTarget?.texture||exteriorSkyTexture;scene.environmentIntensity=interiorEnvironmentTarget? .92 : .72;renderer.shadowMap.enabled=false;renderer.shadowMap.autoUpdate=false;renderer.shadowMap.needsUpdate=false;scene.fog=new THREE.FogExp2(uiTheme==='light'?0xe9eeec:0x050505,uiTheme==='light'?.010:.014);
   controls.minDistance=7.8;controls.maxDistance=52;controls.minPolarAngle=.16;controls.maxPolarAngle=Math.PI*.48;controls.autoRotate=false;
   cameraFlight={from:camera.position.clone(),to:new THREE.Vector3(22.5,17.5,27.8),fromTarget:controls.target.clone(),toTarget:new THREE.Vector3(0,5.05,0),start:performance.now(),duration:850};
  }
