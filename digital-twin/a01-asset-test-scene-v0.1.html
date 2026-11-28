@@ -337,11 +337,17 @@ async function loadModel(key,localFile=null){
   $("emptyState").querySelector("p").textContent="Файл проверяется и загружается в изолированную сцену.";
   $("fitButton").disabled=true;$("resetButton").disabled=true;$("clearButton").disabled=true;
   status("Загрузка "+ASSETS[key].file+"…");
+  if(!localFile){
+    $("emptyState").classList.remove("hidden");
+    $("emptyState").querySelector("h2").textContent="Нужен локальный GLB";
+    $("emptyState").querySelector("p").textContent="Бинарные runtime-файлы не размещены на этом хостинге. Скачайте runtime GLB из комплекта A-01 Asset Audit Pack и нажмите «Выбрать локальный GLB».";
+    status("Выберите локальный GLB-файл", "warn");
+    $("fileLabel").textContent="Локальный runtime GLB · обработка на устройстве";
+    return;
+  }
   try{
-    const source=localFile||ASSETS[key].url;
-    const buffer=localFile?await localFile.arrayBuffer():await (await fetch(source,{cache:"no-store"})).arrayBuffer();
-    if(!localFile && !buffer.byteLength)throw new Error("Пустой ответ сервера");
-    const fileInfo=localFile||{name:ASSETS[key].file,size:buffer.byteLength};
+    const buffer=await localFile.arrayBuffer();
+    const fileInfo=localFile;
     loader.parse(buffer,"",gltf=>{
       try{
         root=gltf.scene;
@@ -448,7 +454,7 @@ function init(){
   new ResizeObserver(resize).observe(viewport);
   window.addEventListener("visibilitychange",()=>{if(document.hidden&&action&&!action.paused)setAnimation(false);});
   requestRender();
-  setStatus("Выберите модель и загрузите локальный GLB-файл для просмотра", "warn");
+  status("Ожидание локального GLB-файла", "warn");
 }
 init();
 </script>
