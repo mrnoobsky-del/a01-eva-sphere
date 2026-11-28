@@ -42,6 +42,7 @@ W-01 remains M0 / proposed / not calculated. Fixture quantities, flows, pressure
 
 ## Energy, grid and wireless infrastructure
 - [EV-POWER-INJECTION-01 — Активная подпитка электрического потока и усилительные узлы (RU)](EV-POWER-INJECTION-01-active-power-injection-nodes-v0.1_RU.md)
+- [EV-CRYSTAL-OPTICS-01 — Фасеточный алмазный ИК-узел и управление светом (RU)](EV-CRYSTAL-OPTICS-01-faceted-diamond-infrared-light-engine-v0.1_RU.md)
 - [EV-LIQUID-ENERGY-01 — Жидкие энергоносители, электролиты и энергетические контуры (RU)](EV-LIQUID-ENERGY-01-liquid-energy-carriers-v0.1_RU.md)
 - [EV-CARRIER-01 — Альтернативные энергоносители и совместимость с существующей инфраструктурой (RU)](EV-CARRIER-01-alternative-energy-carriers-infrastructure-compatibility-v0.1_RU.md)
 
