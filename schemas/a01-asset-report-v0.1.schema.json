@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mrnoobsky-del/a01-eva-sphere/blob/main/schemas/a01-asset-report-v0.1.schema.json",
+  "title": "A-01 Asset Lab Report",
+  "description": "Report exported locally by A-01 Asset Lab v0.1 after inspecting a GLB or unpacked glTF asset.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "createdAt",
+    "application",
+    "runtime",
+    "source",
+    "attribution",
+    "review"
+  ],
+  "properties": {
+    "schema": {
+      "const": "A01.AssetLab.Report.v0.1"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "application": {
+      "const": "A-01 Asset Lab v0.1"
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["three", "browser", "devicePixelRatio"],
+      "properties": {
+        "three": { "type": "string" },
+        "browser": { "type": "string" },
+        "devicePixelRatio": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "triangles",
+        "vertices",
+        "meshes",
+        "materials",
+        "textures",
+        "textureDetails",
+        "animations",
+        "sourceDimensions"
+      ],
+      "properties": {
+        "file": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "bytes", "type"],
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "bytes": { "type": "integer", "minimum": 0 },
+            "type": { "type": "string" }
+          }
+        },
+        "triangles": { "type": "integer", "minimum": 0 },
+        "vertices": { "type": "integer", "minimum": 0 },
+        "meshes": { "type": "integer", "minimum": 0 },
+        "materials": { "type": "integer", "minimum": 0 },
+        "textures": { "type": "integer", "minimum": 0 },
+        "textureDetails": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "width", "height", "colorSpace"],
+            "properties": {
+              "name": { "type": "string" },
+              "width": { "type": ["integer", "null"], "minimum": 1 },
+              "height": { "type": ["integer", "null"], "minimum": 1 },
+              "colorSpace": { "type": "string" }
+            }
+          }
+        },
+        "animations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "duration", "tracks"],
+            "properties": {
+              "name": { "type": "string" },
+              "duration": { "type": "number", "minimum": 0 },
+              "tracks": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "sourceDimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["x", "y", "z"],
+          "properties": {
+            "x": { "type": "number", "minimum": 0 },
+            "y": { "type": "number", "minimum": 0 },
+            "z": { "type": "number", "minimum": 0 }
+          }
+        }
+      }
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "author", "sourceUrl", "license", "changes"],
+      "properties": {
+        "title": { "type": "string" },
+        "author": { "type": "string" },
+        "sourceUrl": { "type": "string", "format": "uri" },
+        "license": { "type": "string" },
+        "changes": { "type": "string" }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "browserLoaded",
+        "integratedIntoA01PrimaryScene",
+        "licenseVerifiedByTool",
+        "mobileAcceptance"
+      ],
+      "properties": {
+        "browserLoaded": { "type": "boolean" },
+        "integratedIntoA01PrimaryScene": { "const": false },
+        "licenseVerifiedByTool": { "const": false },
+        "mobileAcceptance": { "type": "string" }
+      }
+    }
+  }
+}
