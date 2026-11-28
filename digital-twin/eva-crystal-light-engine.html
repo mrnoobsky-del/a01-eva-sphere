@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090d13">
+<title>Eva Crystal Light Engine — оптический стенд</title>
+<style>
+:root{color-scheme:dark;--bg:#090d13;--panel:rgba(15,22,31,.86);--line:rgba(179,207,224,.14);--muted:#91a3b2;--text:#edf4f8;--cyan:#79d9f2;--gold:#d9ae58}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:radial-gradient(ellipse at 52% 43%,#142331 0%,#0b111a 48%,#070a0f 100%);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text)}
+#stage{position:fixed;inset:0}
+canvas{display:block;width:100%;height:100%;outline:none}
+.topbar{position:fixed;top:18px;left:20px;right:20px;display:flex;align-items:center;justify-content:space-between;pointer-events:none;z-index:5}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:36px;height:36px;border:1px solid rgba(121,217,242,.45);border-radius:12px;display:grid;place-items:center;color:var(--cyan);font-weight:700;box-shadow:0 0 28px rgba(71,188,224,.12)}
+.brand strong{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+.brand span{display:block;color:var(--muted);font-size:11px;letter-spacing:.04em}
+.status{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(10,15,22,.62);backdrop-filter:blur(18px);color:#b8c6cf;font-size:11px;letter-spacing:.06em}
+.panel{position:fixed;z-index:4;top:76px;left:20px;width:294px;max-height:calc(100vh - 100px);overflow:auto;padding:17px;border:1px solid var(--line);border-radius:19px;background:var(--panel);backdrop-filter:blur(22px);box-shadow:0 18px 60px rgba(0,0,0,.26)}
+.panel.right{left:auto;right:20px;width:244px}
+h1{font-size:16px;line-height:1.3;margin:0 0 5px;font-weight:650}
+.sub{font-size:11px;color:var(--muted);margin:0 0 16px}
+.section{padding-top:13px;margin-top:13px;border-top:1px solid var(--line)}
+.section:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.label{display:flex;align-items:center;justify-content:space-between;color:#c5d2da;font-size:11px;margin-bottom:8px}
+.value{color:var(--cyan);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:#75cfe9;cursor:pointer}
+.range-hint{display:flex;justify-content:space-between;color:#778b99;font-size:10px;margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:#182431;border:1px solid #2a3d4c;color:#9eb4c1;border-radius:9px;padding:6px 9px;font-size:11px;cursor:pointer}
+.chip.active{background:rgba(203,157,73,.15);border-color:rgba(217,174,88,.62);color:#f1cc7a}
+.actions{display:flex;gap:7px;margin-top:13px}
+button{font:inherit}
+.action{flex:1;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:#1b2a36;color:#dbe9ef;cursor:pointer;font-size:11px}
+.action.primary{background:#d2a74e;border-color:#e8c36f;color:#17130b;font-weight:700}
+.action:hover,.chip:hover{filter:brightness(1.14)}
+.metric{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid rgba(179,207,224,.08);font-size:11px}
+.metric span{color:var(--muted)}
+.metric b{font-variant-numeric:tabular-nums;color:#e5eff4;font-weight:600}
+.legend{display:grid;gap:7px;margin-top:13px;color:#a9bbc5;font-size:10px}
+.key{display:flex;align-items:center;gap:8px}
+.swatch{width:19px;height:3px;border-radius:5px;background:var(--cyan)}
+.swatch.gold{background:var(--gold)}
+.swatch.out{background:#b6f5cf}
+.note{font-size:10px;color:#8295a2;line-height:1.5;margin-top:14px}
+.footer{position:fixed;bottom:17px;left:50%;transform:translateX(-50%);z-index:3;padding:7px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(8,13,19,.65);backdrop-filter:blur(16px);font-size:10px;color:#8fa2af;white-space:nowrap}
+#toast{position:fixed;z-index:8;left:50%;top:67px;transform:translateX(-50%);background:#183040;border:1px solid rgba(121,217,242,.35);color:#d9f6ff;padding:8px 13px;border-radius:10px;font-size:11px;opacity:0;transition:opacity .2s;pointer-events:none}
+#toast.show{opacity:1}
+@media(max-width:900px){.panel{left:12px;top:auto;bottom:58px;width:min(270px,calc(50vw - 18px));max-height:52vh;padding:13px}.panel.right{left:auto;right:12px;width:min(220px,calc(50vw - 18px));top:76px;bottom:auto;max-height:36vh}.topbar{left:13px;right:13px;top:12px}.footer{bottom:10px}.status{font-size:9px}}
+@media(max-width:560px){.brand strong{font-size:11px}.brand span{font-size:9px}.mark{width:30px;height:30px}.panel{width:calc(100vw - 24px);left:12px;right:12px;bottom:54px;max-height:39vh}.panel.right{top:auto;bottom:calc(39vh + 62px);left:12px;right:12px;width:calc(100vw - 24px);max-height:19vh;padding:10px 13px}.panel.right .sub{display:none}.panel.right h1{font-size:13px}.panel.right .metric{display:inline-flex;width:48%;padding:4px 0;margin-right:1%}.panel.right .legend{display:none}.panel.right .note{display:none}.section{padding-top:9px;margin-top:9px}.sub{margin-bottom:10px}.footer{font-size:9px}}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="topbar">
+  <div class="brand"><div class="mark">EV</div><div><strong>Eva Crystal Light Engine</strong><span>faceted IR optics · study v0.1</span></div></div>
+  <div class="status">DIGITAL MODEL · NOT A MEASUREMENT</div>
+</div>
+<div class="panel">
+  <h1>Оптическая геометрия</h1>
+  <p class="sub">Кристалл-пирамида · внутренние отражения · выборочное золочение</p>
+  <div class="section">
+    <div class="label"><span>Угол ввода луча</span><b class="value" id="angleVal">0°</b></div>
+    <input id="angle" type="range" min="-25" max="25" step="1" value="0">
+    <div class="range-hint"><span>−25°</span><span>0°</span><span>+25°</span></div>
+  </div>
+  <div class="section">
+    <div class="label"><span>Показатель преломления n</span><b class="value" id="indexVal">2.40</b></div>
+    <input id="index" type="range" min="2.30" max="2.48" step="0.01" value="2.40">
+    <div class="range-hint"><span>2.30</span><span>условная настройка</span><span>2.48</span></div>
+  </div>
+  <div class="section">
+    <div class="label"><span>Отражение золотой грани</span><b class="value" id="goldVal">98.5%</b></div>
+    <input id="gold" type="range" min="90" max="99.9" step="0.1" value="98.5">
+    <div class="range-hint"><span>90%</span><span>условная настройка</span><span>99.9%</span></div>
+  </div>
+  <div class="section">
+    <div class="label"><span>Качество поверхности TIR</span><b class="value" id="surfaceVal">99.7%</b></div>
+    <input id="surface" type="range" min="97" max="99.99" step="0.01" value="99.7">
+    <div class="range-hint"><span>97%</span><span>эффективность на проход</span><span>99.99%</span></div>
+  </div>
+  <div class="section">
+    <div class="label"><span>Золотое покрытие граней</span><b class="value" id="facesCount">2 грани</b></div>
+    <div class="chips" id="faces">
+      <button class="chip active" data-face="0">A · левая</button>
+      <button class="chip" data-face="1">B · входная</button>
+      <button class="chip active" data-face="2">C · правая</button>
+      <button class="chip" data-face="3">D · задняя</button>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="action primary" id="retrace">Перестроить луч</button>
+    <button class="action" id="reset">Сбросить</button>
+  </div>
+  <div class="note">Параметры n и отражения заданы как демонстрационные. Точные значения зависят от длины волны, материала, полировки и реального покрытия.</div>
+</div>
+<div class="panel right">
+  <h1>Результат трассировки</h1>
+  <p class="sub">Геометрическая модель с упрощённым энергетическим учётом</p>
+  <div class="metric"><span>События TIR</span><b id="tirCount">—</b></div>
+  <div class="metric"><span>Отражения от золота</span><b id="goldCount">—</b></div>
+  <div class="metric"><span>Доля на выходе</span><b id="outputPower">—</b></div>
+  <div class="metric"><span>Потери на входе</span><b id="entryLoss">—</b></div>
+  <div class="metric"><span>Статус луча</span><b id="rayStatus">—</b></div>
+  <div class="legend">
+    <div class="key"><i class="swatch"></i>Полное внутреннее отражение</div>
+    <div class="key"><i class="swatch gold"></i>Отражение от золотой грани</div>
+    <div class="key"><i class="swatch out"></i>Выходящий луч</div>
+  </div>
+  <div class="note">Доля на выходе — оценка после входного френелевского отражения и заданных потерь на проходах. Не является КПД реального устройства.</div>
+</div>
+<div id="toast"></div>
+<div class="footer">Перетащите для обзора · колесо мыши для масштаба · без авто-вращения</div>
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js";
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/controls/OrbitControls.js";
+
+const mount = document.getElementById("stage");
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x0a1119, 0.045);
+const camera = new THREE.PerspectiveCamera(42, innerWidth/innerHeight, 0.1, 100);
+camera.position.set(4.4,3.0,5.5);
+const renderer = new THREE.WebGLRenderer({antialias:true,alpha:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.18;
+mount.appendChild(renderer.domElement);
+const controls = new OrbitControls(camera,renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = .06;
+controls.target.set(0,.05,0);
+controls.autoRotate = false;
+controls.minDistance = 3.1;
+controls.maxDistance = 11;
+
+scene.add(new THREE.HemisphereLight(0xb9e8ff,0x18202b,1.45));
+const key = new THREE.DirectionalLight(0xffffff,2.2); key.position.set(4,6,5); scene.add(key);
+const rim = new THREE.PointLight(0x53c9f2,38,9); rim.position.set(-3,1,2); scene.add(rim);
+const warm = new THREE.PointLight(0xeab95b,26,8); warm.position.set(2,3,-3); scene.add(warm);
+
+const grid = new THREE.GridHelper(10,20,0x284353,0x1b2d39);
+grid.position.y=-1.17; grid.material.transparent=true; grid.material.opacity=.42; scene.add(grid);
+const floor = new THREE.Mesh(new THREE.CircleGeometry(3.2,80),new THREE.MeshBasicMaterial({color:0x10212c,transparent:true,opacity:.22,side:THREE.DoubleSide}));
+floor.rotation.x=-Math.PI/2; floor.position.y=-1.165; scene.add(floor);
+
+const verts = [
+ new THREE.Vector3(0,1.55,0),
+ new THREE.Vector3(-1,-1,-1),
+ new THREE.Vector3(1,-1,-1),
+ new THREE.Vector3(1,-1,1),
+ new THREE.Vector3(-1,-1,1)
+];
+const faces = [
+ {v:[0,1,4],name:"A",label:"левая"},
+ {v:[0,4,3],name:"B",label:"входная"},
+ {v:[0,3,2],name:"C",label:"правая"},
+ {v:[0,2,1],name:"D",label:"задняя"},
+ {v:[1,2,3],name:"E",label:"основание 1"},
+ {v:[1,3,4],name:"F",label:"основание 2"}
+];
+function outwardNormal(face){
+ const a=verts[face.v[0]],b=verts[face.v[1]],c=verts[face.v[2]];
+ const n=new THREE.Vector3().subVectors(b,a).cross(new THREE.Vector3().subVectors(c,a)).normalize();
+ const center=new THREE.Vector3().add(a).add(b).add(c).multiplyScalar(1/3);
+ if(n.dot(center)<0)n.negate();
+ return n;
+}
+faces.forEach(f=>f.normal=outwardNormal(f));
+
+const crystalGroup = new THREE.Group(); scene.add(crystalGroup);
+const crystalMaterial = new THREE.MeshPhysicalMaterial({
+ color:0x78d9ef,metalness:0,roughness:.055,transmission:.58,thickness:.38,ior:2.4,
+ transparent:true,opacity:.34,side:THREE.DoubleSide,depthWrite:false,clearcoat:1,clearcoatRoughness:.08
+});
+const goldMaterial = new THREE.MeshStandardMaterial({color:0xc99a42,metalness:.94,roughness:.22,side:THREE.DoubleSide});
+const edgeMaterial = new THREE.LineBasicMaterial({color:0x9eeaff,transparent:true,opacity:.58});
+const faceMeshes=[];
+faces.forEach((f,i)=>{
+ const points=f.v.map(k=>verts[k]);
+ const g=new THREE.BufferGeometry().setFromPoints(points);
+ g.setIndex([0,1,2]); g.computeVertexNormals();
+ const m=new THREE.Mesh(g,crystalMaterial);
+ m.userData.face=i; crystalGroup.add(m); faceMeshes.push(m);
+});
+const edges=[];
+const seen=new Set();
+faces.forEach(f=>{
+ for(let i=0;i<3;i++){
+  const a=f.v[i],b=f.v[(i+1)%3],key=[Math.min(a,b),Math.max(a,b)].join("-");
+  if(!seen.has(key)){seen.add(key);edges.push([verts[a],verts[b]]);}
+ }
+});
+edges.forEach(e=>{
+ const g=new THREE.BufferGeometry().setFromPoints(e);
+ crystalGroup.add(new THREE.Line(g,edgeMaterial));
+});
+const apexGlow=new THREE.Mesh(new THREE.SphereGeometry(.035,16,12),new THREE.MeshBasicMaterial({color:0xd8f7ff}));
+apexGlow.position.copy(verts[0]); crystalGroup.add(apexGlow);
+
+const beamGroup = new THREE.Group(); scene.add(beamGroup);
+let pathPoints=[];
+let segmentKinds=[];
+let pulse;
+let pulseData=[];
+let rayPower=0;
+let goldFaces=new Set([0,2]);
+
+function dot(a,b){return a.dot(b);}
+function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
+function fresnelUnpolarized(n1,n2,cos1,cos2){
+ const rs=(n1*cos1-n2*cos2)/(n1*cos1+n2*cos2);
+ const rp=(n2*cos1-n1*cos2)/(n2*cos1+n1*cos2);
+ return (rs*rs+rp*rp)/2;
+}
+function refractInto(d,nOut,n1,n2){
+ const cos1=clamp(-dot(d,nOut),0,1);
+ const eta=n1/n2;
+ const k=1-eta*eta*(1-cos1*cos1);
+ if(k<0)return null;
+ const cos2=Math.sqrt(k);
+ const out=d.clone().multiplyScalar(eta).add(nOut.clone().multiplyScalar(eta*cos1-cos2)).normalize();
+ return {direction:out,cos1,cos2,reflectance:fresnelUnpolarized(n1,n2,cos1,cos2)};
+}
+function refractOut(d,nOut,n1,n2){
+ const cos1=clamp(dot(d,nOut),0,1);
+ const eta=n1/n2;
+ const k=1-eta*eta*(1-cos1*cos1);
+ if(k<0)return null;
+ const cos2=Math.sqrt(k);
+ const out=d.clone().multiplyScalar(eta).add(nOut.clone().multiplyScalar(cos2-eta*cos1)).normalize();
+ return {direction:out,cos1,cos2,reflectance:fresnelUnpolarized(n1,n2,cos1,cos2)};
+}
+function rayTriangle(origin,dir,a,b,c){
+ const edge1=new THREE.Vector3().subVectors(b,a),edge2=new THREE.Vector3().subVectors(c,a);
+ const h=new THREE.Vector3().crossVectors(dir,edge2),det=dot(edge1,h);
+ if(Math.abs(det)<1e-8)return null;
+ const inv=1/det;
+ const s=new THREE.Vector3().subVectors(origin,a);
+ const u=inv*dot(s,h); if(u< -1e-7||u>1+1e-7)return null;
+ const q=new THREE.Vector3().crossVectors(s,edge1);
+ const v=inv*dot(dir,q); if(v< -1e-7||u+v>1+1e-7)return null;
+ const t=inv*dot(edge2,q); if(t<1e-5)return null;
+ return {t,point:origin.clone().addScaledVector(dir,t)};
+}
+function nextHit(origin,dir,excludeFace){
+ let best=null;
+ faces.forEach((f,i)=>{
+  if(i===excludeFace)return;
+  const a=verts[f.v[0]],b=verts[f.v[1]],c=verts[f.v[2]];
+  const hit=rayTriangle(origin,dir,a,b,c);
+  if(hit&&(!best||hit.t<best.t))best={...hit,face:i};
+ });
+ return best;
+}
+function clearBeam(){
+ while(beamGroup.children.length){
+  const o=beamGroup.children.pop();
+  if(o.geometry)o.geometry.dispose();
+  if(o.material){if(Array.isArray(o.material))o.material.forEach(m=>m.dispose());else o.material.dispose();}
+ }
+ pulse=null; pulseData=[];
+}
+function addLine(points,color,width=1){
+ if(points.length<2)return;
+ const geometry=new THREE.BufferGeometry().setFromPoints(points);
+ const material=new THREE.LineBasicMaterial({color,transparent:true,opacity:.95,linewidth:width});
+ const line=new THREE.Line(geometry,material); beamGroup.add(line);
+}
+function addMarker(point,color,r=.045){
+ const mesh=new THREE.Mesh(new THREE.SphereGeometry(r,16,12),new THREE.MeshBasicMaterial({color}));
+ mesh.position.copy(point); beamGroup.add(mesh);
+}
+function trace(){
+ clearBeam();
+ const nDiamond=Number(document.getElementById("index").value);
+ const goldR=Number(document.getElementById("gold").value)/100;
+ const surfaceR=Number(document.getElementById("surface").value)/100;
+ const angle=Number(document.getElementById("angle").value)*Math.PI/180;
+ crystalMaterial.ior=nDiamond;
+ const start=new THREE.Vector3(Math.sin(angle)*.08,0.12,3.05);
+ let direction=new THREE.Vector3(Math.sin(angle),0,-Math.cos(angle)).normalize();
+ const first=nextHit(start,direction,-1);
+ if(!first){setStatus(0,0,0,0,"нет попадания");return;}
+ const entryFace=faces[first.face];
+ const entry=first.point;
+ const incoming=direction.clone();
+ const entered=refractInto(direction,entryFace.normal,1,nDiamond);
+ pathPoints=[start.clone(),entry.clone()];
+ segmentKinds=["in"];
+ addMarker(entry,0x9de9fb,.055);
+ if(!entered){setStatus(0,0,0,0,"нет ввода");return;}
+ let energy=1-entered.reflectance;
+ direction=entered.direction;
+ let origin=entry.clone().addScaledVector(direction,1e-4);
+ let exclude=first.face;
+ let tir=0,gold=0,exitPoint=null,exitDirection=null,exitEnergy=0,status="заперт / лимит";
+ for(let step=0;step<32;step++){
+  const hit=nextHit(origin,direction,exclude);
+  if(!hit)break;
+  const f=faces[hit.face],normal=f.normal;
+  pathPoints.push(hit.point.clone());
+  const isGold=goldFaces.has(hit.face);
+  if(isGold){
+   gold++;
+   segmentKinds.push("gold");
+   energy*=goldR;
+   addMarker(hit.point,0xe7b65b,.047);
+   direction.reflect(normal);
+  }else{
+   const exited=refractOut(direction,normal,nDiamond,1);
+   if(!exited){
+    tir++;
+    segmentKinds.push("tir");
+    energy*=surfaceR;
+    addMarker(hit.point,0x7bdcf5,.038);
+    direction.reflect(normal);
+   }else{
+    segmentKinds.push("out");
+    exitPoint=hit.point.clone();
+    exitDirection=exited.direction.clone();
+    exitEnergy=energy*(1-exited.reflectance);
+    energy*=exited.reflectance;
+    status="выход найден";
+    addMarker(hit.point,0xb6f5cf,.06);
+    pathPoints.push(hit.point.clone().addScaledVector(exitDirection,.8));
+    segmentKinds.push("out");
+    break;
+   }
+  }
+  origin=hit.point.clone().addScaledVector(direction,1e-4);
+  exclude=hit.face;
+ }
+ let segStart=0;
+ for(let i=0;i<segmentKinds.length;i++){
+  const kind=segmentKinds[i];
+  const a=pathPoints[i],b=pathPoints[i+1];
+  if(!a||!b)continue;
+  let color=0x73d9f3;
+  if(kind==="gold")color=0xe6b04e;
+  if(kind==="out")color=0xb6f5cf;
+  addLine([a,b],color);
+  pulseData.push({a:a.clone(),b:b.clone(),kind});
+ }
+ if(exitPoint&&exitDirection){
+  const receiverPos=exitPoint.clone().addScaledVector(exitDirection,1.05);
+  const receiver=new THREE.Group(); receiver.position.copy(receiverPos);
+  const plate=new THREE.Mesh(new THREE.BoxGeometry(.34,.22,.045),new THREE.MeshStandardMaterial({color:0x9fd6d0,metalness:.58,roughness:.26,emissive:0x1c645d,emissiveIntensity:.28}));
+  receiver.add(plate);
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(.22,.012,8,32),new THREE.MeshBasicMaterial({color:0x8cf0d0}));
+  ring.position.z=.03; receiver.add(ring); receiver.lookAt(receiverPos.clone().add(exitDirection)); beamGroup.add(receiver);
+  addLine([exitPoint,receiverPos],0xb6f5cf);
+ }
+ rayPower=exitEnergy;
+ document.getElementById("tirCount").textContent=String(tir);
+ document.getElementById("goldCount").textContent=String(gold);
+ document.getElementById("outputPower").textContent=(exitEnergy*100).toFixed(2)+"%";
+ document.getElementById("entryLoss").textContent=(entered.reflectance*100).toFixed(2)+"%";
+ document.getElementById("rayStatus").textContent=status;
+ document.getElementById("angleVal").textContent=(Number(document.getElementById("angle").value)>0?"+":"")+document.getElementById("angle").value+"°";
+ document.getElementById("indexVal").textContent=nDiamond.toFixed(2);
+ document.getElementById("goldVal").textContent=(goldR*100).toFixed(1)+"%";
+ document.getElementById("surfaceVal").textContent=(surfaceR*100).toFixed(2)+"%";
+ document.getElementById("facesCount").textContent=goldFaces.size+" грани";
+ updateFaceMaterials();
+ if(!exitPoint)showToast("Луч не вышел в пределах 32 событий. Измените угол или покрытие.");
+}
+function setStatus(t,g,p,l,s){
+ document.getElementById("tirCount").textContent=String(t);
+ document.getElementById("goldCount").textContent=String(g);
+ document.getElementById("outputPower").textContent=(p*100).toFixed(2)+"%";
+ document.getElementById("entryLoss").textContent=(l*100).toFixed(2)+"%";
+ document.getElementById("rayStatus").textContent=s;
+}
+function updateFaceMaterials(){
+ faceMeshes.forEach((m,i)=>m.material=goldFaces.has(i)?goldMaterial:crystalMaterial);
+ document.querySelectorAll("[data-face]").forEach(btn=>btn.classList.toggle("active",goldFaces.has(Number(btn.dataset.face))));
+ document.getElementById("facesCount").textContent=goldFaces.size+" грани";
+}
+function showToast(message){
+ const toast=document.getElementById("toast");toast.textContent=message;toast.classList.add("show");
+ setTimeout(()=>toast.classList.remove("show"),1800);
+}
+document.querySelectorAll("[data-face]").forEach(btn=>btn.addEventListener("click",()=>{
+ const f=Number(btn.dataset.face);
+ if(goldFaces.has(f))goldFaces.delete(f);else goldFaces.add(f);
+ updateFaceMaterials();trace();
+}));
+["angle","index","gold","surface"].forEach(id=>document.getElementById(id).addEventListener("input",trace));
+document.getElementById("retrace").addEventListener("click",trace);
+document.getElementById("reset").addEventListener("click",()=>{
+ document.getElementById("angle").value=0;document.getElementById("index").value=2.4;
+ document.getElementById("gold").value=98.5;document.getElementById("surface").value=99.7;
+ goldFaces=new Set([0,2]);updateFaceMaterials();trace();showToast("Исходные параметры восстановлены");
+});
+trace();
+const clock=new THREE.Clock();
+function animate(){
+ requestAnimationFrame(animate);
+ const elapsed=clock.getElapsedTime();
+ if(pulseData.length&&pulse===null){
+  pulse=new THREE.Mesh(new THREE.SphereGeometry(.026,12,10),new THREE.MeshBasicMaterial({color:0xe1fbff}));
+  beamGroup.add(pulse);
+ }
+ if(pulse&&pulseData.length){
+  const total=pulseData.length;
+  const t=(elapsed*.22)%1*total;
+  const i=Math.min(total-1,Math.floor(t)),f=t-i;
+  pulse.position.lerpVectors(pulseData[i].a,pulseData[i].b,f);
+ }
+ controls.update();
+ renderer.render(scene,camera);
+}
+animate();
+addEventListener("resize",()=>{
+ camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();
+ renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);
+});
+</script>
+</body>
+</html>
