@@ -1,0 +1,67 @@
+{
+  "schema": "A01.AssetLab.Report.v0.1",
+  "createdAt": "2026-11-28T06:10:23Z",
+  "application": "A-01 Asset Lab v0.1",
+  "runtime": {
+    "three": "not used — offline GLB structural inspection",
+    "browser": "not used — offline inspection",
+    "devicePixelRatio": 1
+  },
+  "source": {
+    "file": {
+      "name": "delivery_robot.glb",
+      "bytes": 1915324,
+      "type": "model/gltf-binary"
+    },
+    "triangles": 5652,
+    "vertices": 8166,
+    "meshes": 1,
+    "materials": 1,
+    "textures": 3,
+    "textureDetails": [
+      {
+        "name": "baseColorTexture",
+        "width": 2048,
+        "height": 2048,
+        "colorSpace": "sRGB"
+      },
+      {
+        "name": "metallicRoughnessTexture",
+        "width": 1024,
+        "height": 1024,
+        "colorSpace": "Linear / NoColorSpace"
+      },
+      {
+        "name": "emissiveTexture",
+        "width": 2048,
+        "height": 2048,
+        "colorSpace": "sRGB"
+      }
+    ],
+    "animations": [
+      {
+        "name": "Animation",
+        "duration": 9.92,
+        "tracks": 11
+      }
+    ],
+    "sourceDimensions": {
+      "x": 0.5287,
+      "y": 0.6097,
+      "z": 1.1317
+    }
+  },
+  "attribution": {
+    "title": "Delivery robot",
+    "author": "Bento (@gostbento); model description requests credit to Eric — discrepancy not resolved",
+    "sourceUrl": "https://sketchfab.com/3d-models/delivery-robot-4dbac67355174751801fb1f6e8dc6230",
+    "license": "CC BY 4.0 stated in embedded glTF metadata; external license and attribution details not independently verified in this report",
+    "changes": "Derived runtime copy: base-color PNG converted to a 256-entry indexed palette at unchanged 2048×2048 resolution; primitive index accessor converted from UNSIGNED_INT to UNSIGNED_SHORT. Original source GLB retained unchanged."
+  },
+  "review": {
+    "browserLoaded": false,
+    "integratedIntoA01PrimaryScene": false,
+    "licenseVerifiedByTool": false,
+    "mobileAcceptance": "Not tested in a browser or on mobile. Offline GLB parsing only. devicePixelRatio=1 is a schema-valid placeholder, not a measured device value."
+  }
+}
