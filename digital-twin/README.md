@@ -2,20 +2,20 @@
 
 This directory contains the evolving A-01 digital workspace and software prototypes. A digital model is not evidence that physical systems have been built, commissioned or validated.
 
-## Current primary build — A-01 v4.9.3
+## Current primary build — A-01 v4.9.4
 
-A-01 v4.9.3 is the current primary integrated digital-twin build in GitHub `main`. It is based on the v4.9.2 aroma-atlas source and adds native requestAnimationFrame cadence (no fixed 60 Hz cap), default no-auto-rotation behavior, and an object-inspection layout intended to keep selected geometry visible. 120 Hz is a target on capable hardware, not a measured performance result.
+A-01 v4.9.4 is the current primary build in GitHub `main`. It preserves the v4.9.3 Three.js scene, requestAnimationFrame cadence, no-auto-rotation behavior, object-inspection layout, LOD, geometry batching and adaptive pixel ratio. It adds EVA Resource Loop, a local scenario model for water, food, electricity and reserve comparisons. Inputs are illustrative assumptions, not measurements. 120 Hz remains a hardware-dependent target, not a measured result.
 
-- [Primary HTML build v4.9.3](eva-sphere-a01-v493-120hz-unobstructed-study.html)
-- [Preserved v4.9.0 Wix HTML build](eva-sphere-a01-v490-wix-preview.html) — `https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/eva-sphere-a01-v490-quality-experience-preview.html`
-- [VibeShorts canonical original](eva-sphere-a01-v490-vibeshorts-original.html) — `https://vibeshorts.ru/evasphere/`
-- [EvaSphere canonical original](eva-sphere-a01-v490-evasphere-original.html) — `https://evasphere.usite.pro/`
-- [Russian documentation](README_RU_v490.md) · [Changelog](CHANGELOG_v490.md) · [Release notes](../releases/v4.9.0/RELEASE-NOTES_RU.md)
-- [Runtime and performance note](../performance/V490-RUNTIME-HARDENING_RU.md)
+- [Primary HTML build v4.9.4](eva-sphere-a01-v494-resource-loop.html)
+- [Russian documentation](README_RU_v494.md) · [Changelog](CHANGELOG_v494.md) · [Release notes](../releases/v4.9.4/RELEASE-NOTES_RU.md)
+- [EVA Resource Loop technical note](../docs/A01-RESOURCE-LOOP-DIGITAL-TWIN-v0.1_RU.md)
+- [GitHub analogue and license review](../docs/OPEN-SOURCE-ANALOGUES-REVIEW-v0.1_RU.md)
+- [Preserved v4.9.3 snapshot](eva-sphere-a01-v493-120hz-unobstructed-study.html)
 
-The release adds contextual Lottie for loading, first-visit welcome and the active shell-service demonstration; improves player fallback and cleanup; adds WebGL context recovery and a retryable startup error panel; removes the fixed 60 Hz cap from the active render loop; and improves welcome keyboard focus. Demand-driven rendering, adaptive pixel ratio, geometry batching, feature picking and LOD are retained. The public FPS overlay and rotation-test controls remain removed.
+The resource model runs locally in the browser. No sensors, live telemetry, building controllers or physical equipment commands are connected. It does not replace the existing Climate, Energy or Engineering modules.
 
-**Verification:** v4.9.3 JavaScript script blocks and embedded JSON were statically checked before publication. Browser/device acceptance of scene layout, WebGL, object-card placement, touch input and 60/90/120 Hz frame-time percentiles remains outstanding. No 120 FPS result is claimed. The v4.9.0 runtime checks remain historical evidence for that prior build.
+**Verification:** static HTML structure, unique IDs and scenario formula control values are checked for this release. Browser/device acceptance of WebGL, touch input, visual layout and frame-time percentiles remains a separate task. No 120 FPS result is claimed. The physical Sphere remains a concept, not a commissioned building.
+
 
 ## Preserved previous release — A-01 v4.1.4
 

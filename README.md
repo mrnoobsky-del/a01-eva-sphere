@@ -102,18 +102,18 @@ MODNET separates four assets: the module, the dock slot, the transport carrier a
 
 SnowFlow is a pre-design concept. No physical pavement system is claimed to be built, calculated, commissioned or tested.
 
-## Current primary digital-twin build
+## Current primary digital twin build
 
-**Performance programme:** [A-01 Performance — 60 FPS without visual quality loss](performance/README.md) · [P0 source review](performance/P0-STATIC-SOURCE-REVIEW-v4.0.0_RU.md) · [Browser baseline recorder](performance/baseline-recorder.js) · [Benchmark report template](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
+**Performance programme:** [A-01 performance notes](performance/README.md) · [Browser baseline recorder](performance/baseline-recorder.js) · [Benchmark report template](performance/BENCHMARK-REPORT-TEMPLATE_RU.md)
 
-- **A-01 v4.9.0 — Current Primary Digital Twin:** [Wix preview](digital-twin/eva-sphere-a01-v490-wix-preview.html) · [VibeShorts original](digital-twin/eva-sphere-a01-v490-vibeshorts-original.html) · [EvaSphere original](digital-twin/eva-sphere-a01-v490-evasphere-original.html)
-- [v4.9.0 documentation](digital-twin/README_RU_v490.md) · [Changelog](digital-twin/CHANGELOG_v490.md) · [Release notes](releases/v4.9.0/RELEASE-NOTES_RU.md)
-- **Preserved previous release:** [A-01 v4.1.4](digital-twin/eva-sphere-a01-v414-wix-preview.html) · [Documentation](digital-twin/README_RU_v414.md) · [Changelog](digital-twin/CHANGELOG_v414.md)
-- **Preserved previous scene snapshot:** [A-01 v4.1.3](digital-twin/eva-sphere-a01-v413-primary-digital-twin.html) · [Documentation](digital-twin/README_RU_v413.md) · [Changelog](digital-twin/CHANGELOG_v413.md)
-- **Preserved architecture foundation:** [A-01 v4.0.0](digital-twin/eva-sphere-a01-v400-primary-architecture-baseline.html) · [Documentation](digital-twin/README_RU_v400.md) · [Changelog](digital-twin/CHANGELOG_v400.md)
+- **A-01 v4.9.4 — current primary digital twin:** [Open the primary HTML build](digital-twin/eva-sphere-a01-v494-resource-loop.html)
+- [v4.9.4 Russian documentation](digital-twin/README_RU_v494.md) · [Changelog](digital-twin/CHANGELOG_v494.md) · [Release notes](releases/v4.9.4/RELEASE-NOTES_RU.md)
+- [EVA Resource Loop — scenario resource-balance model](docs/A01-RESOURCE-LOOP-DIGITAL-TWIN-v0.1_RU.md)
+- [GitHub analogue and license review](docs/OPEN-SOURCE-ANALOGUES-REVIEW-v0.1_RU.md)
+- [Preserved v4.9.3 primary snapshot](digital-twin/eva-sphere-a01-v493-120hz-unobstructed-study.html)
+- [Preserved earlier v4.9.0 build](digital-twin/eva-sphere-a01-v490-wix-preview.html)
 
-v4.9.0 extends the v4.1.4 interface and scene without overwriting prior snapshots. Static JavaScript/JSON/HTML and canonical metadata checks passed. Browser/device acceptance of the new Lottie lifecycle, WebGL recovery and 3D scene is still pending; the 60 Hz frame cap is not proof of 60 FPS. The physical Sphere remains a concept and is not represented as built or commissioned. GitHub publication does not automatically deploy to uCoz or VibeShorts.
-
+v4.9.4 retains the existing Three.js scene and adds EVA Resource Loop, a local illustrative scenario model for water, food, electricity and reserve comparisons. It is not connected to sensors, telemetry or building controls. Scenario inputs are not measured or calibrated. 120 Hz remains a target for compatible hardware, not a verified frame-rate result. The physical Sphere remains a concept, not a built facility. GitHub publication does not automatically deploy to Wix or uCoz; each destination is updated separately.
 
 
 ## Founder
