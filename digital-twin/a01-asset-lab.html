@@ -245,7 +245,7 @@ function initScene() {
 
   const assetManager = new THREE.LoadingManager();
   assetManager.setURLModifier((url) => {
-    const clean = decodeURIComponent(url).split("?")[0].replace(/^\\.\\//, "");
+    const clean = decodeURIComponent(url).split("?")[0].replace(/^\.\//, "");
     const file = folderAssetMap.get(clean) || folderAssetMap.get(clean.split("/").pop());
     if (!file) return url;
     if (!fileUrlCache.has(file)) {
@@ -456,7 +456,7 @@ function buildFolderMap(files, modelFile) {
   });
   return activeFolderBasePath ? activeFolderBasePath + "/" : "";
 }
-async function loadFile(file, folderFiles) {
+async async function loadFile(file, folderFiles) {
   if (!file) return;
   const ext = file.name.toLowerCase().split(".").pop();
   if (ext !== "glb" && ext !== "gltf") {
