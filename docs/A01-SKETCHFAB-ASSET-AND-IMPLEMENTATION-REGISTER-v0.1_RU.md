@@ -1,14 +1,14 @@
 # A-01 — Реестр 3D-ассетов Sketchfab и план интеграции v0.1
 
 **Дата среза:** 28 ноября 2026 года  
-**Статус:** исследование / кандидаты на прототипирование  
+**Статус:** исследование + офлайн-аудит двух пользовательских GLB; браузерная приёмка и интеграция в основную сцену не выполнены  
 **Область:** цифровой двойник A-01, Three.js, GLB/glTF
 
 ## 1. Назначение
 
 Документ фиксирует внешние 3D-модели, которые могут ускорить разработку Сферы Евы: сервисные роботы, гидропонику, лифты, транспорт, оболочку и инженерное оборудование.
 
-Запись в реестре **не означает**, что модель уже скачана, проверена в браузере или встроена в A-01. На дату этого среза ни один из перечисленных внешних GLB-файлов не добавлен в основной цифровой двойник. Сначала проверяются права, структура модели, материалы, размеры, анимации, текстуры и мобильная производительность.
+Запись в реестре **не означает**, что модель проверена в браузере или встроена в A-01. Два пользовательских GLB (Delivery Robot и Axiom Starliner) получены и проверены офлайн на структуру, геометрию, текстуры, skin/animation и целостность bufferView. Ни один из них не добавлен в основную сцену. Права на повторное распространение, браузерная приёмка и мобильная производительность требуют отдельной проверки.
 
 ## 2. Правила допуска
 
@@ -24,14 +24,14 @@
 
 | ID | Модель / автор | Геометрия | Лицензия на странице | Роль в A-01 | Решение |
 |---|---|---:|---|---|---|
-| A01-ASSET-ROB-001 | [Delivery robot — Bento (@gostbento)](https://sketchfab.com/3d-models/delivery-robot-4dbac67355174751801fb1f6e8dc6230) | 5.7k треугольников / 2.9k вершин (страница модели, проверена 28.11.2026) | CC Attribution / CC BY 4.0 | Базовый сервисный робот, доставка внутри комплекса, тест rig/анимации и масштабов | **P0 — ожидает локального GLB** |
-| A01-ASSET-GRD-001 | [Farmstand Hydroponics Tower — m3org](https://sketchfab.com/3d-models/farmstand-hydroponics-tower-c92e2794c05348bc975d07158a90458c) | 38.6k / 20.3k | CC Attribution | Гидропонная башня, демонстрация вертикального выращивания | **P0 — кандидат после проверки материалов** |
+| A01-ASSET-ROB-001 | [Delivery robot — Bento (@gostbento)](https://sketchfab.com/3d-models/delivery-robot-4dbac67355174751801fb1f6e8dc6230) | GLB: 5 652 треугольника / 8 166 вершин POSITION; страница: 5.7k / 2.9k | CC BY 4.0 в metadata GLB; актуальная карточка требует повторной сверки | Базовый сервисный робот, доставка внутри комплекса, тест rig/анимации | **P0 — офлайн-аудит готов; browser QA ожидает** |
+| A01-ASSET-SPC-001 | [Axiom The Bn L Starliner — alfathwawaow](https://sketchfab.com/3d-models/axiom-the-bn-l-starliner-e354278ba8ed487bb4f0f576364d9950) | GLB: 2 768 треугольников / 5 164 вершин | CC BY 4.0 в embedded metadata; страница и лицензия не проверены независимо | Визуальный кандидат для транспортного/докового сценария; статичная модель без текстур и анимации | **P1 — офлайн-аудит готов; browser QA ожидает** |\n| A01-ASSET-GRD-001 | [Farmstand Hydroponics Tower — m3org](https://sketchfab.com/3d-models/farmstand-hydroponics-tower-c92e2794c05348bc975d07158a90458c) | 38.6k / 20.3k | CC Attribution | Гидропонная башня, демонстрация вертикального выращивания | **P0 — кандидат после проверки материалов** |
 | A01-ASSET-LFT-001 | [Simple Elevator with Animation — lhaegy.fu](https://sketchfab.com/3d-models/simple-elevator-with-animation-770488a2f94a453fb90a7445bda63cd0) | 5.2k / 3k | CC Attribution | Эталон движения кабины и дверей лифта; проверка импорта анимации | **P0 — первый кандидат** |
 | A01-ASSET-ROB-002 | [Delivery Bot by Glowbox](https://sketchfab.com/3d-models/delivery-bot-by-glowbox-1e62f7f502e648b59a45a2e9d6d827bf) | 19.7k / 10.4k | CC Attribution; на странице также есть уведомление NoAI | Альтернативный, более детальный робот доставки с PBR-текстурами 4K | **P1 — отложить до проверки NoAI и оптимизации текстур** |
 
 ### 3.1 Примечания по первым кандидатам
 
-**Delivery robot — Bento (@gostbento).** При повторной проверке страницы 28 ноября 2026 года отображались 5.7k треугольников, 2.9k вершин, 368 загрузок и лицензия CC Attribution (CC BY 4.0). В описании модели есть просьба указать credit Eric, тогда как профиль Bento сообщает, что его первое имя — Mauro. Это расхождение нужно сохранить как примечание и при необходимости уточнить у автора; не приписывать Eric авторство без подтверждения. Для атрибуции в A-01 сохранять отображаемое имя Bento, username @gostbento, прямую ссылку на модель и лицензию CC BY 4.0; в поле attribution note — «Creator's description requests credit to Eric». Источник: [страница модели](https://sketchfab.com/3d-models/delivery-robot-4dbac67355174751801fb1f6e8dc6230). Официальная документация Sketchfab указывает, что Download API требует аутентификации пользователя. Поэтому модель пока не получена и не протестирована в Asset Lab. Следующий шаг — пользователь скачивает файл штатной кнопкой Sketchfab и передаёт локальный GLB в Asset Lab. После фактической загрузки проверить скелет, клипы анимации, ориентацию, единицы масштаба, draw calls и мобильную производительность.
+**Delivery robot — Bento (@gostbento).** При повторной проверке страницы 28 ноября 2026 года отображались 5.7k треугольников, 2.9k вершин, 368 загрузок и лицензия CC Attribution (CC BY 4.0). В описании модели есть просьба указать credit Eric, тогда как профиль Bento сообщает, что его первое имя — Mauro. Это расхождение нужно сохранить как примечание и при необходимости уточнить у автора; не приписывать Eric авторство без подтверждения. Для атрибуции сохранять отображаемое имя Bento, username @gostbento, прямую ссылку и примечание «Creator's description requests credit to Eric». GLB пользователя получен и структурно проверен: 1 mesh, 1 material, 8 166 вершин POSITION, 5 652 треугольника, 3 текстуры, 1 skin с 9 joints, 1 клип Animation (9,92 с, 11 каналов). Значения карточки Sketchfab (2.9k vertices) не совпадают с фактическим количеством POSITION в GLB; это разные счётчики и оба сохранены. Подготовлена runtime-копия с уменьшением размера на 30,1% без изменений геометрии/скелета/анимации. Браузерное воспроизведение и мобильная производительность ещё не проверены.
 
 **Farmstand Hydroponics Tower.** На странице указаны 38.6k треугольников, 20.3k вершин и CC Attribution. Модель подходит как визуальная заготовка гидропонной башни, но сама по себе не является инженерной спецификацией реальной установки. Не переносить её размеры, производительность или конструктивные характеристики в инженерные расчёты без независимой проверки.
 
@@ -158,3 +158,30 @@ Asset Lab v0.1 опубликован как отдельная страница
 - [Creative Commons Attribution-NonCommercial 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
 **Итог:** первый технический проход — робот Bento и лифт в изолированном asset-lab. Гидропонную башню подключать после проверки материалов и мобильной нагрузки. Основную сцену A-01 не заменять и не перегружать внешними моделями.
+
+
+## 11. Фактический офлайн-аудит пользовательских GLB — 28.11.2026
+
+### Delivery Robot — Bento
+
+- Файл: `delivery_robot.glb`, 1 915 324 байт; runtime: `delivery-robot-runtime-v0.1.glb`, 1 339 432 байт (−30,1%).
+- 1 mesh, 1 material, 8 166 POSITION vertices, 5 652 triangles, 3 textures.
+- Textures: base color 2048×2048, metallic-roughness 1024×1024, emissive 2048×2048.
+- 1 skin / 9 joints; клип Animation 9,92 секунды / 11 channels.
+- Изменения runtime: base-color PNG переведён в 256-color indexed palette при том же разрешении; index accessor 32-bit → 16-bit. Остальные текстуры, вершины, skin и animation channels сохранены.
+- SHA-256 original: `45c49e3d50d3fe4e905ec8f41b6bac33ab7873aa7e0871e620618e9ebed801de`; runtime: `fe7b742db275c4be4efd93a80d797c5e93da109eaf70dd8219e3493b1f55b7df`.
+
+### Axiom The Bn L Starliner
+
+- Файл: `axiom_the_bn_l_starliner.glb`, 200 268 байт; runtime: `axiom-starliner-runtime-v0.1.glb`, 183 676 байт (−8,3%).
+- 1 mesh, 1 material, 5 164 POSITION vertices, 2 768 triangles; textures, skin and animation clips отсутствуют.
+- Изменение runtime: index accessor 32-bit → 16-bit; geometry, vertex data и material parameters сохранены.
+- SHA-256 original: `919d5ec3c24c19fcab42b48227659897d1e2c4eb6a4dbe2b0deda8ddb7697322`; runtime: `c8b61907d833c8e228474bb8a7c0786b7c0a34a29fca7f50f7a182946d24d1a2`.
+- Автор и CC BY 4.0 взяты из embedded metadata; страница источника и актуальные условия независимо не проверялись.
+
+### Документы и ограничения
+
+- Отдельная сцена: [A-01 Asset Test Scene v0.1](../digital-twin/a01-asset-test-scene-v0.1.html).
+- [Индекс отчётов](../digital-twin/a01-asset-reports/README_RU.md), [JSON Delivery Robot](../digital-twin/a01-asset-reports/delivery-robot-audit-v0.1.json), [JSON Axiom Starliner](../digital-twin/a01-asset-reports/axiom-starliner-audit-v0.1.json), [манифест оптимизации](../digital-twin/a01-asset-reports/OPTIMIZATION-MANIFEST-v0.1_RU.md).
+- Оригинальные GLB не изменялись; runtime-копии производные. Геометрические bounds совпадают с оригиналами в пределах численной точности; размеры заданы в исходных единицах модели, не подтверждённых как метры.
+- Оба GLB успешно разобраны офлайн; bufferView references и counts сверены. WebGL/browser loading, desktop/mobile visuals, frame-time p50/p95 и draw calls не измерялись. Интеграции в primary v4.9.4 или preview v4.9.5 нет. 120 FPS не заявляется.
