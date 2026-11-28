@@ -89,6 +89,8 @@ W-01 remains M0 / proposed / not calculated. Fixture quantities, flows, pressure
 - [Architecture notes](../architecture/README.md)
 - [Digital twin](../digital-twin/README.md)
 - [A-01 v4.9.4 — EVA Resource Loop digital twin](../digital-twin/README_RU_v494.md)
+- [A-01 v4.9.5 — PBR & Reflection Preview (experimental)](../digital-twin/README_RU_v495.md)
+- [A01-PBR-01 — PBR, HDRI and reflection rendering (RU)](A01-PBR-REFLECTION-RENDERING-v0.1_RU.md)
 - [EVA Resource Loop — scenario resource model](A01-RESOURCE-LOOP-DIGITAL-TWIN-v0.1_RU.md)
 - [GitHub analogue and license review](OPEN-SOURCE-ANALOGUES-REVIEW-v0.1_RU.md)
 - [A-01 Performance — 60 FPS without visual quality loss (EN)](../performance/README.md)
