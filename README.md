@@ -136,9 +136,11 @@ No contribution should include credentials, API keys, personal data, private mes
 
 ## 3D Asset Lab and Partner Proposal
 
-- [A-01 Asset Lab — isolated GLB/glTF inspector](digital-twin/a01-asset-lab.html)
+- [Open Asset Lab on Wix](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/a01-asset-lab.html)
+- [A-01 Asset Lab source](digital-twin/a01-asset-lab.html)
 - [Asset Lab v0.1 usage guide (RU)](digital-twin/README_ASSET_LAB_v01.md)
-- [A-01 Open Commons Sponsorship partner page](digital-twin/a01-open-commons-sponsorship.html)
+- [Open Commons Sponsorship page on Wix](https://headless-dozcbvursgh-storypad9-1409.wix-site-host.com/a01-open-commons-sponsorship.html)
+- [Partner page source](digital-twin/a01-open-commons-sponsorship.html)
 - [Sketchfab asset register and integration plan (RU)](docs/A01-SKETCHFAB-ASSET-AND-IMPLEMENTATION-REGISTER-v0.1_RU.md)
 
 The Asset Lab inspects user-selected models locally in the browser; it does not download Sketchfab assets or upload model files to A-01 servers.
